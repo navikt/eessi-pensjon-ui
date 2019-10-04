@@ -39,8 +39,17 @@ describe('components/FileUpload/FileUpload', () => {
     onFileChange: jest.fn(),
     openModal: jest.fn(),
     status: {},
-    tabIndex: 1,
-    t: jest.fn((translationString) => { return translationString })
+    labels: {
+      accepted: 'ui:accepted',
+      size: 'ui:size',
+      download: 'ui:download',
+      dropFilesHere: 'ui:dropFilesHere',
+      fileIsTooBigLimitIs: 'ui:fileIsTooBigLimitIs',
+      maxFilesExceeded: 'ui:maxFilesExceeded',
+      rejected: 'ui:rejected',
+      removed: 'ui:removed',
+      total: 'ui:total'
+    }
   }
 
   const fileContents = 'file contents'
@@ -121,7 +130,7 @@ describe('components/FileUpload/FileUpload', () => {
   it('Renders a file ', () => {
     wrapper = mount(<FileUpload {...initialMockProps} files={[file]} />)
     expect(wrapper.exists('.c-file')).toBeTruthy()
-    expect(wrapper.find('.c-file').render().text()).toEqual('title=text.txt\nui:size: 13 bytestxt')
+    expect(wrapper.find('.c-file').render().text()).toEqual('title=text.txt\nui:size: 13Btxt')
   })
 
   it('Deleting a file', () => {
@@ -152,7 +161,7 @@ describe('components/FileUpload/FileUpload', () => {
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed text.txt')
   })
 
-  it('With a PDF file, loaded', () => {
+  it('With a Pdf file, loaded', () => {
     wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
 
     act(() => {

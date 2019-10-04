@@ -5,15 +5,27 @@ import PT from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 import _ from 'lodash'
 import classNames from 'classnames'
+import Mustache from 'mustache'
 import bytes from 'bytes'
 import File from '../File/File'
-
 import './FileUpload.css'
-import MiniaturePDF from '../File/MiniaturePDF'
 
-const FileUpload = (props) => {
-  const { acceptedMimetypes, afterDrop, beforeDrop, className, closeModal, currentPages } = props
-  const { files, maxFiles, maxFileSize, onFileChange, openModal, status, tabIndex, t } = props
+const defaultLabels = {
+  accepted: 'Akseptert',
+  size: 'Størrelse',
+  download: 'Last ned',
+  dropFilesHere: 'Klikk her for å velge filer. Filformat er JPG, PNG og PDF, maks {{maxFiles}} filer.',
+  fileIsTooBigLimitIs: 'filen {{file}} ({{size}}) er for stor, grensen er {{maxFileSize}}',
+  maxFilesExceeded: 'For mange filer, maks er {{maxFiles}} filer',
+  rejected: 'Avvist',
+  removed: 'Fjernet',
+  total: 'Totalt'
+}
+
+const FileUpload = ({
+  acceptedMimetypes, afterDrop, beforeDrop, className, closeModal, currentPages, files, labels = defaultLabels,
+  maxFiles, maxFileSize, onFileChange, openModal, status, tabIndex
+}) => {
   const [_files, setFiles] = useState(files)
   const [_currentPages, setCurrentPages] = useState(currentPages || [])
   const [_status, setStatus] = useState(status || {})
@@ -28,7 +40,7 @@ const FileUpload = (props) => {
     openModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-          <File t={t} file={file} width={400} height={600} pageNumber={pageNumber} />
+          <File labels={labels} file={file} width={400} height={600} pageNumber={pageNumber} />
         </div>
       )
     })
@@ -76,11 +88,11 @@ const FileUpload = (props) => {
         newCurrentPages[newCurrentPages.length] = 1
       }
     })
-    let statusMessage = t('ui:accepted') + ': ' + acceptedFiles.length + ', '
-    statusMessage += t('ui:rejected') + ': ' + rejectedFiles.length + ', '
-    statusMessage += t('ui:total') + ': ' + newFiles.length
+    let statusMessage = labels.accepted + ': ' + acceptedFiles.length + ', '
+    statusMessage += labels.rejected + ': ' + rejectedFiles.length + ', '
+    statusMessage += labels.total + ': ' + newFiles.length
     updateFiles(newFiles, newCurrentPages, statusMessage)
-  }, [_currentPages, _files, t, updateFiles])
+  }, [_currentPages, _files, updateFiles])
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (beforeDrop) {
@@ -88,7 +100,9 @@ const FileUpload = (props) => {
     }
     if (maxFiles && (_files.length + acceptedFiles.length > maxFiles)) {
       return setStatus({
-        message: t('ui:maxFilesExceeded', { maxFiles: maxFiles }),
+        message: Mustache.render(labels.maxFilesExceeded, {
+          maxFiles: maxFiles
+        }),
         type: 'ERROR'
       })
     }
@@ -98,12 +112,12 @@ const FileUpload = (props) => {
     if (afterDrop) {
       afterDrop()
     }
-  }, [_files.length, afterDrop, beforeDrop, maxFiles, processFiles, t])
+  }, [_files.length, afterDrop, beforeDrop, labels, maxFiles, processFiles])
 
   const onDropRejected = (rejectedFiles) => {
     if (maxFileSize && rejectedFiles[0].size > maxFileSize) {
       setStatus({
-        message: t('ui:fileIsTooBigLimitIs', {
+        message: Mustache.render(labels.fileIsTooBigLimitIs, {
           maxFileSize: bytes(maxFileSize),
           size: bytes(rejectedFiles[0].size),
           file: rejectedFiles[0].name
@@ -119,7 +133,7 @@ const FileUpload = (props) => {
     newFiles.splice(fileIndex, 1)
     newCurrentPages.splice(fileIndex, 1)
     const filename = _files[fileIndex].name
-    const statusMessage = t('ui:removed') + ' ' + filename
+    const statusMessage = labels.removed + ' ' + filename
     updateFiles(newFiles, newCurrentPages, statusMessage)
   }
 
@@ -159,7 +173,9 @@ const FileUpload = (props) => {
       <input {...getInputProps()} />
       <div className='c-fileUpload-placeholder'>
         <div className='c-fileUpload-placeholder-message'>
-          {t('ui:dropFilesHere', { maxFiles: maxFiles })}
+          {Mustache.render(labels.dropFilesHere, {
+            maxFiles: maxFiles
+          })}
         </div>
         <div className={classNames('c-fileUpload-placeholder-status', 'c-fileUpload-placeholder-status-' + _status.type)}>
           {_status.message || ''}
@@ -169,10 +185,11 @@ const FileUpload = (props) => {
         {_files.map((file, i) => {
           return (
             <File
-              className='mr-2' key={i} file={file} t={t}
+              className='mr-2' key={i} file={file}
               currentPage={_currentPages[i]}
               deleteLink downloadLink previewLink
               index={i}
+              labels={labels}
               onPreviousPage={onPreviousPageRequest}
               onNextPage={onNextPageRequest}
               onLoadSuccess={onLoadSuccess}
@@ -198,7 +215,6 @@ FileUpload.propTypes = {
   maxFileSize: PT.number,
   onFileChange: PT.func.isRequired,
   openModal: PT.func.isRequired,
-  t: PT.func.isRequired,
   tabIndex: PT.number
 }
 FileUpload.displayName = 'FileUpload'

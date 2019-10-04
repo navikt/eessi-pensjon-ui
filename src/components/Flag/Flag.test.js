@@ -4,7 +4,7 @@ import Flag from './Flag'
 describe('components/Flag', () => {
   const mockInitialProps = {
     label: 'mockLabel',
-    country: 'xx'
+    country: 'NO'
   }
 
   it('Renders', () => {
@@ -18,10 +18,15 @@ describe('components/Flag', () => {
     expect(wrapper.find('.c-flag').props().className.includes('TEST-CLASSNAME')).toBeTruthy()
   })
 
-  it('Has proper HTML structure', () => {
-    const wrapper = mount(<Flag {...mockInitialProps} extension='.extension' />)
+  it('Has proper HTML structure for non-existent flag', () => {
+    const wrapper = mount(<Flag {...mockInitialProps} country='aa' />)
     expect(wrapper.find('.c-flag').props().title).toEqual('mockLabel')
-    expect(wrapper.find('img').props().alt).toEqual('mockLabel')
-    expect(wrapper.find('img').props().src).toEqual('mockPath/xx.extension')
+    expect(wrapper.exists('svg')).toBeFalsy()
+  })
+
+  it('Has proper HTML structure for nexistent flag', () => {
+    const wrapper = mount(<Flag {...mockInitialProps} />)
+    expect(wrapper.find('.c-flag').props().title).toEqual('mockLabel')
+    expect(wrapper.render().html()).toEqual('<no.svg></no.svg>')
   })
 })

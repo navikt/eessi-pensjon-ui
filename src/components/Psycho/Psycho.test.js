@@ -12,7 +12,7 @@ describe('components/Psycho', () => {
     const wrapper = mount(<Psycho type='smilende' />)
     expect(wrapper.exists('.c-psycho')).toBeTruthy()
     expect(wrapper.find('img').props().alt).toEqual('nav-smilende-veileder')
-    wrapper.setProps({ type: 'trist' })
+    wrapper.setProps({ mood: 'trist' })
     expect(wrapper.find('img').props().alt).toEqual('nav-trist-veileder')
   })
 })

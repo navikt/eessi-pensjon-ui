@@ -1,8 +1,23 @@
 EESSI Pensjon UI components 
 ===========================
 
-This is a collection of common React components developed within the scope of EESSI 
-Pensjon, and shared across EESSI Pensjon frontend applications. 
+EESSI Pensjon UI is a collection of React components developed within the scope of EESSI 
+Pensjon, to be reused by the different EESSI Pensjon frontend applications. 
 
-The purpose is to avoid duplicated code and to share these components to everyone that needs them. 
+You can also use these components in your JavaScript project, no React dependencies needed.
+Just add this line in the `dependencies` object in your `package.json` file:
+
+    "eessi-pensjon-ui": "https://github.com/navikt/eessi-pensjon-ui#{tag}"
+    
+Make sure to replace `{tag}` with the latest Git tag. 
+    
+---
+
+# Henvendelser
+
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
+
+## For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #eessi-pensjonpub.
 

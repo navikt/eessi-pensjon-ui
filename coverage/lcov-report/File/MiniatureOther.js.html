@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for File/MiniatureOther.js</title>
-    <meta charset="utf-8" />
+    <title>Code coverage report for File/Other.js    <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +15,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">File</a> MiniatureOther.js
-    </h1>
+      <a href="../index.html">All files</a> / <a href="index.html">File</a> Other/h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">87.5% </span>
@@ -171,9 +169,9 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 &nbsp;
-import './MiniatureOther.css'
+import './Other.css'
 &nbsp;
-export const MiniatureOther = (props) =&gt; {
+export const Other = (props) =&gt; {
   const {
     animate, className, file, index, isHovering, onClick = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, onDeleteDocument, size, t
   } = props
@@ -181,7 +179,7 @@ export const MiniatureOther = (props) =&gt; {
 &nbsp;
   return (
     &lt;div
-      className={classNames('c-file-miniatureOther', className, { animate: animate })}
+      className={classNames('c-file-Other', className, { animate: animate })}
     &gt;
     title={file.name + '\n' + t('ui:size') + ': ' + size}
       {isHovering
@@ -213,7 +211,7 @@ export const MiniatureOther = (props) =&gt; {
   )
 }
 &nbsp;
-MiniatureOther.propTypes = {
+Other.propTypes = {
   animate: PT.bool,
   className: PT.string,
   file: PT.object.isRequired,
@@ -225,7 +223,7 @@ MiniatureOther.propTypes = {
   t: PT.func.isRequired
 }
 &nbsp;
-export default MiniatureOther
+export default Other
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

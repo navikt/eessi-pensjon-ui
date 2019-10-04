@@ -3,16 +3,13 @@ import PT from 'prop-types'
 import _ from 'lodash'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
-import Banner from '../Banner/Banner'
 
-const ColorPicker = (props) => {
-  const { color, onChangeComplete } = props
-
+const ColorPicker = ({ color, onChangeComplete }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
   const [_color, setColor] = useState({ r: 255, g: 255, b: 255, a: 1 })
 
   useEffect(() => {
-    if (!_.isEqual(color, _color)) {
+    if (!_(color).isEqual(_color)) {
       setColor(color)
     }
   }, [color, _color])

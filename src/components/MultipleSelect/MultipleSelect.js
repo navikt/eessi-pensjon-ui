@@ -8,26 +8,13 @@ import classNames from 'classnames'
 import MultipleOption from './MultipleOption'
 import MultipleValueRemove from './MultipleValueRemove'
 import './MultipleSelect.css'
-import StorageModal from '../Modal/StorageModal'
 
 const animatedComponents = makeAnimated()
 
-const MultipleSelect = (props) => {
-  const {
-    id,
-    placeholder,
-    values,
-    creatable = false,
-    includeList,
-    excludeList,
-    optionList = [],
-    className,
-    error = false,
-    errorMessage,
-    onChange,
-    hideSelectedOptions
-  } = props
-
+const MultipleSelect = ({
+  className, creatable = false, error = false, errorMessage, excludeList, hideSelectedOptions,
+  id, includeList, onChange, optionList = [], placeholder, values
+}) => {
   const [_values, setValues] = useState(values)
 
   useEffect(() => {
@@ -37,13 +24,13 @@ const MultipleSelect = (props) => {
   }, [values, _values])
 
   const include = (selectedValues, allValues) => {
-    return _.filter(allValues, it => {
+    return _(allValues).filter(it => {
       return selectedValues.indexOf(it.value) >= 0
     })
   }
 
   const exclude = (selectedValues, allValues) => {
-    return _.filter(allValues, it => {
+    return _(allValues).filter(it => {
       return selectedValues.indexOf(it.value) < 0
     })
   }
@@ -77,59 +64,39 @@ const MultipleSelect = (props) => {
 
   let options = includeList ? include(includeList, optionList) : optionList
   options = excludeList ? exclude(excludeList, options) : options
+  const Component = creatable ? CreatableSelect : Select
 
   return (
-    <div id={id} className={classNames('c-multipleSelect', className, { skjemaelement__feilmelding: error })}>
-      {creatable
-        ? (
-          <CreatableSelect
-            placeholder={placeholder}
-            isMulti
-            animatedComponents
-            closeMenuOnSelect={false}
-            value={_values}
-            options={options}
-            id={id ? id + '-select' : null}
-            components={{
-              Option: MultipleOption,
-              MultiValueRemove: MultipleValueRemove,
-              ...animatedComponents
-            }}
-            className='multipleSelect'
-            classNamePrefix='multipleSelect'
-            onChange={onChange}
-            hideSelectedOptions={hideSelectedOptions || false}
-            styles={selectStyle()}
-            tabSelectsValue={false}
-          />
-        )
-        : (
-          <Select
-            placeholder={placeholder}
-            isMulti
-            closeMenuOnSelect={false}
-            value={_values}
-            options={options}
-            id={id ? id + '-select' : null}
-            components={{
-              ...animatedComponents,
-              Option: MultipleOption,
-              MultiValueRemove: MultipleValueRemove
-            }}
-            className='multipleSelect'
-            classNamePrefix='multipleSelect'
-            onChange={onChange}
-            hideSelectedOptions={hideSelectedOptions || false}
-            styles={selectStyle()}
-            tabSelectsValue={false}
-          />
-        )}
+    <div
+      id={id}
+      className={classNames('c-multipleSelect', className, { skjemaelement__feilmelding: error })}
+    >
+      <Component
+        id={id ? id + '-select' : null}
+        className='multipleSelect'
+        classNamePrefix='multipleSelect'
+        placeholder={placeholder}
+        isMulti
+        animatedComponents
+        closeMenuOnSelect={false}
+        value={_values}
+        options={options}
+        components={{
+          ...animatedComponents,
+          Option: MultipleOption,
+          MultiValueRemove: MultipleValueRemove
+
+        }}
+        onChange={onChange}
+        hideSelectedOptions={hideSelectedOptions || false}
+        styles={selectStyle()}
+        tabSelectsValue={false}
+      />
+
       {error
         ? (
-          <div role='alert' aria-live='assertive'>
-            <div className='skjemaelement__feilmelding'>
-              {errorMessage}
-            </div>
+          <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+            {errorMessage}
           </div>
         )
         : null}

@@ -11,7 +11,6 @@ import Alert from '../Alert/Alert'
 // import * as uiActions from 'actions/ui'
 // import { getDisplayName } from 'utils/displayName'
 import './StorageModal.css'
-import Modal from './Modal'
 
 /* const mapStateToProps = (state) => {
   return {

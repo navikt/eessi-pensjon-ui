@@ -1,14 +1,14 @@
 import React from 'react'
 import PT from 'prop-types'
+import _ from 'lodash'
 import { Hovedknapp, Knapp, Modal as NavModal, Undertittel } from '../../Nav'
 import './Modal.css'
-import Icons from '../Icons/Icons'
 
-export const Modal = (props) => {
-  const { onModalClose, modal, modalOpen } = props
-
+export const Modal = ({ onModalClose, modal, modalOpen }) => {
   const closeModal = () => {
-    onModalClose()
+    if (_(onModalClose).isFunction()) {
+      onModalClose()
+    }
   }
 
   return (
@@ -29,13 +29,11 @@ export const Modal = (props) => {
               </div>
             )
             : null}
-          {modal.modalContent
-            ? modal.modalContent
-            : (
-              <div className='c-modal__text m-4 text-center'>
-                {modal.modalText}
-              </div>
-            )}
+          {modal.modalContent || (
+            <div className='c-modal__text m-4 text-center'>
+              {modal.modalText}
+            </div>
+          )}
           {modal.modalButtons
             ? (
               <div className='c-modal__buttons text-center'>

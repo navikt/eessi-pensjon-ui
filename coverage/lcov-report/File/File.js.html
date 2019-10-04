@@ -249,9 +249,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
-import MiniatureOther from './MiniatureOther'
-import MiniaturePDF from './MiniaturePDF'
-import MiniatureImage from './MiniatureImage'
+import Other from './Other'
+import Pdf from './Pdf'
+import Image from './Image'
 import './File.css'
 &nbsp;
 const units = ['bytes', 'KB', 'MB', 'GB']
@@ -290,7 +290,7 @@ const File = (props) =&gt; {
         className='c-file'
         onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
       &gt;
-        &lt;MiniatureOther
+        &lt;Other
           isHovering={isHovering}
           animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
         /&gt;
@@ -304,7 +304,7 @@ const File = (props) =&gt; {
           className='c-file'
           onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
         &gt;
-          &lt;MiniaturePDF
+          &lt;Pdf
             isHovering={isHovering}
             animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
           /&gt;
@@ -317,7 +317,7 @@ const File = (props) =&gt; {
           className='c-file'
           onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
         &gt;
-          &lt;MiniatureImage
+          &lt;Image
             isHovering={isHovering}
             animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
           /&gt;
@@ -329,7 +329,7 @@ const File = (props) =&gt; {
           className='c-file'
           onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
         &gt;
-          &lt;MiniatureOther
+          &lt;Other
             isHovering={isHovering}
             animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
           /&gt;

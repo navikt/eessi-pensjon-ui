@@ -1,17 +1,22 @@
 import React from 'react'
 import PT from 'prop-types'
-import CountrySelect from './CountrySelect'
+import Flag from '../Flag/Flag'
 
 const CountryValue = (props) => {
   const { selectProps, data, innerProps } = props
-  const flagImageUrl = selectProps.selectProps.flagImagePath + data.value + '.png'
   const _type = selectProps.selectProps.type || 'country'
   const _label = _type === 'country' ? data.label : (data.currency ? data.currency + ' - ' : '') + data.currencyLabel
 
   return (
     <div className='c-countryValue' {...innerProps}>
-      <img src={flagImageUrl} alt={data.label} />
-      {_label}
+      <Flag
+        className='mr-2'
+        label={_label}
+        country={data.value}
+        type='original'
+        size='M'
+      />
+      <span className='c-countryValue__label'>{_label}</span>
     </div>
   )
 }

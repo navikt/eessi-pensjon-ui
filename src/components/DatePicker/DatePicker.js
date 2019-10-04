@@ -3,14 +3,36 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import moment from 'moment'
 import { Input } from '../../Nav'
-
 import './DatePicker.css'
-import CountrySelect from '../CountrySelect/CountrySelect'
 
 const DatePicker = (props) => {
-  const { className, disabled = false, feil, labels = {}, ids = {}, onChange, placeholders = {}, initialValues = {} } = props
+  const { className, disabled = false, feil, labels = {}, ids = {}, onChange, onBlur, onFocus, placeholders = {}, initialValues = {} } = props
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState({})
+  const [_timeoutID, setTimeoutID] = useState(null)
+  const [focus, setFocus] = useState(false)
+
+  const handleOnBlur = (event) => {
+    event.persist()
+    setTimeoutID(
+      setTimeout(() => {
+        setFocus(false)
+        if (typeof onBlur === 'function') {
+          onBlur(event)
+        }
+      }, 0)
+    )
+  }
+
+  const handleOnFocus = (event) => {
+    clearTimeout(_timeoutID)
+    if (!focus) {
+      setFocus(true)
+      if (typeof onFocus === 'function') {
+        onFocus(event)
+      }
+    }
+  }
 
   const maxLength = (limit, event) => {
     const target = event.target
@@ -90,7 +112,11 @@ const DatePicker = (props) => {
   const handleChangeYear = (e) => { dateChange('year', e) }
 
   return (
-    <div className={classNames('c-datePicker', className)}>
+    <div
+      className={classNames('c-datePicker', className)}
+      onBlur={handleOnBlur}
+      onFocus={handleOnFocus}
+    >
       <div className='row pr-2'>
         <div className='col pl-2 pr-1'>
           <Input
@@ -158,6 +184,8 @@ DatePicker.propTypes = {
   initialValues: PT.object,
   feil: PT.object,
   labels: PT.object,
+  onBlur: PT.func,
+  onFocus: PT.func,
   onChange: PT.func.isRequired
 }
 DatePicker.displayName = 'DatePicker'

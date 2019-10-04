@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for File/MiniaturePDF.js</title>
+    <title>Code coverage report for File/PDFe>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,8 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">File</a> MiniaturePDF.js
-    </h1>
+      <a href="../index.html">All files</a> / <a href="index.html">File</a> Pdf.js>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">97.83% </span>
@@ -438,11 +437,11 @@ import { pdfjs, Document, Page } from 'react-pdf'
 import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 &nbsp;
-import './MiniaturePDF.css'
+import './Pdf.css'
 &nbsp;
 pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.js'
 &nbsp;
-export const MiniaturePDF = (props) =&gt; {
+export const Pdf = (props) =&gt; {
   const { addLink, animate, className, currentPage, deleteLink, downloadLink, file, height, initialNumberPages, index, isHovering, onAddFile } = props
   const { onClick, onDeleteDocument, onLoadSuccess, onNextPage, onPreviewDocument, onPreviousPage, previewLink } = props
   const { scale, size, t, ui, width } = props
@@ -508,7 +507,7 @@ export const MiniaturePDF = (props) =&gt; {
 &nbsp;
   return (
     &lt;div
-      className={classNames('c-file-miniaturePdf', className, { animate: animate })}
+      className={classNames('c-file-Pdf', className, { animate: animate })}
       title={title}
       style={{ transform: 'scale(' + scale + ')' }}
     &gt;
@@ -598,7 +597,7 @@ export const MiniaturePDF = (props) =&gt; {
   )
 }
 &nbsp;
-MiniaturePDF.propTypes = {
+Pdf.propTypes = {
   addLink: PT.bool,
   animate: PT.bool,
   className: PT.string,
@@ -624,7 +623,7 @@ MiniaturePDF.propTypes = {
   width: PT.number
 }
 &nbsp;
-export default MiniaturePDF
+export default Pdf
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

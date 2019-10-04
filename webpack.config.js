@@ -1,11 +1,11 @@
-var path = require('path')
+const path = require('path')
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/dist.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: 'dist.js',
     library: 'eessi-pensjon-ui',
     libraryTarget: 'umd',
     publicPath: '/dist/',
@@ -17,7 +17,7 @@ module.exports = {
       use: ['style-loader', 'css-loader', 'less-loader']
     }, {
       test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader']
     }, {
       test: /\.svg$/,
       use: [{
@@ -40,9 +40,9 @@ module.exports = {
       test: /\.(png|jpe?g|gif)$/i,
       use: [{
         loader: 'url-loader',
-        options:{
-          fallback: "file-loader",
-          name: "[name][md5:hash].[ext]",
+        options: {
+          fallback: 'file-loader',
+          name: '[name][md5:hash].[ext]',
           outputPath: 'dist/',
           publicPath: '/dist/'
         }
@@ -66,24 +66,24 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'react': path.resolve(__dirname, './node_modules/react'),
+      react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-      'assets': path.resolve(__dirname, 'assets')
+      assets: path.resolve(__dirname, 'assets')
     }
   },
   externals: {
     // Don't bundle react or react-dom
     react: {
-      commonjs: "react",
-      commonjs2: "react",
-      amd: "React",
-      root: "React"
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'React',
+      root: 'React'
     },
-    "react-dom": {
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "ReactDOM",
-      root: "ReactDOM"
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'ReactDOM',
+      root: 'ReactDOM'
     }
   }
 }

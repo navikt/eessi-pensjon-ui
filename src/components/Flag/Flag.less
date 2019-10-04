@@ -1,9 +1,11 @@
 .c-flag {
+  border: 1px solid lightgrey;
+
+  &.type-circle {
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid lightgrey;
 
-    &__size-M {
+    &.size-M {
 
       width: 25px;
       height: 25px;
@@ -16,7 +18,7 @@
       }
     }
 
-    &__size-L {
+    &.size-L {
 
       width: 40px;
       height: 40px;
@@ -28,6 +30,22 @@
         margin-top: 0%;
       }
     }
+  }
+
+  &.type-original {
+
+    &.size-M {
+
+      height: 25px;
+      width: 40px;
+    }
+
+    &.size-L {
+
+      height: 40px;
+      width: 80px;
+    }
+  }
 }
 
 .c-flaglist {

@@ -7,14 +7,12 @@ import CountryData from '../CountryData/CountryData'
 import CountryOption from '../CountrySelect/CountryOption'
 import CountryValue from '../CountrySelect/CountryValue'
 import CountryErrorStyle from '../CountrySelect/CountryErrorStyle'
-
 import './CountrySelect.css'
-import ColorPicker from '../ColorPicker/ColorPicker'
 
-const CountrySelect = (props) => {
-  const { className, components, error = false, errorMessage, excludeList, id } = props
-  const { includeList, locale, onSelect, placeholder, type, styles = {}, value } = props
-
+const CountrySelect = ({
+  className, components, error = false, errorMessage, excludeList, id,
+  includeList, locale, onSelect, placeholder, type, styles = {}, value
+}) => {
   const include = (selectedCountries, allCountries) => {
     return _(allCountries).filter(country => {
       return selectedCountries.indexOf(country.value) >= 0
@@ -52,8 +50,7 @@ const CountrySelect = (props) => {
           ...components
         }}
         selectProps={{
-          type: type,
-          flagImagePath: '../../../../../flags/'
+          type: type
         }}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'

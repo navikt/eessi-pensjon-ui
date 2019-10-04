@@ -4,11 +4,9 @@ import { Veilederpanel } from '../../Nav'
 import Icons from '../Icons/Icons'
 import Psycho from './Psycho'
 import classNames from 'classnames'
-
 import './Psycho.css'
 
-const PsychoPanel = (props) => {
-  const { children, className, closeButton, type } = props
+const PsychoPanel = ({ children, className, closeButton, mood }) => {
   const [hidden, setHidden] = useState(false)
 
   const handleClose = (e) => {
@@ -23,7 +21,7 @@ const PsychoPanel = (props) => {
 
   return (
     <div className={classNames('c-psychoPanel', className)}>
-      <Veilederpanel type='normal' svg={<Psycho type={type} />} kompakt>
+      <Veilederpanel type='normal' svg={<Psycho mood={mood} />} kompakt>
         {children}
         {closeButton ? (
           <div className='closeButton'>
@@ -44,7 +42,7 @@ PsychoPanel.propTypes = {
   children: PT.node.isRequired,
   className: PT.string,
   closeButton: PT.bool,
-  type: PT.string
+  mood: PT.string
 }
 PsychoPanel.displayName = 'PsychoPanel'
 export default PsychoPanel

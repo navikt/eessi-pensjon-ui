@@ -3,10 +3,8 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import { Checkbox } from '../../Nav'
 
-const MultipleOption = (props) => {
-  const { data, selectProps, innerProps, isSelected, isFocused } = props
+const MultipleOption = ({ data, selectProps, innerProps, isSelected, isFocused }) => {
   const id = selectProps.id + '-' + data.value
-
   return (
     <div id={id}>
       <div
@@ -19,7 +17,8 @@ const MultipleOption = (props) => {
           id={'c-multipleOption__checkbox-' + id}
           className='c-multipleOption__checkbox'
           label={data.label}
-          onChange={() => {}} checked={isSelected}
+          onChange={() => {}}
+          checked={isSelected}
         />
       </div>
     </div>

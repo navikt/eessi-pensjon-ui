@@ -8,7 +8,7 @@ import Flag from './Flag'
 import './Flag.css'
 
 const FlagList = (props) => {
-  const { className, items, locale, overflowLimit = 2, size } = props
+  const { className, items, locale, overflowLimit = 2, size, type } = props
 
   return (
     <div
@@ -23,6 +23,7 @@ const FlagList = (props) => {
           <Flag
             className='m-2'
             size={size}
+            type={type}
             key={index}
             country={item.country}
             label={label}

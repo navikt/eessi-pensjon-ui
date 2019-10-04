@@ -4,7 +4,7 @@ import Banner from './Banner'
 describe('components/Banner', () => {
   const initialMockProps = {
     header: 'BANNER',
-    t: jest.fn((translationString) => { return translationString }),
+    labelHighContrast: 'mockLabel',
     toggleHighContrast: jest.fn()
   }
 

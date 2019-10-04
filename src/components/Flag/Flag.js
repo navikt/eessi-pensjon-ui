@@ -1,20 +1,27 @@
 import React from 'react'
 import PT from 'prop-types'
 import classnames from 'classnames'
+import CountryData from '../CountryData/CountryData'
 import './Flag.css'
 
-
-const Flag = (props) => {
-  const { className, country, label, size = 'M' } = props
+const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
+  if (['original', 'circle'].indexOf(type) < 0) {
+    console.error('Flag type ' + type + ' not valid')
+    return null
+  }
 
   const getFlag = () => {
-    const Flags = require('../../resources/flags/' + country.toLowerCase() + '.svg').default
-    return <Flags/>
+    if (CountryData.exists(country)) {
+      const Flags = require('../../resources/flags/' + country.toLowerCase() + '.svg').default
+      return <Flags />
+    }
+    console.error('Flag ' + country.toLowerCase() + ' not found')
+    return null
   }
 
   return (
     <div
-      className={classnames(className, 'c-flag', 'c-flag__size-' + size)}
+      className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
       title={label}
     >
       {getFlag()}
@@ -26,6 +33,7 @@ Flag.propTypes = {
   className: PT.string,
   country: PT.string.isRequired,
   label: PT.string.isRequired,
+  type: PT.string,
   size: PT.string
 }
 Flag.displayName = 'Flag'

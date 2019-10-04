@@ -1,31 +1,30 @@
 import React from 'react'
 import PT from 'prop-types'
 import { components } from 'react-select'
+import Flag from '../Flag/Flag'
 import classNames from 'classnames'
-import CountryValue from './CountryValue'
 
 const CountryOption = (props) => {
   const { data, innerProps, isSelected, isFocused, label, selectProps, value } = props
-  const flagImageUrl = selectProps.selectProps.flagImagePath + value + '.png'
   const _type = selectProps.selectProps.type || 'country'
   const _label = _type === 'country' ? label : (data.currency ? data.currency + ' - ' : '') + data.currencyLabel
-  const handleImageError = selectProps.selectProps.onImageError
   return (
     <components.Option {...props}>
-      <div id={selectProps.id + '-' + data.value}>
-        <div
-          className={classNames('c-countryOption', {
-            selected: isSelected,
-            focused: isFocused
-          })} {...innerProps}
-        >
-          <img
-            src={flagImageUrl}
-            alt={label}
-            onError={handleImageError}
-          />
-          <span className='c-countryOption__label'>{_label}</span>
-        </div>
+      <div
+        id={selectProps.id + '-' + data.value}
+        className={classNames('c-countryOption', {
+          selected: isSelected,
+          focused: isFocused
+        })} {...innerProps}
+      >
+        <Flag
+          className='mr-2'
+          label={_label}
+          country={value}
+          type='original'
+          size='M'
+        />
+        <span className='c-countryOption__label'>{_label}</span>
       </div>
     </components.Option>
   )

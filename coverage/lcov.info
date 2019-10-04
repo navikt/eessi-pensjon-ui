@@ -515,8 +515,7 @@ BRF:24
 BRH:18
 end_of_record
 TN:
-SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/MiniatureImage.js
-FN:8,(anonymous_0)
+SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/Image(anonymous_0)
 FN:9,(anonymous_1)
 FN:23,(anonymous_2)
 FN:33,(anonymous_3)
@@ -551,8 +550,7 @@ BRF:9
 BRH:8
 end_of_record
 TN:
-SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/MiniatureOther.js
-FN:8,(anonymous_0)
+SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/Other.jsonymous_0)
 FN:10,(anonymous_1)
 FN:22,(anonymous_2)
 FN:31,(anonymous_3)
@@ -585,8 +583,7 @@ BRF:7
 BRH:7
 end_of_record
 TN:
-SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/MiniaturePDF.js
-FN:11,(anonymous_0)
+SF:/Users/n/Work/eessi-pensjon-ui/src/components/File/Pdf,(anonymous_0)
 FN:19,(anonymous_1)
 FN:25,(anonymous_2)
 FN:32,(anonymous_3)

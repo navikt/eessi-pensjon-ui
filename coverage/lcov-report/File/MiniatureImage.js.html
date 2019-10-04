@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for File/MiniatureImage.js</title>
+    <title>Code coverage report for File/Imagee>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,8 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">File</a> MiniatureImage.js
-    </h1>
+      <a href="../index.html">All files</a> / <a href="index.html">File</a> Image.js>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">87.5% </span>
@@ -187,15 +186,15 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 &nbsp;
-import './MiniatureImage.css'
+import './Image.css'
 &nbsp;
-export const MiniatureImage = (props) =&gt; {
+export const Image = (props) =&gt; {
   const { animate, className, deleteLink, downloadLink, file, index, isHovering, onClick = <span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >()</span> =&gt; {},</span> onDeleteDocument, scale, size, t } = props
   const title = '' + file.name + '\n' + t('ui:size') + ': ' + size
 &nbsp;
   return (
     &lt;div
-      className={classNames('c-file-miniatureImage', className, { animate: animate })}
+      className={classNames('c-file-Image', className, { animate: animate })}
       title={title}
       style={{ transform: 'scale(' + scale + ')' }}
     &gt;
@@ -234,7 +233,7 @@ export const MiniatureImage = (props) =&gt; {
   )
 }
 &nbsp;
-MiniatureImage.propTypes = {
+Image.propTypes = {
   animate: PT.bool,
   className: PT.string,
   deleteLink: PT.bool,
@@ -249,7 +248,7 @@ MiniatureImage.propTypes = {
   t: PT.func.isRequired
 }
 &nbsp;
-export default MiniatureImage
+export default Image
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

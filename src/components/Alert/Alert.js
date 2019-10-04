@@ -1,6 +1,7 @@
 import React from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
+import _ from 'lodash'
 import Icons from '../Icons/Icons'
 import { AlertStripe } from '../../Nav'
 import './Alert.css'
@@ -11,8 +12,14 @@ export const errorTypes = {
   WARNING: 'advarsel'
 }
 
-export const Alert = (props) => {
-  const { className, clientErrorStatus, clientErrorMessage, error, fixed, onClientClear, t, type, serverErrorMessage } = props
+export const Alert = ({ className, error, message, onClientClear, status = 'ERROR', type }) => {
+  let _message = message
+
+  const onClearClicked = () => {
+    if (_(onClientClear).isFunction()) {
+      onClientClear()
+    }
+  }
 
   const printError = (error) => {
     const errorMessage = []
@@ -31,63 +38,36 @@ export const Alert = (props) => {
     return errorMessage.join(' - ')
   }
 
-  if (type === 'server') {
-    if (!serverErrorMessage) {
-      return null
-    }
-
-    let message = t(serverErrorMessage)
-    if (error) {
-      message += ': ' + printError(error)
-    }
-    return (
-      <AlertStripe
-        className={classNames('c-alert', 'server', className)} type={errorTypes.ERROR}
-      >
-        {message}
-        <Icons className='closeIcon' size='1x' kind='solidclose' onClick={onClientClear} />
-      </AlertStripe>
-    )
-  }
-
-  if (!clientErrorMessage) {
+  if (!_message) {
     return null
   }
 
-  const separatorIndex = clientErrorMessage.lastIndexOf('|')
-  let message
-
-  if (separatorIndex >= 0) {
-    message = t(clientErrorMessage.substring(0, separatorIndex)) + ': ' + clientErrorMessage.substring(separatorIndex + 1)
-  } else {
-    message = t(clientErrorMessage)
+  if (!['client', 'server'].indexOf(type) < 0) {
+    console.error('Invalid alert type: ' + type)
+    return null
   }
 
   if (error) {
-    message += ': ' + printError(error)
+    _message += ': ' + printError(error)
   }
 
   return (
     <AlertStripe
-      className={classNames(className, 'c-alert', 'client', { fixed: fixed || true })}
-      type={errorTypes[clientErrorStatus]}
+      className={classNames('c-alert', type, className, { fixed: type === 'client' })} type={errorTypes[status]}
     >
-      {message}
-      <Icons className='closeIcon' kind='solidclose' onClick={onClientClear} />
+      {_message}
+      <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} />
     </AlertStripe>
   )
 }
 
 Alert.propTypes = {
   className: PT.string,
-  clientErrorStatus: PT.string,
-  clientErrorMessage: PT.string,
   error: PT.object,
-  fixed: PT.bool,
-  onClientClear: PT.func.isRequired,
-  t: PT.func.isRequired,
+  message: PT.string,
+  onClientClear: PT.func,
   type: PT.string.isRequired,
-  serverErrorMessage: PT.string
+  status: PT.string
 }
 
 Alert.displayName = 'Alert'

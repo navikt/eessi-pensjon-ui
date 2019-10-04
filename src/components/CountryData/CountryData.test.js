@@ -32,6 +32,11 @@ describe('components/CountryData', () => {
     })
   })
 
+  it('exists', () => {
+    expect(CountryData.exists('aa')).toBeFalsy()
+    expect(CountryData.exists('no')).toBeTruthy()
+  })
+
   it('filterByValueOnArray', () => {
     const data = CountryData.filterByValueOnArray('nb', ['NO', 'SE', 'FI', 'DK'])
     expect(data).toMatchObject([{

@@ -1274,12 +1274,6 @@ class CountryData {
         label: 'Zimbabwe',
         currencyLabel: 'Zimbabwe Dollar',
         currency: 'ZWL'
-      }, {
-        value: 'XX',
-        value3: 'XXX',
-        label: 'Demoland',
-        currencyLabel: 'Demokroner',
-        currency: 'XXX'
       }
     ],
     nb: [
@@ -2781,12 +2775,6 @@ class CountryData {
         label: 'Øst Timor',
         currencyLabel: 'US Dollar',
         currency: 'USD'
-      }, {
-        value: 'XX',
-        value3: 'XXX',
-        label: 'Demoland',
-        currencyLabel: 'Demokroner',
-        currency: 'XXX'
       }]
   }
 
@@ -2795,16 +2783,20 @@ class CountryData {
   }
 
   findByValue = (locale, value) => {
-    return _.find(this.countries[locale], { value: value })
+    return _.find(this.countries[locale], { value: value.toUpperCase() })
   }
 
   findByValue3 = (locale, value) => {
-    return _.find(this.countries[locale], { value3: value })
+    return _.find(this.countries[locale], { value3: value.toUpperCase() })
+  }
+
+  exists = (country) => {
+    return this.findByValue('nb', country.toUpperCase()) !== undefined
   }
 
   filterByValueOnArray = (locale, needles) => {
     return _.filter(this.countries[locale], it => {
-      return needles.indexOf(it.value) >= 0
+      return needles.indexOf(it.value.toUpperCase()) >= 0
     })
   }
 }

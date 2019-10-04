@@ -1,33 +1,22 @@
 import React, { useState } from 'react'
 import PT from 'prop-types'
-import _ from 'lodash'
-import MiniatureOther from './MiniatureOther'
-import MiniaturePDF from './MiniaturePDF'
-import MiniatureImage from './MiniatureImage'
+import bytes from 'bytes'
+import Other from './Other'
+import Pdf from './Pdf'
+import Image from './Image'
 import './File.css'
-import DatePicker from '../DatePicker/DatePicker'
 
-const units = ['bytes', 'KB', 'MB', 'GB']
-
-const renderBytes = (bytes) => {
-  if (!bytes) {
+const renderBytes = (_bytes) => {
+  if (!_bytes) {
     return '-'
   }
-  let level = 0
-  while (bytes >= 1000 && ++level) {
-    bytes = bytes / 1000
-  }
-  return bytes.toFixed(bytes >= 10 || level < 1 ? 0 : 1) + ' ' + units[level]
+  return bytes(_bytes)
 }
 
 const File = (props) => {
-  const { animate, file, scale, ui } = props
+  const { animate = true, file, scale = 1.0, ui = 'paper' } = props
   const [isHovering, setIsHovering] = useState(false)
-
-  const _animate = _.isBoolean(animate) ? animate : true
   const _size = file && file.size !== undefined ? renderBytes(file.size) : 0
-  const _scale = scale || 1.0
-  const _ui = ui || 'paper'
 
   const onHandleMouseEnter = () => {
     setIsHovering(true)
@@ -37,58 +26,30 @@ const File = (props) => {
     setIsHovering(false)
   }
 
-  if (!file.content) {
-    return (
-      <div
-        className='c-file'
-        onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
-      >
-        <MiniatureOther
-          isHovering={isHovering}
-          animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
-        />
-      </div>
-    )
+  let Component = Other
+  if (file.mimetype && file.mimetype === 'application/pdf') {
+    Component = Pdf
   }
-  switch (file.mimetype) {
-    case 'application/pdf' :
-      return (
-        <div
-          className='c-file'
-          onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
-        >
-          <MiniaturePDF
-            isHovering={isHovering}
-            animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
-          />
-        </div>
-      )
-    case 'image/png':
-    case 'image/jpeg':
-      return (
-        <div
-          className='c-file'
-          onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
-        >
-          <MiniatureImage
-            isHovering={isHovering}
-            animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
-          />
-        </div>
-      )
-    default:
-      return (
-        <div
-          className='c-file'
-          onMouseEnter={onHandleMouseEnter} onMouseLeave={onHandleMouseLeave}
-        >
-          <MiniatureOther
-            isHovering={isHovering}
-            animate={_animate} size={_size} scale={_scale} ui={_ui} {...props}
-          />
-        </div>
-      )
+  if (file.mimetype && file.mimetype.startsWith('image/')) {
+    Component = Image
   }
+
+  return (
+    <div
+      className='c-file'
+      onMouseEnter={onHandleMouseEnter}
+      onMouseLeave={onHandleMouseLeave}
+    >
+      <Component
+        isHovering={isHovering}
+        animate={animate}
+        size={_size}
+        scale={scale}
+        ui={ui}
+        {...props}
+      />
+    </div>
+  )
 }
 
 File.propTypes = {

@@ -11,6 +11,6 @@ describe('components/WaitingPanel', () => {
   it('Has proper HTML structure', () => {
     const wrapper = mount(<WaitingPanel message='testmessage' />)
     expect(wrapper.exists('.c-waitingPanel')).toBeTruthy()
-    expect(wrapper.find('.c-waitingPanel__message').text()).toEqual('testmessage')
+    expect(wrapper.find('.c-waitingPanel__message').hostNodes().text()).toEqual('testmessage')
   })
 })

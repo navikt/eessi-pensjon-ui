@@ -30,7 +30,6 @@ import MannIcon from '../../resources/images/mann.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as icons from '@fortawesome/free-solid-svg-icons'
-import FocusGroup from '../FocusGroup/FocusGroup'
 
 const Icons = (props) => {
   const { kind, size } = props
