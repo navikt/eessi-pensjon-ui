@@ -6,7 +6,7 @@ import Psycho from './Psycho'
 import classNames from 'classnames'
 import './Psycho.css'
 
-const PsychoPanel = ({ children, className, closeButton, mood }) => {
+const PsychoPanel = ({ children, className, closeButton = false, mood }) => {
   const [hidden, setHidden] = useState(false)
 
   const handleClose = (e) => {

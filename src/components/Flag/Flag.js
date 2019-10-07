@@ -3,6 +3,7 @@ import PT from 'prop-types'
 import classnames from 'classnames'
 import CountryData from '../CountryData/CountryData'
 import './Flag.css'
+import ReactFlag from 'react-world-flags'
 
 const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
   if (['original', 'circle'].indexOf(type) < 0) {
@@ -12,8 +13,7 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
 
   const getFlag = () => {
     if (CountryData.exists(country)) {
-      const Flags = require('../../resources/flags/' + country.toLowerCase() + '.svg').default
-      return <Flags />
+      return <ReactFlag code={country} />
     }
     console.error('Flag ' + country.toLowerCase() + ' not found')
     return null

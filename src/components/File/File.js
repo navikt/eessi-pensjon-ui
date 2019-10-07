@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PT from 'prop-types'
+import classNames from 'classnames'
 import bytes from 'bytes'
 import Other from './Other'
 import Pdf from './Pdf'
@@ -14,7 +15,7 @@ const renderBytes = (_bytes) => {
 }
 
 const File = (props) => {
-  const { animate = true, file, scale = 1.0, ui = 'paper' } = props
+  const { className, animate = true, file, scale = 1.0 } = props
   const [isHovering, setIsHovering] = useState(false)
   const _size = file && file.size !== undefined ? renderBytes(file.size) : 0
 
@@ -36,7 +37,7 @@ const File = (props) => {
 
   return (
     <div
-      className='c-file'
+      className={classNames('c-file', className)}
       onMouseEnter={onHandleMouseEnter}
       onMouseLeave={onHandleMouseLeave}
     >
@@ -45,7 +46,6 @@ const File = (props) => {
         animate={animate}
         size={_size}
         scale={scale}
-        ui={ui}
         {...props}
       />
     </div>
@@ -53,10 +53,10 @@ const File = (props) => {
 }
 
 File.propTypes = {
+  className: PT.string,
   animate: PT.bool,
   file: PT.object.isRequired,
-  scale: PT.number,
-  ui: PT.string
+  scale: PT.number
 }
 File.displayName = 'File'
 export default File

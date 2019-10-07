@@ -113,7 +113,6 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
   )
 }
 
-
 DnDSpecial.propTypes = {
   actions: PT.object,
   separator: PT.object.isRequired,

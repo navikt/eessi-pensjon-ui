@@ -4,7 +4,6 @@ import _ from 'lodash'
 import { DragDropContext } from 'react-beautiful-dnd'
 
 const DnD = ({ actions, recipe, children }) => {
-
   const reorder = (list, startIndex, endIndex) => {
     const newList = Array.from(list)
     const [removed] = newList.splice(startIndex, 1)

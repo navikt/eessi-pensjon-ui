@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Select from 'react-select'
 import PT from 'prop-types'
 import _ from 'lodash'
@@ -10,9 +10,10 @@ import CountryErrorStyle from '../CountrySelect/CountryErrorStyle'
 import './CountrySelect.css'
 
 const CountrySelect = ({
-  className, components, error = false, errorMessage, excludeList, id,
-  includeList, locale, onSelect, placeholder, type, styles = {}, value
+  className, error, excludeList, id, includeList, locale = 'nb', onSelect, placeholder, type, value = null
 }) => {
+  const [_value, setValue] = useState(value)
+
   const include = (selectedCountries, allCountries) => {
     return _(allCountries).filter(country => {
       return selectedCountries.indexOf(country.value) >= 0
@@ -25,11 +26,18 @@ const CountrySelect = ({
     })
   }
 
+  const onSelectChange = (e) => {
+    if (_(onSelect).isFunction()) {
+      onSelect(e)
+    }
+    setValue(e)
+  }
+
   const optionList = CountryData.getData(locale)
   let options = (includeList ? include(includeList, optionList) : optionList)
   options = (excludeList ? exclude(excludeList, options) : options)
 
-  let defValue = value
+  let defValue = _value
   if (defValue && !defValue.label) {
     defValue = _(options).find({ value: defValue.value ? defValue.value : defValue })
   }
@@ -46,17 +54,15 @@ const CountrySelect = ({
         id={id ? id + '-select' : null}
         components={{
           Option: CountryOption,
-          SingleValue: CountryValue,
-          ...components
+          SingleValue: CountryValue
         }}
         selectProps={{
           type: type
         }}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'
-        onChange={onSelect}
+        onChange={onSelectChange}
         styles={{
-          ...styles,
           ...CountryErrorStyle(error)
         }}
         tabSelectsValue={false}
@@ -65,7 +71,7 @@ const CountrySelect = ({
       {error
         ? (
           <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-            {errorMessage}
+            {error}
           </div>
         )
         : null}
@@ -75,17 +81,14 @@ const CountrySelect = ({
 
 CountrySelect.propTypes = {
   className: PT.string,
-  components: PT.object,
-  error: PT.bool,
-  errorMessage: PT.string,
+  error: PT.string,
   excludeList: PT.array,
   id: PT.string,
   includeList: PT.array,
-  locale: PT.string.isRequired,
-  onSelect: PT.func.isRequired,
+  locale: PT.string,
+  onSelect: PT.func,
   placeholder: PT.string,
   type: PT.string,
-  styles: PT.object,
   value: PT.oneOfType([PT.object, PT.string])
 }
 CountrySelect.displayName = 'CountrySelect'

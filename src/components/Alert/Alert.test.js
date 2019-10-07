@@ -7,7 +7,7 @@ describe('components/Alert/Alert', () => {
     status: 'OK',
     message: 'mockErrorMessage',
     error: undefined,
-    onClientClear: jest.fn()
+    onClear: jest.fn()
   }
 
   it('Renders', () => {
@@ -46,7 +46,7 @@ describe('components/Alert/Alert', () => {
   it('Close button clears alert', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' status='ERROR' />)
     wrapper.find('.closeIcon').hostNodes().simulate('click')
-    expect(initialMockProps.onClientClear).toHaveBeenCalled()
+    expect(initialMockProps.onClear).toHaveBeenCalled()
   })
 
   it('Pretty prints a error message', () => {

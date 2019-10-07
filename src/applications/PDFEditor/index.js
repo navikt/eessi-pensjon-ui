@@ -6,7 +6,7 @@ import './index.css'
 
 const PDFEditor = () => (
   <StoreProvider initialState={initialState} reducer={reducer}>
-    <Pdf/>
+    <Pdf />
   </StoreProvider>
 )
 

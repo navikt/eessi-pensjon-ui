@@ -8,13 +8,15 @@ import classNames from 'classnames'
 import Mustache from 'mustache'
 import bytes from 'bytes'
 import File from '../File/File'
+import Modal from '../Modal/Modal'
 import './FileUpload.css'
 
 const defaultLabels = {
+  all: 'alle',
   accepted: 'Akseptert',
   size: 'Størrelse',
   download: 'Last ned',
-  dropFilesHere: 'Klikk her for å velge filer. Filformat er JPG, PNG og PDF, maks {{maxFiles}} filer.',
+  dropFilesHere: 'Klikk her for å velge filer. Filformat er {{filFormat}}, maks {{maxFiles}} filer, maks størrelse {{maxFileSize}}.',
   fileIsTooBigLimitIs: 'filen {{file}} ({{size}}) er for stor, grensen er {{maxFileSize}}',
   maxFilesExceeded: 'For mange filer, maks er {{maxFiles}} filer',
   rejected: 'Avvist',
@@ -23,12 +25,15 @@ const defaultLabels = {
 }
 
 const FileUpload = ({
-  acceptedMimetypes, afterDrop, beforeDrop, className, closeModal, currentPages, files, labels = defaultLabels,
-  maxFiles, maxFileSize, onFileChange, openModal, status, tabIndex
+  acceptedMimetypes, afterDrop, beforeDrop, className, currentPages, files = [], labels,
+  maxFiles = 99, maxFileSize = 10485760, onFileChange, status, tabIndex
 }) => {
   const [_files, setFiles] = useState(files)
   const [_currentPages, setCurrentPages] = useState(currentPages || [])
   const [_status, setStatus] = useState(status || {})
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modal, setModal] = useState(undefined)
+  const _labels = { ...defaultLabels, ...labels }
 
   useEffect(() => {
     if (!_.isEmpty(_files) && _.isEmpty(_currentPages)) {
@@ -36,14 +41,20 @@ const FileUpload = ({
     }
   }, [_currentPages, _files])
 
+  const closePreview = () => {
+    setModal(undefined)
+    setModalOpen(false)
+  }
+
   const openPreview = (file, pageNumber) => {
-    openModal({
+    setModal({
       modalContent: (
-        <div style={{ cursor: 'pointer' }} onClick={closeModal}>
-          <File labels={labels} file={file} width={400} height={600} pageNumber={pageNumber} />
+        <div style={{ cursor: 'pointer' }} onClick={closePreview}>
+          <File labels={_labels} file={file} width={400} height={600} pageNumber={pageNumber} />
         </div>
       )
     })
+    setModalOpen(true)
   }
 
   const updateFiles = useCallback((newFiles, newCurrentPages, statusMessage) => {
@@ -57,7 +68,7 @@ const FileUpload = ({
         type: 'OK'
       })
     }
-    if (onFileChange) {
+    if (_(onFileChange).isFunction()) {
       onFileChange(newFiles)
     }
   }, [_status, onFileChange])
@@ -88,11 +99,11 @@ const FileUpload = ({
         newCurrentPages[newCurrentPages.length] = 1
       }
     })
-    let statusMessage = labels.accepted + ': ' + acceptedFiles.length + ', '
-    statusMessage += labels.rejected + ': ' + rejectedFiles.length + ', '
-    statusMessage += labels.total + ': ' + newFiles.length
+    let statusMessage = _labels.accepted + ': ' + acceptedFiles.length + ', '
+    statusMessage += _labels.rejected + ': ' + rejectedFiles.length + ', '
+    statusMessage += _labels.total + ': ' + newFiles.length
     updateFiles(newFiles, newCurrentPages, statusMessage)
-  }, [_currentPages, _files, updateFiles])
+  }, [_currentPages, _files, _labels, updateFiles])
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (beforeDrop) {
@@ -100,7 +111,7 @@ const FileUpload = ({
     }
     if (maxFiles && (_files.length + acceptedFiles.length > maxFiles)) {
       return setStatus({
-        message: Mustache.render(labels.maxFilesExceeded, {
+        message: Mustache.render(_labels.maxFilesExceeded, {
           maxFiles: maxFiles
         }),
         type: 'ERROR'
@@ -112,12 +123,12 @@ const FileUpload = ({
     if (afterDrop) {
       afterDrop()
     }
-  }, [_files.length, afterDrop, beforeDrop, labels, maxFiles, processFiles])
+  }, [_files.length, afterDrop, beforeDrop, _labels, maxFiles, processFiles])
 
   const onDropRejected = (rejectedFiles) => {
     if (maxFileSize && rejectedFiles[0].size > maxFileSize) {
       setStatus({
-        message: Mustache.render(labels.fileIsTooBigLimitIs, {
+        message: Mustache.render(_labels.fileIsTooBigLimitIs, {
           maxFileSize: bytes(maxFileSize),
           size: bytes(rejectedFiles[0].size),
           file: rejectedFiles[0].name
@@ -133,7 +144,7 @@ const FileUpload = ({
     newFiles.splice(fileIndex, 1)
     newCurrentPages.splice(fileIndex, 1)
     const filename = _files[fileIndex].name
-    const statusMessage = labels.removed + ' ' + filename
+    const statusMessage = _labels.removed + ' ' + filename
     updateFiles(newFiles, newCurrentPages, statusMessage)
   }
 
@@ -165,41 +176,48 @@ const FileUpload = ({
   })
 
   return (
-    <div
-      className={classNames('c-fileUpload', 'p-4', { 'c-fileUpload-active ': isDragActive }, className)}
-      tabIndex={tabIndex}
-      {...getRootProps()}
-    >
-      <input {...getInputProps()} />
-      <div className='c-fileUpload-placeholder'>
-        <div className='c-fileUpload-placeholder-message'>
-          {Mustache.render(labels.dropFilesHere, {
-            maxFiles: maxFiles
+    <>
+      <Modal modalOpen={modalOpen} modal={modal} />
+      <div
+        className={classNames('c-fileUpload', 'p-4', { 'c-fileUpload-active ': isDragActive }, className)}
+        tabIndex={tabIndex}
+        {...getRootProps()}
+      >
+        <input {...getInputProps()} />
+        <div className='c-fileUpload-placeholder'>
+          <div className='c-fileUpload-placeholder-message'>
+            {Mustache.render(_labels.dropFilesHere, {
+              maxFiles: maxFiles,
+              maxFileSize: bytes(maxFileSize),
+              filFormat: acceptedMimetypes ? acceptedMimetypes.map(type => {
+                return type.substring(type.indexOf('/') + 1, type.length).toUpperCase()
+              }).join(', ') : _labels.all
+            })}
+          </div>
+          <div className={classNames('c-fileUpload-placeholder-status', 'c-fileUpload-placeholder-status-' + _status.type)}>
+            {_status.message || ''}
+          </div>
+        </div>
+        <div className='c-fileUpload-files scrollable'>
+          {_files.map((file, i) => {
+            return (
+              <File
+                className='mr-2' key={i} file={file}
+                currentPage={_currentPages[i]}
+                deleteLink downloadLink previewLink
+                index={i}
+                labels={_labels}
+                onPreviousPage={onPreviousPageRequest}
+                onNextPage={onNextPageRequest}
+                onLoadSuccess={onLoadSuccess}
+                onDeleteDocument={removeFile}
+                onPreviewDocument={openPreview}
+              />
+            )
           })}
         </div>
-        <div className={classNames('c-fileUpload-placeholder-status', 'c-fileUpload-placeholder-status-' + _status.type)}>
-          {_status.message || ''}
-        </div>
       </div>
-      <div className='c-fileUpload-files scrollable'>
-        {_files.map((file, i) => {
-          return (
-            <File
-              className='mr-2' key={i} file={file}
-              currentPage={_currentPages[i]}
-              deleteLink downloadLink previewLink
-              index={i}
-              labels={labels}
-              onPreviousPage={onPreviousPageRequest}
-              onNextPage={onNextPageRequest}
-              onLoadSuccess={onLoadSuccess}
-              onDeleteDocument={removeFile}
-              onPreviewDocument={openPreview}
-            />
-          )
-        })}
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -208,13 +226,13 @@ FileUpload.propTypes = {
   afterDrop: PT.func,
   beforeDrop: PT.func,
   className: PT.string,
-  closeModal: PT.func.isRequired,
   currentPages: PT.array,
-  files: PT.array.isRequired,
+  files: PT.array,
+  labels: PT.object,
   maxFiles: PT.number,
   maxFileSize: PT.number,
-  onFileChange: PT.func.isRequired,
-  openModal: PT.func.isRequired,
+  onFileChange: PT.func,
+  status: PT.object,
   tabIndex: PT.number
 }
 FileUpload.displayName = 'FileUpload'

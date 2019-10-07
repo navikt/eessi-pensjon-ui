@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
@@ -12,27 +12,15 @@ import './MultipleSelect.css'
 const animatedComponents = makeAnimated()
 
 const MultipleSelect = ({
-  className, creatable = false, error = false, errorMessage, excludeList, hideSelectedOptions,
-  id, includeList, onChange, optionList = [], placeholder, values
+  className, creatable = false, error, hideSelectedOptions = false, id, onSelect, options = [], placeholder, values = []
 }) => {
   const [_values, setValues] = useState(values)
 
-  useEffect(() => {
-    if (!_.isEqual(_values, values)) {
-      setValues(values)
+  const onSelectChange = (e) => {
+    if (_(onSelect).isFunction()) {
+      onSelect(e)
     }
-  }, [values, _values])
-
-  const include = (selectedValues, allValues) => {
-    return _(allValues).filter(it => {
-      return selectedValues.indexOf(it.value) >= 0
-    })
-  }
-
-  const exclude = (selectedValues, allValues) => {
-    return _(allValues).filter(it => {
-      return selectedValues.indexOf(it.value) < 0
-    })
+    setValues(e)
   }
 
   const selectStyle = () => {
@@ -62,8 +50,6 @@ const MultipleSelect = ({
     }
   }
 
-  let options = includeList ? include(includeList, optionList) : optionList
-  options = excludeList ? exclude(excludeList, options) : options
   const Component = creatable ? CreatableSelect : Select
 
   return (
@@ -85,9 +71,8 @@ const MultipleSelect = ({
           ...animatedComponents,
           Option: MultipleOption,
           MultiValueRemove: MultipleValueRemove
-
         }}
-        onChange={onChange}
+        onChange={onSelectChange}
         hideSelectedOptions={hideSelectedOptions || false}
         styles={selectStyle()}
         tabSelectsValue={false}
@@ -96,7 +81,7 @@ const MultipleSelect = ({
       {error
         ? (
           <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-            {errorMessage}
+            {error}
           </div>
         )
         : null}
@@ -105,20 +90,15 @@ const MultipleSelect = ({
 }
 
 MultipleSelect.propTypes = {
-  onChange: PT.func.isRequired,
-  values: PT.array.isRequired,
-  style: PT.object,
-  includeList: PT.array,
-  excludeList: PT.array,
-  optionList: PT.array,
   className: PT.string,
-  required: PT.string,
+  creatable: PT.bool,
+  error: PT.string,
+  hideSelectedOptions: PT.bool,
   id: PT.string,
-  inputProps: PT.object,
-  errorMessage: PT.string,
-  styles: PT.object,
-  error: PT.bool,
-  creatable: PT.bool
+  onSelect: PT.func,
+  options: PT.array,
+  placeholder: PT.string,
+  values: PT.array
 }
 MultipleSelect.displayName = 'MultipleSelect'
 export default MultipleSelect

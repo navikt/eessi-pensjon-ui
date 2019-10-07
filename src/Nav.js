@@ -106,11 +106,11 @@ export {
   BekreftCheckboksPanel,
   Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column,
   Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten,
-  Fieldset,
+  Fareknapp, Fieldset, Flatknapp,
   HjeklpetekstBase, HjelpetekstAuto, HjelpetekstHoyre, HjelpetekstMidt, HjelpetekstOver, HjelpetekstUnder, HjelpetekstUnderHoyre, HjelpetekstUnderVenstre, HjelpetekstVenstre,
-  Hamburgerknapp,
+  Hamburgerknapp, Hovedknapp,
   Ikon, Ingress, Innholdstittel, Input,
-  Knapp, Hovedknapp, Flatknapp, KnappBase, Fareknapp,
+  Knapp, KnappBase,
   Lenke, Lenkepanel, LenkepanelBase, Lesmerpanel, Lukknapp,
   Modal, Menyknapp,
   Nesteknapp, Normaltekst,
@@ -119,6 +119,5 @@ export {
   Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp,
   Tabs, Tekstomrade, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,
   Undertittel, Undertekst, UndertekstBold,
-  Veileder,
-  Veilederpanel
+  Veileder, Veilederpanel
 }

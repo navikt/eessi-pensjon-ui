@@ -1,10 +1,11 @@
 import React from 'react'
 import PT from 'prop-types'
+import classNames from 'classnames'
 import _ from 'lodash'
 import { Hovedknapp, Knapp, Modal as NavModal, Undertittel } from '../../Nav'
 import './Modal.css'
 
-export const Modal = ({ onModalClose, modal, modalOpen }) => {
+export const Modal = ({ className, onModalClose, modal }) => {
   const closeModal = () => {
     if (_(onModalClose).isFunction()) {
       onModalClose()
@@ -13,9 +14,9 @@ export const Modal = ({ onModalClose, modal, modalOpen }) => {
 
   return (
     <NavModal
-      className='c-modal'
+      className={classNames('c-modal', className)}
       ariaHideApp={false}
-      isOpen={modalOpen}
+      isOpen={!_(modal).isNil()}
       onRequestClose={closeModal}
       closeButton={false}
       contentLabel='contentLabel'
@@ -38,7 +39,10 @@ export const Modal = ({ onModalClose, modal, modalOpen }) => {
             ? (
               <div className='c-modal__buttons text-center'>
                 {modal.modalButtons.map(button => {
-                  const handleClick = button.onClick
+                  const handleClick = _(button.onClick).isFunction() ? () => {
+                    button.onClick()
+                    closeModal()
+                  } : closeModal
                   return button.main
                     ? (
                       <Hovedknapp
@@ -71,9 +75,9 @@ export const Modal = ({ onModalClose, modal, modalOpen }) => {
 }
 
 Modal.propTypes = {
-  onModalClose: PT.func.isRequired,
-  modal: PT.object,
-  modalOpen: PT.bool.isRequired
+  className: PT.string,
+  onModalClose: PT.func,
+  modal: PT.object
 }
 Modal.displayName = 'Modal'
 export default Modal

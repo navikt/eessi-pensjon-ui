@@ -7,7 +7,7 @@ import './Image.css'
 export const Image = ({
   animate, className, deleteLink, downloadLink, file, index, isHovering,
   onClick = () => {}, labels = { size: 'Størrelse', download: 'Last ned' },
-  onDeleteDocument, scale, size
+  onDeleteDocument, onPreviewDocument, previewLink, scale, size
 }) => {
   const title = '' + file.name + '\n' + labels.size + ': ' + size
 
@@ -15,7 +15,6 @@ export const Image = ({
     <div
       className={classNames('c-file-Image', className, { animate: animate })}
       title={title}
-      style={{ transform: 'scale(' + scale + ')' }}
     >
       <div>
         {deleteLink && isHovering
@@ -28,6 +27,15 @@ export const Image = ({
             </div>
           )
           : null}
+        {previewLink && isHovering
+          ? (
+            <div
+              className='link previewLink'
+              onClick={() => onPreviewDocument(index)}
+            >
+              <Icons style={{ cursor: 'pointer' }} size='1x' kind='view' />
+            </div>
+          ) : null}
         {downloadLink && isHovering
           ? (
             <div className='link downloadLink'>
@@ -43,7 +51,7 @@ export const Image = ({
         <div className='content' onClick={() => onClick(index)}>
           <img
             alt={file.name}
-            style={{ maxWidth: '100px' }}
+            style={{ maxWidth: (100 * scale) + 'px' }}
             src={'data:' + file.mimetype + ';base64,' + file.content.base64}
           />
         </div>

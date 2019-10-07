@@ -19,8 +19,7 @@ describe('components/CountrySelect', () => {
     includeList: CountryFilter.EEA,
     value: testData,
     onSelect: jest.fn(),
-    error: undefined,
-    errorMessage: undefined
+    error: undefined
   }
 
   it('Renders', () => {
@@ -50,10 +49,6 @@ describe('components/CountrySelect', () => {
     wrapper = mount(<CountrySelect {...initialMockParams} />)
     wrapper.find('.c-countrySelect__select__dropdown-indicator').hostNodes().simulate('keyDown', { key: 'ArrowDown' })
     wrapper.find('.c-countryOption').hostNodes().last().simulate('keyDown', { key: 'Enter' })
-    expect(initialMockParams.onSelect).toBeCalledWith(testData, {
-      action: 'select-option',
-      name: undefined,
-      option: undefined
-    })
+    expect(initialMockParams.onSelect).toBeCalledWith(testData)
   })
 })

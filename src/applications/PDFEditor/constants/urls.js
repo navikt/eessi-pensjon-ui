@@ -7,4 +7,3 @@ const PDF_URL = BACKEND_URL + '/pdf'
 
 // PdfController
 export const PDF_GENERATE_URL = PDF_URL + '/generate'
-

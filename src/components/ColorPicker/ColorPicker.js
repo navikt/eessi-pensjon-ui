@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
+import classNames from 'classnames'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
 
-const ColorPicker = ({ color, onChangeComplete }) => {
+const ColorPicker = ({ className, initialColor, onColorChanged }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
-  const [_color, setColor] = useState({ r: 255, g: 255, b: 255, a: 1 })
-
-  useEffect(() => {
-    if (!_(color).isEqual(_color)) {
-      setColor(color)
-    }
-  }, [color, _color])
+  const [_color, setColor] = useState(initialColor || { r: 255, g: 255, b: 255, a: 1 })
 
   const toggleColorDisplay = () => {
     setDisplayColorPicker(!displayColorPicker)
@@ -22,8 +17,11 @@ const ColorPicker = ({ color, onChangeComplete }) => {
     setDisplayColorPicker(false)
   }
 
-  const changeColor = (color) => {
-    setColor(color)
+  const onChangeComplete = (color) => {
+    if (_(onColorChanged).isFunction()) {
+      onColorChanged(color)
+    }
+    setColor(color.rgb)
   }
 
   const styles = reactCSS({
@@ -57,7 +55,7 @@ const ColorPicker = ({ color, onChangeComplete }) => {
   })
 
   return (
-    <div className='c-colorPicker'>
+    <div className={classNames('c-colorPicker', className)}>
       <div className='c-colorPicker__container' style={styles.swatch} onClick={toggleColorDisplay}>
         <div style={styles.color} />
       </div>
@@ -65,7 +63,7 @@ const ColorPicker = ({ color, onChangeComplete }) => {
         ? (
           <div className='c-colorPicker__popover' style={styles.popover}>
             <div className='c-colorPicker__cover' style={styles.cover} onClick={closeColorPicker} />
-            <SketchPicker color={color} onChange={changeColor} onChangeComplete={onChangeComplete} />
+            <SketchPicker color={_color} onChangeComplete={onChangeComplete} />
           </div>
         )
         : null}
@@ -74,8 +72,9 @@ const ColorPicker = ({ color, onChangeComplete }) => {
 }
 
 ColorPicker.propTypes = {
+  className: PT.string,
   color: PT.object.isRequired,
-  onChangeComplete: PT.func.isRequired
+  onColorChanged: PT.func.isRequired
 }
 
 ColorPicker.displayName = 'ColorPicker'

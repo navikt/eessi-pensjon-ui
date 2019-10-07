@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
+import _ from 'lodash'
 import moment from 'moment'
 import { Input } from '../../Nav'
 import './DatePicker.css'
 
+const defaultLabels = { day: 'Dag', month: 'Måned', year: 'År' }
+const defaultPlaceholders = { day: 'DD', month: 'MM', year: 'ÅÅÅÅ' }
+
 const DatePicker = (props) => {
-  const { className, disabled = false, feil, labels = {}, ids = {}, onChange, onBlur, onFocus, placeholders = {}, initialValues = {} } = props
+  const { className, disabled = false, error, ids = {}, initialValues = {}, labels, onBlur, onChange, onFocus, placeholders } = props
+
+  const _labels = { ...defaultLabels, ...labels }
+  const _placeholders = { ...defaultPlaceholders, ...placeholders }
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState({})
   const [_timeoutID, setTimeoutID] = useState(null)
@@ -101,7 +108,9 @@ const DatePicker = (props) => {
     }
     setValues(newDate)
     setErrors(checkValidity(newDate))
-    onChange(newDate)
+    if (_(onChange).isFunction()) {
+      onChange(newDate)
+    }
   }
 
   const handleMaxLengthDay = (e) => { maxLength(2, e) }
@@ -121,9 +130,9 @@ const DatePicker = (props) => {
         <div className='col pl-2 pr-1'>
           <Input
             className='DatePickerDayInput'
-            label={labels.day || 'dag'}
+            label={_labels.day || 'dag'}
             id={ids.day || ''}
-            placeholder={placeholders.day}
+            placeholder={_placeholders.day}
             type='number'
             min='1'
             max='31'
@@ -131,15 +140,15 @@ const DatePicker = (props) => {
             value={(values.day !== undefined) ? values.day : ''}
             onInput={handleMaxLengthDay}
             onChange={handleChangeDay}
-            feil={(errors.day || feil) ? { feilmelding: '' } : null}
+            feil={(errors.day || error) ? { feilmelding: '' } : null}
           />
         </div>
         <div className='col pl-1 pr-1'>
           <Input
             className='DatePickerMonthInput'
-            label={labels.month || 'måned'}
+            label={_labels.month || 'måned'}
             id={ids.month || ''}
-            placeholder={placeholders.month}
+            placeholder={_placeholders.month}
             type='number'
             min='1'
             max='12'
@@ -147,28 +156,28 @@ const DatePicker = (props) => {
             value={values.month !== undefined ? values.month : ''}
             onInput={handleMaxLengthMonth}
             onChange={handleChangeMonth}
-            feil={errors.month || feil ? { feilmelding: '' } : null}
+            feil={errors.month || error ? { feilmelding: '' } : null}
           />
         </div>
         <div className='col col pl-1 pr-0'>
           <Input
             className='DatePickerYearInput'
-            label={labels.year || 'år'}
+            label={_labels.year || 'år'}
             id={ids.year || ''}
-            placeholder={placeholders.year}
+            placeholder={_placeholders.year}
             type='number'
             min='1900'
             disabled={disabled}
             value={values.year !== undefined ? values.year : ''}
             onInput={handleMaxLengthYear}
             onChange={handleChangeYear}
-            feil={errors.year || feil ? { feilmelding: '' } : null}
+            feil={errors.year || error ? { feilmelding: '' } : null}
           />
         </div>
       </div>
-      {feil ? (
+      {error ? (
         <div role='alert' aria-live='assertive' className='feilmelding skjemaelement__feilmelding'>
-          {feil.feilmelding}
+          {error}
         </div>
       )
         : null}
@@ -177,16 +186,16 @@ const DatePicker = (props) => {
 }
 
 DatePicker.propTypes = {
+  className: PT.string,
   disabled: PT.bool,
-  required: PT.object,
-  id: PT.string,
+  error: PT.string,
   ids: PT.object,
   initialValues: PT.object,
-  feil: PT.object,
   labels: PT.object,
   onBlur: PT.func,
   onFocus: PT.func,
-  onChange: PT.func.isRequired
+  onChange: PT.func,
+  placeholders: PT.object
 }
 DatePicker.displayName = 'DatePicker'
 export default DatePicker

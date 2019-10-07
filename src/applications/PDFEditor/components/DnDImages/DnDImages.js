@@ -85,13 +85,14 @@ const DnDImages = ({ actions, dndTarget, files, labels, pageScale, recipe }) => 
         )}
       </Droppable>
       {isHovering ? (<div className='addAllLink'>
-        <a href='#addAll'
-           onClick={addAllImagesToTargetPdf}
+        <a
+          href='#addAll'
+          onClick={addAllImagesToTargetPdf}
         >
           {labels.addAll}
         </a>
       </div>
-        ) : null }
+      ) : null}
     </div>
   )
 }
@@ -105,4 +106,3 @@ DnDImages.propTypes = {
 }
 
 export default DnDImages
-

@@ -10,7 +10,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.js'
 export const Pdf = ({
   addLink, animate, className, currentPage, deleteLink, downloadLink, file, height, initialNumberPages, index, isHovering,
   labels = { size: 'Størrelse', download: 'Last ned', pages: 'Sider' }, onAddFile, onClick, onDeleteDocument, onLoadSuccess,
-  onNextPage, onPreviewDocument, onPreviousPage, previewLink, scale, size, ui, width
+  onNextPage, onPreviewDocument, onPreviousPage, previewLink, scale, size, width
 }) => {
   const [_currentPage, setCurrentPage] = useState(1)
   const [_numberPages, setNumberPages] = useState(initialNumberPages)
@@ -76,7 +76,6 @@ export const Pdf = ({
     <div
       className={classNames('c-file-Pdf', className, { animate: animate })}
       title={title}
-      style={{ transform: 'scale(' + scale + ')' }}
     >
       <Document
         className='position-relative'
@@ -153,10 +152,10 @@ export const Pdf = ({
             </div>
           ) : null}
         <div
-          className={classNames('page', ui)}
+          className={classNames('page', 'paper')}
           onClick={onClick}
         >
-          <Page width={width || 100} height={height || 140} renderMode='svg' pageNumber={_currentPage} />
+          <Page width={width || 100 * scale} height={height || 140 * scale} renderMode='svg' pageNumber={_currentPage} />
         </div>
       </Document>
     </div>
@@ -185,7 +184,6 @@ Pdf.propTypes = {
   previewLink: PT.bool,
   scale: PT.number.isRequired,
   size: PT.string,
-  ui: PT.string,
   width: PT.number
 }
 

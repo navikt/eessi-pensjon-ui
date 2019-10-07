@@ -1,5 +1,7 @@
 .c-flag {
+
   border: 1px solid lightgrey;
+  display: inline-block;
 
   &.type-circle {
     border-radius: 50%;
@@ -10,11 +12,10 @@
       width: 25px;
       height: 25px;
 
-      svg {
+      img {
         width: 40px;
-        height: 110%;
-        margin-left: -8px;
-        margin-top: -20%;
+        margin-left: -6px;
+        margin-top: -5%;
       }
     }
 
@@ -23,7 +24,7 @@
       width: 40px;
       height: 40px;
 
-      svg {
+      img {
         width: 60px;
         height: 100%;
         margin-left: -8px;
@@ -34,16 +35,16 @@
 
   &.type-original {
 
-    &.size-M {
+    &.size-M img {
 
       height: 25px;
-      width: 40px;
+      width: auto;
     }
 
-    &.size-L {
+    &.size-L img {
 
       height: 40px;
-      width: 80px;
+      width: auto;
     }
   }
 }

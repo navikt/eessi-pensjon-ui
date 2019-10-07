@@ -5,22 +5,15 @@ import 'core-js/es/array/includes' // IE 11 compatibility
 import 'core-js/es/array/find' // IE 11 compatibility
 import 'core-js/es/map' // IE 11 compatibility
 import 'core-js/es/set' // IE 11 compatibility
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createBrowserHistory } from 'history'
 import { Switch, Route, Router } from 'react-router'
-import 'moment'
-import 'moment/locale/en-gb'
-import 'moment/locale/nb'
-
-
 import * as Applications from './applications'
 import * as Pages from './pages'
-
-//import 'bootstrap/dist/css/bootstrap.min.css'
-//import 'index.css'
-//import 'index_highContrast.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'index.css'
+// import 'index_highContrast.css'
 
 ReactDOM.render(
   <Router history={createBrowserHistory()}>
@@ -33,7 +26,6 @@ ReactDOM.render(
       <Route exact path='/File' component={Pages.File} />
       <Route exact path='/FileUpload' component={Pages.FileUpload} />
       <Route exact path='/Flag' component={Pages.Flag} />
-      <Route exact path='/Icons' component={Pages.Icons} />
       <Route exact path='/Modal' component={Pages.Modal} />
       <Route exact path='/MultipleSelect' component={Pages.MultipleSelect} />
       <Route exact path='/Nav' component={Pages.Nav} />

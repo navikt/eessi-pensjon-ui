@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import PageInDnD from '../PageInDnD/PageInDnD'
 import './DnDSource.css'
 
-const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget}) => {
+const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget }) => {
   const [isHovering, setIsHovering] = useState(false)
   const [isFocused, setIsFocused] = useState(undefined)
 
@@ -27,7 +27,6 @@ const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget}) => {
   }
 
   const addAllPagesToTargetPdf = (name, e) => {
-
     e.preventDefault()
     e.stopPropagation()
 
@@ -109,12 +108,13 @@ const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget}) => {
           </div>
         )}
       </Droppable>
-      {isHovering? (
+      {isHovering ? (
         <div className='addAllLink'>
           <a href='#addAll' onClick={() => addAllPagesToTargetPdf(pdf.name)}>
-            {labels.addAll}</a>
+            {labels.addAll}
+          </a>
         </div>
-        ) : null }
+      ) : null}
     </div>
   )
 }

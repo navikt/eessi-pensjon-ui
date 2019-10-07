@@ -4,22 +4,24 @@ import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 import './Other.css'
 
-export const Other = (props) => {
-  const { animate, className, file, index, isHovering, labels = { size: 'Størrelse', download: 'Last ned' }, onClick = () => {}, onDeleteDocument, size } = props
+export const Other = ({
+  animate, className, deleteLink, downloadLink, file, index, isHovering, labels = { size: 'Størrelse', download: 'Last ned' },
+  onClick = () => {}, onDeleteDocument, scale, size
+}) => {
   const extension = file.name.substring(file.name.lastIndexOf('.') + 1)
 
   return (
     <div
       className={classNames('c-file-Other', className, { animate: animate })}
+      title={file.name + '\n' + labels.size + ': ' + size}
     >
-    title={file.name + '\n' + labels.size + ': ' + size}
-      {isHovering
+      {isHovering && deleteLink
         ? (
           <div className='link deleteLink'>
             <Icons kind='trashcan' size={15} onClick={() => onDeleteDocument(index)} />
           </div>
         ) : null}
-      {isHovering && file.content
+      {isHovering && downloadLink && file.content
         ? (
           <div
             className='link downloadLink'
@@ -35,7 +37,12 @@ export const Other = (props) => {
           </div>
         )
         : null}
-      <div className='content' onClick={() => onClick(index)}>
+      <div
+        className='content' style={{
+          width: (90 * scale) + 'px',
+          height: (140 * scale) + 'px'
+        }} onClick={() => onClick(index)}
+      >
         <div className='extension'>{extension}</div>
       </div>
     </div>

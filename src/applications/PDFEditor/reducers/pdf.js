@@ -24,7 +24,6 @@ export const initialPdfState = {
 }
 
 const pdfReducer = (state = initialPdfState, action = {}) => {
-
   let status
 
   if (_.endsWith(action.type, '/REQUEST')) {

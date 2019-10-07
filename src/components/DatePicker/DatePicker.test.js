@@ -97,22 +97,22 @@ describe('components/DatePicker', () => {
   })
 
   it('Renders input errors correctly', () => {
-    expect(wrapper.exists({ label: 'dag', feil: { feilmelding: '' } })).toBeFalsy()
-    expect(wrapper.exists({ label: 'måned', feil: { feilmelding: '' } })).toBeFalsy()
-    expect(wrapper.exists({ label: 'år', feil: { feilmelding: '' } })).toBeFalsy()
+    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy()
+    expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeFalsy()
+    expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeFalsy()
 
     wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
     wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
     wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
 
-    expect(wrapper.exists({ label: 'dag', feil: { feilmelding: '' } })).toBeTruthy()
-    expect(wrapper.exists({ label: 'måned', feil: { feilmelding: '' } })).toBeTruthy()
-    expect(wrapper.exists({ label: 'år', feil: { feilmelding: '' } })).toBeTruthy()
+    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
+    expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
+    expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeTruthy()
   })
 
   it('Renders total errors correctly', () => {
     expect(wrapper.exists('.feilmelding')).toBeFalsy()
-    wrapper.setProps({ feil: { feilmelding: 'ERROR' } })
+    wrapper.setProps({ error: 'ERROR' })
     expect(wrapper.exists('.feilmelding')).toBeTruthy()
     expect(wrapper.find('.feilmelding').hostNodes().text()).toEqual('ERROR')
   })

@@ -12,12 +12,12 @@ export const errorTypes = {
   WARNING: 'advarsel'
 }
 
-export const Alert = ({ className, error, message, onClientClear, status = 'ERROR', type }) => {
+export const Alert = ({ className, error, fixed = false, message, onClear, status = 'ERROR', type }) => {
   let _message = message
 
   const onClearClicked = () => {
-    if (_(onClientClear).isFunction()) {
-      onClientClear()
+    if (_(onClear).isFunction()) {
+      onClear()
     }
   }
 
@@ -51,12 +51,14 @@ export const Alert = ({ className, error, message, onClientClear, status = 'ERRO
     _message += ': ' + printError(error)
   }
 
+  const _fixed = _.isNil(fixed) ? type === 'client' : fixed
   return (
     <AlertStripe
-      className={classNames('c-alert', type, className, { fixed: type === 'client' })} type={errorTypes[status]}
+      className={classNames('c-alert', type, className, { fixed: _fixed })}
+      type={errorTypes[status]}
     >
       {_message}
-      <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} />
+      {onClear ? <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} /> : null}
     </AlertStripe>
   )
 }

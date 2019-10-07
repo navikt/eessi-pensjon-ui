@@ -31,13 +31,11 @@ describe('components/FileUpload/FileUpload', () => {
     acceptedMimetypes: ['application/pdf', 'text/plain'],
     afterDrop: jest.fn(),
     beforeDrop: jest.fn(),
-    closeModal: jest.fn(),
     currentPages: [],
     files: [],
     maxFiles: 10,
     maxFileSize: 100000,
     onFileChange: jest.fn(),
-    openModal: jest.fn(),
     status: {},
     labels: {
       accepted: 'ui:accepted',
@@ -130,7 +128,7 @@ describe('components/FileUpload/FileUpload', () => {
   it('Renders a file ', () => {
     wrapper = mount(<FileUpload {...initialMockProps} files={[file]} />)
     expect(wrapper.exists('.c-file')).toBeTruthy()
-    expect(wrapper.find('.c-file').render().text()).toEqual('title=text.txt\nui:size: 13Btxt')
+    expect(wrapper.find('.c-file').render().text()).toEqual('txt')
   })
 
   it('Deleting a file', () => {
@@ -179,7 +177,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.find('.previewLink').simulate('click')
     })
-    expect(initialMockProps.openModal).toHaveBeenCalled()
+    expect(wrapper.exists('.c-modal')).toBeTruthy()
 
     expect(wrapper.exists('.nextPage')).toBeTruthy()
     act(() => {
@@ -188,7 +186,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 2')
+    expect(wrapper.find('.c-file .mock-pdfpage').hostNodes().render().text()).toEqual('Page: 2')
 
     expect(wrapper.exists('.previousPage')).toBeTruthy()
     act(() => {
