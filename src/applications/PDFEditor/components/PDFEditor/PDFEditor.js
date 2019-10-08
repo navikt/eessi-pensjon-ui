@@ -11,7 +11,7 @@ import DnD from '../DnD'
 import PDFSizeSlider from '../PDFSizeSlider'
 import 'rc-collapse/assets/index.css'
 
-const PDFEditor = ({ actions, files, dndTarget, labels, recipe, pageScale }) => {
+const PDFEditor = ({ actions, dndTarget, files, labels, recipe, pageScale }) => {
   const handleAccordionChange = (index) => {
     if (!index) { return }
     actions.setActiveDnDTarget(index)
@@ -107,11 +107,11 @@ const PDFEditor = ({ actions, files, dndTarget, labels, recipe, pageScale }) => 
 
 PDFEditor.propTypes = {
   actions: PT.object,
-  history: PT.object,
+  dndTarget: PT.object,
   files: PT.array.isRequired,
   labels: PT.object,
   recipe: PT.object.isRequired,
-  dndTarget: PT.string
+  pageScale: PT.number
 }
 
 export default PDFEditor

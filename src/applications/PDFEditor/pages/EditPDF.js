@@ -4,7 +4,7 @@ import _ from 'lodash'
 import * as Nav from '../../../Nav'
 import PDFEditor from '../components/PDFEditor/PDFEditor'
 
-const EditPDF = ({ actions, labels, recipe, setStep }) => {
+const EditPDF = ({ actions, dndTarget, files, labels, pageScale, recipe, setStep }) => {
   const hasOnlyEmptyArrays = (obj) => {
     var emptyArrayMembers = _.filter(obj, (it) => {
       return !it || (_.isArray(it) && _.isEmpty(it))
@@ -50,7 +50,14 @@ const EditPDF = ({ actions, labels, recipe, setStep }) => {
 
   return (
     <div className='documentbox fieldset m-0 mt-4'>
-      <PDFEditor />
+      <PDFEditor
+        actions={actions}
+        dndTarget={dndTarget}
+        files={files}
+        labels={labels}
+        recipe={recipe}
+        pageScale={pageScale}
+      />
       <Nav.Row className='mb-4'>
         <Nav.Column>
           <Nav.Hovedknapp
@@ -70,8 +77,9 @@ const EditPDF = ({ actions, labels, recipe, setStep }) => {
 EditPDF.propTypes = {
   actions: PT.object,
   labels: PT.object,
-  files: PT.array.isRequired,
-  recipe: PT.object.isRequired
+  files: PT.array,
+  pageScale: PT.number,
+  recipe: PT.object
 }
 
 export default EditPDF

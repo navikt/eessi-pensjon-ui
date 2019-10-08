@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { Hovedknapp } from '../../../Nav'
 import FileUpload from '../../../components/FileUpload/FileUpload'
 
-const SelectPDF = ({ actions, labels, loadingPDF, files, setStep }) => {
+const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
   const onForwardButtonClick = () => {
     setStep('edit')
   }
@@ -29,13 +29,11 @@ const SelectPDF = ({ actions, labels, loadingPDF, files, setStep }) => {
         <h2 className='mb-3'>{labels.fileUpload}</h2>
         <FileUpload
           className={classNames('fileUpload', 'mb-3')}
-          accept={['application/pdf', 'image/jpeg', 'image/png']}
-          files={files || []}
+          acceptedMimetypes={['application/pdf', 'image/jpeg', 'image/png']}
+          files={files}
           beforeDrop={handleBeforeDrop}
           afterDrop={handleAfterDrop}
           onFileChange={handleFileChange}
-          openModal={actions.openModal}
-          closeModal={actions.closeModal}
         />
       </div>
       <Hovedknapp

@@ -54,6 +54,13 @@ const WaitingPanelPage = () => {
               <td>Message to display</td>
               <td>'Vennligst vent...'</td>
             </tr>
+            <tr>
+              <td>size</td>
+              <td><code>string</code></td>
+              <td>false</td>
+              <td>Size of the spinner. Can be one of NavFrontendSpinner values, 'XS', 'S', 'M', 'L', 'XL'</td>
+              <td>M</td>
+            </tr>
           </tbody>
         </table>
       </Panel>

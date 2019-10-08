@@ -2,9 +2,9 @@ import React from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import { Spinner, Normaltekst } from '../../Nav'
-const WaitingPanel = ({ className, message = 'Vennligst vent...' }) => (
+const WaitingPanel = ({ className, size = 'M', message = 'Vennligst vent...' }) => (
   <div className={classNames('c-waitingPanel', 'text-center', className)}>
-    <Spinner />
+    <Spinner type={size} />
     <Normaltekst className='c-waitingPanel__message'>
       {message}
     </Normaltekst>
@@ -13,6 +13,7 @@ const WaitingPanel = ({ className, message = 'Vennligst vent...' }) => (
 
 WaitingPanel.propTypes = {
   className: PT.string,
+  size: PT.string,
   message: PT.string
 }
 WaitingPanel.displayName = 'WaitingPanel'

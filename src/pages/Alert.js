@@ -15,7 +15,7 @@ const IndexPage = () => {
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Alert</Systemtittel>
         <Normaltekst>Changes over the original
-          <a href='https://design.nav.no/components/alertstripe'>
+          <a className='ml-2' href='https://design.nav.no/components/alertstripe'>
             AlertStripe
           </a>
           :

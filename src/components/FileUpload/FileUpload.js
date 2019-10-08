@@ -31,7 +31,6 @@ const FileUpload = ({
   const [_files, setFiles] = useState(files)
   const [_currentPages, setCurrentPages] = useState(currentPages || [])
   const [_status, setStatus] = useState(status || {})
-  const [modalOpen, setModalOpen] = useState(false)
   const [modal, setModal] = useState(undefined)
   const _labels = { ...defaultLabels, ...labels }
 
@@ -43,7 +42,6 @@ const FileUpload = ({
 
   const closePreview = () => {
     setModal(undefined)
-    setModalOpen(false)
   }
 
   const openPreview = (file, pageNumber) => {
@@ -54,7 +52,6 @@ const FileUpload = ({
         </div>
       )
     })
-    setModalOpen(true)
   }
 
   const updateFiles = useCallback((newFiles, newCurrentPages, statusMessage) => {
@@ -177,7 +174,7 @@ const FileUpload = ({
 
   return (
     <>
-      <Modal modalOpen={modalOpen} modal={modal} />
+      <Modal modal={modal} />
       <div
         className={classNames('c-fileUpload', 'p-4', { 'c-fileUpload-active ': isDragActive }, className)}
         tabIndex={tabIndex}

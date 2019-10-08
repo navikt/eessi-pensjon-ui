@@ -33,10 +33,6 @@ describe('components/FileUpload/FileUpload', () => {
     beforeDrop: jest.fn(),
     currentPages: [],
     files: [],
-    maxFiles: 10,
-    maxFileSize: 100000,
-    onFileChange: jest.fn(),
-    status: {},
     labels: {
       accepted: 'ui:accepted',
       size: 'ui:size',
@@ -47,7 +43,11 @@ describe('components/FileUpload/FileUpload', () => {
       rejected: 'ui:rejected',
       removed: 'ui:removed',
       total: 'ui:total'
-    }
+    },
+    maxFiles: 10,
+    maxFileSize: 100000,
+    onFileChange: jest.fn(),
+    status: {}
   }
 
   const fileContents = 'file contents'
@@ -89,7 +89,7 @@ describe('components/FileUpload/FileUpload', () => {
     })
     expect(initialMockProps.onFileChange).not.toHaveBeenCalled()
     await act(async () => {
-      wrapper.simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [file] } })
     })
     await act(async () => {
       wrapper.update()
@@ -104,7 +104,7 @@ describe('components/FileUpload/FileUpload', () => {
     })
     wrapper.setProps({ maxFileSize: 1 })
     await act(async () => {
-      wrapper.simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [file] } })
     })
     act(() => {
       wrapper.update()
@@ -119,7 +119,7 @@ describe('components/FileUpload/FileUpload', () => {
     })
     wrapper.setProps({ acceptedMimetypes: ['application/pdf'] })
     await act(async () => {
-      wrapper.simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [file] } })
     })
     expect(initialMockProps.onFileChange).toHaveBeenCalledWith([])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 0, ui:rejected: 1, ui:total: 0')
@@ -186,7 +186,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find('.c-file .mock-pdfpage').hostNodes().render().text()).toEqual('Page: 2')
+    expect(wrapper.find('.mock-pdfpage').render().text()).toEqual('Page: 2')
 
     expect(wrapper.exists('.previousPage')).toBeTruthy()
     act(() => {

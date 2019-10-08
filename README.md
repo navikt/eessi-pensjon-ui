@@ -11,6 +11,8 @@ Just add this line in the `dependencies` object in your `package.json` file:
     
 Make sure to replace `{tag}` with the latest Git tag. 
     
+There is a <a href="//navikt.github.io/eessi-pensjon-ui/build/index.html">examples page with all the components</a> hosted in this Git repo.
+    
 ---
 
 # Henvendelser

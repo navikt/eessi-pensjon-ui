@@ -6,7 +6,7 @@ import { connect, bindActionCreators } from './store'
 import SelectPDF from './pages/SelectPDF'
 import EditPDF from './pages/EditPDF'
 import GeneratePDF from './pages/GeneratePDF'
-import { Modal } from '../../Nav'
+import { Modal } from '../../components/Modal/Modal'
 
 const mapStateToProps = (state) => {
   return {
@@ -18,8 +18,7 @@ const mapStateToProps = (state) => {
     pageScale: state.pdf.pageScale,
     recipe: state.pdf.recipe,
     watermark: state.pdf.watermark,
-    modal: state.ui.modal,
-    modalOpen: state.ui.modalOpen
+    modal: state.ui.modal
   }
 }
 
@@ -89,17 +88,16 @@ const defaultLabels = {
 }
 
 export const Pdf = (props) => {
-  const { actions, files, recipe, labels, modal, modalOpen } = props
+  const { actions, recipe, labels, modal } = props
   const _labels = { ...defaultLabels, ...labels }
   const [step, setStep] = useState('select')
   return (
     <div className='a-pdf'>
       <Modal
-        modalOpen={modalOpen}
         modal={modal}
         onModalClose={actions.closeModal}
       />
-      <StepIndicator step={step} setStep={setStep} recipe={recipe} files={files} />
+      <StepIndicator step={step} setStep={setStep} labels={_labels} recipe={recipe} />
       {step === 'select' ? <SelectPDF {...props} labels={_labels} setStep={setStep} /> : null}
       {step === 'edit' ? <EditPDF {...props} labels={_labels} setStep={setStep} /> : null}
       {step === 'generate' ? <GeneratePDF {...props} labels={_labels} setStep={setStep} /> : null}

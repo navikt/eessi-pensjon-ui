@@ -7,6 +7,10 @@ const Container = ({ children }) => (
   <div className='_container'>
     <aside>
       <nav>
+        <Systemtittel><Link to='/'>Applications</Link></Systemtittel>
+        <ul>
+          <li><Link to='/PDFEditor'>PDFEditor</Link></li>
+        </ul>
         <Systemtittel><Link to='/'>Components</Link></Systemtittel>
         <ul>
           <li><Link to='/Alert'>Alert</Link></li>
@@ -22,6 +26,7 @@ const Container = ({ children }) => (
           <li><Link to='/Nav'>Nav elements</Link></li>
           <li><Link to='/Psycho'>Psycho</Link></li>
           <li><Link to='/RefreshButton'>Refresh Button</Link></li>
+          <li><Link to='/TableSorter'>TableSorter</Link></li>
           <li><Link to='/WaitingPanel'>WaitingPanel</Link></li>
         </ul>
       </nav>
