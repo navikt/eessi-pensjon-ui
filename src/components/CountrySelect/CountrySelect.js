@@ -57,7 +57,8 @@ const CountrySelect = ({
           SingleValue: CountryValue
         }}
         selectProps={{
-          type: type
+          type: type,
+          id: id + '-select'
         }}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'

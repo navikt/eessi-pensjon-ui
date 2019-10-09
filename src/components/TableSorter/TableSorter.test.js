@@ -20,17 +20,117 @@ describe('components/TableSorter/TableSorter', () => {
         }
       }
     ],
+
     items: [{
-      raw: {},
-      id: '1',
-      name: 'name',
-      tema: 'tema',
-      date: new Date(1970, 1, 1),
-      varianter: [{
-        label: 'label',
-        variant: 'variant',
-        selected: false,
-        focused: false
+      "raw": {
+        "journalpostId": "1",
+        "tittel": "blue.pdf",
+        "tema": "foo",
+        "dokumentInfoId": "4",
+        "datoOpprettet": "2018-12-27T13:42:24.000Z",
+        "varianter": [{
+          "variantformat": "ARKIV",
+          "filnavn": "23534345.pdf"
+        }, {
+          "variantformat": "DUMMY",
+          "filnavn": "908745345.pdf"
+        }]
+      },
+      "journalpostId": "1",
+      "dokumentInfoId": "4",
+      "name": "blue.pdf",
+      "tema": "foo",
+      "date": "2018-12-27T13:42:24.000Z",
+      "varianter": [{
+        "variant": {
+          "variantformat": "ARKIV",
+          "filnavn": "23534345.pdf"
+        },
+        "label": "ARKIV (23534345.pdf)",
+        "selected": false,
+        "focused": false
+      }, {
+        "variant": {
+          "variantformat": "DUMMY",
+          "filnavn": "908745345.pdf"
+        },
+        "label": "DUMMY (908745345.pdf)",
+        "selected": false,
+        "focused": false
+      }]
+    }, {
+      "raw": {
+        "journalpostId": "2",
+        "tittel": "red.pdf",
+        "tema": "bar",
+        "dokumentInfoId": "5",
+        "datoOpprettet": "2018-12-17T13:42:24.000Z",
+        "varianter": [{
+          "variantformat": "ARKIV",
+          "filnavn": "98734213487.pdf"
+        }, {
+          "variantformat": "DUMMY",
+          "filnavn": "998424576.pdf"
+        }]
+      },
+      "journalpostId": "2",
+      "dokumentInfoId": "5",
+      "name": "red.pdf",
+      "tema": "bar",
+      "date": "2018-12-17T13:42:24.000Z",
+      "varianter": [{
+        "variant": {
+          "variantformat": "ARKIV",
+          "filnavn": "98734213487.pdf"
+        },
+        "label": "ARKIV (98734213487.pdf)",
+        "selected": false,
+        "focused": false
+      }, {
+        "variant": {
+          "variantformat": "DUMMY",
+          "filnavn": "998424576.pdf"
+        },
+        "label": "DUMMY (998424576.pdf)",
+        "selected": false,
+        "focused": false
+      }]
+    }, {
+      "raw": {
+        "journalpostId": "3",
+        "tittel": "yellow.pdf",
+        "tema": "fuzz",
+        "dokumentInfoId": "6",
+        "datoOpprettet": "2018-12-07T13:42:24.000Z",
+        "varianter": [{
+          "variantformat": "ARKIV",
+          "filnavn": "1078475197.pdf"
+        }, {
+          "variantformat": "DUMMY",
+          "filnavn": "09873539824762.pdf"
+        }]
+      },
+      "journalpostId": "3",
+      "dokumentInfoId": "6",
+      "name": "yellow.pdf",
+      "tema": "fuzz",
+      "date": "2018-12-07T13:42:24.000Z",
+      "varianter": [{
+        "variant": {
+          "variantformat": "ARKIV",
+          "filnavn": "1078475197.pdf"
+        },
+        "label": "ARKIV (1078475197.pdf)",
+        "selected": false,
+        "focused": false
+      }, {
+        "variant": {
+          "variantformat": "DUMMY",
+          "filnavn": "09873539824762.pdf"
+        },
+        "label": "DUMMY (09873539824762.pdf)",
+        "selected": false,
+        "focused": false
       }]
     }],
     loading: false,

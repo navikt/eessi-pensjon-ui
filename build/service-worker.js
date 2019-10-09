@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/eessi-pensjon-ui/build/precache-manifest.7510d6407d7750b9d36e071b737b6e38.js"
+  "/eessi-pensjon-ui/build/precache-manifest.e0e27e67f16edf2adc48c739f3699ba1.js"
 );
 
 self.addEventListener('message', (event) => {

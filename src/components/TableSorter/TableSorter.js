@@ -22,8 +22,8 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
   }
 
   const sortColumn = (column) => {
-    var newSortOrder = sortOrder[_sort.order]
-    if (_sort.column !== column) {
+    let newSortOrder = sortOrder[_sort.order]
+    if (_sort.column !== column.id) {
       newSortOrder = column.defaultSortOrder
     }
     setSort({ column: column.id, order: newSortOrder })
@@ -35,27 +35,33 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
 
   const rows = () => {
     const filteredItems = _.filter(items, (item) => {
-      return _columns.map((column) => {
+      return _.every(_columns, (column) => {
         const filterText = column.filterText.toLowerCase()
         switch (column.type) {
-          case 'object':
-            return filterText ? item[column.id].find(it => column.needle(it).match(filterText)) : true
           case 'date':
-            return filterText ? item[column.id].toLocaleDateString().match(filterText) : true
+            return filterText ?
+              item[column.id].toLocaleDateString ?
+                item[column.id].toLocaleDateString().match(filterText)
+                : item[column.id].toString().match(filterText)
+              : true
           default:
-            return filterText ? item[column.id].toLowerCase().match(filterText) : true
+            return filterText ?
+              column.needle ?
+                column.needle(item[column.id]).match(filterText)
+                :
+                item[column.id].toLowerCase().match(filterText)
+            : true
         }
       })
     })
 
-    var sortedItems = _.sortBy(filteredItems, _sort.column)
+    let sortedItems = _.sortBy(filteredItems, _sort.column)
     if (_sort.order === 'desc') {
       sortedItems.reverse()
     }
 
     return sortedItems.map((item, index) => {
       const background = index % 2 === 0 ? 'white' : 'whitesmoke'
-
       return (
         <tr
           key={index}
@@ -74,7 +80,7 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
               case 'date':
                 return (
                   <td key={index2}>
-                    <Nav.Normaltekst>{value ? value.toLocaleDateString() : '-'}</Nav.Normaltekst>
+                    <Nav.Normaltekst>{value.toLocaleDateString ? value.toLocaleDateString() : value.toString()}</Nav.Normaltekst>
                   </td>
                 )
               case 'object':
@@ -101,8 +107,8 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
       <>
         <th>
           <Nav.Checkbox
-            id='c-tablesorter__seefilters-checkbox-id'
-            className='c-tablesorter__checkbox'
+            id='c-tableSorter__seefilters-checkbox-id'
+            className='c-tableSorter__checkbox'
             label=''
             checked={seeFilters}
             onChange={() => setSeeFilters(!seeFilters)}
@@ -138,8 +144,8 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
           return (
             <td key={column.id}>
               <Nav.Input
-                id={'c-tablesorter__sort-' + column.id + '-input-id'}
-                className='c-tablesorter__sort-input'
+                id={'c-tableSorter__sort-' + column.id + '-input-id'}
+                className='c-tableSorter__sort-input'
                 label=''
                 value={column.filterText}
                 onChange={(e) => handleFilterTextChange(column, e.target.value)}
@@ -153,11 +159,11 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
 
   return (
     <div className={classNames('c-tableSorter', className)}>
-      <div className='c-tablesorter__status'>
+      <div className='c-tableSorter__status'>
         {loading ? <WaitingPanel size='XS' /> : null}
       </div>
-      <div className='c-tablesorter__content'>
-        <table cellSpacing='0' className='c-tablesorter__table'>
+      <div className='c-tableSorter__content'>
+        <table cellSpacing='0' className='c-tableSorter__table'>
           <thead>
             <tr>{header()}</tr>
             {seeFilters ? <tr>{filterInputs()}</tr> : null}

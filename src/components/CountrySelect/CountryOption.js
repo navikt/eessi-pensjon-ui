@@ -11,14 +11,15 @@ const CountryOption = (props) => {
   return (
     <components.Option {...props}>
       <div
-        id={selectProps.id + '-' + data.value}
+        {...innerProps}
+        id={selectProps.id ? selectProps.id + '-' + data.value : undefined}
         className={classNames('c-countryOption', {
           selected: isSelected,
           focused: isFocused
-        })} {...innerProps}
+        })}
       >
         <Flag
-          className='mr-2'
+          className='c-countryOption__flag'
           label={_label}
           country={value}
           type='original'
