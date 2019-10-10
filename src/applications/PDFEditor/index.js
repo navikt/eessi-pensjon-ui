@@ -1,16 +1,16 @@
 import React from 'react'
-import Pdf from './Pdf'
+import PDFEditor from './PDFEditor'
 import { StoreProvider } from './store'
 import reducer, { initialState } from './reducer'
 import { Panel } from '../../Nav'
 import './index.css'
 
-const PDFEditor = () => (
+const PDFApp = () => (
   <StoreProvider initialState={initialState} reducer={reducer}>
     <Panel>
-      <Pdf />
+      <PDFEditor />
     </Panel>
   </StoreProvider>
 )
 
-export default PDFEditor
+export default PDFApp

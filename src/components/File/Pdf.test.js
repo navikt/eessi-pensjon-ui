@@ -16,7 +16,7 @@ jest.mock('react-pdf', () => {
   }
 })
 
-describe('components/File/Pdf', () => {
+describe('components/File/Editor', () => {
   const t = jest.fn((translationString) => { return translationString })
 
   const initialMockProps = {

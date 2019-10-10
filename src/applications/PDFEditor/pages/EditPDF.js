@@ -2,46 +2,37 @@ import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import * as Nav from '../../../Nav'
-import PDFEditor from '../components/PDFEditor/PDFEditor'
+import Editor from '../components/Editor/Editor'
 
-const EditPDF = ({ actions, dndTarget, files, labels, pageScale, recipe, setStep }) => {
-  const hasOnlyEmptyArrays = (obj) => {
-    var emptyArrayMembers = _.filter(obj, (it) => {
-      return !it || (_.isArray(it) && _.isEmpty(it))
-    })
-    return emptyArrayMembers.length === Object.keys(obj).length
+const EditPDF = (props) => {
+  const { actions, labels, recipes, setStep } = props
+  const hasOnlyEmptyRecipes = (recipes) => {
+    return _.every(recipes, (recipe) => _.isEmpty(recipe))
   }
 
   const onForwardButtonClick = () => {
-    if (hasOnlyEmptyArrays(recipe)) {
-      actions.openModal({
-        modalTitle: labels['recipe-empty-title'],
-        modalText: labels['recipe-empty-text'],
+    if (hasOnlyEmptyRecipes(recipes)) {
+      actions.setModal({
+        modalTitle: labels.modal_empty_title,
+        modalText: labels.modal_empty_text,
         modalButtons: [{
           main: true,
-          text: labels['ok-got-it'],
-          onClick: actions.closeModal()
+          text: labels.modal_ok
         }]
       })
     } else {
-      actions.openModal({
-        modalTitle: labels['recipe-valid-title'],
-        modalText: labels['recipe-valid-text'],
+      actions.setModal({
+        modalTitle: labels.modal_valid_title,
+        modalText: labels.modal_valid_text,
         modalButtons: [{
           main: true,
-          text: labels.yes + ', ' + labels.generate,
-          onClick: goToGenerate
+          text: labels.modal_yes,
+          onClick: () => setStep('generate')
         }, {
-          text: labels.cancel,
-          onClick: actions.closeModal()
+          text: labels.modal_cancel
         }]
       })
     }
-  }
-
-  const goToGenerate = () => {
-    actions.closeModal()
-    setStep('generate')
   }
 
   const onBackButtonClick = () => {
@@ -50,24 +41,24 @@ const EditPDF = ({ actions, dndTarget, files, labels, pageScale, recipe, setStep
 
   return (
     <div className='documentbox fieldset m-0 mt-4'>
-      <PDFEditor
-        actions={actions}
-        dndTarget={dndTarget}
-        files={files}
-        labels={labels}
-        recipe={recipe}
-        pageScale={pageScale}
+      <Editor
+        {...props}
+        targets={['work', 'home', 'sick', 'other']}
       />
       <Nav.Row className='mb-4'>
         <Nav.Column>
           <Nav.Hovedknapp
             className='forwardButton'
-            disabled={hasOnlyEmptyArrays(recipe)}
+            disabled={hasOnlyEmptyRecipes(recipes)}
             onClick={onForwardButtonClick}
           >
-            {labels.forward}
+            {labels.button_forward}
           </Nav.Hovedknapp>
-          <Nav.Knapp className='backButton ml-3' onClick={onBackButtonClick}>{labels.back}</Nav.Knapp>
+          <Nav.Knapp
+            className='backButton ml-3'
+            onClick={onBackButtonClick}>
+            {labels.button_back}
+          </Nav.Knapp>
         </Nav.Column>
       </Nav.Row>
     </div>
@@ -79,7 +70,7 @@ EditPDF.propTypes = {
   labels: PT.object,
   files: PT.array,
   pageScale: PT.number,
-  recipe: PT.object
+  recipes: PT.object
 }
 
 export default EditPDF

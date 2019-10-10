@@ -1,14 +1,16 @@
 import React from 'react'
 import { Systemtittel } from '../Nav'
+import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
 import './Container.css'
-const Container = ({ children }) => (
-  <div className='_container'>
+const Container = ({ className, children }) => (
+  <div className={classNames('_container', className)}>
     <aside>
       <nav>
         <Systemtittel><Link to='/'>Applications</Link></Systemtittel>
         <ul>
+          <li><Link to='/Dashboard'>Dashboard</Link></li>
           <li><Link to='/PDFEditor'>PDFEditor</Link></li>
         </ul>
         <Systemtittel><Link to='/'>Components</Link></Systemtittel>
@@ -31,7 +33,7 @@ const Container = ({ children }) => (
         </ul>
       </nav>
     </aside>
-    <article className='body'>
+    <article className={classNames('body', className)}>
       {children}
     </article>
   </div>

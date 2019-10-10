@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/eessi-pensjon-ui/build/static/css/main.8bbade88.chunk.css",
-    "main.js": "/eessi-pensjon-ui/build/static/js/main.f4ea2899.chunk.js",
-    "main.js.map": "/eessi-pensjon-ui/build/static/js/main.f4ea2899.chunk.js.map",
+    "main.css": "/eessi-pensjon-ui/build/static/css/main.37024f93.chunk.css",
+    "main.js": "/eessi-pensjon-ui/build/static/js/main.950c2376.chunk.js",
+    "main.js.map": "/eessi-pensjon-ui/build/static/js/main.950c2376.chunk.js.map",
     "runtime-main.js": "/eessi-pensjon-ui/build/static/js/runtime-main.6e5721b1.js",
     "runtime-main.js.map": "/eessi-pensjon-ui/build/static/js/runtime-main.6e5721b1.js.map",
-    "static/css/2.49fbe3f3.chunk.css": "/eessi-pensjon-ui/build/static/css/2.49fbe3f3.chunk.css",
-    "static/js/2.378ede7f.chunk.js": "/eessi-pensjon-ui/build/static/js/2.378ede7f.chunk.js",
-    "static/js/2.378ede7f.chunk.js.map": "/eessi-pensjon-ui/build/static/js/2.378ede7f.chunk.js.map",
+    "static/css/2.3f163136.chunk.css": "/eessi-pensjon-ui/build/static/css/2.3f163136.chunk.css",
+    "static/js/2.3b7a7db1.chunk.js": "/eessi-pensjon-ui/build/static/js/2.3b7a7db1.chunk.js",
+    "static/js/2.3b7a7db1.chunk.js.map": "/eessi-pensjon-ui/build/static/js/2.3b7a7db1.chunk.js.map",
     "index.html": "/eessi-pensjon-ui/build/index.html",
-    "precache-manifest.e0e27e67f16edf2adc48c739f3699ba1.js": "/eessi-pensjon-ui/build/precache-manifest.e0e27e67f16edf2adc48c739f3699ba1.js",
+    "precache-manifest.8bf595419185bb6bab4de58f4d16c1c5.js": "/eessi-pensjon-ui/build/precache-manifest.8bf595419185bb6bab4de58f4d16c1c5.js",
     "service-worker.js": "/eessi-pensjon-ui/build/service-worker.js",
-    "static/css/2.49fbe3f3.chunk.css.map": "/eessi-pensjon-ui/build/static/css/2.49fbe3f3.chunk.css.map",
-    "static/css/main.8bbade88.chunk.css.map": "/eessi-pensjon-ui/build/static/css/main.8bbade88.chunk.css.map",
+    "static/css/2.3f163136.chunk.css.map": "/eessi-pensjon-ui/build/static/css/2.3f163136.chunk.css.map",
+    "static/css/main.37024f93.chunk.css.map": "/eessi-pensjon-ui/build/static/css/main.37024f93.chunk.css.map",
     "static/media/bubble-chat-2.svg": "/eessi-pensjon-ui/build/static/media/bubble-chat-2.368d0319.svg",
+    "static/media/cat.jpg": "/eessi-pensjon-ui/build/static/media/cat.59c76d8b.jpg",
     "static/media/filled-version-network-connecting.svg": "/eessi-pensjon-ui/build/static/media/filled-version-network-connecting.b1c887f4.svg",
     "static/media/filled-version-paperclip-2.svg": "/eessi-pensjon-ui/build/static/media/filled-version-paperclip-2.fa13e508.svg",
     "static/media/hjelpetekst-style.less": "/eessi-pensjon-ui/build/static/media/hjelpetekst-style.46eecf28.less",
@@ -40,9 +41,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.6e5721b1.js",
-    "static/css/2.49fbe3f3.chunk.css",
-    "static/js/2.378ede7f.chunk.js",
-    "static/css/main.8bbade88.chunk.css",
-    "static/js/main.f4ea2899.chunk.js"
+    "static/css/2.3f163136.chunk.css",
+    "static/js/2.3b7a7db1.chunk.js",
+    "static/css/main.37024f93.chunk.css",
+    "static/js/main.950c2376.chunk.js"
   ]
 }

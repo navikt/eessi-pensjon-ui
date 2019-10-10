@@ -17,6 +17,8 @@ import 'index.css'
 ReactDOM.render(
   <HashRouter>
     <Switch>
+      <Route exact path='/Dashboard' component={Pages.Dashboard} />
+      <Route exact path='/PDFEditor' component={Pages.PDFEditor} />
       <Route exact path='/Alert' component={Pages.Alert} />
       <Route exact path='/Banner' component={Pages.Banner} />
       <Route exact path='/ColorPicker' component={Pages.ColorPicker} />
@@ -28,7 +30,6 @@ ReactDOM.render(
       <Route exact path='/Modal' component={Pages.Modal} />
       <Route exact path='/MultipleSelect' component={Pages.MultipleSelect} />
       <Route exact path='/Nav' component={Pages.Nav} />
-      <Route exact path='/PDFEditor' component={Pages.PDFEditor} />
       <Route exact path='/Psycho' component={Pages.Psycho} />
       <Route exact path='/RefreshButton' component={Pages.RefreshButton} />
       <Route exact path='/TableSorter' component={Pages.TableSorter} />

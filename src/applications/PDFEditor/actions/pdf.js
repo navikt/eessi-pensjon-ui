@@ -27,10 +27,10 @@ export function clearPDF () {
   }
 }
 
-export function setRecipe (recipe) {
+export function setRecipes (recipes) {
   return {
-    type: types.PDF_SET_RECIPE,
-    payload: recipe
+    type: types.PDF_SET_RECIPES,
+    payload: recipes
   }
 }
 
@@ -58,6 +58,13 @@ export function setWatermark (payload) {
 export function setSeparator (payload) {
   return {
     type: types.PDF_SEPARATOR_SET,
+    payload: payload
+  }
+}
+
+export function setModal (payload) {
+  return {
+    type: types.PDF_MODAL_SET,
     payload: payload
   }
 }

@@ -178,7 +178,7 @@ class StorageModal extends Component {
 
       if (modalOptions.action === 'save') {
         if (fileList.indexOf(saveTargetFileName) >= 0) {
-          actions.openModal({
+          actions.setModal({
             modalTitle: t('overwriteFile'),
             modalText: t('areYouSureOverwriteFile', { file: saveTargetFileName }),
             modalButtons: [{

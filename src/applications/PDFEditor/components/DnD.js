@@ -3,7 +3,7 @@ import PT from 'prop-types'
 import _ from 'lodash'
 import { DragDropContext } from 'react-beautiful-dnd'
 
-const DnD = ({ actions, recipe, children }) => {
+const DnD = ({ setRecipes, recipes, children }) => {
   const reorder = (list, startIndex, endIndex) => {
     const newList = Array.from(list)
     const [removed] = newList.splice(startIndex, 1)
@@ -12,7 +12,7 @@ const DnD = ({ actions, recipe, children }) => {
   }
 
   const onDragEnd = (result) => {
-    const newRecipe = _.clone(recipe)
+    const newRecipes = _.clone(recipes)
     let modified = false
 
     if (!result.destination) { // 'dragged to nowhere'
@@ -28,9 +28,9 @@ const DnD = ({ actions, recipe, children }) => {
     const sourceId = result.source.droppableId.substring(lastIndexOf + 1)
 
     // dragged from a PDF source...
-    if (_.startsWith(result.source.droppableId, 'c-pdf-dndSource-droppable-')) {
+    if (_.startsWith(result.source.droppableId, 'a-pdf-dndSource-droppable-')) {
       // ...to another PDF source? skip it
-      if (_.startsWith(result.destination.droppableId, 'c-pdf-dndSource-droppable-')) {
+      if (_.startsWith(result.destination.droppableId, 'a-pdf-dndSource-droppable-')) {
         return
       }
 
@@ -39,11 +39,11 @@ const DnD = ({ actions, recipe, children }) => {
       const name = result.draggableId.substring(0, lastIndexOf)
       const pageNumber = parseInt(result.draggableId.substring(lastIndexOf + 1), 10)
 
-      if (!newRecipe[targetId]) {
-        newRecipe[targetId] = []
+      if (!newRecipes[targetId]) {
+        newRecipes[targetId] = []
       }
 
-      newRecipe[targetId].splice(result.destination.index, 0, {
+      newRecipes[targetId].splice(result.destination.index, 0, {
         name: name,
         pageNumber: pageNumber,
         type: 'pickPage'
@@ -53,18 +53,18 @@ const DnD = ({ actions, recipe, children }) => {
     }
 
     // dragged from a image source...
-    if (_.startsWith(result.source.droppableId, 'c-pdf-dndImages-droppable-')) {
+    if (_.startsWith(result.source.droppableId, 'a-pdf-dndImages-droppable-')) {
       // ...to same image source? skip it
-      if (_.startsWith(result.destination.droppableId, 'c-pdf-dndImages-droppable-')) {
+      if (_.startsWith(result.destination.droppableId, 'a-pdf-dndImages-droppable-')) {
         return
       }
 
       // ...to DnD target? Add it
-      if (!newRecipe[targetId]) {
-        newRecipe[targetId] = []
+      if (!newRecipes[targetId]) {
+        newRecipes[targetId] = []
       }
 
-      newRecipe[targetId].splice(result.destination.index, 0, {
+      newRecipes[targetId].splice(result.destination.index, 0, {
         name: result.draggableId,
         type: 'pickImage'
       })
@@ -73,40 +73,40 @@ const DnD = ({ actions, recipe, children }) => {
     }
 
     // dragged from a PDF target...
-    if (_.startsWith(result.source.droppableId, 'c-pdf-dndTarget-droppable-')) {
+    if (_.startsWith(result.source.droppableId, 'a-pdf-dndTarget-droppable-')) {
       // ... to the same PDF target: reorder
-      if (_.startsWith(result.destination.droppableId, 'c-pdf-dndTarget-droppable-')) {
-        newRecipe[targetId] = reorder(newRecipe[targetId], result.source.index, result.destination.index)
+      if (_.startsWith(result.destination.droppableId, 'a-pdf-dndTarget-droppable-')) {
+        newRecipes[targetId] = reorder(newRecipes[targetId], result.source.index, result.destination.index)
         modified = true
       }
 
       // ... to another PDF source: remove
-      if (_.startsWith(result.destination.droppableId, 'c-pdf-dndSource-droppable-')) {
-        newRecipe[sourceId].splice(result.source.index, 1)
+      if (_.startsWith(result.destination.droppableId, 'a-pdf-dndSource-droppable-')) {
+        newRecipes[sourceId].splice(result.source.index, 1)
         modified = true
       }
 
       // ... to image source: remove
-      if (_.startsWith(result.destination.droppableId, 'c-pdf-dndImages-droppable-')) {
-        newRecipe[sourceId].splice(result.source.index, 1)
+      if (_.startsWith(result.destination.droppableId, 'a-pdf-dndImages-droppable-')) {
+        newRecipes[sourceId].splice(result.source.index, 1)
         modified = true
       }
     }
 
     // dragged from a special PDF ...
-    if (_.startsWith(result.source.droppableId, 'c-pdf-dndSpecial-droppable')) {
+    if (_.startsWith(result.source.droppableId, 'a-pdf-dndSpecial-droppable')) {
       // ... only accept to a PDF target
-      if (!_.startsWith(result.destination.droppableId, 'c-pdf-dndTarget-droppable-')) {
+      if (!_.startsWith(result.destination.droppableId, 'a-pdf-dndTarget-droppable-')) {
         return
       }
 
-      if (!newRecipe[targetId]) {
-        newRecipe[targetId] = []
+      if (!newRecipes[targetId]) {
+        newRecipes[targetId] = []
       }
 
       const payload = JSON.parse(decodeURIComponent(result.draggableId))
 
-      newRecipe[targetId].splice(result.destination.index, 0, {
+      newRecipes[targetId].splice(result.destination.index, 0, {
         separatorText: payload.separatorText,
         separatorTextColor: payload.separatorTextColor,
         type: 'specialPage'
@@ -116,7 +116,7 @@ const DnD = ({ actions, recipe, children }) => {
     }
 
     if (modified) {
-      actions.setRecipe(newRecipe)
+      setRecipes(newRecipes)
     }
   }
 
@@ -128,8 +128,8 @@ const DnD = ({ actions, recipe, children }) => {
 }
 
 DnD.propTypes = {
-  recipe: PT.object.isRequired,
-  actions: PT.object,
+  setRecipes: PT.func.isRequired,
+  recipes: PT.object.isRequired,
   children: PT.node.isRequired
 }
 

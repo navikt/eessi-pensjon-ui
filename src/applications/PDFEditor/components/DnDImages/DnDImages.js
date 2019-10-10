@@ -3,26 +3,21 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
-import PageInDnD from '../PageInDnD/PageInDnD'
+import DnDPage from '../DnDPage/DnDPage'
 import './DnDImages.css'
 
-const DnDImages = ({ actions, dndTarget, files, labels, pageScale, recipe }) => {
+const DnDImages = (props) => {
+  const { setRecipes, dndTarget, files, labels, pageScale, recipes } = props
   const [isHovering, setIsHovering] = useState(false)
-
-  const onHandleMouseEnter = () => {
-    setIsHovering(true)
-  }
-
-  const onHandleMouseLeave = () => {
-    setIsHovering(false)
-  }
+  const onHandleMouseEnter = () => setIsHovering(true)
+  const onHandleMouseLeave = () => setIsHovering(false)
 
   const addAllImagesToTargetPdf = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
     const potentialImages = []
-    const newRecipe = _.clone(recipe)
+    const newRecipes = _.clone(recipes)
     let modified = false
 
     _.filter(files, (file) => {
@@ -31,49 +26,50 @@ const DnDImages = ({ actions, dndTarget, files, labels, pageScale, recipe }) => 
       return potentialImages.push({ name: file.name, type: 'pickImage' })
     })
 
-    if (!newRecipe[dndTarget]) {
-      newRecipe[dndTarget] = []
+    if (!newRecipes[dndTarget]) {
+      newRecipes[dndTarget] = []
     }
     potentialImages.map(image => {
-      if (!_.find(recipe[dndTarget], { name: image.name })) {
+      if (!_.find(recipes[dndTarget], { name: image.name })) {
         modified = true
-        return newRecipe[dndTarget].push(image)
+        return newRecipes[dndTarget].push(image)
       }
       return image
     })
 
     if (modified) {
-      actions.setRecipe(newRecipe)
+      setRecipes(newRecipes)
     }
   }
 
   return (
     <div
-      className='c-pdf-dndImages position-relative'
+      className='a-pdf-dndImages position-relative'
       onMouseEnter={onHandleMouseEnter}
       onMouseLeave={onHandleMouseLeave}
     >
-      <Droppable isDropDisabled droppableId='c-pdf-dndImages-droppable-images' direction='horizontal'>
+      <Droppable isDropDisabled droppableId='a-pdf-dndImages-droppable-images' direction='horizontal'>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            className={classNames('c-pdf-dndImages-droppable', { 'c-pdf-dndImages-droppable-active': snapshot.isDraggingOver })}
+            className={classNames('a-pdf-dndImages-droppable', { 'a-pdf-dndImages-droppable-active': snapshot.isDraggingOver })}
           >
             {files.map((file, index) => {
-              if (_.find(recipe[dndTarget], { name: file.name })) {
+              if (_.find(recipes[dndTarget], { name: file.name })) {
                 return null
               }
               return (
                 <Draggable key={file.name} draggableId={file.name} index={index}>
                   {(provided, snapshot) => (
                     <div
-                      className={classNames('c-pdf-dndImages-draggable', { dragging: snapshot.isDragging })}
+                      className={classNames('a-pdf-dndImages-draggable', { dragging: snapshot.isDragging })}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <PageInDnD
-                        className={classNames({ 'c-pdf-dndImages-draggable-active': snapshot.isDragging })}
+                      <DnDPage
+                        {...props}
+                        className={classNames({ 'a-pdf-dndImages-draggable-active': snapshot.isDragging })}
                         file={file} action='add'
                       />
                     </div>
@@ -99,8 +95,8 @@ const DnDImages = ({ actions, dndTarget, files, labels, pageScale, recipe }) => 
 
 DnDImages.propTypes = {
   t: PT.func.isRequired,
-  actions: PT.object,
-  recipe: PT.array,
+  setRecipes: PT.func.isRequired,
+  recipes: PT.array,
   pageScale: PT.number,
   dndTarget: PT.string
 }

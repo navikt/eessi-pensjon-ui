@@ -44,12 +44,12 @@ describe('actions/pdf', () => {
     })
   })
 
-  it('setRecipe()', () => {
-    const mockRecipe = { foo: 'bar' }
-    const generatedResult = pdfActions.setRecipe(mockRecipe)
+  it('setRecipes()', () => {
+    const mockRecipes = { foo: 'bar' }
+    const generatedResult = pdfActions.setRecipes(mockRecipes)
     expect(generatedResult).toMatchObject({
-      type: types.PDF_SET_RECIPE,
-      payload: mockRecipe
+      type: types.PDF_SET_RECIPES,
+      payload: mockRecipes
     })
   })
 

@@ -12,7 +12,7 @@ describe('components/File', () => {
     expect(wrapper.isEmptyRender()).toBeFalsy()
   })
 
-  it('Renders Pdf', () => {
+  it('Renders Editor', () => {
     const wrapper = shallow(<File file={mockPDF} />)
     expect(wrapper.exists('Pdf')).toBeTruthy()
     expect(wrapper.exists('Image')).toBeFalsy()

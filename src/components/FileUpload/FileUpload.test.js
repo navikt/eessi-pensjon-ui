@@ -159,7 +159,7 @@ describe('components/FileUpload/FileUpload', () => {
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed text.txt')
   })
 
-  it('With a Pdf file, loaded', () => {
+  it('With a Editor file, loaded', () => {
     wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
 
     act(() => {

@@ -1,3 +1,6 @@
+export { default as PDFEditor } from './applications/PDFEditor/'
+export { default as Dashboard } from './applications/Dashboard/Dashboard'
+
 export { default as Alert } from './components/Alert/Alert'
 export { default as Banner } from './components/Banner/Banner'
 export { default as ColorPicker } from './components/ColorPicker/ColorPicker'
@@ -20,5 +23,5 @@ export { default as PsychoPanel } from './components/Psycho/PsychoPanel'
 export { default as RefreshButton } from './components/RefreshButton/RefreshButton'
 export { default as TableSorter } from './components/TableSorter/TableSorter'
 export { default as WaitingPanel } from './components/WaitingPanel/WaitingPanel'
-export { default as PDFEditor } from './applications/PDFEditor/'
+
 export * as Nav from './Nav'

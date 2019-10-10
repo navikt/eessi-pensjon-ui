@@ -5,40 +5,29 @@ import _ from 'lodash'
 import { Ikon } from '../../../../Nav'
 import './PDFSpecialPage.css'
 
-const PDFSpecialPage = ({ actions, className, deleteLink, dndTarget, pageScale, recipe, separator, style }) => {
-  const [, setIsHovering] = useState(false)
+const PDFSpecialPage = ({ actions, className, deleteLink, dndTarget, pageScale, recipes, separator, style }) => {
+  const [isHovering, setIsHovering] = useState(false)
+  const onHandleMouseEnter = () => setIsHovering(true)
+  const onHandleMouseOver = () => setIsHovering(true)
+  const onHandleMouseLeave = () => setIsHovering(false)
 
-  const onHandleMouseEnter = () => {
-    setIsHovering(true)
-  }
-
-  const onHandleMouseOver = () => {
-    setIsHovering(true)
-  }
-
-  const onHandleMouseLeave = () => {
-    setIsHovering(false)
-  }
-
-  const onDeleteDocument = (separatorText, e) => {
-    e.stopPropagation()
-    e.preventDefault()
-    const newRecipe = _.clone(recipe)
-    const index = _.findIndex(recipe[dndTarget], { separatorText: separatorText })
+  const onDeleteDocument = (separatorText) => {
+    const newRecipes = _.clone(recipes)
+    const index = _.findIndex(recipes[dndTarget], { separatorText: separatorText })
     if (index >= 0) {
-      newRecipe[dndTarget].splice(index, 1)
-      actions.setRecipe(newRecipe)
+      newRecipes[dndTarget].splice(index, 1)
+      actions.setRecipes(newRecipes)
     }
   }
 
   return (
     <div
-      style={style} className={classNames('c-pdf-PDFSpecialPage', className)}
+      style={style} className={classNames('a-pdf-PDFSpecialPage', className)}
       onMouseEnter={onHandleMouseEnter}
       onMouseOver={onHandleMouseOver}
       onMouseLeave={onHandleMouseLeave}
     >
-      {this.state.isHovering && deleteLink ? (
+      {isHovering && deleteLink ? (
         <div onClick={() => onDeleteDocument(separator.separatorText)} className='link deleteLink'>
           <Ikon size={15} kind='trashcan' />
         </div>
@@ -56,7 +45,7 @@ const PDFSpecialPage = ({ actions, className, deleteLink, dndTarget, pageScale, 
 }
 
 PDFSpecialPage.propTypes = {
-  recipe: PT.object.isRequired,
+  recipes: PT.object.isRequired,
   pageScale: PT.number.isRequired,
   className: PT.string,
   style: PT.object,

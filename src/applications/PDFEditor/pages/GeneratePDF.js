@@ -1,41 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import File from '../../../components/File/File'
 import * as Nav from '../../../Nav'
 
-const GeneratePDF = ({ actions, fileNames, files, generatingPDF, generatedPDFs, labels, recipe, watermark, setStep }) => {
+const GeneratePDF = (props) => {
+  const { actions, fileNames, files, generatingPDF, generatedPDFs, labels, recipes, watermark, setStep } = props
   const [_fileNames, setFileNames] = useState({})
   const [mounted, setMounted] = useState(false)
-  const _refs = {}
-
-  Object.keys(generatedPDFs).forEach(key => {
-    // _refs[key] = useRef(null)
-  })
-
-  useEffect(() => {
-    if (!_.isEmpty(generatedPDFs) && _.isEmpty(fileNames)) {
-      const newfileNames = {}
-      // let newRefs = {}
-
-      Object.keys(generatedPDFs).forEach(key => {
-        newfileNames[key] = generatedPDFs[key].name
-      })
-
-      setFileNames(newfileNames)
-    }
-  }, [generatedPDFs, fileNames])
+  const _refs = useRef(_.mapValues(recipes, () => React.createRef()))
 
   useEffect(() => {
     if (!mounted && files) {
       actions.generatePDF({
-        recipe: recipe,
+        recipes: recipes,
         files: files,
         watermark: watermark
       })
       setMounted(true)
     }
-  }, [mounted, actions, files, recipe, watermark])
+  }, [mounted, actions, files, recipes, watermark])
+
+  const setKeys = (generatedPDFs) => {
+    const newfileNames = {}
+    Object.keys(generatedPDFs).forEach(key => {
+      newfileNames[key] = generatedPDFs[key].name
+    })
+    return newfileNames
+  }
+
+  useEffect(() => {
+    if (mounted && !_.isEmpty(generatedPDFs) && _.isEmpty(fileNames)) {
+      setFileNames(setKeys(generatedPDFs))
+    }
+  }, [generatedPDFs, fileNames])
 
   const onBackButtonClick = () => {
     setStep('edit')
@@ -57,14 +55,14 @@ const GeneratePDF = ({ actions, fileNames, files, generatingPDF, generatedPDFs, 
     })
   }
 
-  const buttonText = generatingPDF ? labels['loading-generatingPDF'] : labels.startAgain
+  const buttonText = generatingPDF ? labels.loading_generatingPDF : labels.label_startAgain
 
   return (
     <div>
       {generatingPDF ? (
         <div className='w-100 text-center'>
           <Nav.Spinner />
-          <p className='typo-normal'>{labels['loading-generatingPDF']}</p>
+          <p className='typo-normal'>{labels.loading_generatingPDF}</p>
         </div>
       ) : (generatedPDFs ? (
         <div>
@@ -81,16 +79,16 @@ const GeneratePDF = ({ actions, fileNames, files, generatingPDF, generatedPDFs, 
                     />
                     <a
                       className='hiddenLink' ref={_refs[key]}
-                      onClick={(e) => e.stopPropagation()} title={labels.download}
+                      onClick={(e) => e.stopPropagation()} title={labels.label_download}
                       href={'data:application/octet-stream;base64,' + encodeURIComponent(pdf.content.base64)}
                       download={_fileNames[key]}
-                    >{labels.download}
+                    >{labels.label_download}
                     </a>
                     <Nav.Knapp
                       className='downloadButton'
                       onClick={() => _refs[key].current.click()}
                     >
-                      {labels.download}
+                      {labels.label_download}
                     </Nav.Knapp>
                   </div>
                 </div>
@@ -101,9 +99,9 @@ const GeneratePDF = ({ actions, fileNames, files, generatingPDF, generatedPDFs, 
       ) : null)}
       <Nav.Row className='mt-4'>
         <Nav.Column>
-          <Nav.Hovedknapp className='downloadAllButton' onClick={downloadAll}>{labels.downloadAll}</Nav.Hovedknapp>
+          <Nav.Hovedknapp className='downloadAllButton' onClick={downloadAll}>{labels.button_downloadAll}</Nav.Hovedknapp>
           <Nav.Knapp disabled={generatingPDF} className='ml-3 forwardButton' onClick={onForwardButtonClick}>{buttonText}</Nav.Knapp>
-          <Nav.KnappBase type='flat' className='backButton ml-3' onClick={onBackButtonClick}>{labels.back}</Nav.KnappBase>
+          <Nav.Flatknapp className='backButton ml-3' onClick={onBackButtonClick}>{labels.label_back}</Nav.Flatknapp>
         </Nav.Column>
       </Nav.Row>
     </div>
@@ -115,7 +113,7 @@ GeneratePDF.propTypes = {
   actions: PT.object,
   t: PT.func,
   files: PT.array.isRequired,
-  recipe: PT.object.isRequired,
+  recipes: PT.object.isRequired,
   generatedPDFs: PT.object,
   watermark: PT.object
 }

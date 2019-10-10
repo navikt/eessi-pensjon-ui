@@ -3,74 +3,60 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
-import PageInDnD from '../PageInDnD/PageInDnD'
+import DnDPage from '../DnDPage/DnDPage'
 import './DnDSource.css'
 
-const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget }) => {
+const DnDSource = (props) => {
+  const { setRecipes, labels, pdf, recipes, pageScale, dndTarget } = props
   const [isHovering, setIsHovering] = useState(false)
   const [isFocused, setIsFocused] = useState(undefined)
+  const onHandleMouseEnter = () => setIsHovering(true)
+  const onHandleMouseLeave = () => setIsHovering(false)
+  const onHandleFocus = (key) => setIsFocused(key)
+  const onHandleBlur = () => setIsFocused(undefined)
 
-  const onHandleMouseEnter = () => {
-    setIsHovering(true)
-  }
-
-  const onHandleMouseLeave = () => {
-    setIsHovering(false)
-  }
-
-  const onHandleFocus = (key) => {
-    setIsFocused(key)
-  }
-
-  const onHandleBlur = (key) => {
-    setIsFocused(undefined)
-  }
-
-  const addAllPagesToTargetPdf = (name, e) => {
-    e.preventDefault()
-    e.stopPropagation()
-
+  const addAllPagesToTargetPdf = (name) => {
     const potentialPages = []
-    const newRecipe = _.clone(recipe)
+    const newRecipes = _.clone(recipes)
     let modified = false
 
     _.range(1, pdf.numPages + 1).map(pageNumber => {
       return potentialPages.push({ pageNumber: pageNumber, name: name, type: 'pickPage' })
     })
 
-    if (!newRecipe[dndTarget]) {
-      newRecipe[dndTarget] = []
+    if (!newRecipes[dndTarget]) {
+      newRecipes[dndTarget] = []
     }
     potentialPages.map(page => {
-      if (!_.find(newRecipe[dndTarget], page)) {
+      if (!_.find(newRecipes[dndTarget], page)) {
         modified = true
-        return newRecipe[dndTarget].push(page)
+        return newRecipes[dndTarget].push(page)
       }
       return page
     })
 
     if (modified) {
-      actions.setRecipe(newRecipe)
+      setRecipes(newRecipes)
     }
   }
 
   let selectedPages = []
 
-  if (recipe[dndTarget]) {
-    selectedPages = _.filter(recipe[dndTarget], { name: pdf.name })
+  if (recipes[dndTarget]) {
+    selectedPages = _.filter(recipes[dndTarget], { name: pdf.name })
   }
 
   return (
     <div
-      className='c-pdf-dndSource position-relative'
+      className='a-pdf-dndSource position-relative'
       onMouseEnter={onHandleMouseEnter}
       onMouseLeave={onHandleMouseLeave}
     >
-      <Droppable droppableId={'c-pdf-dndSource-droppable-' + pdf.name} direction='horizontal'>
+      <Droppable droppableId={'a-pdf-dndSource-droppable-' + pdf.name} direction='horizontal'>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            className={classNames('c-pdf-dndSource-droppable', { 'c-pdf-dndSource-droppable-active': snapshot.isDraggingOver })}
+            className={classNames('a-pdf-dndSource-droppable', { 'a-pdf-dndSource-droppable-active': snapshot.isDraggingOver })}
             style={{ minHeight: pageScale * 140 }}
           >
             {_.range(1, pdf.numPages + 1).map(pageNumber => {
@@ -82,15 +68,16 @@ const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget }) => {
                 <Draggable key={key} draggableId={key} index={pageNumber}>
                   {(provided, snapshot) => (
                     <div
-                      className={classNames('c-pdf-dndSource-draggable', { dragging: snapshot.isDragging })}
+                      className={classNames('a-pdf-dndSource-draggable', { dragging: snapshot.isDragging })}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       onFocus={() => onHandleFocus(key)}
                       onBlur={() => onHandleBlur(key)}
                     >
-                      <PageInDnD
-                        className={classNames({ 'c-pdf-dndSource-draggable-active': snapshot.isDragging })}
+                      <DnDPage
+                        {...props}
+                        className={classNames({ 'a-pdf-dndSource-draggable-active': snapshot.isDragging })}
                         style={{
                           minWidth: 100 * pageScale,
                           minHeight: 140 * pageScale
@@ -111,7 +98,7 @@ const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget }) => {
       {isHovering ? (
         <div className='addAllLink'>
           <a href='#addAll' onClick={() => addAllPagesToTargetPdf(pdf.name)}>
-            {labels.addAll}
+            {labels.button_addAll}
           </a>
         </div>
       ) : null}
@@ -120,12 +107,12 @@ const DnDSource = ({ actions, labels, pdf, recipe, pageScale, dndTarget }) => {
 }
 
 DnDSource.propTypes = {
-  actions: PT.object,
+  setRecipes: PT.func.isRequired,
   dndTarget: PT.string,
   labels: PT.object.isRequired,
   pdf: PT.object.isRequired,
   pageScale: PT.number,
-  recipe: PT.object.isRequired
+  recipes: PT.object.isRequired
 }
 
 export default DnDSource

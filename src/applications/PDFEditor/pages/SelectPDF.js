@@ -1,8 +1,7 @@
 import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
-import classNames from 'classnames'
-import { Hovedknapp } from '../../../Nav'
+import { Hovedknapp, Undertittel } from '../../../Nav'
 import FileUpload from '../../../components/FileUpload/FileUpload'
 
 const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
@@ -22,13 +21,11 @@ const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
     actions.loadingFilesEnd()
   }
 
-  const buttonText = loadingPDF ? labels['loading-loadingPDF'] : labels.forward
   return (
     <>
-      <div style={{ animation: 'none', opacity: 1 }} className='fieldset mt-4 mb-4'>
-        <h2 className='mb-3'>{labels.fileUpload}</h2>
+      <div className='fieldset mt-4 mb-4'>
+        <Undertittel className='mb-3'>{labels.title_fileUpload}</Undertittel>
         <FileUpload
-          className={classNames('fileUpload', 'mb-3')}
           acceptedMimetypes={['application/pdf', 'image/jpeg', 'image/png']}
           files={files}
           beforeDrop={handleBeforeDrop}
@@ -40,18 +37,19 @@ const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
         className='forwardButton'
         spinner={loadingPDF}
         disabled={_.isEmpty(files)}
-        onClick={onForwardButtonClick}
-      >{buttonText}
+        onClick={onForwardButtonClick}>
+        {loadingPDF ? labels.loading_loadingPDF : labels.button_forward}
       </Hovedknapp>
     </>
   )
 }
 
 SelectPDF.propTypes = {
-  loadingPDF: PT.bool,
   actions: PT.object,
   labels: PT.object,
-  files: PT.array.isRequired
+  loadingPDF: PT.bool,
+  files: PT.array.isRequired,
+  setStep: PT.func.isRequired
 }
 
 export default SelectPDF

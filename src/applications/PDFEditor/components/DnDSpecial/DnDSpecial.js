@@ -3,7 +3,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import PDFSpecialPage from '../PDFSpecialPage/PDFSpecialPage'
-import { HjelpetekstAuto, Textarea } from '../../../../Nav'
+import { Textarea } from '../../../../Nav'
 import ColorPicker from '../../../../components/ColorPicker/ColorPicker'
 import './DnDSpecial.css'
 
@@ -58,16 +58,15 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
 
   return (
     <div
-      className='c-pdf-dndSpecial position-relative'
+      className='a-pdf-dndSpecial position-relative'
       onMouseEnter={onHandleMouseEnter}
       onMouseLeave={onHandleMouseLeave}
     >
-      <HjelpetekstAuto>{labels['help-specials-pdf']}</HjelpetekstAuto>
-      <Droppable droppableId='c-pdf-dndSpecial-droppable' direction='horizontal'>
+      <Droppable droppableId='a-pdf-dndSpecial-droppable' direction='horizontal'>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            className={classNames('c-pdf-dndSpecial-droppable', { 'c-pdf-dndSpecial-droppable-active': snapshot.isDraggingOver })}
+            className={classNames('a-pdf-dndSpecial-droppable', { 'a-pdf-dndSpecial-droppable-active': snapshot.isDraggingOver })}
           >
             <Draggable
               key='dndspecial' draggableId={encodeURIComponent(JSON.stringify(separator))}
@@ -76,7 +75,7 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
               {(provided, snapshot) => (
                 <>
                   <div
-                    className={classNames('c-pdf-dndSpecial-draggable', { dragging: snapshot.isDragging })}
+                    className={classNames('a-pdf-dndSpecial-draggable', { dragging: snapshot.isDragging })}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -86,7 +85,7 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
                       className={classNames({
                         enabled: separatorEnabled,
                         disabled: !separatorEnabled,
-                        'c-pdf-dndSpecial-draggable-active': snapshot.isDragging
+                        'a-pdf-dndSpecial-draggable-active': snapshot.isDragging
                       })}
                     />
                   </div>
@@ -99,11 +98,11 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
               )}
             </Draggable>
             <div className='ml-3 d-inline-block'>
-              <Textarea label={labels.content} maxLength={100} placeholder={labels['specials-textPlaceholder']} value={separator.separatorText} onChange={setSeparatorText} />
+              <Textarea label={labels.label_content} maxLength={100} placeholder={labels.placeholder_text} value={separator.separatorText} onChange={setSeparatorText} />
               <ColorPicker color={separator.separatorTextColor} onChangeComplete={setSeparatorTextColor} />
             </div>
             <div className='ml-3'>
-              <Textarea label={labels.watermark} maxLength={100} placeholder={labels['specials-watermarkPlaceholder']} value={watermark.watermarkText} onChange={setWatermarkText} />
+              <Textarea label={labels.label_watermark} maxLength={100} placeholder={labels.placeholder_watermark} value={watermark.watermarkText} onChange={setWatermarkText} />
               <ColorPicker color={watermark.watermarkTextColor} onChangeComplete={setWatermarkTextColor} />
             </div>
           </div>
@@ -114,9 +113,10 @@ const DnDSpecial = ({ actions, labels, separator, watermark }) => {
 }
 
 DnDSpecial.propTypes = {
-  actions: PT.object,
-  separator: PT.object.isRequired,
-  watermark: PT.object.isRequired
+  actions: PT.object.isRequired,
+  labels: PT.object,
+  separator: PT.object,
+  watermark: PT.object
 }
 
 export default DnDSpecial
