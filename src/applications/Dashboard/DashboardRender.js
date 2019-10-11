@@ -76,6 +76,7 @@ DashboardRender.propTypes = {
   availableWidgets: PT.array.isRequired,
   currentBreakpoint: PT.string.isRequired,
   editMode: PT.bool.isRequired,
+  labels: PT.object,
   layouts: PT.object.isRequired,
   onAddChange: PT.func.isRequired,
   onBreakpointChange: PT.func.isRequired,
@@ -87,7 +88,6 @@ DashboardRender.propTypes = {
   onWidgetDelete: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,
   onWidgetUpdate: PT.func.isRequired,
-  t: PT.func.isRequired,
   widgets: PT.array
 }
 export default DashboardRender

@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import * as Nav from '../../../../Nav'
+import SmileyWidget from './SmileyWidget'
 
-const SmileyOptionsWidget = ({ availableWidgets, layout, onWidgetUpdate, widget }) => {
+const SmileyOptionsWidget = ({ layout, onWidgetUpdate, widget }) => {
   const [mood, setMood] = useState(widget.options.mood)
 
   const chooseMood = (e) => {
@@ -13,8 +14,6 @@ const SmileyOptionsWidget = ({ availableWidgets, layout, onWidgetUpdate, widget 
     onWidgetUpdate(newWidget, layout)
   }
 
-  const widgetTemplate = _.find(availableWidgets, { type: 'smiley' })
-
   return (
     <div className='w-SmileyOptionsWidget p-3'>
       <Nav.Select
@@ -23,7 +22,7 @@ const SmileyOptionsWidget = ({ availableWidgets, layout, onWidgetUpdate, widget 
         value={mood || ''}
         onChange={chooseMood}
       >
-        {widgetTemplate.options.availableMoods.map(_mood => {
+        {SmileyWidget.properties.options.availableMoods.map(_mood => {
           return <option key={_mood.label} value={_mood.value}>{_mood.label}{' - '}{_mood.value}</option>
         })}
       </Nav.Select>
@@ -32,7 +31,6 @@ const SmileyOptionsWidget = ({ availableWidgets, layout, onWidgetUpdate, widget 
 }
 
 SmileyOptionsWidget.propTypes = {
-  availableWidgets: PT.array.isRequired,
   layout: PT.object.isRequired,
   onWidgetUpdate: PT.func.isRequired,
   widget: PT.object.isRequired

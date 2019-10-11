@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetDelete from './WidgetDelete'
 import labels from './Dashboard.labels'
 
-describe('components/Dashboard/Widget/WidgetDelete', () => {
+describe('applications/Dashboard/WidgetDelete', () => {
   let wrapper
 
   const initialMockProps = {

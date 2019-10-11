@@ -11,6 +11,7 @@ module.exports = {
     publicPath: '/dist/',
     umdNamedDefine: true
   },
+  /* devtool: '#eval-source-map', */
   module: {
     rules: [{
       test: /\.less$/,

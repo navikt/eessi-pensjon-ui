@@ -25,8 +25,8 @@ WidgetAddArea.propTypes = {
   availableWidgets: PT.array.isRequired,
   currentBreakpoint: PT.string.isRequired,
   dragApi: PT.object,
+  labels: PT.object,
   setWidgets: PT.func.isRequired,
-  t: PT.func.isRequired,
   widgets: PT.array.isRequired
 }
 

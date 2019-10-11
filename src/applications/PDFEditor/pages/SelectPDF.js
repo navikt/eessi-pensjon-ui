@@ -37,7 +37,8 @@ const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
         className='forwardButton'
         spinner={loadingPDF}
         disabled={_.isEmpty(files)}
-        onClick={onForwardButtonClick}>
+        onClick={onForwardButtonClick}
+      >
         {loadingPDF ? labels.loading_loadingPDF : labels.button_forward}
       </Hovedknapp>
     </>

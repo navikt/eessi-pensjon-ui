@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
+import pdfjsWorker from 'react-pdf/src/pdf.worker.entry'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
 import Icons from '../../../../components/Icons/Icons'
 import './DnDPage.css'
-pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.js'
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
 const DnDPage = (props) => {
   const { actions, action, className, dndTarget, file, isFocused, pageNumber, pageScale, recipes, style } = props

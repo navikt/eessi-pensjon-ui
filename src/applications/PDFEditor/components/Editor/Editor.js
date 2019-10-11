@@ -33,7 +33,8 @@ const Editor = (props) => {
         <DnDImages
           {...props}
           setRecipes={actions.setRecipes}
-          files={imageFiles} />
+          files={imageFiles}
+        />
       </Ekspanderbartpanel>
     )
   }
@@ -44,7 +45,8 @@ const Editor = (props) => {
         <DnDSource
           {...props}
           setRecipes={actions.setRecipes}
-          pdf={file}/>
+          pdf={file}
+        />
       </Ekspanderbartpanel>
     ))
   )
@@ -90,7 +92,7 @@ const Editor = (props) => {
                 accordion={false}
               >
                 <Ekspanderbartpanel apen={false} key='special' tittel={labels.title_specials} tittelProps='undertittel'>
-                  <DnDSpecial {...props}/>
+                  <DnDSpecial {...props} />
                 </Ekspanderbartpanel>
                 {imageCollapsed}
                 {pdfCollapsed}

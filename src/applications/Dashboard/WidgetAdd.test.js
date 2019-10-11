@@ -16,7 +16,7 @@ jest.mock('react-dnd-html5-backend', () => {
   }
 })
 
-describe('components/Dashboard/Widget/WidgetAdd', () => {
+describe('applications/Dashboard/WidgetAdd', () => {
   let wrapper
   const initialMockProps = {
     connectDragPreview: jest.fn(),

@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetEditOptions from './WidgetEditOptions'
 import NoteOptionsWidget from './widgets/Note/NoteOptionsWidget'
 
-describe('components/Dashboard/Widget/WidgetEditOptions', () => {
+describe('applications/Dashboard/WidgetEditOptions', () => {
   let wrapper
 
   const initialMockProps = {

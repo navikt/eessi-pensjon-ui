@@ -2,13 +2,11 @@ import React from 'react'
 import _ from 'lodash'
 import SmileyWidget from './SmileyWidget'
 import SmileyOptionsWidget from './SmileyOptionsWidget'
-import availableWidgets from 'components/Dashboard/config/AvailableWidgets'
-import layout from 'components/Dashboard/config/DefaultLayout'
+import layout from '../../config/DefaultLayout'
 
 describe('widgets/Smiley/SmileyOptionsWidget', () => {
   let wrapper
   const initialMockProps = {
-    availableWidgets: availableWidgets,
     layout: layout,
     onWidgetUpdate: jest.fn(),
     widget: _.cloneDeep(SmileyWidget.properties)

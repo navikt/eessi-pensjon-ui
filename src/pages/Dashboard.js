@@ -8,7 +8,7 @@ const DashboardPage = () => {
       <Panel className='p-4 w-100'>
         <Systemtittel className='pt-4 pb-4'>Dashboard page</Systemtittel>
         <Normaltekst>Dashboard Page</Normaltekst>
-        <Dashboard/>
+        <Dashboard id='eessi-pensjon-ui-demo' />
       </Panel>
     </Container>
   )

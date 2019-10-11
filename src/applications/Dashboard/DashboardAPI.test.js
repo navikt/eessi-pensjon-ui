@@ -1,14 +1,16 @@
 /* global localStorage */
 
-import defaultWidgets from 'components/Dashboard/config/DefaultWidgets'
-import defaultLayouts from 'components/Dashboard/config/DefaultLayout'
-import defaultConfig from 'components/Dashboard/config/DefaultConfig'
-import availableWidgets from 'components/Dashboard/config/AvailableWidgets'
+import defaultWidgets from './config/DefaultWidgets'
+import defaultLayouts from './config/DefaultLayout'
+import defaultConfig from './config/DefaultConfig'
 import * as DashboardAPI from './DashboardAPI'
+import * as Widgets from './widgets'
+import _ from 'lodash'
 
-describe('components/Dashboard/API/DashboardAPI', () => {
+describe('applications/Dashboard/DashboardAPI', () => {
+  const id = 'test'
   it('loadDashboard() - no localStorage', async (done) => {
-    const [widgets, layouts, config] = await DashboardAPI.loadDashboard()
+    const [widgets, layouts, config] = await DashboardAPI.loadDashboard(id)
     expect(widgets).toEqual(defaultWidgets)
     expect(layouts).toEqual(defaultLayouts)
     expect(config).toEqual(defaultConfig)
@@ -17,11 +19,11 @@ describe('components/Dashboard/API/DashboardAPI', () => {
 
   it('loadDashboard() - with localStorage', async (done) => {
     const mockContent = { foo: 'bar' }
-    localStorage.setItem('c-d-layouts', JSON.stringify(mockContent))
-    localStorage.setItem('c-d-widgets', JSON.stringify(mockContent))
-    localStorage.setItem('c-d-config', JSON.stringify(mockContent))
+    localStorage.setItem('test-layouts', JSON.stringify(mockContent))
+    localStorage.setItem('test-widgets', JSON.stringify(mockContent))
+    localStorage.setItem('test-config', JSON.stringify(mockContent))
 
-    const [widgets, layouts, config] = await DashboardAPI.loadDashboard()
+    const [widgets, layouts, config] = await DashboardAPI.loadDashboard(id)
     expect(widgets).toEqual(mockContent)
     expect(layouts).toEqual(mockContent)
     expect(config).toEqual(mockContent)
@@ -32,11 +34,11 @@ describe('components/Dashboard/API/DashboardAPI', () => {
     const mockWidgets = { value: 'mockWidgets' }
     const mockLayouts = { value: 'mockLayouts' }
     const mockConfig = { value: 'mockConfig' }
-    await DashboardAPI.saveDashboard(mockWidgets, mockLayouts, mockConfig)
+    await DashboardAPI.saveDashboard(id, mockWidgets, mockLayouts, mockConfig)
 
-    const savedLayouts = localStorage.getItem('c-d-layouts')
-    const savedWidgets = localStorage.getItem('c-d-widgets')
-    const savedConfig = localStorage.getItem('c-d-config')
+    const savedLayouts = localStorage.getItem('test-layouts')
+    const savedWidgets = localStorage.getItem('test-widgets')
+    const savedConfig = localStorage.getItem('test-config')
     expect(savedLayouts).toEqual(JSON.stringify(mockLayouts))
     expect(savedWidgets).toEqual(JSON.stringify(mockWidgets))
     expect(savedConfig).toEqual(JSON.stringify(mockConfig))
@@ -44,13 +46,13 @@ describe('components/Dashboard/API/DashboardAPI', () => {
   })
 
   it('resetDashboard()', async (done) => {
-    await localStorage.setItem('c-d-layouts', 'mockLayout')
-    await localStorage.setItem('c-d-widgets', 'mockWidgets')
-    await localStorage.setItem('c-d-config', 'mockConfig')
-    await DashboardAPI.resetDashboard()
-    const savedLayouts = localStorage.getItem('c-d-layouts')
-    const savedWidgets = localStorage.getItem('c-d-widgets')
-    const savedConfig = localStorage.getItem('c-d-config')
+    await localStorage.setItem('test-layouts', 'mockLayout')
+    await localStorage.setItem('test-widgets', 'mockWidgets')
+    await localStorage.setItem('test-config', 'mockConfig')
+    await DashboardAPI.resetDashboard(id)
+    const savedLayouts = localStorage.getItem('test-layouts')
+    const savedWidgets = localStorage.getItem('test-widgets')
+    const savedConfig = localStorage.getItem('test-config')
     expect(savedLayouts).toEqual(JSON.stringify(defaultLayouts))
     expect(savedWidgets).toEqual(JSON.stringify(defaultWidgets))
     expect(savedConfig).toEqual(JSON.stringify(defaultConfig))
@@ -58,8 +60,9 @@ describe('components/Dashboard/API/DashboardAPI', () => {
   })
 
   it('loadAvailableWidgets()', async (done) => {
-    const loadedAvailableWidgets = await DashboardAPI.loadAvailableWidgets()
-    expect(loadedAvailableWidgets).toEqual(availableWidgets)
+    const loadedAvailableWidgets = await DashboardAPI.loadAvailableWidgets(Widgets)
+    const expectedWidgets = _.values(Widgets).map(widget => widget.properties)
+    expect(loadedAvailableWidgets).toEqual(expectedWidgets)
     done()
   })
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import LinksWidget from './LinksWidget'
-jest.mock('widgets/Links/Links', () => {
+jest.mock('./Links', () => {
   return () => { return <div className='mock-w-links' /> }
 })
 

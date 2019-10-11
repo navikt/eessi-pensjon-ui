@@ -2,7 +2,7 @@ import React from 'react'
 import DashboardControlPanel from './DashboardControlPanel'
 import labels from './Dashboard.labels'
 
-describe('components/Dashboard/DashboardControlPanel', () => {
+describe('applications/Dashboard/DashboardControlPanel', () => {
   let wrapper
   const initialMockProps = {
     addMode: false,

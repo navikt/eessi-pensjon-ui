@@ -1,20 +1,8 @@
 import React from 'react'
 import Widget from './Widget'
 import labels from './Dashboard.labels'
-jest.mock('applications/BUC/widgets/index', () => {
-  return () => { return <div className='mock-Buc' /> }
-})
-jest.mock('widgets/PdfWidget', () => {
-  return () => { return <div className='w-PdfWidget' /> }
-})
-jest.mock('widgets/Overview/OverviewWidget', () => {
-  return () => { return <div className='w-OverviewWidget' /> }
-})
-jest.mock('widgets/Links/LinksWidget', () => {
-  return () => { return <div className='w-LinksWidget' /> }
-})
 
-describe('components/Dashboard/Widget/Widget', () => {
+describe('applications/Dashboard/Widget', () => {
   let wrapper
   const initialMockProps = {
     actions: {},
@@ -80,20 +68,5 @@ describe('components/Dashboard/Widget/Widget', () => {
   it('Renders LinksWidget', () => {
     wrapper.setProps({ widget: { type: 'links', options: { collapsed: false } } })
     expect(wrapper.exists('.w-LinksWidget')).toBeTruthy()
-  })
-
-  it('Renders OverviewWidget', () => {
-    wrapper.setProps({ widget: { type: 'overview', options: { collapsed: false } } })
-    expect(wrapper.exists('.w-OverviewWidget')).toBeTruthy()
-  })
-
-  it('Renders PdfWidget', () => {
-    wrapper.setProps({ widget: { type: 'pdf' } })
-    expect(wrapper.exists('.w-PdfWidget')).toBeTruthy()
-  })
-
-  it('Renders BucWidget', () => {
-    wrapper.setProps({ widget: { type: 'buc' } })
-    expect(wrapper.exists('.w-BucWidget')).toBeTruthy()
   })
 })

@@ -37,11 +37,11 @@ jest.mock('react-dnd-html5-backend', () => {
   return () => { return undefined }
 })
 
-jest.mock('components/Dashboard/Widget/Widget', () => {
+jest.mock('./Widget', () => {
   return () => { return <div className='mock-c-d-widget' /> }
 })
 
-describe('components/Dashboard/Dashboard', () => {
+describe('applications/Dashboard/Dashboard', () => {
   const initialMockProps = {
     t: jest.fn((translationString) => { return translationString }),
     addMode: false,

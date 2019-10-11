@@ -1,17 +1,17 @@
 import React from 'react'
-import { Dashboard } from './Dashboard'
-import DashboardRender from 'components/Dashboard/DashboardRender'
-
+import Dashboard from './Dashboard'
+import DashboardRender from './DashboardRender'
+import labels from './Dashboard.labels'
 const mockLayouts = {
   lg: [
-    { i: 'w-1-overview', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 },
-    { i: 'w-2-buc', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
+    { i: 'w-1-note', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 },
+    { i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
   ]
 }
 
 const mockWidgets = [
-  { i: 'w-1-overview', type: 'overview', title: 'Overview widget', options: {} },
-  { i: 'w-2-buc', type: 'buc', title: 'BUC widget', options: {} }
+  { i: 'w-1-note', type: 'note', title: 'Note widget', options: {} },
+  { i: 'w-2-smiley', type: 'smiley', title: 'Smiley widget', options: {} }
 ]
 
 const mockConfig = {
@@ -35,35 +35,23 @@ const localStorageMock = (() => {
     },
     initializeStore: () => {
       store = {
-        'c-d-widgets': JSON.stringify(mockWidgets),
-        'c-d-layouts': JSON.stringify(mockLayouts),
-        'c-d-config': JSON.stringify(mockConfig)
+        'test-widgets': JSON.stringify(mockWidgets),
+        'test-layouts': JSON.stringify(mockLayouts),
+        'test-config': JSON.stringify(mockConfig)
       }
     }
   }
 })()
 
-jest.mock('i18next', () => {
-  const use = jest.fn()
-  const init = jest.fn()
-  const loadLanguages = jest.fn()
-  const result = {
-    use: use,
-    init: init,
-    loadLanguages: loadLanguages
-  }
-  use.mockImplementation(() => result)
-  return result
-})
-
-jest.mock('components/Dashboard/DashboardRender', () => {
+jest.mock('applications/Dashboard/DashboardRender', () => {
   return () => { return <div /> }
 })
 
-describe('components/Dashboard/Dashboard', () => {
+describe('applications/Dashboard/Dashboard', () => {
   let wrapper
   const initialMockProps = {
-    t: jest.fn((translationString) => { return translationString })
+    labels: labels,
+    id: 'test'
   }
 
   beforeAll(() => {
@@ -260,11 +248,11 @@ describe('components/Dashboard/Dashboard', () => {
     expect(props().widgets).toEqual(mockWidgets)
     act(() => {
       props().onWidgetUpdate({
-        i: 'w-1-overview',
+        i: 'w-1-notes',
         type: 'horse',
         title: 'horse widget',
         options: { legs: 4, mane: true }
-      }, { i: 'w-1-overview' })
+      }, { i: 'w-1-notes' })
     })
     act(() => {
       wrapper.update()
@@ -275,9 +263,9 @@ describe('components/Dashboard/Dashboard', () => {
       title: 'horse widget',
       options: { legs: 4, mane: true }
     }, {
-      i: 'w-2-buc',
-      type: 'buc',
-      title: 'BUC widget',
+      i: 'w-2-smiley',
+      type: 'smiley',
+      title: 'Smiley widget',
       options: {}
     }])
   })
@@ -294,15 +282,15 @@ describe('components/Dashboard/Dashboard', () => {
       wrapper.update()
     })
     act(() => {
-      props().onWidgetResize({ i: 'w-1-overview', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 })
+      props().onWidgetResize({ i: 'w-1-notes', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 })
     })
     act(() => {
       wrapper.update()
     })
     expect(props().layouts).toEqual({
       lg: [
-        { i: 'w-1-overview', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 },
-        { i: 'w-2-buc', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
+        { i: 'w-1-notes', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 },
+        { i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
       ]
     })
   })
@@ -314,13 +302,13 @@ describe('components/Dashboard/Dashboard', () => {
     })
     expect(props().layouts).toEqual(mockLayouts)
     act(() => {
-      props().onWidgetDelete({ i: 'w-1-overview' })
+      props().onWidgetDelete({ i: 'w-1-notes' })
     })
     act(() => {
       wrapper.update()
     })
     expect(props().layouts).toEqual({
-      lg: [{ i: 'w-2-buc', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }]
+      lg: [{ i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }]
     })
   })
 })

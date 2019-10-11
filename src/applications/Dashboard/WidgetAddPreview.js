@@ -69,7 +69,7 @@ WidgetAddPreview.propTypes = {
   initialOffset: PT.object,
   isDragging: PT.bool,
   item: PT.object,
-  t: PT.func.isRequired
+  labels: PT.object
 }
 
 const WidgetAddPreviewDragLayer = DragLayer(monitor => ({

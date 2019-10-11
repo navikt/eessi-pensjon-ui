@@ -7,7 +7,7 @@ import defaultLabels from './Dashboard.labels'
 import * as DashboardAPI from './DashboardAPI'
 import * as Widgets from './widgets'
 
-export const Dashboard = ({ defaultConfig, defaultWidgets, defaultLayout, labels, extraWidgets }) => {
+const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, extraWidgets }) => {
   const [editMode, setEditMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -17,13 +17,13 @@ export const Dashboard = ({ defaultConfig, defaultWidgets, defaultLayout, labels
   const [backupLayouts, setBackupLayouts] = useState({})
   const [currentBreakpoint, setCurrentBreakpoint] = useState('lg')
   const [availableWidgets, setAvailableWidgets] = useState([])
-  const _labels = {...defaultLabels, labels}
+  const _labels = { ...defaultLabels, labels }
   const MyWidgets = { ...extraWidgets, ...Widgets }
 
   const initDashboard = async () => {
-    const _availableWidgets = DashboardAPI.loadAvailableWidgets(MyWidgets)
+    const _availableWidgets = DashboardAPI.loadAvailableWidgets(id, MyWidgets)
     setAvailableWidgets(_availableWidgets)
-    const [_widgets, _layouts, _config] = await DashboardAPI.loadDashboard(defaultWidgets, defaultLayout, defaultConfig)
+    const [_widgets, _layouts, _config] = await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayout, defaultConfig)
     setWidgets(_widgets)
     setLayouts(_layouts)
     setConfig(_config)
@@ -39,7 +39,7 @@ export const Dashboard = ({ defaultConfig, defaultWidgets, defaultLayout, labels
       return (widget.i === layout.i) ? updatedWidget : widget
     })
     setWidgets(newWidgets)
-    await DashboardAPI.saveWidgets(newWidgets)
+    await DashboardAPI.saveWidgets(id, newWidgets)
   }
 
   const onWidgetResize = layout => {
@@ -82,14 +82,14 @@ export const Dashboard = ({ defaultConfig, defaultWidgets, defaultLayout, labels
   }
 
   const onResetEdit = async () => {
-    await DashboardAPI.resetDashboard()
+    await DashboardAPI.resetDashboard(id, defaultWidgets, defaultLayout, defaultConfig)
     initDashboard()
     setAddMode(false)
     setEditMode(false)
   }
 
   const onSaveEdit = async () => {
-    await DashboardAPI.saveDashboard(widgets, layouts, config)
+    await DashboardAPI.saveDashboard(id, widgets, layouts, config)
     setAddMode(false)
     setEditMode(false)
   }
@@ -106,6 +106,7 @@ export const Dashboard = ({ defaultConfig, defaultWidgets, defaultLayout, labels
 }
 
 Dashboard.propTypes = {
+  id: PT.string.isRequired,
   labels: PT.object,
   extraWidgets: PT.object
 }

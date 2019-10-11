@@ -27,7 +27,7 @@ jest.mock('./WidgetAdd', () => {
   return () => { return <div className='mock-widgetadd' /> }
 })
 
-describe('components/Dashboard/Widget/WidgetAddArea', () => {
+describe('applications/Dashboard/WidgetAddArea', () => {
   let wrapper
 
   const initialMockProps = {

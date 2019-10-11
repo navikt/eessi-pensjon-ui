@@ -111,8 +111,8 @@ const GeneratePDF = (props) => {
 GeneratePDF.propTypes = {
   generatingPDF: PT.bool,
   actions: PT.object,
-  t: PT.func,
   files: PT.array.isRequired,
+  labels: PT.object,
   recipes: PT.object.isRequired,
   generatedPDFs: PT.object,
   watermark: PT.object

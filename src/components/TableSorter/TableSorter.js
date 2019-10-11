@@ -39,23 +39,22 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
         const filterText = column.filterText.toLowerCase()
         switch (column.type) {
           case 'date':
-            return filterText ?
-              item[column.id].toLocaleDateString ?
-                item[column.id].toLocaleDateString().match(filterText)
+            return filterText
+              ? item[column.id].toLocaleDateString
+                ? item[column.id].toLocaleDateString().match(filterText)
                 : item[column.id].toString().match(filterText)
               : true
           default:
-            return filterText ?
-              column.needle ?
-                column.needle(item[column.id]).match(filterText)
-                :
-                item[column.id].toLowerCase().match(filterText)
-            : true
+            return filterText
+              ? column.needle
+                ? column.needle(item[column.id]).match(filterText)
+                : item[column.id].toLowerCase().match(filterText)
+              : true
         }
       })
     })
 
-    let sortedItems = _.sortBy(filteredItems, _sort.column)
+    const sortedItems = _.sortBy(filteredItems, _sort.column)
     if (_sort.order === 'desc') {
       sortedItems.reverse()
     }

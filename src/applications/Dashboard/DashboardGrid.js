@@ -66,6 +66,7 @@ DashboardGrid.propTypes = {
   currentBreakpoint: PT.string.isRequired,
   dragApi: PT.object.isRequired,
   editMode: PT.bool.isRequired,
+  labels: PT.object,
   layouts: PT.object.isRequired,
   onBreakpointChange: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
@@ -73,7 +74,6 @@ DashboardGrid.propTypes = {
   onWidgetResize: PT.func.isRequired,
   onWidgetDelete: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
-  t: PT.func.isRequired,
   widgets: PT.array.isRequired
 }
 

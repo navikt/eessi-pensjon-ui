@@ -56,7 +56,8 @@ const EditPDF = (props) => {
           </Nav.Hovedknapp>
           <Nav.Knapp
             className='backButton ml-3'
-            onClick={onBackButtonClick}>
+            onClick={onBackButtonClick}
+          >
             {labels.button_back}
           </Nav.Knapp>
         </Nav.Column>

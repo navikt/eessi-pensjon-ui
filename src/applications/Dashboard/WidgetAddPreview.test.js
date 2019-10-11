@@ -17,7 +17,7 @@ document.getElementById = (el) => {
   }
 }
 
-describe('components/Dashboard/Widget/WidgetAddPreview', () => {
+describe('applications/Dashboard/WidgetAddPreview', () => {
   let wrapper
 
   const initialMockProps = {

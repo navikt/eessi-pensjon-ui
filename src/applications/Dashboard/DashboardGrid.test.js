@@ -16,7 +16,7 @@ jest.mock('react-dnd', () => {
   }
 })
 
-describe('components/Dashboard/DashboardGrid', () => {
+describe('applications/Dashboard/DashboardGrid', () => {
   let wrapper
   const initialMockProps = {
     availableWidgets: [],

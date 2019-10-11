@@ -1,6 +1,6 @@
 import React from 'react'
 import PT from 'prop-types'
-import * as Nav  from '../../Nav'
+import * as Nav from '../../Nav'
 import ReactResizeDetector from 'react-resize-detector'
 
 import './Widget.css'
@@ -46,10 +46,10 @@ const WidgetDelete = ({ labels, layout, onResize, onWidgetDelete, setMode }) => 
 }
 
 WidgetDelete.propTypes = {
+  labels: PT.object,
   layout: PT.object.isRequired,
   onResize: PT.func.isRequired,
   onWidgetDelete: PT.func.isRequired,
-  setMode: PT.func.isRequired,
-  t: PT.func.isRequired
+  setMode: PT.func.isRequired
 }
 export default WidgetDelete

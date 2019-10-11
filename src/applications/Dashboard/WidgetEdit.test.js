@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetEdit from './WidgetEdit'
 import labels from './Dashboard.labels'
 
-describe('components/Dashboard/Widget/WidgetEdit', () => {
+describe('applications/Dashboard/WidgetEdit', () => {
   let wrapper
 
   const initialMockProps = {

@@ -1,17 +1,17 @@
-import pdfReducer, { initialPdfState } from './reducers/pdf.js'
+import reducer, { initialState } from './reducer.js'
 import * as types from './constants/actionTypes'
 
 describe('reducers/pdf', () => {
   const simulate = (type, param, initialBool, status) => {
     expect(
-      pdfReducer({
-        ...initialPdfState,
+      reducer({
+        ...initialState,
         [param]: initialBool
       }, {
         type: type
       })
     ).toEqual({
-      ...initialPdfState,
+      ...initialState,
       [param]: !initialBool,
       status: status
     })

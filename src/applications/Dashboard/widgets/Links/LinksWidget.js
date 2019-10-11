@@ -7,7 +7,7 @@ import Links from './Links'
 
 import './LinksWidget.css'
 
-const LinksWidget = ({ onResize, onUpdate, t, widget }) => {
+const LinksWidget = ({ onResize, onUpdate, widget }) => {
   const onClick = () => {
     const newWidget = _.cloneDeep(widget)
     newWidget.options.collapsed = !newWidget.options.collapsed
@@ -36,7 +36,7 @@ const LinksWidget = ({ onResize, onUpdate, t, widget }) => {
           />
           {widget.options.collapsed === true
             ? null
-            : <Links t={t} />}
+            : <Links />}
         </div>
       </Nav.Ekspanderbartpanel>
     </div>
@@ -58,7 +58,6 @@ LinksWidget.properties = {
 LinksWidget.propTypes = {
   onResize: PT.func.isRequired,
   onUpdate: PT.func.isRequired,
-  t: PT.func.isRequired,
   widget: PT.object.isRequired
 }
 

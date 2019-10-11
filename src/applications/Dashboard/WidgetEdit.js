@@ -23,8 +23,8 @@ const WidgetEdit = (props) => {
 }
 
 WidgetEdit.propTypes = {
-  setMode: PT.func.isRequired,
-  t: PT.func.isRequired
+  labels: PT.object,
+  setMode: PT.func.isRequired
 }
 
 export default WidgetEdit

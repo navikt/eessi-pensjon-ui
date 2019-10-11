@@ -7,7 +7,7 @@ import DnDPage from '../DnDPage/DnDPage'
 import './DnDImages.css'
 
 const DnDImages = (props) => {
-  const { setRecipes, dndTarget, files, labels, pageScale, recipes } = props
+  const { setRecipes, dndTarget, files, labels, recipes } = props
   const [isHovering, setIsHovering] = useState(false)
   const onHandleMouseEnter = () => setIsHovering(true)
   const onHandleMouseLeave = () => setIsHovering(false)
@@ -80,21 +80,22 @@ const DnDImages = (props) => {
           </div>
         )}
       </Droppable>
-      {isHovering ? (<div className='addAllLink'>
-        <a
-          href='#addAll'
-          onClick={addAllImagesToTargetPdf}
-        >
-          {labels.addAll}
-        </a>
-      </div>
+      {isHovering ? (
+        <div className='addAllLink'>
+          <a
+            href='#addAll'
+            onClick={addAllImagesToTargetPdf}
+          >
+            {labels.button_addAll}
+          </a>
+        </div>
       ) : null}
     </div>
   )
 }
 
 DnDImages.propTypes = {
-  t: PT.func.isRequired,
+  labels: PT.object,
   setRecipes: PT.func.isRequired,
   recipes: PT.array,
   pageScale: PT.number,

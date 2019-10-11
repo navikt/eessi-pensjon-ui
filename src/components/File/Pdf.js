@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
 import { pdfjs, Document, Page } from 'react-pdf'
+import pdfjsWorker from 'react-pdf/src/pdf.worker.entry'
 import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 import './Pdf.css'
-
-pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.js'
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
 export const Pdf = ({
   addLink, animate, className, currentPage, deleteLink, downloadLink, file, height, initialNumberPages, index, isHovering,

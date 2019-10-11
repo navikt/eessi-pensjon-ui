@@ -9,7 +9,7 @@ document.getElementById = () => {
   }
 }
 
-describe('components/Dashboard/Widget/WidgetContainer', () => {
+describe('applications/Dashboard/WidgetContainer', () => {
   let wrapper
 
   const initialMockProps = {

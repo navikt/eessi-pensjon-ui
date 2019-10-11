@@ -69,11 +69,11 @@ const DashboardControlPanel = (props) => {
 DashboardControlPanel.propTypes = {
   addMode: PT.bool.isRequired,
   editMode: PT.bool.isRequired,
+  labels: PT.object,
   onAddChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
   onEditModeOn: PT.func.isRequired,
-  onSaveEdit: PT.func.isRequired,
-  t: PT.func.isRequired
+  onSaveEdit: PT.func.isRequired
 }
 
 DashboardControlPanel.defaultProps = DashboardConfig
