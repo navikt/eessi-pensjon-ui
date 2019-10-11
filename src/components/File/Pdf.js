@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
-import { pdfjs, Document, Page } from 'react-pdf'
-import pdfjsWorker from 'react-pdf/src/pdf.worker.entry'
+import { Document, Page, pdfjs } from 'react-pdf'
 import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 import './Pdf.css'
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
+if (process.env.NODE_ENV !== 'production') {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+} else {
+  pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.js`
+}
 
 export const Pdf = ({
   addLink, animate, className, currentPage, deleteLink, downloadLink, file, height, initialNumberPages, index, isHovering,

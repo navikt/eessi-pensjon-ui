@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
-import pdfjsWorker from 'react-pdf/src/pdf.worker.entry'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
 import Icons from '../../../../components/Icons/Icons'
 import './DnDPage.css'
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
+if (process.env.NODE_ENV !== 'production') {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+} else {
+  pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.js`
+}
 
 const DnDPage = (props) => {
   const { actions, action, className, dndTarget, file, isFocused, pageNumber, pageScale, recipes, style } = props

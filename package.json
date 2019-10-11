@@ -7,9 +7,11 @@
     "build": "npm run build:css && npm run build:js",
     "build:css": "less-watch-compiler --run-once --config less.json",
     "build:js": "cross-env NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
-    "dist": "npm run dist:css && npm run dist:js",
+    "dist:dev": "cross-env NODE_ENV=development npm run dist:css && npm run dist:jsdev",
+    "dist:prod": "cross-env NODE_ENV=production npm run dist:css && npm run dist:jsprod",
     "dist:css": "less-watch-compiler --run-once --config less.json",
-    "dist:js": "rm -rf ./dist && webpack",
+    "dist:jsdev": "rm -rf ./dist && webpack --config webpack.dev.js",
+    "dist:jsprod": "rm -rf ./dist && webpack --config webpack.prod.js",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "start": "cross-env NODE_ENV=development npm-run-all -p start:*",
@@ -24,7 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/navikt/eessi-pensjon-ui.git"
   },
-  "homepage": "https://nav.github.io/eessi-pensjon-ui/build",
   "private": true,
   "peerDependencies": {
     "react": "^16.10.2",
@@ -37,6 +38,7 @@
     "bootstrap": "^4.3.1",
     "browser-cookies": "^1.2.0",
     "classnames": "^2.2.6",
+    "copy-webpack-plugin": "^5.0.4",
     "cross-fetch": "^3.0.4",
     "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
@@ -144,7 +146,8 @@
     "standard": "^14.3.1",
     "svg-inline-loader": "^0.8.0",
     "url-loader": "^2.2.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-merge": "^4.2.2"
   },
   "standard": {
     "ignore": [
