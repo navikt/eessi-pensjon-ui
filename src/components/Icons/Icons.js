@@ -101,6 +101,7 @@ const Icons = (props) => {
     case 'outlink' : return <LineVersionLogout {...props} />
     case 'problem' : return <ProblemCircle {...props} />
     case 'chat' : return <BubbleChat {...props} />
+    case 'settings' : return <FontAwesomeIcon icon={icons.faCog} {...props} />
 
     default: return null
   }

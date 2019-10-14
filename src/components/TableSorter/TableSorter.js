@@ -6,7 +6,7 @@ import * as Nav from '../../Nav'
 import WaitingPanel from '../WaitingPanel/WaitingPanel'
 import './TableSorter.css'
 
-const TableSorter = ({ className, sort = { column: '', order: '' }, columns = [], items = [], loading = false }) => {
+const TableSorter = ({ className, sort = { column: '', order: '' }, context, columns = [], items = [], loading = false }) => {
   const [_sort, setSort] = useState(sort)
   const [_columns, setColumns] = useState(columns)
   const [seeFilters, setSeeFilters] = useState(false)
@@ -85,7 +85,7 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, columns = []
               case 'object':
                 return (
                   <td key={index2}>
-                    {column.toTableCell ? column.toTableCell(item, value) : JSON.stringify(value)}
+                    {typeof column.toTableCell === 'function' ? column.toTableCell(item, value, context) : JSON.stringify(value)}
                   </td>
                 )
               default:

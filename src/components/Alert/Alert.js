@@ -12,7 +12,7 @@ export const errorTypes = {
   WARNING: 'advarsel'
 }
 
-export const Alert = ({ className, error, fixed = false, message, onClear, status = 'ERROR', type }) => {
+export const Alert = ({ className, error, fixed, message, onClear, status = 'ERROR', type }) => {
   let _message = message
 
   const onClearClicked = () => {
@@ -66,10 +66,11 @@ export const Alert = ({ className, error, fixed = false, message, onClear, statu
 Alert.propTypes = {
   className: PT.string,
   error: PT.object,
+  fixed: PT.bool,
   message: PT.string,
-  onClientClear: PT.func,
-  type: PT.string.isRequired,
-  status: PT.string
+  onClear: PT.func,
+  status: PT.string,
+  type: PT.string.isRequired
 }
 
 Alert.displayName = 'Alert'

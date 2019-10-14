@@ -29,8 +29,8 @@ describe('applications/Dashboard/DashboardControlPanel', () => {
   })
 
   it('Clicking on Edit button', () => {
-    expect(wrapper.exists('.c-dashboard__controlPanel-edit-button')).toBeTruthy()
-    wrapper.find('#c-dashboard__controlPanel-edit-button-id').hostNodes().simulate('click')
+    expect(wrapper.exists('.c-dashboard__controlPanel-edit-icon')).toBeTruthy()
+    wrapper.find('#c-dashboard__controlPanel-edit-icon-id').hostNodes().simulate('click')
     expect(initialMockProps.onEditModeOn).toHaveBeenCalled()
   })
 

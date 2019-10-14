@@ -21,7 +21,7 @@ const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, e
   const MyWidgets = { ...extraWidgets, ...Widgets }
 
   const initDashboard = async () => {
-    const _availableWidgets = DashboardAPI.loadAvailableWidgets(id, MyWidgets)
+    const _availableWidgets = DashboardAPI.loadAvailableWidgets(MyWidgets)
     setAvailableWidgets(_availableWidgets)
     const [_widgets, _layouts, _config] = await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayout, defaultConfig)
     setWidgets(_widgets)

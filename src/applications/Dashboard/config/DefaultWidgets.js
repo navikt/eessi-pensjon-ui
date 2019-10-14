@@ -3,7 +3,8 @@ export default [{
   type: 'note',
   title: 'Note widget',
   options: {
-    backgroundColor: 'yellow'
+    backgroundColor: 'yellow',
+    content: '<ul><li>Eggs</li><li>Milk</li><li>Bread</li></ul>'
   }
 }, {
   i: 'w-2-smiley',

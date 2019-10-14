@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
 import ReactResizeDetector from 'react-resize-detector'
 import SmileyOptionsWidget from './SmileyOptionsWidget'
+import './SmileyWidget.css'
 
 const SmileyWidget = ({ onResize, widget }) => {
   const [mounted, setMounted] = useState(false)

@@ -3,6 +3,7 @@ import PT from 'prop-types'
 import _ from 'lodash'
 import ReactResizeDetector from 'react-resize-detector'
 import NoteOptionsWidget from './NoteOptionsWidget'
+import './NoteWidget.css'
 
 const NoteWidget = ({ id, layout, onResize, onWidgetUpdate, widget }) => {
   const [mounted, setMounted] = useState(false)
@@ -67,6 +68,7 @@ NoteWidget.properties = {
     sm: { minW: 1, maxW: 1, defaultW: 1, minH: 5, defaultH: 5, maxH: 999 }
   },
   options: {
+    content: '<ul><li>Eggs</li><li>Milk</li><li>Bread</li></ul>',
     backgroundColor: 'yellow',
     availableColors: ['white', 'yellow', 'orange', 'pink', 'lightgreen']
   }

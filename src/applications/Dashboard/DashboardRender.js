@@ -3,6 +3,7 @@ import PT from 'prop-types'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { createDragApiRef } from 'react-grid-layout'
+import classNames from 'classnames'
 import WidgetAddArea from './WidgetAddArea'
 import DashboardGrid from './DashboardGrid'
 import DashboardControlPanel from './DashboardControlPanel'
@@ -25,7 +26,7 @@ export const DashboardRender = ({
     )
   } else {
     return (
-      <div className='c-dashboard'>
+      <div className={classNames('c-dashboard', currentBreakpoint)}>
         <DndProvider backend={HTML5Backend}>
           <DashboardControlPanel
             labels={labels}

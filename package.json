@@ -16,7 +16,7 @@
     "lint:fix": "standard --fix",
     "start": "cross-env NODE_ENV=development npm-run-all -p start:*",
     "start:css": "less-watch-compiler --config less.json",
-    "start:js": "react-scripts start",
+    "start:js": "cross-env PORT=3001 react-scripts start",
     "test": "cross-env NODE_ENV=test react-scripts test",
     "test:ci": "cross-env NODE_ENV=test react-scripts test --updateSnapshot --watchAll=false",
     "test:coverage": "cross-env NODE_ENV=test react-scripts test --coverage  --watchAll=false"

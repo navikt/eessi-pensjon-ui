@@ -1,7 +1,7 @@
 import React from 'react'
 import PT from 'prop-types'
 import DashboardConfig from './config/DashboardConfig'
-
+import Icons from '../../components/Icons/Icons'
 const DashboardControlPanel = (props) => {
   const { addMode, editMode, labels, onAddChange, onCancelEdit, onEditModeOn, onResetEdit, onSaveEdit } = props
 
@@ -29,13 +29,13 @@ const DashboardControlPanel = (props) => {
           </button>
         ) : null}
         {!editMode ? (
-          <button
-            id='c-dashboard__controlPanel-edit-button-id'
-            className='c-dashboard__controlPanel-edit-button'
+          <Icons kind='settings'
+            style={{cursor: 'pointer'}}
+            title={labels.editDashboard}
+            id='c-dashboard__controlPanel-edit-icon-id'
+            className='c-dashboard__controlPanel-edit-icon'
             onClick={onEditModeOn}
-          >
-            {labels.editDashboard}
-          </button>
+          />
         ) : (
           <>
             <button
