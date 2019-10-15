@@ -61,7 +61,6 @@ export const DashboardRender = ({
             onWidgetUpdate={onWidgetUpdate}
             onWidgetResize={onWidgetResize}
             onWidgetDelete={onWidgetDelete}
-            availableWidgets={availableWidgets}
             labels={labels}
             dragApi={dragApi}
             MyWidgets={MyWidgets}

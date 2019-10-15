@@ -7,7 +7,7 @@ import defaultLabels from './Dashboard.labels'
 import * as DashboardAPI from './DashboardAPI'
 import * as Widgets from './widgets'
 
-const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, extraWidgets }) => {
+const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, extraWidgets, allowedWidgets = undefined }) => {
   const [editMode, setEditMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -21,9 +21,9 @@ const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, e
   const MyWidgets = { ...extraWidgets, ...Widgets }
 
   const initDashboard = async () => {
-    const _availableWidgets = DashboardAPI.loadAvailableWidgets(MyWidgets)
+    const _availableWidgets = DashboardAPI.loadAvailableWidgets(MyWidgets, allowedWidgets)
     setAvailableWidgets(_availableWidgets)
-    const [_widgets, _layouts, _config] = await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayout, defaultConfig)
+    const [_widgets, _layouts, _config] = await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayout, defaultConfig, allowedWidgets)
     setWidgets(_widgets)
     setLayouts(_layouts)
     setConfig(_config)

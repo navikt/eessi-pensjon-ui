@@ -23,6 +23,7 @@
     "test:coverage": "cross-env NODE_ENV=test react-scripts test --coverage  --watchAll=false"
   },
   "main": "dist/dist.js",
+  "homepage": ".",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/eessi-pensjon-ui.git"

@@ -29,6 +29,7 @@ const Widget = (props) => {
 Widget.propTypes = {
   labels: PT.object,
   mode: PT.string,
+  MyWidgets: PT.object,
   widget: PT.object.isRequired
 }
 

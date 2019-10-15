@@ -35,7 +35,6 @@ const NoteOptionsWidget = ({ layout, onWidgetUpdate, widget }) => {
 }
 
 NoteOptionsWidget.propTypes = {
-  availableWidgets: PT.array.isRequired,
   layout: PT.object.isRequired,
   onWidgetUpdate: PT.func.isRequired,
   widget: PT.object.isRequired

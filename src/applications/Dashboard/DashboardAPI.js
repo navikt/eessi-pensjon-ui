@@ -10,7 +10,7 @@ const dashboardNeedsUpgrade = (instanceVersion, dashboardVersion) => {
   return dashboardVersion > instanceVersion
 }
 
-export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayout, customDefaultConfig) => {
+export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayout, customDefaultConfig, allowedWidgets) => {
   let layouts, widgets
   let config = await localStorage.getItem(id + '-config')
   config = config ? JSON.parse(config) : customDefaultConfig
@@ -32,6 +32,24 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
       widgets = defaultWidgets
     }
   }
+
+  console.log(widgets)
+  console.log(layouts)
+  console.log(allowedWidgets)
+  widgets = allowedWidgets ? widgets.filter((w) => {
+    return _.includes(allowedWidgets, w.type)
+  }) : widgets
+  console.log(widgets)
+  const widgetIds = widgets.map(w => w.i)
+  console.log(widgetIds)
+  if (!_.isEmpty(widgetIds)) {
+    Object.keys(layouts).forEach((breakpoint) => {
+      layouts[breakpoint] = layouts[breakpoint].filter((w) => {
+        return _.includes(widgetIds, w.i)
+      })
+    })
+  }
+  console.log(layouts)
   return [widgets, layouts, config]
 }
 
@@ -51,6 +69,14 @@ export const resetDashboard = async (id, customDefaultWidgets, customDefaultLayo
   await localStorage.setItem(id + '-layouts', JSON.stringify(customDefaultLayout || defaultLayouts))
 }
 
-export const loadAvailableWidgets = (widgets) => {
-  return _.values(widgets).map(widget => widget.properties)
+export const loadAvailableWidgets = (widgets, allowedWidgets) => {
+  if (!allowedWidgets) {
+    return _.values(widgets).map(widget => widget.properties)
+  }
+  return _.values(widgets)
+    .filter(widget => {
+      console.log(allowedWidgets, widget, _.includes(allowedWidgets, widget.properties.type))
+      return _.includes(allowedWidgets, widget.properties.type)
+    })
+    .map(widget => widget.properties)
 }

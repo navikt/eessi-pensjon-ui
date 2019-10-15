@@ -10,7 +10,7 @@ import DashboardConfig from './config/DashboardConfig'
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export const DashboardGrid = (props) => {
-  const { availableWidgets, canDrop, connectDropTarget, currentBreakpoint, dragApi, editMode, labels, layouts, MyWidgets } = props
+  const { canDrop, connectDropTarget, currentBreakpoint, dragApi, editMode, labels, layouts, MyWidgets } = props
   const { onBreakpointChange, onLayoutChange, onWidgetUpdate, onWidgetResize, onWidgetDelete, rowHeight, widgets } = props
 
   return connectDropTarget(
@@ -41,16 +41,15 @@ export const DashboardGrid = (props) => {
           return (
             <div id={'widget-' + layout.i} key={layout.i}>
               <WidgetContainer
+                widget={_.find(widgets, { i: layout.i })}
+                currentBreakpoint={currentBreakpoint}
+                editMode={editMode}
                 layout={layout}
                 labels={labels}
-                widget={_.find(widgets, { i: layout.i })}
-                editMode={editMode}
-                currentBreakpoint={currentBreakpoint}
                 onWidgetResize={onWidgetResize}
                 onWidgetUpdate={onWidgetUpdate}
                 onWidgetDelete={onWidgetDelete}
                 rowHeight={rowHeight}
-                availableWidgets={availableWidgets}
                 MyWidgets={MyWidgets}
               />
             </div>
@@ -61,7 +60,6 @@ export const DashboardGrid = (props) => {
 }
 
 DashboardGrid.propTypes = {
-  availableWidgets: PT.array.isRequired,
   connectDropTarget: PT.func.isRequired,
   currentBreakpoint: PT.string.isRequired,
   dragApi: PT.object.isRequired,
