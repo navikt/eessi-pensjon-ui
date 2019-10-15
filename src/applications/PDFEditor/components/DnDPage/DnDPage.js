@@ -8,7 +8,7 @@ import './DnDPage.css'
 if (process.env.NODE_ENV !== 'production') {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 } else {
-  pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.js`
+  pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.js'
 }
 
 const DnDPage = (props) => {

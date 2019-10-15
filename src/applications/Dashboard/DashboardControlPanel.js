@@ -29,8 +29,9 @@ const DashboardControlPanel = (props) => {
           </button>
         ) : null}
         {!editMode ? (
-          <Icons kind='settings'
-            style={{cursor: 'pointer'}}
+          <Icons
+            kind='settings'
+            style={{ cursor: 'pointer' }}
             title={labels.editDashboard}
             id='c-dashboard__controlPanel-edit-icon-id'
             className='c-dashboard__controlPanel-edit-icon'

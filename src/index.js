@@ -8,7 +8,7 @@ import 'core-js/es/set' // IE 11 compatibility
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route } from 'react-router'
-import { HashRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import * as Pages from './pages'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'index.css'

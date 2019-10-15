@@ -22,7 +22,7 @@ const FlagList = (props) => {
         const label = item.label || CountryData.findByValue(locale, item.country).label
         return (
           <Flag
-            className='m-2'
+            className='m-1'
             size={size}
             type={type}
             key={index}

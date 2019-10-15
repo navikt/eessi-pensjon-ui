@@ -26,7 +26,6 @@ import Trashcan from '../../resources/images/Trashcan'
 import Tilsette from '../../resources/images/Tilsette'
 import LineVersionClose from '../../resources/images/LineVersionClose'
 import LineVersionLogout from '../../resources/images/LineVersionLogout'
-import MannIcon from '../../resources/images/mann.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as icons from '@fortawesome/free-solid-svg-icons'
@@ -60,8 +59,9 @@ const Icons = (props) => {
 
     case 'nav-close' : return <RemoveCircleSVG {...props} />
     case 'nav-message-sent' : return <MessageSentSVG {...props} />
-    case 'nav-man-icon' : return <MannIcon {...props} />
-    case 'nav-woman-icon' : return <img alt='woman-icon' src={require('../../resources/images/kvinne.png')} {...props} />
+    case 'nav-man-icon' : return <img alt='man-icon' width={w} height={h} src={require('../../resources/images/mann.png')} {...props} />
+    case 'nav-unknown-icon' : return <img alt='ukjent-icon' width={w} height={h} src={require('../../resources/images/ukjent.png')} {...props} />
+    case 'nav-woman-icon' : return <img alt='woman-icon' width={w} height={h} src={require('../../resources/images/kvinne.png')} {...props} />
 
     case 'document' : return <FontAwesomeIcon icon={icons.faFile} {...props} />
     case 'view' : return <FontAwesomeIcon icon={icons.faEye} {...props} />
