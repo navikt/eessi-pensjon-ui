@@ -20,6 +20,8 @@ import BirthdaycakeSVG from '../../resources/images/line-version-birthday-cake.s
 import HelpcircleSVG from '../../resources/images/line-version-help-circle.svg'
 import PiggybankSVG from '../../resources/images/line-version-piggy-bank.svg'
 import NetworkConnectingSVG from '../../resources/images/filled-version-network-connecting.svg'
+import Calendar from '../../resources/images/line-version-expanded-calendar-3.svg'
+import Globe from '../../resources/images/line-version-expanded-globe-2.svg'
 
 import Vedlegg from '../../resources/images/Vedlegg'
 import Trashcan from '../../resources/images/Trashcan'
@@ -32,20 +34,10 @@ import * as icons from '@fortawesome/free-solid-svg-icons'
 
 const Icons = (props) => {
   const { kind, size } = props
-  const h = parseInt(size, 10) || 24; const w = h
+  const h = parseInt(size, 10) || 24
+  const w = h
 
   switch (kind) {
-    case 'work' : return <FontAwesomeIcon icon={icons.faBriefcase} {...props} />
-    case 'home' : return <FontAwesomeIcon icon={icons.faHome} {...props} />
-    case 'child' : return <FontAwesomeIcon icon={icons.faChild} {...props} />
-    case 'voluntary' : return <FontAwesomeIcon icon={icons.faHandsHelping} {...props} />
-    case 'military' : return <FontAwesomeIcon icon={icons.faFighterJet} {...props} />
-    case 'birth' : return <FontAwesomeIcon icon={icons.faChild} {...props} />
-    case 'learn' : return <FontAwesomeIcon icon={icons.faSchool} {...props} />
-    case 'daily' : return <FontAwesomeIcon icon={icons.faMoneyBillWave} {...props} />
-    case 'sick' : return <FontAwesomeIcon icon={icons.faHSquare} {...props} />
-    case 'other' : return <FontAwesomeIcon icon={icons.faCalendar} {...props} />
-
     case 'nav-work' : return <HandbagSVG {...props} width={w} height={h} />
     case 'nav-home' : return <HomeSVG {...props} width={w} height={h} />
     case 'nav-military' : return <RankArmySVG {...props} width={w} height={h} />
@@ -65,8 +57,6 @@ const Icons = (props) => {
 
     case 'document' : return <FontAwesomeIcon icon={icons.faFile} {...props} />
     case 'view' : return <FontAwesomeIcon icon={icons.faEye} {...props} />
-    case 'calendar' : return <FontAwesomeIcon icon={icons.faCalendarCheck} {...props} />
-
     case 'user' : return <FontAwesomeIcon icon={icons.faUser} {...props} />
     case 'file' : return <FontAwesomeIcon icon={icons.faFile} {...props} />
     case 'print' : return <FontAwesomeIcon icon={icons.faPrint} {...props} />
@@ -75,7 +65,6 @@ const Icons = (props) => {
     case 'export' : return <FontAwesomeIcon icon={icons.faFileExport} {...props} />
     case 'file-submit' : return <FontAwesomeIcon icon={icons.faUpload} {...props} />
     case 'menu' : return <FontAwesomeIcon icon={icons.faBars} {...props} />
-
     case 'clip' : return <FontAwesomeIcon icon={icons.faPaperclip} {...props} />
     case 'refresh' : return <FontAwesomeIcon icon={icons.faSyncAlt} {...props} />
     case 'form' : return <FontAwesomeIcon icon={icons.faBars} {...props} />
@@ -87,21 +76,23 @@ const Icons = (props) => {
     case 'caretRight' : case 'next' : return <FontAwesomeIcon icon={icons.faCaretRight} {...props} />
     case 'server' : return <FontAwesomeIcon icon={icons.faServer} {...props} />
     case 'db' : return <FontAwesomeIcon icon={icons.faDatabase} {...props} />
-
-    case 'paperclip' : return <PaperClip {...props} />
-    case 'checkCircle' : return <CheckCircle {...props} />
-    case 'removeCircle' : return <RemoveCircle {...props} />
-    case 'connecting' : return <NetworkConnectingSVG {...props} />
     case 'solidclose' : return <FontAwesomeIcon icon={icons.faTimesCircle} {...props} />
     case 'close' : return <FontAwesomeIcon icon={icons.faTimes} {...props} />
-    case 'bigclose' : return <LineVersionClose {...props} />
-    case 'vedlegg' : return <Vedlegg {...props} />
-    case 'trashcan' : return <Trashcan {...props} />
-    case 'tilsette' : return <Tilsette {...props} />
-    case 'outlink' : return <LineVersionLogout {...props} />
-    case 'problem' : return <ProblemCircle {...props} />
-    case 'chat' : return <BubbleChat {...props} />
-    case 'settings' : return <FontAwesomeIcon icon={icons.faCog} {...props} />
+    case 'settings' : return <FontAwesomeIcon icon={icons.faCog} {...props}/>
+
+    case 'paperclip' : return <PaperClip {...props} width={w} height={h}/>
+    case 'checkCircle' : return <CheckCircle {...props} width={w} height={h}/>
+    case 'removeCircle' : return <RemoveCircle {...props} width={w} height={h}/>
+    case 'connecting' : return <NetworkConnectingSVG {...props} width={w} height={h}/>
+    case 'bigclose' : return <LineVersionClose {...props} width={w} height={h}/>
+    case 'vedlegg' : return <Vedlegg {...props} width={w} height={h}/>
+    case 'trashcan' : return <Trashcan {...props} width={w} height={h}/>
+    case 'tilsette' : return <Tilsette {...props} width={w} height={h}/>
+    case 'outlink' : return <LineVersionLogout {...props} width={w} height={h}/>
+    case 'problem' : return <ProblemCircle {...props} width={w} height={h}/>
+    case 'chat' : return <BubbleChat {...props} width={w} height={h}/>
+    case 'address' : return <Globe {...props} width={w} height={h}/>
+    case 'calendar' : return <Calendar {...props} width={w} height={h}/>
 
     default: return null
   }

@@ -7,7 +7,7 @@ import defaultLabels from './Dashboard.labels'
 import * as DashboardAPI from './DashboardAPI'
 import * as Widgets from './widgets'
 
-const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, extraWidgets, allowedWidgets = undefined }) => {
+const Dashboard = ({ allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, extraWidgets, id, labels }) => {
   const [editMode, setEditMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -42,14 +42,14 @@ const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, e
     await DashboardAPI.saveWidgets(id, newWidgets)
   }
 
-  const onWidgetResize = layout => {
+  const onWidgetResize = (layout) => {
     const newLayout = _.cloneDeep(layouts)
     const index = _.findIndex(newLayout[currentBreakpoint], { i: layout.i })
     newLayout[currentBreakpoint][index] = layout
     setLayouts(newLayout)
   }
 
-  const onWidgetDelete = layout => {
+  const onWidgetDelete = (layout) => {
     setWidgets(_.reject(widgets, { i: layout.i }))
     const newLayout = _.cloneDeep(layouts)
     Object.keys(newLayout).forEach(breakpoint => {
@@ -78,6 +78,7 @@ const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, e
 
   const onCancelEdit = () => {
     setEditMode(false)
+    setAddMode(false)
     setLayouts(backupLayouts)
   }
 
@@ -106,9 +107,13 @@ const Dashboard = ({ id, defaultConfig, defaultWidgets, defaultLayout, labels, e
 }
 
 Dashboard.propTypes = {
+  allowedWidgets: PT.array,
+  defaultConfig: PT.object,
+  defaultLayout: PT.object,
+  defaultWidgets: PT.array,
+  extraWidgets: PT.object,
   id: PT.string.isRequired,
-  labels: PT.object,
-  extraWidgets: PT.object
+  labels: PT.object
 }
 
 Dashboard.defaultProps = DashboardConfig

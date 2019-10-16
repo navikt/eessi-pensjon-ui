@@ -2,8 +2,9 @@ import React from 'react'
 import PT from 'prop-types'
 import classnames from 'classnames'
 import CountryData from '../CountryData/CountryData'
-import './Flag.css'
+import ReactTooltip from 'react-tooltip'
 import ReactFlag from 'react-world-flags'
+import './Flag.css'
 
 const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
   if (['original', 'circle'].indexOf(type) < 0) {
@@ -20,12 +21,15 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
   }
 
   return (
-    <div
-      className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
-      title={label}
-    >
-      {getFlag()}
-    </div>
+    <>
+      <ReactTooltip place='top' type='dark' effect='solid' />
+      <div
+        className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
+        data-tip={label}
+      >
+        {getFlag()}
+      </div>
+    </>
   )
 }
 
