@@ -77,7 +77,8 @@ DashboardControlPanel.propTypes = {
   onAddChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
   onEditModeOn: PT.func.isRequired,
-  onSaveEdit: PT.func.isRequired
+  onSaveEdit: PT.func.isRequired,
+  onResetEdit: PT.func.isRequired
 }
 
 DashboardControlPanel.defaultProps = DashboardConfig

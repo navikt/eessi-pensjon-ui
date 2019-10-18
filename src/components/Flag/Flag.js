@@ -2,7 +2,6 @@ import React from 'react'
 import PT from 'prop-types'
 import classnames from 'classnames'
 import CountryData from '../CountryData/CountryData'
-import ReactTooltip from 'react-tooltip'
 import ReactFlag from 'react-world-flags'
 import './Flag.css'
 

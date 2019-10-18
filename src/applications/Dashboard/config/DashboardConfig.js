@@ -4,5 +4,6 @@ export default {
   margin: [10, 10],
   containerPadding: [10, 10],
   rowHeight: 30,
+  defaultTab: 'default',
   version: 1
 }

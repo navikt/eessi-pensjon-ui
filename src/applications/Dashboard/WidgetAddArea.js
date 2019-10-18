@@ -4,9 +4,13 @@ import WidgetAdd from './WidgetAdd'
 import WidgetAddPreview from './WidgetAddPreview'
 import './Widget.css'
 
-const WidgetAddArea = ({ availableWidgets, currentBreakpoint, dragApi, labels, setWidgets, widgets }) => (
+const WidgetAddArea = ({ availableWidgets, currentBreakpoint, currentTab, dragApi, labels, setWidgets, widgets }) => (
   <div className='c-d-widgetAddArea'>
-    <WidgetAddPreview labels={labels} currentBreakpoint={currentBreakpoint} />
+    <WidgetAddPreview
+      labels={labels}
+      currentTab={currentTab}
+      currentBreakpoint={currentBreakpoint}
+    />
     {availableWidgets.map((widget, i) => {
       return (
         <WidgetAdd
@@ -24,6 +28,7 @@ const WidgetAddArea = ({ availableWidgets, currentBreakpoint, dragApi, labels, s
 WidgetAddArea.propTypes = {
   availableWidgets: PT.array.isRequired,
   currentBreakpoint: PT.string.isRequired,
+  currentTab: PT.string.isRequired,
   dragApi: PT.object,
   labels: PT.object,
   setWidgets: PT.func.isRequired,

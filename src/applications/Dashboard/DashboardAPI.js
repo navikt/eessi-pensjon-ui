@@ -38,9 +38,11 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
   }) : widgets
   const widgetIds = widgets.map(w => w.i)
   if (!_.isEmpty(widgetIds)) {
-    Object.keys(layouts).forEach((breakpoint) => {
-      layouts[breakpoint] = layouts[breakpoint].filter((w) => {
-        return _.includes(widgetIds, w.i)
+    Object.keys(layouts).forEach((tab) => {
+      Object.keys(layouts[tab]).forEach((breakpoint) => {
+        layouts[tab][breakpoint] = layouts[tab][breakpoint].filter((w) => {
+          return _.includes(widgetIds, w.i)
+        })
       })
     })
   }

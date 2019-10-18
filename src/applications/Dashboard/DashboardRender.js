@@ -15,8 +15,8 @@ import './Dashboard.css'
 const dragApi = createDragApiRef()
 
 export const DashboardRender = ({
-  addMode, availableWidgets, currentBreakpoint, editMode, labels, layouts, mounted, MyWidgets, onAddChange,
-  onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onResetEdit, onSaveEdit,
+  addMode, availableWidgets, currentTab, currentBreakpoint, editMode, labels, layouts, mounted, MyWidgets, onAddChange,
+  onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onResetEdit, onSaveEdit, onTabAdd, onTabDelete, onTabChange,
   onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, setWidgets, widgets
 }) => {
   if (!mounted) {
@@ -29,7 +29,6 @@ export const DashboardRender = ({
         <DndProvider backend={HTML5Backend}>
           <DashboardControlPanel
             labels={labels}
-            currentBreakpoint={currentBreakpoint}
             addMode={addMode}
             editMode={editMode}
             onEditModeOn={onEditModeOn}
@@ -40,9 +39,9 @@ export const DashboardRender = ({
           />
           {addMode ? (
             <WidgetAddArea
+              availableWidgets={availableWidgets}
               labels={labels}
               currentBreakpoint={currentBreakpoint}
-              availableWidgets={availableWidgets}
               widgets={widgets}
               setWidgets={setWidgets}
               dragApi={dragApi}
@@ -56,6 +55,10 @@ export const DashboardRender = ({
             mounted={mounted}
             currentBreakpoint={currentBreakpoint}
             onBreakpointChange={onBreakpointChange}
+            currentTab={currentTab}
+            onTabChange={onTabChange}
+            onTabAdd={onTabAdd}
+            onTabDelete={onTabDelete}
             onLayoutChange={onLayoutChange}
             onWidgetUpdate={onWidgetUpdate}
             onWidgetResize={onWidgetResize}
@@ -85,6 +88,7 @@ DashboardRender.propTypes = {
   onEditModeOn: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
   onResetEdit: PT.func.isRequired,
+  onTabChange: PT.func.isRequired,
   onSaveEdit: PT.func.isRequired,
   onWidgetDelete: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,
