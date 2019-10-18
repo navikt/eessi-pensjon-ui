@@ -8,7 +8,6 @@ import WidgetAddArea from './WidgetAddArea'
 import DashboardGrid from './DashboardGrid'
 import DashboardControlPanel from './DashboardControlPanel'
 import WaitingPanel from '../../components/WaitingPanel/WaitingPanel'
-
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 import './Dashboard.css'
@@ -18,7 +17,7 @@ const dragApi = createDragApiRef()
 export const DashboardRender = ({
   addMode, availableWidgets, currentBreakpoint, editMode, labels, layouts, mounted, MyWidgets, onAddChange,
   onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onResetEdit, onSaveEdit,
-  onWidgetDelete, onWidgetResize, onWidgetUpdate, setWidgets, widgets
+  onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, setWidgets, widgets
 }) => {
   if (!mounted) {
     return (
@@ -61,6 +60,8 @@ export const DashboardRender = ({
             onWidgetUpdate={onWidgetUpdate}
             onWidgetResize={onWidgetResize}
             onWidgetDelete={onWidgetDelete}
+            onWidgetFullFocus={onWidgetFullFocus}
+            onWidgetRestoreFocus={onWidgetRestoreFocus}
             labels={labels}
             dragApi={dragApi}
             MyWidgets={MyWidgets}
@@ -88,6 +89,8 @@ DashboardRender.propTypes = {
   onWidgetDelete: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,
   onWidgetUpdate: PT.func.isRequired,
+  onWidgetFullFocus: PT.func.isRequired,
+  onWidgetRestoreFocus: PT.func.isRequired,
   widgets: PT.array
 }
 export default DashboardRender

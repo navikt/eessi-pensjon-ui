@@ -2,27 +2,13 @@ import React from 'react'
 import Dashboard from './Dashboard'
 import DashboardRender from './DashboardRender'
 import labels from './Dashboard.labels'
-const mockLayouts = {
-  lg: [
-    { i: 'w-1-note', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 },
-    { i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
-  ]
-}
-
-const mockWidgets = [
-  { i: 'w-1-note', type: 'note', title: 'Note widget', options: {} },
-  { i: 'w-2-smiley', type: 'smiley', title: 'Smiley widget', options: {} }
-]
-
-const mockConfig = {
-  version: 1
-}
-
+import mockLayouts from './config/DefaultLayout'
+import mockWidgets from './config/DefaultWidgets'
+import mockConfig from './config/DefaultConfig'
 const defaultLocalStorage = window.localStorage
 
 const localStorageMock = (() => {
   let store = {}
-
   return {
     getItem: (key) => {
       return store[key] || null
@@ -302,7 +288,7 @@ describe('applications/Dashboard/Dashboard', () => {
     })
     expect(props().layouts).toEqual(mockLayouts)
     act(() => {
-      props().onWidgetDelete({ i: 'w-1-notes' })
+      props().onWidgetDelete({ i: 'w-1-note' })
     })
     act(() => {
       wrapper.update()

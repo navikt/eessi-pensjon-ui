@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import Widget from './Widget'
-
 import './Widget.css'
 
 const WidgetContainer = (props) => {
-  const { currentBreakpoint, editMode, layout, onWidgetUpdate, onWidgetResize, rowHeight, widget } = props
+  const { currentBreakpoint, editMode, layout, onWidgetUpdate, onWidgetResize, onWidgetFullFocus, onWidgetRestoreFocus, rowHeight, widget } = props
 
   const [sizes, setSizes] = useState({ lg: {}, md: {}, sm: {} })
   const [mouseOver, setMouseOver] = useState(false)
@@ -45,8 +44,16 @@ const WidgetContainer = (props) => {
     }
   }, [mode, editMode, mouseOver])
 
-  const onUpdate = (update) => {
-    onWidgetUpdate(update, layout)
+  const onUpdate = (widget) => {
+    onWidgetUpdate(widget, layout)
+  }
+
+  const onFullFocus = () => {
+    onWidgetFullFocus(widget)
+  }
+
+  const onRestoreFocus = () => {
+    onWidgetRestoreFocus()
   }
 
   const onResize = (width, height) => {
@@ -103,6 +110,8 @@ const WidgetContainer = (props) => {
         setMode={setMode}
         onUpdate={onUpdate}
         onResize={onResize}
+        onFullFocus={onFullFocus}
+        onRestoreFocus={onRestoreFocus}
       />
     </div>
   )
@@ -114,6 +123,8 @@ WidgetContainer.propTypes = {
   layout: PT.object.isRequired,
   onWidgetUpdate: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,
+  onWidgetFullFocus: PT.func.isRequired,
+  onWidgetRestoreFocus: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
   widget: PT.object.isRequired
 }

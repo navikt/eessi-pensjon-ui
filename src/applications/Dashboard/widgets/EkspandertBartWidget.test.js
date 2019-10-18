@@ -1,6 +1,6 @@
 import React from 'react'
 import EkspandertBartWidget from './EkspandertBartWidget'
-import labels from './Dashboard.labels'
+import labels from '../Dashboard.labels'
 
 describe('widgets/EkspandertBartWidget', () => {
   let wrapper

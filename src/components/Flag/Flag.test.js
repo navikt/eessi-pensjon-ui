@@ -4,7 +4,7 @@ import Flag from './Flag'
 describe('components/Flag', () => {
   const mockInitialProps = {
     label: 'mockLabel',
-    country: 'NO'
+    country: 'no'
   }
 
   it('Renders', () => {
@@ -20,13 +20,13 @@ describe('components/Flag', () => {
 
   it('Has proper HTML structure for non-existent flag', () => {
     const wrapper = mount(<Flag {...mockInitialProps} country='aa' />)
-    expect(wrapper.find('.c-flag').props().title).toEqual('mockLabel')
+    expect(wrapper.find('.c-flag').props()['data-tip']).toEqual('mockLabel')
     expect(wrapper.exists('svg')).toBeFalsy()
   })
 
-  it('Has proper HTML structure for nexistent flag', () => {
+  it('Has proper HTML structure for existent flag', () => {
     const wrapper = mount(<Flag {...mockInitialProps} />)
-    expect(wrapper.find('.c-flag').props().title).toEqual('mockLabel')
+    expect(wrapper.find('.c-flag').props()['data-tip']).toEqual('mockLabel')
     expect(wrapper.render().html()).toEqual('<img src="data:image/svg+xml,%3Csvg xmlns=&apos;http://www.w3.org/2000/svg&apos; viewBox=&apos;0 0 1100 800&apos;%3E %3Crect width=&apos;1100&apos; height=&apos;800&apos; fill=&apos;%23ef2b2d&apos;/%3E %3Crect width=&apos;200&apos; height=&apos;800&apos; x=&apos;300&apos; fill=&apos;%23fff&apos;/%3E %3Crect width=&apos;1100&apos; height=&apos;200&apos; y=&apos;300&apos; fill=&apos;%23fff&apos;/%3E %3Crect width=&apos;100&apos; height=&apos;800&apos; x=&apos;350&apos; fill=&apos;%23002868&apos;/%3E %3Crect width=&apos;1100&apos; height=&apos;100&apos; y=&apos;350&apos; fill=&apos;%23002868&apos;/%3E %3C/svg%3E">')
   })
 })

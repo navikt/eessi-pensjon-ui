@@ -58,7 +58,7 @@ export const Alert = ({ className, error, fixed, message, onClear, status = 'ERR
       type={errorTypes[status]}
     >
       {_message}
-      {onClear ? <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} /> : null}
+      {_(onClear).isFunction() ? <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} /> : null}
     </AlertStripe>
   )
 }

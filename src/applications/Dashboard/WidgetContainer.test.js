@@ -19,8 +19,9 @@ describe('applications/Dashboard/WidgetContainer', () => {
     layout: { foo: 'bar' },
     onWidgetUpdate: jest.fn(),
     onWidgetResize: jest.fn(),
+    onWidgetFullFocus: jest.fn(),
+    onWidgetRestoreFocus: jest.fn(),
     rowHeight: 0,
-
     widget: {
       options: {
         backgroundColor: 'mockColor'

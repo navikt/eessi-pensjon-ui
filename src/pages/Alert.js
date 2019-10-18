@@ -23,14 +23,14 @@ const IndexPage = () => {
         <Undertittel className='pt-4 pb-4'>Close button with callback function</Undertittel>
         <Alert
           type='client' fixed={false} message='Close me for a function callback'
-          onClientClear={() => { window.alert('clicked') }}
+          onClear={() => { window.alert('clicked') }}
         />
         <SyntaxHighlighter language='javascript' style={prism}>
           {'<Alert \n' +
           'type=\'client\' \n' +
           'fixed={false} \n' +
           'message=\'Close me for a function callback\' \n' +
-          'onClientClear={() => {window.alert(\'clicked\')}}\n' +
+          'onClear={() => {window.alert(\'clicked\')}}\n' +
           '/>'}
         </SyntaxHighlighter>
 

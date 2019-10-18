@@ -61,7 +61,8 @@ const WidgetAddDragSource = DragSource(
         i: newId,
         type: props.widget.type,
         title: props.widget.title,
-        options: props.widget.options
+        options: props.widget.options,
+        visible: true
       }))
       // return the object I want to send to dropTarget when dropped
       return {

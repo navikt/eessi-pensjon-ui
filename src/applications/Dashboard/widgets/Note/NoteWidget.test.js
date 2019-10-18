@@ -45,7 +45,7 @@ describe('widgets/Note/NoteWidget', () => {
       ...initialMockProps.widget,
       options: {
         ...initialMockProps.widget.options,
-        content: ''
+        content: '<ul><li>Eggs</li><li>Milk</li><li>Bread</li></ul>'
       }
     },
     initialMockProps.layout)

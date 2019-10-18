@@ -33,15 +33,10 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
     }
   }
 
-  console.log(widgets)
-  console.log(layouts)
-  console.log(allowedWidgets)
   widgets = allowedWidgets ? widgets.filter((w) => {
     return _.includes(allowedWidgets, w.type)
   }) : widgets
-  console.log(widgets)
   const widgetIds = widgets.map(w => w.i)
-  console.log(widgetIds)
   if (!_.isEmpty(widgetIds)) {
     Object.keys(layouts).forEach((breakpoint) => {
       layouts[breakpoint] = layouts[breakpoint].filter((w) => {
@@ -49,7 +44,6 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
       })
     })
   }
-  console.log(layouts)
   return [widgets, layouts, config]
 }
 
@@ -75,7 +69,6 @@ export const loadAvailableWidgets = (widgets, allowedWidgets) => {
   }
   return _.values(widgets)
     .filter(widget => {
-      console.log(allowedWidgets, widget, _.includes(allowedWidgets, widget.properties.type))
       return _.includes(allowedWidgets, widget.properties.type)
     })
     .map(widget => widget.properties)

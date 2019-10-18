@@ -10,6 +10,7 @@ import * as Widgets from './widgets'
 const Dashboard = ({ allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, extraWidgets, id, labels }) => {
   const [editMode, setEditMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
+  const [fullFocusMode, setFullFocusMode] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [widgets, setWidgets] = useState([])
   const [layouts, setLayouts] = useState({})
@@ -33,6 +34,37 @@ const Dashboard = ({ allowedWidgets = undefined, defaultConfig, defaultWidgets, 
     initDashboard()
     setMounted(true)
   }, [])
+
+  const onWidgetFullFocus = (focusedWidget) => {
+    if (!fullFocusMode) {
+      setFullFocusMode(true)
+      const newWidgets = widgets.map((widget) => ({
+        ...widget,
+        visible: focusedWidget.i === widget.i
+      }))
+      const newLayouts = _.cloneDeep(layouts)
+      Object.keys(newLayouts).forEach((breakpoint) => {
+        newLayouts[breakpoint] = newLayouts[breakpoint].filter((widget) => {
+          const _widget = _.find(newWidgets, (w) => w.i === widget.i)
+          return _widget.visible !== false
+        })
+      })
+      setWidgets(newWidgets)
+      setBackupLayouts(layouts)
+      setLayouts(newLayouts)
+    }
+  }
+
+  const onWidgetRestoreFocus = () => {
+    if (fullFocusMode) {
+      setFullFocusMode(false)
+      setWidgets(widgets.map((widget) => ({
+        ...widget,
+        visible: true
+      })))
+      setLayouts(backupLayouts)
+    }
+  }
 
   const onWidgetUpdate = async (updatedWidget, layout) => {
     const newWidgets = widgets.map((widget) => {
@@ -101,7 +133,8 @@ const Dashboard = ({ allowedWidgets = undefined, defaultConfig, defaultWidgets, 
       onSaveEdit={onSaveEdit} onResetEdit={onResetEdit} onAddChange={onAddChange} mounted={mounted}
       layouts={layouts} onLayoutChange={onLayoutChange} onBreakpointChange={onBreakpointChange} currentBreakpoint={currentBreakpoint}
       widgets={widgets} availableWidgets={availableWidgets} setWidgets={setWidgets} onWidgetUpdate={onWidgetUpdate}
-      onWidgetResize={onWidgetResize} onWidgetDelete={onWidgetDelete} MyWidgets={MyWidgets}
+      onWidgetResize={onWidgetResize} onWidgetDelete={onWidgetDelete} onWidgetFullFocus={onWidgetFullFocus}
+      onWidgetRestoreFocus={onWidgetRestoreFocus} MyWidgets={MyWidgets}
     />
   )
 }

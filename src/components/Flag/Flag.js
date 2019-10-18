@@ -22,7 +22,6 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
 
   return (
     <>
-      <ReactTooltip place='top' type='dark' effect='solid' />
       <div
         className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
         data-tip={label}
@@ -36,7 +35,7 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
 Flag.propTypes = {
   className: PT.string,
   country: PT.string.isRequired,
-  label: PT.string.isRequired,
+  label: PT.oneOfType([PT.string, PT.element]),
   type: PT.string,
   size: PT.string
 }

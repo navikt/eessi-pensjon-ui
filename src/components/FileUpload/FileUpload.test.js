@@ -186,7 +186,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find('.mock-pdfpage').render().text()).toEqual('Page: 2')
+    expect(wrapper.find('.mock-pdfpage').last().render().text()).toEqual('Page: 2')
 
     expect(wrapper.exists('.previousPage')).toBeTruthy()
     act(() => {
@@ -195,6 +195,6 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 1')
+    expect(wrapper.find('.c-file .mock-pdfpage').last().render().text()).toEqual('Page: 1')
   })
 })

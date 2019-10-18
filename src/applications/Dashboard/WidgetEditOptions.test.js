@@ -8,6 +8,7 @@ describe('applications/Dashboard/WidgetEditOptions', () => {
   const initialMockProps = {
     widget: {
       type: 'note',
+      visible: true,
       options: {
         backgroundColor: 'mockColor'
       }

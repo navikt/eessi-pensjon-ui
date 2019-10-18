@@ -78,21 +78,21 @@ const Icons = (props) => {
     case 'db' : return <FontAwesomeIcon icon={icons.faDatabase} {...props} />
     case 'solidclose' : return <FontAwesomeIcon icon={icons.faTimesCircle} {...props} />
     case 'close' : return <FontAwesomeIcon icon={icons.faTimes} {...props} />
-    case 'settings' : return <FontAwesomeIcon icon={icons.faCog} {...props}/>
+    case 'settings' : return <FontAwesomeIcon icon={icons.faCog} {...props} />
 
-    case 'paperclip' : return <PaperClip {...props} width={w} height={h}/>
-    case 'checkCircle' : return <CheckCircle {...props} width={w} height={h}/>
-    case 'removeCircle' : return <RemoveCircle {...props} width={w} height={h}/>
-    case 'connecting' : return <NetworkConnectingSVG {...props} width={w} height={h}/>
-    case 'bigclose' : return <LineVersionClose {...props} width={w} height={h}/>
-    case 'vedlegg' : return <Vedlegg {...props} width={w} height={h}/>
-    case 'trashcan' : return <Trashcan {...props} width={w} height={h}/>
-    case 'tilsette' : return <Tilsette {...props} width={w} height={h}/>
-    case 'outlink' : return <LineVersionLogout {...props} width={w} height={h}/>
-    case 'problem' : return <ProblemCircle {...props} width={w} height={h}/>
-    case 'chat' : return <BubbleChat {...props} width={w} height={h}/>
-    case 'address' : return <Globe {...props} width={w} height={h}/>
-    case 'calendar' : return <Calendar {...props} width={w} height={h}/>
+    case 'paperclip' : return <PaperClip {...props} width={w} height={h} />
+    case 'checkCircle' : return <CheckCircle {...props} width={w} height={h} />
+    case 'removeCircle' : return <RemoveCircle {...props} width={w} height={h} />
+    case 'connecting' : return <NetworkConnectingSVG {...props} width={w} height={h} />
+    case 'bigclose' : return <LineVersionClose {...props} width={w} height={h} />
+    case 'vedlegg' : return <Vedlegg {...props} width={w} height={h} />
+    case 'trashcan' : return <Trashcan {...props} width={w} height={h} />
+    case 'tilsette' : return <Tilsette {...props} width={w} height={h} />
+    case 'outlink' : return <LineVersionLogout {...props} width={w} height={h} />
+    case 'problem' : return <ProblemCircle {...props} width={w} height={h} />
+    case 'chat' : return <BubbleChat {...props} width={w} height={h} />
+    case 'address' : return <Globe {...props} width={w} height={h} />
+    case 'calendar' : return <Calendar {...props} width={w} height={h} />
 
     default: return null
   }

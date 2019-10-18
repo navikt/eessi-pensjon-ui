@@ -11,7 +11,8 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export const DashboardGrid = (props) => {
   const { canDrop, connectDropTarget, currentBreakpoint, dragApi, editMode, labels, layouts, MyWidgets } = props
-  const { onBreakpointChange, onLayoutChange, onWidgetUpdate, onWidgetResize, onWidgetDelete, rowHeight, widgets } = props
+  const { onBreakpointChange, onLayoutChange, onWidgetFullFocus, onWidgetRestoreFocus, onWidgetUpdate } = props
+  const { onWidgetResize, onWidgetDelete, rowHeight, widgets } = props
 
   return connectDropTarget(
     <div
@@ -49,6 +50,8 @@ export const DashboardGrid = (props) => {
                 onWidgetResize={onWidgetResize}
                 onWidgetUpdate={onWidgetUpdate}
                 onWidgetDelete={onWidgetDelete}
+                onWidgetFullFocus={onWidgetFullFocus}
+                onWidgetRestoreFocus={onWidgetRestoreFocus}
                 rowHeight={rowHeight}
                 MyWidgets={MyWidgets}
               />
@@ -71,6 +74,8 @@ DashboardGrid.propTypes = {
   onWidgetUpdate: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,
   onWidgetDelete: PT.func.isRequired,
+  onWidgetFullFocus: PT.func.isRequired,
+  onWidgetRestoreFocus: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
   widgets: PT.array.isRequired
 }
