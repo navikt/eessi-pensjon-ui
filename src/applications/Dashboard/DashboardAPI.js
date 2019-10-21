@@ -33,6 +33,16 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
     }
   }
 
+  if (!layouts.hasOwnProperty('default') && layouts.hasOwnProperty('lg') ) {
+    layouts = {
+      'default': {
+        lg: layouts.lg,
+        md: layouts.md,
+        sm: layouts.sm
+      }
+    }
+  }
+
   widgets = allowedWidgets ? widgets.filter((w) => {
     return _.includes(allowedWidgets, w.type)
   }) : widgets

@@ -8,8 +8,10 @@ import defaultLabels from './Dashboard.labels'
 import * as DashboardAPI from './DashboardAPI'
 import * as Widgets from './widgets'
 
-const Dashboard = ({ allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, defaultTab, extraWidgets,
-  id, labels, afterLayoutChange }) => {
+const Dashboard = ({
+  allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, defaultTab, extraWidgets,
+  id, labels, afterLayoutChange
+}) => {
   const [editMode, setEditMode] = useState(false)
   const [addMode, setAddMode] = useState(false)
   const [fullFocusMode, setFullFocusMode] = useState(false)

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import { Stegindikator } from '../../../Nav'
-import AdvarselTrekant from '../../../resources/images/AdvarselTrekant'
+import Icons from '../../../components/Icons/Icons'
 
 const steps = ['select', 'edit', 'generate']
 
@@ -51,7 +51,7 @@ const StepIndicator = ({ files, labels, recipes, step, setStep }) => {
       />
       {message ? (
         <div className='w-100 text-center mb-2'>
-          <AdvarselTrekant size={16} />
+          <Icons kind='advarsel' size={16} />
           <span className='ml-2'>{message}</span>
         </div>
       ) : null}

@@ -8,7 +8,7 @@ global.render = render
 global.mount = mount
 global.act = act
 
-// mock canvas function, as jsdom throws error if not here
+// mock canvas/HTML functions, as jsdom throws error if not mocked
 HTMLCanvasElement.prototype.getContext = jest.fn()
 window.scrollTo = jest.fn()
 window.location.reload = jest.fn()
