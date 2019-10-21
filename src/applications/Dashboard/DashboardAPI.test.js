@@ -18,15 +18,13 @@ describe('applications/Dashboard/DashboardAPI', () => {
   })
 
   it('loadDashboard() - with localStorage', async (done) => {
-    const mockContent = { foo: 'bar' }
-    localStorage.setItem('test-layouts', JSON.stringify(mockContent))
-    localStorage.setItem('test-widgets', JSON.stringify(mockContent))
-    localStorage.setItem('test-config', JSON.stringify(mockContent))
-
+    localStorage.setItem('test-layouts', JSON.stringify(defaultLayouts))
+    localStorage.setItem('test-widgets', JSON.stringify(defaultWidgets))
+    localStorage.setItem('test-config', JSON.stringify(defaultConfig))
     const [widgets, layouts, config] = await DashboardAPI.loadDashboard(id)
-    expect(widgets).toEqual(mockContent)
-    expect(layouts).toEqual(mockContent)
-    expect(config).toEqual(mockContent)
+    expect(widgets).toEqual(defaultWidgets)
+    expect(layouts).toEqual(defaultLayouts)
+    expect(config).toEqual(defaultConfig)
     done()
   })
 

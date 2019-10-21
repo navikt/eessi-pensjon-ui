@@ -33,9 +33,9 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
     }
   }
 
-  if (!layouts.hasOwnProperty('default') && layouts.hasOwnProperty('lg') ) {
+  if (!Object.prototype.hasOwnProperty.call(layouts, 'default') && Object.prototype.hasOwnProperty.call(layouts, 'lg')) {
     layouts = {
-      'default': {
+      default: {
         lg: layouts.lg,
         md: layouts.md,
         sm: layouts.sm

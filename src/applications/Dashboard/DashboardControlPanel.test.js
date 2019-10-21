@@ -12,6 +12,7 @@ describe('applications/Dashboard/DashboardControlPanel', () => {
     onAddChange: jest.fn(),
     onCancelEdit: jest.fn(),
     onEditModeOn: jest.fn(),
+    onResetEdit: jest.fn(),
     onSaveEdit: jest.fn()
   }
 

@@ -166,7 +166,7 @@ const Dashboard = ({
     setEditMode(false)
   }
   if (!mounted) {
-    return <WaitingPanel />
+    return <WaitingPanel className='c-dashboard__loading' />
   }
 
   return (

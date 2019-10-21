@@ -23,5 +23,4 @@ export { default as PsychoPanel } from './components/Psycho/PsychoPanel'
 export { default as RefreshButton } from './components/RefreshButton/RefreshButton'
 export { default as TableSorter } from './components/TableSorter/TableSorter'
 export { default as WaitingPanel } from './components/WaitingPanel/WaitingPanel'
-
 export * as Nav from './Nav'

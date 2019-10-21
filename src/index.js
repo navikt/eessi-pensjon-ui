@@ -9,32 +9,49 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route } from 'react-router'
 import { HashRouter } from 'react-router-dom'
-import * as Pages from './pages'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'index.css'
-// import 'index_highContrast.css'
+import MyLoadable from './loadable'
+const DashboardPage = MyLoadable({ loader: () => import('./pages/Dashboard') })
+const PDFEditorPage = MyLoadable({ loader: () => import('./pages/PDFEditor') })
+const AlertPage = MyLoadable({ loader: () => import('./pages/Alert') })
+const BannerPage = MyLoadable({ loader: () => import('./pages/Banner') })
+const ColorPickerPage = MyLoadable({ loader: () => import('./pages/ColorPicker') })
+const CountryUtilsPage = MyLoadable({ loader: () => import('./pages/CountryUtils') })
+const DatePickerPage = MyLoadable({ loader: () => import('./pages/DatePicker') })
+const FilePage = MyLoadable({ loader: () => import('./pages/File') })
+const FileUploadPage = MyLoadable({ loader: () => import('./pages/FileUpload') })
+const FlagPage = MyLoadable({ loader: () => import('./pages/Flag') })
+const IndexPage = MyLoadable({ loader: () => import('./pages/IndexPage') })
+const ModalPage = MyLoadable({ loader: () => import('./pages/Modal') })
+const MultipleSelectPage = MyLoadable({ loader: () => import('./pages/MultipleSelect') })
+const NavPage = MyLoadable({ loader: () => import('./pages/Nav') })
+const PsychoPage = MyLoadable({ loader: () => import('./pages/Psycho') })
+const RefreshButtonPage = MyLoadable({ loader: () => import('./pages/RefreshButton') })
+const TableSorterPage = MyLoadable({ loader: () => import('./pages/TableSorter') })
+const WaitingPanelPage = MyLoadable({ loader: () => import('./pages/WaitingPanel') })
 
 ReactDOM.render(
   <HashRouter>
     <Switch>
-      <Route exact path='/Dashboard' component={Pages.Dashboard} />
-      <Route exact path='/PDFEditor' component={Pages.PDFEditor} />
-      <Route exact path='/Alert' component={Pages.Alert} />
-      <Route exact path='/Banner' component={Pages.Banner} />
-      <Route exact path='/ColorPicker' component={Pages.ColorPicker} />
-      <Route exact path='/CountryUtils' component={Pages.CountryUtils} />
-      <Route exact path='/DatePicker' component={Pages.DatePicker} />
-      <Route exact path='/File' component={Pages.File} />
-      <Route exact path='/FileUpload' component={Pages.FileUpload} />
-      <Route exact path='/Flag' component={Pages.Flag} />
-      <Route exact path='/Modal' component={Pages.Modal} />
-      <Route exact path='/MultipleSelect' component={Pages.MultipleSelect} />
-      <Route exact path='/Nav' component={Pages.Nav} />
-      <Route exact path='/Psycho' component={Pages.Psycho} />
-      <Route exact path='/RefreshButton' component={Pages.RefreshButton} />
-      <Route exact path='/TableSorter' component={Pages.TableSorter} />
-      <Route exact path='/WaitingPanel' component={Pages.WaitingPanel} />
-      <Route path='/' component={Pages.IndexPage} />
+      <Route exact path='/Dashboard' component={DashboardPage} />
+      <Route exact path='/PDFEditor' component={PDFEditorPage} />
+      <Route exact path='/Alert' component={AlertPage} />
+      <Route exact path='/Banner' component={BannerPage} />
+      <Route exact path='/ColorPicker' component={ColorPickerPage} />
+      <Route exact path='/CountryUtils' component={CountryUtilsPage} />
+      <Route exact path='/DatePicker' component={DatePickerPage} />
+      <Route exact path='/File' component={FilePage} />
+      <Route exact path='/FileUpload' component={FileUploadPage} />
+      <Route exact path='/Flag' component={FlagPage} />
+      <Route exact path='/Modal' component={ModalPage} />
+      <Route exact path='/MultipleSelect' component={MultipleSelectPage} />
+      <Route exact path='/Nav' component={NavPage} />
+      <Route exact path='/Psycho' component={PsychoPage} />
+      <Route exact path='/RefreshButton' component={RefreshButtonPage} />
+      <Route exact path='/TableSorter' component={TableSorterPage} />
+      <Route exact path='/WaitingPanel' component={WaitingPanelPage} />
+      <Route path='/' component={IndexPage} />
     </Switch>
   </HashRouter>,
   document.getElementById('root')

@@ -5,9 +5,6 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
-import samplePDF from '../resources/tests/samplePDF'
-import sampleJPG from '../resources/tests/sampleJPG'
-import sampleOther from '../resources/tests/sampleOther'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const FileUploadPage = () => {
@@ -18,10 +15,18 @@ const FileUploadPage = () => {
         <Normaltekst>File upload utility, with drag & drop, and mimetype / size limits</Normaltekst>
 
         <Undertittel className='pt-4 pb-4'>File Upload with initial file list</Undertittel>
-
-        <FileUpload files={[samplePDF, sampleJPG, sampleOther]} />
+        <FileUpload files={[
+          require('../resources/tests/samplePDF').default,
+          require('../resources/tests/sampleJPG').default,
+          require('../resources/tests/sampleOther').default
+        ]}
+        />
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<FileUpload files={[samplePDF, sampleJPG, sampleOther]}/>'}
+          {'<FileUpload files={[\n' +
+          '  require(\'../resources/tests/samplePDF\').default, \n' +
+          '  require(\'../resources/tests/sampleJPG\').default,\n' +
+          '  require(\'../resources/tests/sampleOther\').default\n' +
+          ']}/>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>File Upload with restricted mimetypes, max file size, max number files</Undertittel>

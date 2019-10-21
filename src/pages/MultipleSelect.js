@@ -15,6 +15,26 @@ const MultipleSelectPage = () => {
         <Normaltekst>Select box where the user can select multiple options, and manage them in the main select box.</Normaltekst>
         <Normaltekst className='pb-4'>Aditionally, the user may add new options. Just type the new element in the select box, the press Enter to add.</Normaltekst>
 
+        <Undertittel className='pt-4 pb-4'>Multiple select default with options and values</Undertittel>
+
+        <Normaltekst className='pb-4'>This is the basic select with a given set of options and already selected values</Normaltekst>
+
+        <MultipleSelect
+          className='w-50'
+          options={[{ label: 'VIP', value: 'vip' }, { label: 'Secret', value: 'secret' }]}
+          values={[{ label: 'VIP', value: 'vip' }]}
+        />
+
+        <SyntaxHighlighter language='javascript' style={prism}>
+          {'<MultipleSelect\n' +
+          'creatable={true}\n' +
+          'options={[{label: \'VIP\', value: \'vip\'}, {label: \'Secret\', value: \'secret\'}]}\n' +
+          'values={[{ label: \'VIP\', value: \'vip\' }]}\n' +
+          '/>'}
+        </SyntaxHighlighter>
+
+        <Undertittel className='pt-4 pb-4'>Multiple select with creatable and custom onSelect</Undertittel>
+
         <MultipleSelect
           className='w-50'
           creatable
@@ -40,7 +60,7 @@ const MultipleSelectPage = () => {
         />
 
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<MultipleSelect error=\'Please select one element\'\n/>'}
+          {'<MultipleSelect error=\'Please select one element\'/>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>

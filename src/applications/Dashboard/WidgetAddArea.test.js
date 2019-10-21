@@ -35,8 +35,11 @@ describe('applications/Dashboard/WidgetAddArea', () => {
       foo: 'mockAvailableWidget'
     }],
     currentBreakpoint: 'lg',
+    currentTab: 'default',
     dragApi: {},
     labels: labels,
+    onTabAdd: jest.fn(),
+    onTabDelete: jest.fn(),
     setWidgets: jest.fn(),
     widgets: []
   }

@@ -14,13 +14,11 @@ describe('applications/Dashboard/WidgetEditOptions', () => {
       }
     },
     MyWidgets: [{
-      NoteWidget: {
-        edit: NoteOptionsWidget,
-        properties: {
-          type: 'note',
-          options: {
-            availableColors: ['mockColor']
-          }
+      edit: NoteOptionsWidget,
+      properties: {
+        type: 'note',
+        options: {
+          availableColors: ['mockColor']
         }
       }
     }],

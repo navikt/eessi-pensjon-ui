@@ -2,10 +2,14 @@ const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  entry: './src/dist.js',
+  entry: {
+    index: './src/dist.js',
+    nav: './src/dist-nav.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'dist.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     library: 'eessi-pensjon-ui',
     libraryTarget: 'umd',
     publicPath: '/dist/',
@@ -45,13 +49,7 @@ module.exports = {
     }, {
       test: /\.(png|jpe?g|gif)$/i,
       use: [{
-        loader: 'url-loader',
-        options: {
-          fallback: 'file-loader',
-          name: '[name][md5:hash].[ext]',
-          outputPath: 'dist/',
-          publicPath: '/dist/'
-        }
+        loader: 'url-loader'
       }]
     }, {
       test: /\.js$/,

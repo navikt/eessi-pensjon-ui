@@ -1,5 +1,6 @@
 import React from 'react'
 import DashboardRender from './DashboardRender'
+import labels from './Dashboard.labels'
 
 jest.mock('react-dnd', () => {
   return {
@@ -43,25 +44,31 @@ jest.mock('./Widget', () => {
 
 describe('applications/Dashboard/Dashboard', () => {
   const initialMockProps = {
-    t: jest.fn((translationString) => { return translationString }),
     addMode: false,
+    availableWidgets: [],
     editMode: false,
+    mounted: false,
+    labels: labels,
+    layouts: { default: { lg: [] } },
+    currentTab: 'default',
+    currentBreakpoint: 'lg',
     onEditModeOn: jest.fn(),
     onCancelEdit: jest.fn(),
     onSaveEdit: jest.fn(),
     onAddChange: jest.fn(),
-    mounted: false,
-    layouts: {},
     onLayoutChange: jest.fn(),
     onBreakpointChange: jest.fn(),
-    currentBreakpoint: 'lg',
-    widgets: [],
-    availableWidgets: [],
-    setWidgets: jest.fn(),
     onResetEdit: jest.fn(),
     onWidgetUpdate: jest.fn(),
     onWidgetResize: jest.fn(),
-    onWidgetDelete: jest.fn()
+    onWidgetDelete: jest.fn(),
+    onTabChange: jest.fn(),
+    onTabAdd: jest.fn(),
+    onTabDelete: jest.fn(),
+    onWidgetFullFocus: jest.fn(),
+    onWidgetRestoreFocus: jest.fn(),
+    setWidgets: jest.fn(),
+    widgets: []
   }
 
   it('Renders', () => {
@@ -73,7 +80,7 @@ describe('applications/Dashboard/Dashboard', () => {
 
   it('Has proper HTML structure: loading', () => {
     const wrapper = mount(<DashboardRender {...initialMockProps} />)
-    expect(wrapper.exists('div.c-dashboard__loading')).toBeTruthy()
+    expect(wrapper.exists('div.c-dashboardrender__loading')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -90,7 +97,7 @@ describe('applications/Dashboard/Dashboard', () => {
     expect(wrapper.exists('WidgetAddArea')).toBeFalsy()
     wrapper.setProps({ ...initialMockProps, mounted: true })
     expect(wrapper.exists('.c-dashboard__controlPanel-buttons')).toBeTruthy()
-    expect(wrapper.exists('#c-dashboard__controlPanel-edit-button-id')).toBeTruthy()
+    expect(wrapper.exists('#c-dashboard__controlPanel-edit-icon-id')).toBeTruthy()
     wrapper.setProps({ ...initialMockProps, mounted: true, editMode: true })
     expect(wrapper.exists('#c-dashboard__controlPanel-add-button-id')).toBeTruthy()
     wrapper.setProps({ ...initialMockProps, mounted: true, addMode: true })

@@ -1,9 +1,10 @@
 {
   "name": "eessi-pensjon-ui",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "license": "MIT",
   "description": "EESSI Pensjon UI",
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "build": "npm run build:css && npm run build:js",
     "build:css": "less-watch-compiler --run-once --config less.json",
     "build:js": "cross-env NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
@@ -22,7 +23,7 @@
     "test:ci": "cross-env NODE_ENV=test react-scripts test --updateSnapshot --watchAll=false",
     "test:coverage": "cross-env NODE_ENV=test react-scripts test --coverage  --watchAll=false"
   },
-  "main": "dist/dist.js",
+  "main": "dist/index.js",
   "homepage": ".",
   "repository": {
     "type": "git",
@@ -107,6 +108,7 @@
     "react-dropzone": "^10.1.10",
     "react-grid-layout": "https://github.com/navikt/react-grid-layout#1.0.1",
     "react-hook-thunk-reducer": "^0.1.1",
+    "react-loadable": "^5.5.0",
     "react-modal": "^3.10.1",
     "react-motion": "^0.5.2",
     "react-pdf": "^4.1.0",
@@ -145,6 +147,7 @@
     "react-svg-loader": "^3.0.3",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^2.1.0",
     "standard": "^14.3.1",
     "svg-inline-loader": "^0.8.0",
     "url-loader": "^2.2.0",
@@ -152,6 +155,7 @@
     "webpack-merge": "^4.2.2"
   },
   "standard": {
+    "parser": "babel-eslint",
     "ignore": [
       "dist/*.js",
       "build/**/*.js",

@@ -30,6 +30,7 @@ export const DashboardGrid = (props) => {
         onTabAdd={onTabAdd}
         onTabDelete={onTabDelete}
         onTabChange={onTabChange}
+        currentTab={currentTab}
         layouts={layouts}
       />
       <ResponsiveReactGridLayout

@@ -21,7 +21,7 @@ export const DashboardRender = ({
 }) => {
   if (!mounted) {
     return (
-      <WaitingPanel className='c-dashboard__loading' style={{ paddingTop: '3rem' }} message={labels.loading} />
+      <WaitingPanel className='c-dashboardrender__loading' style={{ paddingTop: '3rem' }} message={labels.loading} />
     )
   } else {
     return (
@@ -39,6 +39,7 @@ export const DashboardRender = ({
           />
           {addMode ? (
             <WidgetAddArea
+              currentTab={currentTab}
               availableWidgets={availableWidgets}
               labels={labels}
               currentBreakpoint={currentBreakpoint}

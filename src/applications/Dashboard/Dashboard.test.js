@@ -2,6 +2,7 @@ import React from 'react'
 import Dashboard from './Dashboard'
 import DashboardRender from './DashboardRender'
 import labels from './Dashboard.labels'
+import _ from 'lodash'
 import mockLayouts from './config/DefaultLayout'
 import mockWidgets from './config/DefaultWidgets'
 import mockConfig from './config/DefaultConfig'
@@ -55,7 +56,7 @@ describe('applications/Dashboard/Dashboard', () => {
   beforeEach(async () => {
     window.localStorage.initializeStore()
     await act(async () => {
-      wrapper = mount(<Dashboard {...initialMockProps} />)
+      wrapper = await mount(<Dashboard {...initialMockProps} />)
     })
   })
 
@@ -69,28 +70,37 @@ describe('applications/Dashboard/Dashboard', () => {
   })
 
   it('Mounts', () => {
-    const props = () => wrapper.find(DashboardRender).props()
-    expect(props().mounted).toEqual(false)
+    expect(wrapper.exists(DashboardRender)).toBeFalsy()
     act(() => {
       wrapper.update()
     })
-    expect(props().mounted).toEqual(true)
+    expect(wrapper.find(DashboardRender).props().mounted).toBeTruthy()
   })
 
   it('onLayoutChange', () => {
-    const wrapper = shallow(<Dashboard {...initialMockProps} />)
+    act(() => {
+      wrapper.update()
+    })
     const props = () => wrapper.find(DashboardRender).props()
     act(() => {
       props().onLayoutChange(null, 'mockLayoutValue')
     })
-    expect(props().layouts).toEqual('mockLayoutValue')
+    act(() => {
+      wrapper.update()
+    })
+    expect(props().layouts).toEqual({ default: 'mockLayoutValue' })
   })
 
   it('onBreakpointChange', () => {
-    const wrapper = shallow(<Dashboard {...initialMockProps} />)
+    act(() => {
+      wrapper.update()
+    })
     const props = () => wrapper.find(DashboardRender).props()
     act(() => {
       props().onBreakpointChange('mockBreakpointValue')
+    })
+    act(() => {
+      wrapper.update()
     })
     expect(props().currentBreakpoint).toEqual('mockBreakpointValue')
   })
@@ -149,7 +159,7 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual({ lg: [] })
+    expect(props().layouts).toEqual({ default: { lg: [] } })
     act(() => {
       props().onCancelEdit()
     })
@@ -164,6 +174,12 @@ describe('applications/Dashboard/Dashboard', () => {
   it('onSaveEdit', async () => {
     const props = () => wrapper.find(DashboardRender).props()
 
+    act(() => {
+      wrapper.update()
+    })
+    act(() => {
+      props().onTabChange('default')
+    })
     act(() => {
       wrapper.update()
     })
@@ -187,7 +203,8 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual({ lg: [] })
+
+    expect(props().layouts).toEqual({ default: { lg: [] } })
     expect(props().widgets).toEqual([])
     await act(async () => {
       await props().onSaveEdit()
@@ -196,11 +213,11 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    const widgets = await window.localStorage.getItem('c-d-widgets')
-    const layouts = await window.localStorage.getItem('c-d-layouts')
+    const widgets = await window.localStorage.getItem('test-widgets')
+    const layouts = await window.localStorage.getItem('test-layouts')
 
     expect(props().editMode).toEqual(false)
-    expect(JSON.parse(layouts)).toEqual({ lg: [] })
+    expect(JSON.parse(layouts)).toEqual({ default: { lg: [] } })
     expect(JSON.parse(widgets)).toEqual([])
   })
 
@@ -226,75 +243,63 @@ describe('applications/Dashboard/Dashboard', () => {
     expect(props().addMode).toEqual(false)
   })
 
-  it('onWidgetUpdate', () => {
+  it('onWidgetUpdate', async (done) => {
+    act(() => {
+      wrapper.update()
+    })
     const props = () => wrapper.find(DashboardRender).props()
-    act(() => {
-      wrapper.update()
-    })
-    expect(props().widgets).toEqual(mockWidgets)
-    act(() => {
-      props().onWidgetUpdate({
-        i: 'w-1-notes',
-        type: 'horse',
-        title: 'horse widget',
-        options: { legs: 4, mane: true }
-      }, { i: 'w-1-notes' })
-    })
-    act(() => {
-      wrapper.update()
-    })
-    expect(props().widgets).toEqual([{
-      i: 'w-1-overview',
+    const newWidgetUpdate = {
+      i: 'w-1-note',
       type: 'horse',
       title: 'horse widget',
       options: { legs: 4, mane: true }
-    }, {
-      i: 'w-2-smiley',
-      type: 'smiley',
-      title: 'Smiley widget',
-      options: {}
-    }])
-  })
-
-  it('onWidgetResize', () => {
-    const props = () => wrapper.find(DashboardRender).props()
+    }
+    const mockLayout = _.find(mockLayouts.default.lg, w => w.i === 'w-1-note')
+    await act(async () => {
+      await props().onWidgetUpdate(newWidgetUpdate, mockLayout)
+    })
     act(() => {
       wrapper.update()
     })
+    expect(_.find(props().widgets, w => w.i === 'w-1-note')).toMatchObject(newWidgetUpdate)
+    done()
+  })
+
+  it('onWidgetResize', () => {
+    act(() => {
+      wrapper.update()
+    })
+    const props = () => wrapper.find(DashboardRender).props()
     act(() => {
       props().onBreakpointChange('lg')
     })
     act(() => {
       wrapper.update()
     })
+    const newLayoutSize = { i: 'w-1-note', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 }
     act(() => {
-      props().onWidgetResize({ i: 'w-1-notes', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 })
+      props().onWidgetResize(newLayoutSize)
     })
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual({
-      lg: [
-        { i: 'w-1-notes', x: 99, y: 99, w: 99, h: 99, minW: 99, maxW: 99, minH: 99, maxH: 99 },
-        { i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }
-      ]
-    })
+
+    expect(_.find(props().layouts.default.lg, w => w.i === 'w-1-note')).toMatchObject(newLayoutSize)
   })
 
   it('onWidgetDelete', () => {
+    act(() => {
+      wrapper.update()
+    })
     const props = () => wrapper.find(DashboardRender).props()
+    expect(props().layouts.default.lg.map(w => w.i)).toEqual(['w-1-note', 'w-2-smiley', 'w-3-cat'])
+
+    act(() => {
+      props().onWidgetDelete({ i: 'w-2-smiley' })
+    })
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual(mockLayouts)
-    act(() => {
-      props().onWidgetDelete({ i: 'w-1-note' })
-    })
-    act(() => {
-      wrapper.update()
-    })
-    expect(props().layouts).toEqual({
-      lg: [{ i: 'w-2-smiley', x: 0, y: 2, w: 1, h: 6, minW: 1, maxW: 1, minH: 2, maxH: 999 }]
-    })
+    expect(props().layouts.default.lg.map(w => w.i)).toEqual(['w-1-note', 'w-3-cat'])
   })
 })

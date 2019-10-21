@@ -1,7 +1,7 @@
 export default {
   default: {
     lg: [
-      { i: 'w-1-notes', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 },
+      { i: 'w-1-note', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 },
       { i: 'w-2-smiley', x: 4, y: 0, w: 4, h: 5, minW: 2, maxW: 4, minH: 5, maxH: 999 },
       { i: 'w-3-cat', x: 8, y: 0, w: 4, h: 6, minW: 4, maxW: 12, minH: 2, maxH: 999 }
     ],

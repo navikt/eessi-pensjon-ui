@@ -12,12 +12,20 @@ const MultipleOption = ({ data, selectProps, innerProps, isSelected, isFocused }
           selected: isSelected,
           focused: isFocused
         })} {...innerProps}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          innerProps.onClick()
+        }}
       >
         <Checkbox
           id={'c-multipleOption__checkbox-' + id}
           className='c-multipleOption__checkbox'
           label={data.label}
-          onChange={() => {}}
+          onChange={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
           checked={isSelected}
         />
       </div>

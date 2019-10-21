@@ -1,6 +1,10 @@
 import React from 'react'
 import Widget from './Widget'
 import labels from './Dashboard.labels'
+import * as Widgets from './widgets'
+jest.mock('./widgets/Links/Links', () => {
+  return () => { return <div className='mock-w-links' /> }
+})
 
 describe('applications/Dashboard/Widget', () => {
   let wrapper
@@ -13,6 +17,7 @@ describe('applications/Dashboard/Widget', () => {
     onWidgetUpdate: jest.fn(),
     setMode: jest.fn(),
     labels: labels,
+    MyWidgets: Widgets,
     widget: {
       type: 'foo',
       title: 'mockTitle',
