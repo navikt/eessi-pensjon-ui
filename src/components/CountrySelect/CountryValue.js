@@ -9,13 +9,15 @@ const CountryValue = (props) => {
 
   return (
     <div className='c-countryValue' {...innerProps}>
-      <Flag
-        className='mr-2'
-        label={_label}
-        country={data.value}
-        type='original'
-        size='M'
-      />
+      {selectProps.selectProps.flags ? (
+        <Flag
+          className='mr-2'
+          label={_label}
+          country={data.value}
+          type='original'
+          size='M'
+        />
+      ) : null}
       <span className='c-countryValue__label'>{_label}</span>
     </div>
   )

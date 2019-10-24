@@ -1,24 +1,35 @@
 import React from 'react'
 import Container from './Container'
-import { Normaltekst, Panel, Systemtittel } from '../Nav'
+import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 const IndexPage = () => (
   <Container>
     <Panel className='p-4'>
-      <Systemtittel className='pt-4 pb-4'>Index</Systemtittel>
-      <Normaltekst>This is a showcase page for all applications and components used in EESSI Pensjon UI web products.</Normaltekst>
-      <Normaltekst>If you want to use any of these components in your web project, you have to:</Normaltekst>
-      <ol>
+      <Systemtittel className='pt-4 pb-4'>EESSI Pensjon React Components</Systemtittel>
+      <Normaltekst>This is a showcase page for all React applications / components used in EESSI Pensjon UI web projects.</Normaltekst>
+      <Normaltekst>Use the left menu to browse all components and learn how to configure them.</Normaltekst>
+
+      <Undertittel className='pt-4 pb-4'>How to add a EESSI Pensjon component to your web project</Undertittel>
+      <Normaltekst>In order to use any of these components, you have to:</Normaltekst>
+      <ol className='pt-4'>
         <li>
-          <Normaltekst>Add into <code>package.json</code>:</Normaltekst>
+          <Normaltekst className='pb-4'>Add into <code>package.json</code>:</Normaltekst>
           <pre>"eessi-pensjon-ui": "https://github.com/navikt/eessi-pensjon-ui#{'{'}tag{'}'}]",</pre>
-          <Normaltekst>Where <code>{'{'}tag{'}'}</code> can be a git tag or branch (master)</Normaltekst>
+          <Normaltekst className='pb-4'>Where <code>{'{'}tag{'}'}</code> is an optional Git tag or branch (defaults to master)</Normaltekst>
         </li>
         <li>
-          <Normaltekst>Import the components as follows:</Normaltekst>
-          <pre>import {'{'} Component {'}'} from 'eessi-pensjon-ui</pre>
+          <Normaltekst className='pb-4'>Import the React component as follows:</Normaltekst>
+          <pre>import {'{'} Component {'}'} from 'eessi-pensjon-ui'</pre>
         </li>
       </ol>
-      <Normaltekst>Use the menu to see the component's page and to learn how to configure.</Normaltekst>
+
+      <Undertittel className='pt-4 pb-4'>How to add a NAV components to your web project</Undertittel>
+      <Normaltekst>This package has a separate dist that gathers all <a href='//design.nav.no'>NAV Designsystem</a> components in one import.</Normaltekst>
+      <Normaltekst className='pb-4'>To use only that dist, do: </Normaltekst>
+
+      <pre>import * as Nav from 'eessi-pensjon-ui/nav'</pre>
+      <hr className='mt-5' style={{ borderColor: 'gray' }} />
+      <Normaltekst>Maintainer: <a href='mailto:NunoCardoso@nav.no'>Nuno.Cardoso@nav.no</a></Normaltekst>
+      <Normaltekst>Project page: <a href='//github.com/navikt/eessi-pensjon-ui/'>Github</a></Normaltekst>
     </Panel>
   </Container>
 )

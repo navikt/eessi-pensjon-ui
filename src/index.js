@@ -12,24 +12,25 @@ import { HashRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'index.css'
 import MyLoadable from './loadable'
-const DashboardPage = MyLoadable({ loader: () => import('./pages/Dashboard') })
-const PDFEditorPage = MyLoadable({ loader: () => import('./pages/PDFEditor') })
-const AlertPage = MyLoadable({ loader: () => import('./pages/Alert') })
-const BannerPage = MyLoadable({ loader: () => import('./pages/Banner') })
-const ColorPickerPage = MyLoadable({ loader: () => import('./pages/ColorPicker') })
-const CountryUtilsPage = MyLoadable({ loader: () => import('./pages/CountryUtils') })
-const DatePickerPage = MyLoadable({ loader: () => import('./pages/DatePicker') })
-const FilePage = MyLoadable({ loader: () => import('./pages/File') })
-const FileUploadPage = MyLoadable({ loader: () => import('./pages/FileUpload') })
-const FlagPage = MyLoadable({ loader: () => import('./pages/Flag') })
+const DashboardPage = MyLoadable({ loader: () => import('./pages/DashboardPage') })
+const PDFEditorPage = MyLoadable({ loader: () => import('./pages/PDFEditorPage') })
+const AlertPage = MyLoadable({ loader: () => import('./pages/AlertPage') })
+const BannerPage = MyLoadable({ loader: () => import('./pages/BannerPage') })
+const ColorPickerPage = MyLoadable({ loader: () => import('./pages/ColorPickerPage') })
+const CountryUtilsPage = MyLoadable({ loader: () => import('./pages/CountryUtilsPage') })
+const DatePickerPage = MyLoadable({ loader: () => import('./pages/DatePickerPage') })
+const FilePage = MyLoadable({ loader: () => import('./pages/FilePage') })
+const FileUploadPage = MyLoadable({ loader: () => import('./pages/FileUploadPage') })
+const FlagPage = MyLoadable({ loader: () => import('./pages/FlagPage') })
 const IndexPage = MyLoadable({ loader: () => import('./pages/IndexPage') })
-const ModalPage = MyLoadable({ loader: () => import('./pages/Modal') })
-const MultipleSelectPage = MyLoadable({ loader: () => import('./pages/MultipleSelect') })
-const NavPage = MyLoadable({ loader: () => import('./pages/Nav') })
-const PsychoPage = MyLoadable({ loader: () => import('./pages/Psycho') })
-const RefreshButtonPage = MyLoadable({ loader: () => import('./pages/RefreshButton') })
-const TableSorterPage = MyLoadable({ loader: () => import('./pages/TableSorter') })
-const WaitingPanelPage = MyLoadable({ loader: () => import('./pages/WaitingPanel') })
+const IconsPage = MyLoadable({ loader: () => import('./pages/IconsPage') })
+const ModalPage = MyLoadable({ loader: () => import('./pages/ModalPage') })
+const MultipleSelectPage = MyLoadable({ loader: () => import('./pages/MultipleSelectPage') })
+const NavPage = MyLoadable({ loader: () => import('./pages/NavPage') })
+const PsychoPage = MyLoadable({ loader: () => import('./pages/PsychoPage') })
+const RefreshButtonPage = MyLoadable({ loader: () => import('./pages/RefreshButtonPage') })
+const TableSorterPage = MyLoadable({ loader: () => import('./pages/TableSorterPage') })
+const WaitingPanelPage = MyLoadable({ loader: () => import('./pages/WaitingPanelPage') })
 
 ReactDOM.render(
   <HashRouter>
@@ -44,6 +45,7 @@ ReactDOM.render(
       <Route exact path='/File' component={FilePage} />
       <Route exact path='/FileUpload' component={FileUploadPage} />
       <Route exact path='/Flag' component={FlagPage} />
+      <Route exact path='/Icons' component={IconsPage} />
       <Route exact path='/Modal' component={ModalPage} />
       <Route exact path='/MultipleSelect' component={MultipleSelectPage} />
       <Route exact path='/Nav' component={NavPage} />

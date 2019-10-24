@@ -11,7 +11,7 @@ const PDFSpecialPage = ({ actions, className, deleteLink, dndTarget, pageScale, 
   const onHandleMouseOver = () => setIsHovering(true)
   const onHandleMouseLeave = () => setIsHovering(false)
 
-  const onDeleteDocument = (separatorText) => {
+  const onDeleteFile = (separatorText) => {
     const newRecipes = _.clone(recipes)
     const index = _.findIndex(recipes[dndTarget], { separatorText: separatorText })
     if (index >= 0) {
@@ -28,7 +28,7 @@ const PDFSpecialPage = ({ actions, className, deleteLink, dndTarget, pageScale, 
       onMouseLeave={onHandleMouseLeave}
     >
       {isHovering && deleteLink ? (
-        <div onClick={() => onDeleteDocument(separator.separatorText)} className='link deleteLink'>
+        <div onClick={() => onDeleteFile(separator.separatorText)} className='link deleteLink'>
           <Ikon size={15} kind='trashcan' />
         </div>
       ) : null}

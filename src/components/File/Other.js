@@ -1,64 +1,36 @@
 import React from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
-import Icons from '../Icons/Icons'
 import './Other.css'
 
-export const Other = ({
-  animate, className, deleteLink, downloadLink, file, index, isHovering, labels = { size: 'Størrelse', download: 'Last ned' },
-  onClick = () => {}, onDeleteDocument, scale, size
-}) => {
-  const extension = file.name.substring(file.name.lastIndexOf('.') + 1)
-
-  return (
+export const Other = ({ className, file, height, labels, onContentClick, scale, width }) => (
+  <div
+    className={classNames('c-file-Other', className)}
+    title={file.name + '\n' + labels.size + ': ' + file.size}
+  >
     <div
-      className={classNames('c-file-Other', className, { animate: animate })}
-      title={file.name + '\n' + labels.size + ': ' + size}
+      className='content'
+      style={{
+        width: ((width || 100) * scale) + 'px',
+        height: ((height || 140) * scale) + 'px'
+      }}
+      onClick={onContentClick}
     >
-      {isHovering && deleteLink
-        ? (
-          <div className='link deleteLink'>
-            <Icons kind='trashcan' size={15} onClick={() => onDeleteDocument(index)} />
-          </div>
-        ) : null}
-      {isHovering && downloadLink && file.content
-        ? (
-          <div
-            className='link downloadLink'
-          >
-            <a
-              onClick={(e) => e.stopPropagation()}
-              title={labels.download}
-              href={'data:application/octet-stream;base64,' + encodeURIComponent(file.content.base64)}
-              download={file.name}
-            >
-              <Icons size='sm' kind='download' />
-            </a>
-          </div>
-        )
-        : null}
-      <div
-        className='content' style={{
-          width: (90 * scale) + 'px',
-          height: (140 * scale) + 'px'
-        }} onClick={() => onClick(index)}
-      >
-        <div className='extension'>{extension}</div>
+      <div className='extension'>
+        {file.name ? file.name.substring(file.name.lastIndexOf('.') + 1) : ''}
       </div>
     </div>
-  )
-}
+  </div>
+)
 
 Other.propTypes = {
-  animate: PT.bool,
   className: PT.string,
   file: PT.object.isRequired,
-  index: PT.number,
-  isHovering: PT.bool,
-  labels: PT.object,
-  onClick: PT.func,
-  onDeleteDocument: PT.func,
-  size: PT.string
+  height: PT.number,
+  labels: PT.object.isRequired,
+  onContentClick: PT.func,
+  scale: PT.number.isRequired,
+  width: PT.number
 }
 Other.displayName = 'Other'
 export default Other

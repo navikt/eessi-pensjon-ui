@@ -30,7 +30,7 @@ const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
           files={files}
           beforeDrop={handleBeforeDrop}
           afterDrop={handleAfterDrop}
-          onFileChange={handleFileChange}
+          onFilesChanged={handleFileChange}
         />
       </div>
       <Hovedknapp

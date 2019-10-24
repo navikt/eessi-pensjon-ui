@@ -159,7 +159,7 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
   return (
     <div className={classNames('c-tableSorter', className)}>
       <div className='c-tableSorter__status'>
-        {loading ? <WaitingPanel size='XS' /> : null}
+        {loading ? <WaitingPanel size='XS' message='' /> : null}
       </div>
       <div className='c-tableSorter__content'>
         <table cellSpacing='0' className='c-tableSorter__table'>

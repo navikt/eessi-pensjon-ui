@@ -18,13 +18,15 @@ const CountryOption = (props) => {
           focused: isFocused
         })}
       >
-        <Flag
-          className='c-countryOption__flag'
-          label={_label}
-          country={value}
-          type='original'
-          size='M'
-        />
+        {selectProps.selectProps.flags ? (
+          <Flag
+            className='c-countryOption__flag mr-2'
+            label={_label}
+            country={value}
+            type='original'
+            size='M'
+          />
+        ) : null}
         <span className='c-countryOption__label'>{_label}</span>
       </div>
     </components.Option>

@@ -8,7 +8,7 @@ jest.mock('react-pdf', () => {
   return {
     pdfjs: { GlobalWorkerOptions: { workerSrc: '' } },
     Document: (props) => {
-      props.setNumberPages(5)
+      props.onLoadSuccess({ numPages: 5 })
       return (
         <div className='mock-pdfdocument'>
           {props.children}
@@ -46,7 +46,7 @@ describe('components/FileUpload/FileUpload', () => {
     },
     maxFiles: 10,
     maxFileSize: 100000,
-    onFileChange: jest.fn(),
+    onFilesChanged: jest.fn(),
     status: {}
   }
 
@@ -58,7 +58,8 @@ describe('components/FileUpload/FileUpload', () => {
     },
     mimetype: 'text/plain',
     name: 'text.txt',
-    size: 13
+    size: 13,
+    id: 'text.txt'
   }
 
   beforeEach(() => {
@@ -83,24 +84,24 @@ describe('components/FileUpload/FileUpload', () => {
     expect(wrapper.exists('.c-fileUpload-files')).toBeTruthy()
   })
 
-  it('UseEffect: File dropped, onFileChange is called when dropping something', async () => {
+  it('UseEffect: File dropped, onFilesChanged is called when dropping something', async () => {
     act(() => {
-      initialMockProps.onFileChange.mockClear()
+      initialMockProps.onFilesChanged.mockClear()
     })
-    expect(initialMockProps.onFileChange).not.toHaveBeenCalled()
+    expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
     await act(async () => {
       wrapper.find('input').simulate('drop', { target: { files: [file] } })
     })
     await act(async () => {
       wrapper.update()
     })
-    expect(initialMockProps.onFileChange).toHaveBeenCalledWith([expectedProcessedFile])
+    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([expectedProcessedFile])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 1, ui:rejected: 0, ui:total: 0')
   })
 
   it('Dropping a file too large', async () => {
     act(() => {
-      initialMockProps.onFileChange.mockClear()
+      initialMockProps.onFilesChanged.mockClear()
     })
     wrapper.setProps({ maxFileSize: 1 })
     await act(async () => {
@@ -109,19 +110,19 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(initialMockProps.onFileChange).toHaveBeenCalledWith([])
+    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:fileIsTooBigLimitIs')
   })
 
   it('Dropping a file of a forbidden mimetype', async () => {
     act(() => {
-      initialMockProps.onFileChange.mockClear()
+      initialMockProps.onFilesChanged.mockClear()
     })
     wrapper.setProps({ acceptedMimetypes: ['application/pdf'] })
     await act(async () => {
       wrapper.find('input').simulate('drop', { target: { files: [file] } })
     })
-    expect(initialMockProps.onFileChange).toHaveBeenCalledWith([])
+    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 0, ui:rejected: 1, ui:total: 0')
   })
 
@@ -136,13 +137,13 @@ describe('components/FileUpload/FileUpload', () => {
       wrapper = mount(<FileUpload {...initialMockProps} files={[file]} />)
     })
     act(() => {
-      initialMockProps.onFileChange.mockClear()
+      initialMockProps.onFilesChanged.mockClear()
     })
-    expect(initialMockProps.onFileChange).not.toHaveBeenCalled()
+    expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
     expect(wrapper.exists('.deleteLink')).toBeFalsy()
 
     act(() => {
-      wrapper.find('.c-file').simulate('mouseenter')
+      wrapper.find('.c-file').simulate('mouseover')
     })
     act(() => {
       wrapper.update()
@@ -155,7 +156,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.update()
     })
-    expect(initialMockProps.onFileChange).toHaveBeenCalledWith([])
+    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed text.txt')
   })
 

@@ -1,6 +1,6 @@
 /* global window, Uint8Array */
 
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import PT from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 import _ from 'lodash'
@@ -9,71 +9,51 @@ import Mustache from 'mustache'
 import bytes from 'bytes'
 import File from '../File/File'
 import Modal from '../Modal/Modal'
+import defaultLabels from './FileUpload.labels'
 import './FileUpload.css'
 
-const defaultLabels = {
-  all: 'alle',
-  accepted: 'Akseptert',
-  size: 'Størrelse',
-  download: 'Last ned',
-  dropFilesHere: 'Klikk her for å velge filer. Filformat er {{filFormat}}, maks {{maxFiles}} filer, maks størrelse {{maxFileSize}}.',
-  fileIsTooBigLimitIs: 'filen {{file}} ({{size}}) er for stor, grensen er {{maxFileSize}}',
-  maxFilesExceeded: 'For mange filer, maks er {{maxFiles}} filer',
-  rejected: 'Avvist',
-  removed: 'Fjernet',
-  total: 'Totalt'
-}
-
 const FileUpload = ({
-  acceptedMimetypes, afterDrop, beforeDrop, className, currentPages, files = [], labels,
-  maxFiles = 99, maxFileSize = 10485760, onFileChange, status, tabIndex
+  acceptedMimetypes, afterFileDrop, beforeFileDrop, className, files = [], labels,
+  maxFiles = 99, maxFileSize = 10485760, onFilesChanged
 }) => {
-  const [_files, setFiles] = useState(files)
-  const [_currentPages, setCurrentPages] = useState(currentPages || [])
-  const [_status, setStatus] = useState(status || {})
+  const [_files, setFiles] = useState(files.map(file => ({
+    ...file,
+    id: file.id || file.name + ' ' + new Date().getTime()
+  })))
+  const [_status, setStatus] = useState({})
   const [modal, setModal] = useState(undefined)
   const _labels = { ...defaultLabels, ...labels }
-
-  useEffect(() => {
-    if (!_.isEmpty(_files) && _.isEmpty(_currentPages)) {
-      setCurrentPages(_files.map(f => { return 1 }))
-    }
-  }, [_currentPages, _files])
 
   const closePreview = () => {
     setModal(undefined)
   }
 
-  const openPreview = (file, pageNumber) => {
+  const openPreview = (file, initialPage) => {
     setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={closePreview}>
-          <File labels={_labels} file={file} width={400} height={600} pageNumber={pageNumber} />
+          <File file={file} width={400} height={600} initialPage={initialPage} onContentClick={closePreview} />
         </div>
       )
     })
   }
 
-  const updateFiles = useCallback((newFiles, newCurrentPages, statusMessage) => {
+  const updateFiles = useCallback((newFiles, statusMessage) => {
     setFiles(newFiles)
-    if (newCurrentPages) {
-      setCurrentPages(newCurrentPages)
-    }
     if (statusMessage) {
       setStatus({
         message: (statusMessage || _status),
         type: 'OK'
       })
     }
-    if (_(onFileChange).isFunction()) {
-      onFileChange(newFiles)
+    if (_(onFilesChanged).isFunction()) {
+      onFilesChanged(newFiles)
     }
-  }, [_status, onFileChange])
+  }, [_status, onFilesChanged])
 
   const processFiles = useCallback((acceptedFiles, rejectedFiles) => {
     const newFiles = _.clone(_files)
-    const newCurrentPages = _.clone(_currentPages)
-    acceptedFiles.forEach((file, index) => {
+    acceptedFiles.forEach((file) => {
       const reader = new FileReader()
       reader.readAsArrayBuffer(file)
       reader.onerror = error => { console.log(error) }
@@ -86,6 +66,7 @@ const FileUpload = ({
         }
         const base64 = window.btoa(x)
         newFiles.push({
+          id: !_.includes(_files, { name: file.name }) ? file.name : file.name + '-' + new Date().getTime(),
           size: file.size,
           name: file.name,
           mimetype: file.type,
@@ -93,18 +74,17 @@ const FileUpload = ({
             base64: base64
           }
         })
-        newCurrentPages[newCurrentPages.length] = 1
+        let statusMessage = _labels.accepted + ': ' + acceptedFiles.length + ', '
+        statusMessage += _labels.rejected + ': ' + rejectedFiles.length + ', '
+        statusMessage += _labels.total + ': ' + newFiles.length
+        updateFiles(newFiles, statusMessage)
       }
     })
-    let statusMessage = _labels.accepted + ': ' + acceptedFiles.length + ', '
-    statusMessage += _labels.rejected + ': ' + rejectedFiles.length + ', '
-    statusMessage += _labels.total + ': ' + newFiles.length
-    updateFiles(newFiles, newCurrentPages, statusMessage)
-  }, [_currentPages, _files, _labels, updateFiles])
+  }, [_files, _labels, updateFiles])
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    if (beforeDrop) {
-      beforeDrop()
+    if (_.isFunction(beforeFileDrop)) {
+      beforeFileDrop()
     }
     if (maxFiles && (_files.length + acceptedFiles.length > maxFiles)) {
       return setStatus({
@@ -114,13 +94,11 @@ const FileUpload = ({
         type: 'ERROR'
       })
     }
-
     processFiles(acceptedFiles, rejectedFiles)
-
-    if (afterDrop) {
-      afterDrop()
+    if (_.isFunction(afterFileDrop)) {
+      afterFileDrop()
     }
-  }, [_files.length, afterDrop, beforeDrop, _labels, maxFiles, processFiles])
+  }, [_files.length, afterFileDrop, beforeFileDrop, _labels, maxFiles, processFiles])
 
   const onDropRejected = (rejectedFiles) => {
     if (maxFileSize && rejectedFiles[0].size > maxFileSize) {
@@ -135,34 +113,24 @@ const FileUpload = ({
     }
   }
 
-  const removeFile = (fileIndex) => {
-    const newFiles = _.cloneDeep(_files)
-    const newCurrentPages = _.cloneDeep(_currentPages)
-    newFiles.splice(fileIndex, 1)
-    newCurrentPages.splice(fileIndex, 1)
-    const filename = _files[fileIndex].name
-    const statusMessage = _labels.removed + ' ' + filename
-    updateFiles(newFiles, newCurrentPages, statusMessage)
+  const removeFile = (file) => {
+    let statusMessage = _labels.removed
+    const newFiles = _.filter(_files, f => {
+      if (file.id === f.id) {
+        statusMessage += ' ' + f.name
+        return false
+      }
+      return true
+    })
+    console.log(statusMessage)
+    updateFiles(newFiles, statusMessage)
   }
 
-  const onLoadSuccess = (index, event) => {
-    if (index !== undefined && event && event.numPages) {
-      const newFiles = _.cloneDeep(_files)
-      newFiles[index].numPages = event.numPages
-      updateFiles(newFiles)
-    }
-  }
-
-  const onPreviousPageRequest = (fileIndex) => {
-    const newCurrentPages = _.cloneDeep(_currentPages)
-    newCurrentPages[fileIndex] = newCurrentPages[fileIndex] - 1
-    setCurrentPages(newCurrentPages)
-  }
-
-  const onNextPageRequest = (fileIndex) => {
-    const newCurrentPages = _.cloneDeep(_currentPages)
-    newCurrentPages[fileIndex] = newCurrentPages[fileIndex] + 1
-    setCurrentPages(newCurrentPages)
+  const onLoadSuccess = (file) => {
+    const newFiles = _files.map(f => {
+      return file.id === f.id ? file : f
+    })
+    updateFiles(newFiles)
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -173,64 +141,56 @@ const FileUpload = ({
   })
 
   return (
-    <>
+    <div
+      className={classNames('c-fileUpload', { 'c-fileUpload-active ': isDragActive }, className)}
+      {...getRootProps()}
+    >
       <Modal modal={modal} />
-      <div
-        className={classNames('c-fileUpload', 'p-4', { 'c-fileUpload-active ': isDragActive }, className)}
-        tabIndex={tabIndex}
-        {...getRootProps()}
-      >
-        <input {...getInputProps()} />
-        <div className='c-fileUpload-placeholder'>
-          <div className='c-fileUpload-placeholder-message'>
-            {Mustache.render(_labels.dropFilesHere, {
-              maxFiles: maxFiles,
-              maxFileSize: bytes(maxFileSize),
-              filFormat: acceptedMimetypes ? acceptedMimetypes.map(type => {
-                return type.substring(type.indexOf('/') + 1, type.length).toUpperCase()
-              }).join(', ') : _labels.all
-            })}
-          </div>
-          <div className={classNames('c-fileUpload-placeholder-status', 'c-fileUpload-placeholder-status-' + _status.type)}>
-            {_status.message || ''}
-          </div>
-        </div>
-        <div className='c-fileUpload-files scrollable'>
-          {_files.map((file, i) => {
-            return (
-              <File
-                className='mr-2' key={i} file={file}
-                currentPage={_currentPages[i]}
-                deleteLink downloadLink previewLink
-                index={i}
-                labels={_labels}
-                onPreviousPage={onPreviousPageRequest}
-                onNextPage={onNextPageRequest}
-                onLoadSuccess={onLoadSuccess}
-                onDeleteDocument={removeFile}
-                onPreviewDocument={openPreview}
-              />
-            )
+      <input {...getInputProps()} />
+      <div className='c-fileUpload-placeholder'>
+        <div className='c-fileUpload-placeholder-message'>
+          {Mustache.render(_labels.dropFilesHere, {
+            maxFiles: maxFiles,
+            maxFileSize: bytes(maxFileSize),
+            filFormat: acceptedMimetypes ? acceptedMimetypes.map(type => {
+              return type.substring(type.indexOf('/') + 1, type.length).toUpperCase()
+            }).join(', ') : _labels.all
           })}
         </div>
+        <div className={classNames('c-fileUpload-placeholder-status', 'c-fileUpload-placeholder-status-' + _status.type)}>
+          {_status.message || ''}
+        </div>
       </div>
-    </>
+      <div className='c-fileUpload-files scrollable'>
+        {_files.map((file, i) => (
+          <div key={i} className='mr-2'>
+            <File
+              file={file}
+              showDeleteButton
+              showDownloadButton
+              showPreviewButton
+              onLoadSuccess={onLoadSuccess}
+              onDeleteFile={removeFile}
+              onPreviewFile={openPreview}
+            />
+          </div>
+        )
+        )}
+      </div>
+    </div>
   )
 }
 
 FileUpload.propTypes = {
   acceptedMimetypes: PT.oneOfType([PT.string, PT.array]),
-  afterDrop: PT.func,
-  beforeDrop: PT.func,
+  afterFileDrop: PT.func,
+  beforeFileDrop: PT.func,
   className: PT.string,
-  currentPages: PT.array,
   files: PT.array,
   labels: PT.object,
   maxFiles: PT.number,
   maxFileSize: PT.number,
-  onFileChange: PT.func,
-  status: PT.object,
-  tabIndex: PT.number
+  onFilesChanged: PT.func
 }
 FileUpload.displayName = 'FileUpload'
 export default FileUpload

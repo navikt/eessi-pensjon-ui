@@ -4,7 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: {
     index: './src/dist.js',
-    nav: './src/dist-nav.js'
+    nav: './src/dist-nav.js',
+    api: './src/actions/api.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -32,18 +33,10 @@ module.exports = {
       test: /\.svg$/,
       use: [{
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-          plugins: [
-            '@babel/transform-react-jsx',
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-proposal-export-namespace-from'
-          ]
-        }
       }, {
         loader: 'react-svg-loader',
         options: {
-          jsx: false // true outputs JSX tags
+          jsx: true // true outputs JSX tags
         }
       }]
     }, {

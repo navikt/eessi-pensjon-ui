@@ -10,7 +10,7 @@ import CountryErrorStyle from '../CountrySelect/CountryErrorStyle'
 import './CountrySelect.css'
 
 const CountrySelect = ({
-  className, error, excludeList, id, includeList, locale = 'nb', onSelect, placeholder, type, value = null
+  className, error, excludeList, flags = true, id, includeList, locale = 'nb', onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
 }) => {
   const [_value, setValue] = useState(value)
 
@@ -27,8 +27,8 @@ const CountrySelect = ({
   }
 
   const onSelectChange = (e) => {
-    if (_(onSelect).isFunction()) {
-      onSelect(e)
+    if (_(onOptionSelected).isFunction()) {
+      onOptionSelected(e)
     }
     setValue(e)
   }
@@ -36,6 +36,23 @@ const CountrySelect = ({
   const optionList = CountryData.getData(locale)
   let options = (includeList ? include(includeList, optionList) : optionList)
   options = (excludeList ? exclude(excludeList, options) : options)
+  let _options
+
+  if (sort === 'scandinaviaFirst') {
+    _options = options.concat()
+  }
+
+  if (sort === 'asc') {
+    _options = options.concat().sort((a, b) => {
+      return a.label.localeCompare(b.label)
+    })
+  }
+
+  if (sort === 'desc') {
+    _options = options.concat().sort((a, b) => {
+      return b.label.localeCompare(a.label)
+    })
+  }
 
   let defValue = _value
   if (defValue && !defValue.label) {
@@ -50,7 +67,7 @@ const CountrySelect = ({
       <Select
         placeholder={placeholder}
         value={defValue || null}
-        options={options}
+        options={_options}
         id={id ? id + '-select' : null}
         components={{
           Option: CountryOption,
@@ -58,7 +75,8 @@ const CountrySelect = ({
         }}
         selectProps={{
           type: type,
-          id: id + '-select'
+          id: id + '-select',
+          flags: flags
         }}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'
@@ -84,11 +102,13 @@ CountrySelect.propTypes = {
   className: PT.string,
   error: PT.string,
   excludeList: PT.array,
+  flags: PT.bool.isRequired,
   id: PT.string,
   includeList: PT.array,
   locale: PT.string,
-  onSelect: PT.func,
+  onOptionSelected: PT.func,
   placeholder: PT.string,
+  sort: PT.oneOf(['asc', 'desc', 'scandinaviaFirst']),
   type: PT.string,
   value: PT.oneOfType([PT.object, PT.string])
 }

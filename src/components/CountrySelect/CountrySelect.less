@@ -7,17 +7,17 @@
     align-items: center;
   }
 
+  &__select__option--is-selected {
+    background: orange !important;
+  }
+
+  &__select__option--is-focused {
+    background: lightblue !important;
+  }
+
   .c-countryOption {
     display: flex;
     align-items: center;
-
-    &.selected {
-       background: lightblue;
-    }
-
-    &.focused {
-       background: aliceblue;
-    }
 
     &__label {
        color: black;
@@ -25,10 +25,8 @@
     }
 
     img {
-       border: 1px solid lightgrey;
        width: 50px;
        height: 30px;
-       margin-right: 0.7rem;
     }
   }
 
@@ -63,19 +61,20 @@
     }
   }
 
+  &__select__option--is-selected {
+    background: @blue;
+    color: @black !important;
+    font-weight: bold;
+  }
+
+  &__select__option--is-focused {
+    background: @high-contrast-orange;
+    color: @black !important;
+    font-weight: bold;
+  }
+
   .c-countryOption {
     background: @black;
-
-    &.selected {
-       background: @blue;
-       color: @black !important;
-       font-weight: bold;
-    }
-    &.focused {
-       background: @high-contrast-orange;
-       color: @black !important;
-       font-weight: bold;
-    }
   }
 
   .skjemaelement__feilmelding {

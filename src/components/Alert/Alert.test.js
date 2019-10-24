@@ -7,7 +7,7 @@ describe('components/Alert/Alert', () => {
     status: 'OK',
     message: 'mockErrorMessage',
     error: undefined,
-    onClear: jest.fn()
+    onClose: jest.fn()
   }
 
   it('Renders', () => {
@@ -18,13 +18,13 @@ describe('components/Alert/Alert', () => {
 
   it('Has proper HTML structure as server', () => {
     wrapper = mount(<Alert {...initialMockProps} type='server' />)
-    expect(wrapper.exists('.c-alert.server')).toBeTruthy()
+    expect(wrapper.exists('.c-alert__type-server')).toBeTruthy()
     expect(wrapper.render().text()).toEqual('mockErrorMessage')
   })
 
   it('Has proper HTML structure as client', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' />)
-    expect(wrapper.exists('.c-alert.client')).toBeTruthy()
+    expect(wrapper.exists('.c-alert__type-client')).toBeTruthy()
     expect(wrapper.render().text()).toEqual('mockErrorMessage')
   })
 
@@ -46,7 +46,7 @@ describe('components/Alert/Alert', () => {
   it('Close button clears alert', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' status='ERROR' />)
     wrapper.find('.closeIcon').hostNodes().simulate('click')
-    expect(initialMockProps.onClear).toHaveBeenCalled()
+    expect(initialMockProps.onClose).toHaveBeenCalled()
   })
 
   it('Pretty prints a error message', () => {

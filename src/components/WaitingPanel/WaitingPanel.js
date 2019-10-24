@@ -5,9 +5,11 @@ import { Spinner, Normaltekst } from '../../Nav'
 const WaitingPanel = ({ className, size = 'M', message = 'Vennligst vent...' }) => (
   <div className={classNames('c-waitingPanel', 'text-center', className)}>
     <Spinner type={size} />
-    <Normaltekst className='c-waitingPanel__message'>
-      {message}
-    </Normaltekst>
+    {message ? (
+      <Normaltekst className='c-waitingPanel__message'>
+        {message}
+      </Normaltekst>
+    ) : null}
   </div>
 )
 

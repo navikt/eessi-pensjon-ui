@@ -4,20 +4,25 @@ import classNames from 'classnames'
 import Icons from '../Icons/Icons'
 import './RefreshButton.css'
 
-const RefreshButton = ({ className, labelRefresh = 'Forfriske', onRefreshClick, rotating }) => (
-  <div title={labelRefresh} className={classNames('c-refreshButton', className)}>
-    <a href='#refresh' onClick={onRefreshClick}>
-      <div className={classNames({ rotating: rotating })}>
-        <Icons kind='refresh' />
-      </div>
-    </a>
-  </div>
+const RefreshButton = ({ className, labelRefresh = 'Forfriske', onRefreshClicked = () => {}, rotating = false }) => (
+  <a
+    title={labelRefresh}
+    href='#refresh'
+    className={classNames('c-refreshbutton', className, { rotating: rotating })}
+    onClick={(e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      onRefreshClicked()
+    }}
+  >
+    <Icons kind='refresh' />
+  </a>
 )
 
 RefreshButton.propTypes = {
   className: PT.string,
   labelRefresh: PT.string,
-  onRefreshClick: PT.func.isRequired,
+  onRefreshClicked: PT.func.isRequired,
   rotating: PT.bool.isRequired
 }
 RefreshButton.displayName = 'RefreshButton'

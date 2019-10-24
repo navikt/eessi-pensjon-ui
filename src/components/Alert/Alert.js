@@ -12,12 +12,12 @@ export const errorTypes = {
   WARNING: 'advarsel'
 }
 
-export const Alert = ({ className, error, fixed, message, onClear, status = 'ERROR', type }) => {
+export const Alert = ({ className, error, fixed, message, onClose, status = 'ERROR', type }) => {
   let _message = message
 
-  const onClearClicked = () => {
-    if (_(onClear).isFunction()) {
-      onClear()
+  const onCloseIconClicked = () => {
+    if (_(onClose).isFunction()) {
+      onClose()
     }
   }
 
@@ -42,8 +42,13 @@ export const Alert = ({ className, error, fixed, message, onClear, status = 'ERR
     return null
   }
 
-  if (!['client', 'server'].indexOf(type) < 0) {
+  if (!_.includes(['client', 'server'], type)) {
     console.error('Invalid alert type: ' + type)
+    return null
+  }
+
+  if (!_.includes(Object.keys(errorTypes), status)) {
+    console.error('Invalid alert status: ' + status)
     return null
   }
 
@@ -54,11 +59,11 @@ export const Alert = ({ className, error, fixed, message, onClear, status = 'ERR
   const _fixed = _.isNil(fixed) ? type === 'client' : fixed
   return (
     <AlertStripe
-      className={classNames('c-alert', type, className, { fixed: _fixed })}
+      className={classNames('c-alert', 'c-alert__type-' + type, 'c-alert__status-' + status, className, { fixed: _fixed })}
       type={errorTypes[status]}
     >
       {_message}
-      {_(onClear).isFunction() ? <Icons className='closeIcon' kind='solidclose' onClick={onClearClicked} /> : null}
+      {_(onClose).isFunction() ? <Icons className='closeIcon' kind='solidclose' onClick={onCloseIconClicked} /> : null}
     </AlertStripe>
   )
 }
@@ -68,9 +73,9 @@ Alert.propTypes = {
   error: PT.object,
   fixed: PT.bool,
   message: PT.string,
-  onClear: PT.func,
-  status: PT.string,
-  type: PT.string.isRequired
+  onClose: PT.func,
+  status: PT.oneOf(['OK', 'ERROR', 'WARNING']).isRequired,
+  type: PT.oneOf(['client', 'server']).isRequired
 }
 
 Alert.displayName = 'Alert'

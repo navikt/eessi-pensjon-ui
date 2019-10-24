@@ -31,9 +31,18 @@ const FlagList = (props) => {
           />
         )
       })}
-      {_(overflowLimit).isNumber() && items.length > overflowLimit
-        ? <Normaltekst className='pt-2'>+{items.length - overflowLimit}</Normaltekst>
-        : null}
+      {_(overflowLimit).isNumber() && items.length > overflowLimit ? (
+        <Normaltekst
+          data-tip={items
+            .concat()
+            .slice((items.length - overflowLimit) * -1)
+            .map(item => item.label)
+            .join(', ')}
+          className='pt-2'
+        >
+            +{items.length - overflowLimit}
+        </Normaltekst>
+      ) : null}
     </div>
   )
 }

@@ -15,10 +15,11 @@ describe('components/CountrySelect', () => {
   const initialMockParams = {
     id: 'react-select-test',
     classNamePrefix: 'test',
+    flags: true,
     locale: 'nb',
     includeList: CountryFilter.EEA,
     value: testData,
-    onSelect: jest.fn(),
+    onOptionSelected: jest.fn(),
     error: undefined
   }
 
@@ -49,6 +50,6 @@ describe('components/CountrySelect', () => {
     wrapper = mount(<CountrySelect {...initialMockParams} />)
     wrapper.find('.c-countrySelect__select__dropdown-indicator').hostNodes().simulate('keyDown', { key: 'ArrowDown' })
     wrapper.find('.c-countryOption').hostNodes().last().simulate('keyDown', { key: 'Enter' })
-    expect(initialMockParams.onSelect).toBeCalledWith(testData)
+    expect(initialMockParams.onOptionSelected).toBeCalledWith(testData)
   })
 })
