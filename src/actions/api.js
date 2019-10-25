@@ -4,7 +4,7 @@ import 'cross-fetch/polyfill'
 import uuid from 'uuid/v4'
 import * as types from '../constants/actionTypes'
 import { IS_TEST } from '../constants/environment'
-const HOST = window.location.hostname
+import { HOST } from '../constants/urls'
 
 export const fakeCall = ({ context, expectedPayload, method, type, url }) => {
   return (dispatch) => {
@@ -36,7 +36,7 @@ export const fakeCall = ({ context, expectedPayload, method, type, url }) => {
   }
 }
 
-export const realCall = ({ body, context, failWith401, failWith500, headers, method, payload, type, url }) => {
+export const realCall = ({ body, context, cascadeFailureError, headers, method, payload, type, url }) => {
   return (dispatch) => {
     dispatch({
       type: type.request
@@ -89,7 +89,7 @@ export const realCall = ({ body, context, failWith401, failWith500, headers, met
           originalPayload: _body,
           context: context
         })
-        if (failWith401) {
+        if (cascadeFailureError) {
           dispatch({
             type: type.failure,
             payload: error,
@@ -97,6 +97,13 @@ export const realCall = ({ body, context, failWith401, failWith500, headers, met
             context: context
           })
         }
+      } else if (error.status === 403) {
+        dispatch({
+          type: type.forbidden || type.failure,
+          payload: error,
+          originalPayload: _body,
+          context: context
+        })
       } else if (error.status >= 500) {
         dispatch({
           type: types.SERVER_INTERNAL_ERROR,
@@ -104,7 +111,7 @@ export const realCall = ({ body, context, failWith401, failWith500, headers, met
           originalPayload: _body,
           context: context
         })
-        if (failWith500) {
+        if (cascadeFailureError) {
           dispatch({
             type: type.failure,
             payload: error,

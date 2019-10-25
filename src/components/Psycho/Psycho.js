@@ -1,8 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import PT from 'prop-types'
-import SmilendeOrangeVeileder from '../../resources/veileder/NavPensjonSmilendeOrangeVeileder'
-import TristOrangeVeileder from '../../resources/veileder/NavPensjonTristOrangeVeileder'
+import SmilendeOrangeVeileder from './veileder/NavPensjonSmilendeOrangeVeileder'
+import TristOrangeVeileder from './veileder/NavPensjonTristOrangeVeileder'
 
 const Psycho = ({ className, mood = 'smilende' }) => (
   <div className={classNames('c-psycho', className)}>

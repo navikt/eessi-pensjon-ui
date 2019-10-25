@@ -75,14 +75,14 @@ describe('actions/api', () => {
       })
   })
 
-  it('call() with fake url, 500 response and failWith500', () => {
+  it('call() with fake url, 500 response and cascading failure error', () => {
     nock('http://mockedurl')
       .get('/')
       .reply(500, { message: 'unauthorized' })
 
     return store.dispatch(api.realCall({
       url: 'http://mockedurl/',
-      failWith500: true,
+      cascadeFailureError: true,
       type: {
         request: 'REQUEST',
         success: 'SUCCESS',
@@ -119,14 +119,57 @@ describe('actions/api', () => {
       })
   })
 
-  it('call() with fake url, 401 response and failWith401', () => {
+  it('call() with fake url and 403 response with a forbidden action', () => {
+    nock('http://mockedurl')
+      .get('/')
+      .reply(403, { message: 'no way jose' })
+
+    return store.dispatch(api.realCall({
+      url: 'http://mockedurl/',
+      type: {
+        request: 'REQUEST',
+        success: 'SUCCESS',
+        failure: 'FAILURE',
+        forbidden: 'FORBIDDEN'
+      }
+    }))
+      .then(() => {
+        const expectedActions = store.getActions()
+        expect(expectedActions.length).toBe(2)
+        expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
+        expect(expectedActions[1]).toHaveProperty('type', 'FORBIDDEN')
+      })
+  })
+
+  it('call() with fake url and 403 response with standard failure action', () => {
+    nock('http://mockedurl')
+      .get('/')
+      .reply(403, { message: 'no way jose' })
+
+    return store.dispatch(api.realCall({
+      url: 'http://mockedurl/',
+      type: {
+        request: 'REQUEST',
+        success: 'SUCCESS',
+        failure: 'FAILURE'
+      }
+    }))
+      .then(() => {
+        const expectedActions = store.getActions()
+        expect(expectedActions.length).toBe(2)
+        expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
+        expect(expectedActions[1]).toHaveProperty('type', 'FAILURE')
+      })
+  })
+
+  it('call() with fake url, 401 response and cascadeFailureError', () => {
     nock('http://mockedurl')
       .get('/')
       .reply(401, { message: 'unauthorized' })
 
     return store.dispatch(api.realCall({
       url: 'http://mockedurl/',
-      failWith401: true,
+      cascadeFailureError: true,
       type: {
         request: 'REQUEST',
         success: 'SUCCESS',

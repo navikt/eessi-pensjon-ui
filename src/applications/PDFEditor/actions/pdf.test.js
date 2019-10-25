@@ -1,4 +1,4 @@
-import * as api from './api'
+import * as api from '../../../actions/api'
 import * as pdfActions from './pdf'
 import * as types from '../constants/actionTypes'
 import * as urls from '../constants/urls'
