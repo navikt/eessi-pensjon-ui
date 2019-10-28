@@ -9,7 +9,7 @@ import * as DashboardAPI from './DashboardAPI'
 import * as Widgets from './widgets'
 
 const Dashboard = ({
-  allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, defaultTab, extraWidgets,
+  allowedWidgets = undefined, defaultConfig, defaultWidgets, defaultLayout, defaultTabIndex, extraWidgets,
   id, labels, afterLayoutChange
 }) => {
   const [editMode, setEditMode] = useState(false)
@@ -17,9 +17,9 @@ const Dashboard = ({
   const [fullFocusMode, setFullFocusMode] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [widgets, setWidgets] = useState([])
-  const [layouts, _setLayouts] = useState({})
+  const [layouts, _setLayouts] = useState([])
   const [config, setConfig] = useState({})
-  const [currentTab, setCurrentTab] = useState(defaultTab || config.defaultTab)
+  const [currentTabIndex, setCurrentTabIndex] = useState(defaultTabIndex || 0)
   const [backupLayouts, setBackupLayouts] = useState({})
   const [currentBreakpoint, setCurrentBreakpoint] = useState('lg')
   const [availableWidgets, setAvailableWidgets] = useState([])
@@ -48,8 +48,8 @@ const Dashboard = ({
         visible: focusedWidget.i === widget.i
       }))
       const newLayouts = _.cloneDeep(layouts)
-      Object.keys(newLayouts[currentTab]).forEach((breakpoint) => {
-        newLayouts[currentTab][breakpoint] = newLayouts[currentTab][breakpoint].filter((widget) => {
+      Object.keys(newLayouts[currentTabIndex].body).forEach((breakpoint) => {
+        newLayouts[currentTabIndex].body[breakpoint] = newLayouts[currentTabIndex].body[breakpoint].filter((widget) => {
           const _widget = _.find(newWidgets, (w) => w.i === widget.i)
           return _widget.visible !== false
         })
@@ -88,49 +88,79 @@ const Dashboard = ({
 
   const onWidgetResize = (layout) => {
     const newLayout = _.cloneDeep(layouts)
-    const index = _.findIndex(newLayout[currentTab][currentBreakpoint], { i: layout.i })
-    newLayout[currentTab][currentBreakpoint][index] = layout
+    const index = _.findIndex(newLayout[currentTabIndex].body[currentBreakpoint], { i: layout.i })
+    newLayout[currentTabIndex].body[currentBreakpoint][index] = layout
     setLayouts(newLayout)
   }
 
   const onWidgetDelete = (layout) => {
     setWidgets(_.reject(widgets, { i: layout.i }))
     const newLayout = _.cloneDeep(layouts)
-    Object.keys(newLayout[currentTab]).forEach(breakpoint => {
-      newLayout[currentTab][breakpoint] = _.reject(newLayout[currentTab][breakpoint], { i: layout.i })
+    Object.keys(newLayout[currentTabIndex].body).forEach(breakpoint => {
+      newLayout[currentTabIndex].body[breakpoint] = _.reject(newLayout[currentTabIndex].body[breakpoint], { i: layout.i })
     })
     setLayouts(newLayout)
   }
 
   const onLayoutChange = (layout, changedLayout) => {
     const newLayout = _.cloneDeep(layouts)
-    newLayout[currentTab] = changedLayout
+    newLayout[currentTabIndex].body = changedLayout
     setLayouts(newLayout)
   }
 
-  const onTabChange = (newTab) => {
-    setCurrentTab(newTab)
+  const onTabChange = (newTabIndex) => {
+    setCurrentTabIndex(newTabIndex)
   }
 
-  const onTabAdd = (newTab) => {
-    if (newTab === 'new') {
+  const onTabRename = (newTabIndex, newTabLabel) => {
+    const newLayouts = _.cloneDeep(layouts)
+    newLayouts[newTabIndex].label = newTabLabel
+    setLayouts(newLayouts)
+  }
+
+  const onTabAdd = (newTabIndex, newTabLabel) => {
+    if (newTabLabel === 'new') {
       console.log('Can\'t name new tab \'new\'')
       return
     }
-    const newLayout = _.cloneDeep(layouts)
-    newLayout[newTab] = { lg: [], md: [], sm: [] }
-    setCurrentTab(newTab)
-    setLayouts(newLayout)
+    const newLayouts = _.cloneDeep(layouts)
+    newLayouts.splice(newTabIndex, 0, {
+      label: newTabLabel,
+      body: { lg: [], md: [], sm: [] }
+    })
+    setCurrentTabIndex(newTabIndex)
+    setLayouts(newLayouts)
   }
 
-  const onTabDelete = (newTab) => {
-    const tabs = Object.keys(layouts)
-    if (tabs.length <= 1) {
+  const onTabDelete = (newTabIndex) => {
+    if (layouts.length <= 1) {
       console.log('wont delete, last dashboard tab')
       return
     }
-    setCurrentTab(_.find(tabs, (value) => value !== newTab))
-    setLayouts(_.omitBy(layouts, (value, key) => key === newTab))
+    const newLayouts = _.cloneDeep(layouts)
+    newLayouts.splice(newTabIndex, 1)
+    setCurrentTabIndex(0)
+    setLayouts(newLayouts)
+  }
+
+  const onTabMove = (sourceIndex, howMuch) => {
+    const targetIndex = sourceIndex + howMuch
+    let newLayouts = _.cloneDeep(layouts)
+    const targetLayout = newLayouts[targetIndex]
+    const sourceLayout = newLayouts[sourceIndex]
+    const currentTab = newLayouts[currentTabIndex]
+    newLayouts = newLayouts.map((layout, index) => {
+      if (index === targetIndex) {
+        return sourceLayout
+      }
+      if (index === sourceIndex) {
+        return targetLayout
+      }
+      return layouts[index]
+    })
+    const newCurrentTabIndex = _.findIndex(layouts, (layout) => layout.label === currentTab.label)
+    setCurrentTabIndex(newCurrentTabIndex)
+    setLayouts(newLayouts)
   }
 
   const onBreakpointChange = (breakpoint) => {
@@ -171,12 +201,13 @@ const Dashboard = ({
 
   return (
     <DashboardRender
-      addMode={addMode} currentTab={currentTab} editMode={editMode} labels={_labels} onEditModeOn={onEditModeOn} onCancelEdit={onCancelEdit}
+      addMode={addMode} currentTabIndex={currentTabIndex} editMode={editMode} labels={_labels} onEditModeOn={onEditModeOn} onCancelEdit={onCancelEdit}
       onSaveEdit={onSaveEdit} onResetEdit={onResetEdit} onAddChange={onAddChange} mounted={mounted}
       layouts={layouts} onLayoutChange={onLayoutChange} onBreakpointChange={onBreakpointChange} currentBreakpoint={currentBreakpoint}
       widgets={widgets} availableWidgets={availableWidgets} setWidgets={setWidgets} onWidgetUpdate={onWidgetUpdate}
       onWidgetResize={onWidgetResize} onWidgetDelete={onWidgetDelete} onWidgetFullFocus={onWidgetFullFocus}
-      onWidgetRestoreFocus={onWidgetRestoreFocus} onTabAdd={onTabAdd} onTabDelete={onTabDelete} onTabChange={onTabChange} MyWidgets={MyWidgets}
+      onWidgetRestoreFocus={onWidgetRestoreFocus} onTabAdd={onTabAdd} onTabDelete={onTabDelete} onTabChange={onTabChange}
+      onTabRename={onTabRename} onTabMove={onTabMove} MyWidgets={MyWidgets}
     />
   )
 }
@@ -185,8 +216,8 @@ Dashboard.propTypes = {
   afterLayoutChange: PT.func,
   allowedWidgets: PT.array,
   defaultConfig: PT.object,
-  defaultLayout: PT.object,
-  defaultTab: PT.string,
+  defaultLayout: PT.array,
+  defaultTabIndex: PT.number,
   defaultWidgets: PT.array,
   extraWidgets: PT.object,
   id: PT.string.isRequired,

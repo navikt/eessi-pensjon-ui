@@ -76,9 +76,18 @@ const FileUpload = ({
         })
         let statusMessage = _labels.accepted + ': ' + acceptedFiles.length + ', '
         statusMessage += _labels.rejected + ': ' + rejectedFiles.length + ', '
-        statusMessage += _labels.total + ': ' + newFiles.length
+        statusMessage += _labels.total + ': ' + (acceptedFiles.length + rejectedFiles.length)
         updateFiles(newFiles, statusMessage)
       }
+    })
+    rejectedFiles.forEach(() => {
+      let statusMessage = _labels.accepted + ': ' + acceptedFiles.length + ', '
+      statusMessage += _labels.rejected + ': ' + rejectedFiles.length + ', '
+      statusMessage += _labels.total + ': ' + (acceptedFiles.length + rejectedFiles.length)
+      setStatus({
+        message: statusMessage,
+        type: 'OK'
+      })
     })
   }, [_files, _labels, updateFiles])
 
@@ -122,7 +131,6 @@ const FileUpload = ({
       }
       return true
     })
-    console.log(statusMessage)
     updateFiles(newFiles, statusMessage)
   }
 

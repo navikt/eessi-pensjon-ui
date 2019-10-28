@@ -1,32 +1,32 @@
 import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
-import AdvarselTrekant from './src/advarsel-trekant'
-import BubbleChat from './src/bubble-chat-2'
-import FilledNetworkConnecting from './src/filled-version-network-connecting'
-import FilledPaperClip from './src/filled-version-paperclip-2'
-import FilledRemoveCircle from './src/filled-version-remove-circle'
-import LineBirthdayCake from './src/line-version-birthday-cake'
-import LineBookmarkArticle from './src/line-version-bookmark-article'
-import LineCheckCircle from './src/line-version-check-circle-2'
-import LineClose from './src/line-version-close'
-import LineEcoGlobe from './src/line-version-eco-globe'
-import LineExpandedCalendar from './src/line-version-expanded-calendar-3'
-import LineExpandedGlobe from './src/line-version-expanded-globe-2'
-import LineHandbag from './src/line-version-handbag-3'
-import LineHeartCircle from './src/line-version-heart-circle'
-import LineHelpCircle from './src/line-version-help-circle'
-import LineLogout from './src/line-version-logout'
-import LineHome from './src/line-version-home-3'
-import LineMessageSent from './src/line-version-expanded-email-send-3'
-import LinePiggyBank from './src/line-version-piggy-bank'
-import LineRankArmy from './src/line-version-rank-army-2'
-import LineRemoveCircle from './src/line-version-remove-circle'
-import LineStethoscope from './src/line-version-expanded-stethoscope'
-import ProblemCircle from './src/report-problem-circle'
-import Vedlegg from './src/Vedlegg'
-import Trashcan from './src/Trashcan'
-import Tilsette from './src/Tilsette'
+import AdvarselTrekant from '../../resources/icons/advarsel-trekant'
+import BubbleChat from '../../resources/icons/bubble-chat-2'
+import FilledNetworkConnecting from '../../resources/icons/filled-version-network-connecting'
+import FilledPaperClip from '../../resources/icons/filled-version-paperclip-2'
+import FilledRemoveCircle from '../../resources/icons/filled-version-remove-circle'
+import LineBirthdayCake from '../../resources/icons/line-version-birthday-cake'
+import LineBookmarkArticle from '../../resources/icons/line-version-bookmark-article'
+import LineCheckCircle from '../../resources/icons/line-version-check-circle-2'
+import LineClose from '../../resources/icons/line-version-close'
+import LineEcoGlobe from '../../resources/icons/line-version-eco-globe'
+import LineExpandedCalendar from '../../resources/icons/line-version-expanded-calendar-3'
+import LineExpandedGlobe from '../../resources/icons/line-version-expanded-globe-2'
+import LineHandbag from '../../resources/icons/line-version-handbag-3'
+import LineHeartCircle from '../../resources/icons/line-version-heart-circle'
+import LineHelpCircle from '../../resources/icons/line-version-help-circle'
+import LineLogout from '../../resources/icons/line-version-logout'
+import LineHome from '../../resources/icons/line-version-home-3'
+import LineMessageSent from '../../resources/icons/line-version-expanded-email-send-3'
+import LinePiggyBank from '../../resources/icons/line-version-piggy-bank'
+import LineRankArmy from '../../resources/icons/line-version-rank-army-2'
+import LineRemoveCircle from '../../resources/icons/line-version-remove-circle'
+import LineStethoscope from '../../resources/icons/line-version-expanded-stethoscope'
+import ProblemCircle from '../../resources/icons/report-problem-circle'
+import Vedlegg from '../../resources/icons/Vedlegg'
+import Trashcan from '../../resources/icons/Trashcan'
+import Tilsette from '../../resources/icons/Tilsette'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as icons from '@fortawesome/free-solid-svg-icons'
@@ -82,14 +82,14 @@ const Icons = (props) => {
     case 'nav-daily' : return <LinePiggyBank {...props} width={w} height={h} />
     case 'nav-home' : return <LineHome {...props} width={w} height={h} />
     case 'nav-learn' : return <LineBookmarkArticle {...props} width={w} height={h} />
-    case 'nav-man-icon' : return <img alt='man-icon' {...props} width={w} height={h} src={require('./src/icon-mann.png')} />
+    case 'nav-man-icon' : return <img alt='man-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-mann.png')} />
     case 'nav-message-sent' : return <LineMessageSent {...props} width={w} height={h} />
     case 'nav-military' : return <LineRankArmy {...props} width={w} height={h} />
     case 'nav-other' : return <LineHelpCircle {...props} width={w} height={h} />
     case 'nav-sick' : return <LineStethoscope {...props} width={w} height={h} />
-    case 'nav-unknown-icon' : return <img alt='ukjent-icon' {...props} width={w} height={h} src={require('./src/icon-ukjent.png')} />
+    case 'nav-unknown-icon' : return <img alt='ukjent-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-ukjent.png')} />
     case 'nav-voluntary' : return <LineEcoGlobe {...props} width={w} height={h} />
-    case 'nav-woman-icon' : return <img alt='woman-icon' {...props} width={w} height={h} src={require('./src/icon-kvinne.png')} />
+    case 'nav-woman-icon' : return <img alt='woman-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-kvinne.png')} />
     case 'nav-work' : return <LineHandbag {...props} width={w} height={h} />
     case 'outlink' : return <LineLogout {...props} width={w} height={h} />
     case 'paperclip' : return <FilledPaperClip {...props} width={w} height={h} />

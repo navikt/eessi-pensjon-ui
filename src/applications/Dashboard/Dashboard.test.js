@@ -88,7 +88,7 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual({ default: 'mockLayoutValue' })
+    expect(props().layouts).toEqual([{ label: 'default', body: 'mockLayoutValue' }])
   })
 
   it('onBreakpointChange', () => {
@@ -159,7 +159,7 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual({ default: { lg: [] } })
+    expect(props().layouts).toEqual([{ label: 'default', body: { lg: [] } }])
     act(() => {
       props().onCancelEdit()
     })
@@ -178,7 +178,7 @@ describe('applications/Dashboard/Dashboard', () => {
       wrapper.update()
     })
     act(() => {
-      props().onTabChange('default')
+      props().onTabChange(0)
     })
     act(() => {
       wrapper.update()
@@ -204,7 +204,7 @@ describe('applications/Dashboard/Dashboard', () => {
       wrapper.update()
     })
 
-    expect(props().layouts).toEqual({ default: { lg: [] } })
+    expect(props().layouts).toEqual([{ label: 'default', body: { lg: [] } }])
     expect(props().widgets).toEqual([])
     await act(async () => {
       await props().onSaveEdit()
@@ -217,7 +217,7 @@ describe('applications/Dashboard/Dashboard', () => {
     const layouts = await window.localStorage.getItem('test-layouts')
 
     expect(props().editMode).toEqual(false)
-    expect(JSON.parse(layouts)).toEqual({ default: { lg: [] } })
+    expect(JSON.parse(layouts)).toEqual([{ label: 'default', body: { lg: [] } }])
     expect(JSON.parse(widgets)).toEqual([])
   })
 
@@ -254,7 +254,7 @@ describe('applications/Dashboard/Dashboard', () => {
       title: 'horse widget',
       options: { legs: 4, mane: true }
     }
-    const mockLayout = _.find(mockLayouts.default.lg, w => w.i === 'w-1-note')
+    const mockLayout = _.find(mockLayouts[0].body.lg, w => w.i === 'w-1-note')
     await act(async () => {
       await props().onWidgetUpdate(newWidgetUpdate, mockLayout)
     })
@@ -284,7 +284,7 @@ describe('applications/Dashboard/Dashboard', () => {
       wrapper.update()
     })
 
-    expect(_.find(props().layouts.default.lg, w => w.i === 'w-1-note')).toMatchObject(newLayoutSize)
+    expect(_.find(props().layouts[0].body.lg, w => w.i === 'w-1-note')).toMatchObject(newLayoutSize)
   })
 
   it('onWidgetDelete', () => {
@@ -292,7 +292,7 @@ describe('applications/Dashboard/Dashboard', () => {
       wrapper.update()
     })
     const props = () => wrapper.find(DashboardRender).props()
-    expect(props().layouts.default.lg.map(w => w.i)).toEqual(['w-1-note', 'w-2-smiley', 'w-3-cat'])
+    expect(props().layouts[0].body.lg.map(w => w.i)).toEqual(['w-1-note', 'w-2-smiley', 'w-3-cat'])
 
     act(() => {
       props().onWidgetDelete({ i: 'w-2-smiley' })
@@ -300,6 +300,6 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts.default.lg.map(w => w.i)).toEqual(['w-1-note', 'w-3-cat'])
+    expect(props().layouts[0].body.lg.map(w => w.i)).toEqual(['w-1-note', 'w-3-cat'])
   })
 })

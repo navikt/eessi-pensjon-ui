@@ -7,7 +7,7 @@ import layout from '../../config/DefaultLayout'
 describe('widgets/Note/NoteOptionsWidget', () => {
   let wrapper
   const initialMockProps = {
-    layout: layout,
+    layout: layout[0],
     onWidgetUpdate: jest.fn(),
     widget: _.cloneDeep(NoteWidget.properties)
   }

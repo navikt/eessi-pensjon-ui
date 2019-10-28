@@ -8,7 +8,9 @@ jest.mock('react-pdf', () => {
   return {
     pdfjs: { GlobalWorkerOptions: { workerSrc: '' } },
     Document: (props) => {
-      props.onLoadSuccess({ numPages: 5 })
+      setTimeout(() => {
+        props.onLoadSuccess({ numPages: 5 })
+      }, 500)
       return (
         <div className='mock-pdfdocument'>
           {props.children}
@@ -51,7 +53,7 @@ describe('components/FileUpload/FileUpload', () => {
   }
 
   const fileContents = 'file contents'
-  const file = new File([fileContents], 'text.txt', { type: 'text/plain' })
+  const fileThatDrops = new File([fileContents], 'text.txt', { type: 'text/plain' })
   const expectedProcessedFile = {
     content: {
       base64: 'ZmlsZSBjb250ZW50cw=='
@@ -90,13 +92,13 @@ describe('components/FileUpload/FileUpload', () => {
     })
     expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
     await act(async () => {
-      wrapper.find('input').simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [fileThatDrops] } })
     })
     await act(async () => {
       wrapper.update()
     })
     expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([expectedProcessedFile])
-    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 1, ui:rejected: 0, ui:total: 0')
+    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 1, ui:rejected: 0, ui:total: 1')
   })
 
   it('Dropping a file too large', async () => {
@@ -105,12 +107,12 @@ describe('components/FileUpload/FileUpload', () => {
     })
     wrapper.setProps({ maxFileSize: 1 })
     await act(async () => {
-      wrapper.find('input').simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [fileThatDrops] } })
     })
     act(() => {
       wrapper.update()
     })
-    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
+    expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:fileIsTooBigLimitIs')
   })
 
@@ -120,21 +122,24 @@ describe('components/FileUpload/FileUpload', () => {
     })
     wrapper.setProps({ acceptedMimetypes: ['application/pdf'] })
     await act(async () => {
-      wrapper.find('input').simulate('drop', { target: { files: [file] } })
+      wrapper.find('input').simulate('drop', { target: { files: [fileThatDrops] } })
     })
-    expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
-    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 0, ui:rejected: 1, ui:total: 0')
+    act(() => {
+      wrapper.update()
+    })
+    expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
+    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:accepted: 0, ui:rejected: 1, ui:total: 1')
   })
 
   it('Renders a file ', () => {
-    wrapper = mount(<FileUpload {...initialMockProps} files={[file]} />)
+    wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
     expect(wrapper.exists('.c-file')).toBeTruthy()
-    expect(wrapper.find('.c-file').render().text()).toEqual('txt')
+    expect(wrapper.find('.c-file').render().text()).toEqual('Page: 1')
   })
 
   it('Deleting a file', () => {
     act(() => {
-      wrapper = mount(<FileUpload {...initialMockProps} files={[file]} />)
+      wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
     })
     act(() => {
       initialMockProps.onFilesChanged.mockClear()
@@ -157,45 +162,48 @@ describe('components/FileUpload/FileUpload', () => {
       wrapper.update()
     })
     expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
-    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed text.txt')
+    expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed red.pdf')
   })
 
-  it('With a Editor file, loaded', () => {
+  // async because it takes 500 ms for the mock Document to throw a onLoadSuccess with numPages
+  it('With a Editor file, loaded', async (done) => {
     wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
+    setTimeout(() => {
+      act(() => {
+        wrapper.update()
+      })
+      expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 1')
+      act(() => {
+        wrapper.find('.c-file').simulate('mouseenter')
+      })
+      act(() => {
+        wrapper.update()
+      })
 
-    act(() => {
-      wrapper.update()
-    })
-    expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 1')
-    act(() => {
-      wrapper.find('.c-file').simulate('mouseenter')
-    })
-    act(() => {
-      wrapper.update()
-    })
+      expect(wrapper.exists('.previewLink')).toBeTruthy()
+      act(() => {
+        wrapper.find('.previewLink').simulate('click')
+      })
+      expect(wrapper.exists('.c-modal')).toBeTruthy()
 
-    expect(wrapper.exists('.previewLink')).toBeTruthy()
-    act(() => {
-      wrapper.find('.previewLink').simulate('click')
-    })
-    expect(wrapper.exists('.c-modal')).toBeTruthy()
+      expect(wrapper.exists('.nextPage')).toBeTruthy()
+      act(() => {
+        wrapper.find('.nextPage').simulate('click')
+      })
+      act(() => {
+        wrapper.update()
+      })
+      expect(wrapper.find('.mock-pdfpage').last().render().text()).toEqual('Page: 2')
 
-    expect(wrapper.exists('.nextPage')).toBeTruthy()
-    act(() => {
-      wrapper.find('.nextPage').simulate('click')
-    })
-    act(() => {
-      wrapper.update()
-    })
-    expect(wrapper.find('.mock-pdfpage').last().render().text()).toEqual('Page: 2')
-
-    expect(wrapper.exists('.previousPage')).toBeTruthy()
-    act(() => {
-      wrapper.find('.previousPage').simulate('click')
-    })
-    act(() => {
-      wrapper.update()
-    })
-    expect(wrapper.find('.c-file .mock-pdfpage').last().render().text()).toEqual('Page: 1')
+      expect(wrapper.exists('.previousPage')).toBeTruthy()
+      act(() => {
+        wrapper.find('.previousPage').simulate('click')
+      })
+      act(() => {
+        wrapper.update()
+      })
+      expect(wrapper.find('.c-file .mock-pdfpage').last().render().text()).toEqual('Page: 1')
+      done()
+    }, 750)
   })
 })

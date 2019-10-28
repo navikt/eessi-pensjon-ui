@@ -11,13 +11,14 @@ import DashboardTabs from './DashboardTabs'
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export const DashboardGrid = (props) => {
-  const { canDrop, connectDropTarget, currentTab, currentBreakpoint, dragApi, editMode, labels, layouts, MyWidgets } = props
+  const { canDrop, connectDropTarget, currentTabIndex, currentBreakpoint, dragApi, editMode, labels, layouts, MyWidgets } = props
   const { onBreakpointChange, onLayoutChange, onWidgetFullFocus, onWidgetRestoreFocus, onWidgetUpdate } = props
-  const { onWidgetResize, onWidgetDelete, onTabAdd, onTabChange, onTabDelete, rowHeight, widgets } = props
+  const { onWidgetResize, onWidgetDelete, onTabAdd, onTabChange, onTabRename, onTabDelete, onTabMove, rowHeight, widgets } = props
 
-  if (_.isEmpty(layouts) || _.isEmpty(layouts[currentTab])) {
+  if (_.isEmpty(layouts) || _.isNil(currentTabIndex)) {
     return null
   }
+
   return connectDropTarget(
     <div
       id='dashboardGrid'
@@ -30,7 +31,9 @@ export const DashboardGrid = (props) => {
         onTabAdd={onTabAdd}
         onTabDelete={onTabDelete}
         onTabChange={onTabChange}
-        currentTab={currentTab}
+        onTabRename={onTabRename}
+        onTabMove={onTabMove}
+        currentTabIndex={currentTabIndex}
         layouts={layouts}
       />
       <ResponsiveReactGridLayout
@@ -41,7 +44,7 @@ export const DashboardGrid = (props) => {
         containerPadding={DashboardConfig.containerPadding}
         isDraggable={editMode}
         isResizable={editMode}
-        layouts={layouts[currentTab] || {}}
+        layouts={layouts[currentTabIndex].body || {}}
         onBreakpointChange={onBreakpointChange}
         onLayoutChange={onLayoutChange}
         measureBeforeMount={false}
@@ -50,7 +53,7 @@ export const DashboardGrid = (props) => {
         draggableHandle='.draggableHandle'
         dragApiRef={dragApi}
       >
-        {_.map(layouts[currentTab][currentBreakpoint], (layout) => {
+        {_.map(layouts[currentTabIndex].body[currentBreakpoint], (layout) => {
           return (
             <div id={'widget-' + layout.i} key={layout.i}>
               <WidgetContainer
@@ -77,11 +80,11 @@ export const DashboardGrid = (props) => {
 DashboardGrid.propTypes = {
   connectDropTarget: PT.func.isRequired,
   currentBreakpoint: PT.string.isRequired,
-  currentTab: PT.string.isRequired,
+  currentTabIndex: PT.number.isRequired,
   dragApi: PT.object.isRequired,
   editMode: PT.bool.isRequired,
   labels: PT.object,
-  layouts: PT.object.isRequired,
+  layouts: PT.array.isRequired,
   onBreakpointChange: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
   onWidgetUpdate: PT.func.isRequired,
@@ -89,7 +92,11 @@ DashboardGrid.propTypes = {
   onWidgetDelete: PT.func.isRequired,
   onWidgetFullFocus: PT.func.isRequired,
   onWidgetRestoreFocus: PT.func.isRequired,
+  onTabAdd: PT.func.isRequired,
+  onTabDelete: PT.func.isRequired,
   onTabChange: PT.func.isRequired,
+  onTabRename: PT.func.isRequired,
+  onTabMove: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
   widgets: PT.array.isRequired
 }

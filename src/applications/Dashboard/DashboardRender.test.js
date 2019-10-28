@@ -49,8 +49,11 @@ describe('applications/Dashboard/Dashboard', () => {
     editMode: false,
     mounted: false,
     labels: labels,
-    layouts: { default: { lg: [] } },
-    currentTab: 'default',
+    layouts: [{
+      label: 'default',
+      body: { lg: [] }
+    }],
+    currentTabIndex: 0,
     currentBreakpoint: 'lg',
     onEditModeOn: jest.fn(),
     onCancelEdit: jest.fn(),
@@ -65,6 +68,8 @@ describe('applications/Dashboard/Dashboard', () => {
     onTabChange: jest.fn(),
     onTabAdd: jest.fn(),
     onTabDelete: jest.fn(),
+    onTabRename: jest.fn(),
+    onTabMove: jest.fn(),
     onWidgetFullFocus: jest.fn(),
     onWidgetRestoreFocus: jest.fn(),
     setWidgets: jest.fn(),

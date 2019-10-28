@@ -5,7 +5,7 @@ describe('components/Banner', () => {
   const initialMockProps = {
     header: 'BANNER',
     labelHighContrast: 'mockLabel',
-    toggleHighContrast: jest.fn()
+    onHighContrastClicked: jest.fn()
   }
 
   it('Renders', () => {
@@ -24,6 +24,6 @@ describe('components/Banner', () => {
   it('Handles highContrast request', () => {
     const wrapper = mount(<Banner {...initialMockProps} />)
     wrapper.find('#c-banner__highcontrast-link-id').hostNodes().simulate('click')
-    expect(initialMockProps.toggleHighContrast).toBeCalled()
+    expect(initialMockProps.onHighContrastClicked).toBeCalled()
   })
 })

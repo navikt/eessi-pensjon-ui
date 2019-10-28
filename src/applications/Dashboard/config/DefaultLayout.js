@@ -1,5 +1,6 @@
-export default {
-  default: {
+export default [{
+  label: 'default',
+  body: {
     lg: [
       { i: 'w-1-note', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 },
       { i: 'w-2-smiley', x: 4, y: 0, w: 4, h: 5, minW: 2, maxW: 4, minH: 5, maxH: 999 },
@@ -16,4 +17,4 @@ export default {
       { i: 'w-3-cat', x: 2, y: 0, w: 1, h: 2, minW: 1, maxW: 1, minH: 2, maxH: 999 }
     ]
   }
-}
+}]

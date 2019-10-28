@@ -3,7 +3,7 @@ import RefreshButton from './RefreshButton'
 
 describe('components/RefreshButton', () => {
   const initialMockProps = {
-    onRefreshClick: jest.fn(),
+    onRefreshClicked: jest.fn(),
     rotating: false,
     labelRefresh: 'mockLabelRefresh'
   }
@@ -16,9 +16,9 @@ describe('components/RefreshButton', () => {
 
   it('Has proper HTML structure', () => {
     const wrapper = mount(<RefreshButton {...initialMockProps} />)
-    expect(wrapper.exists('.c-refreshButton')).toBeTruthy()
-    expect(wrapper.find('.c-refreshButton').props().title).toEqual(initialMockProps.labelRefresh)
-    wrapper.find('.c-refreshButton a').hostNodes().simulate('click')
-    expect(initialMockProps.onRefreshClick).toHaveBeenCalled()
+    expect(wrapper.exists('.c-refreshbutton')).toBeTruthy()
+    expect(wrapper.find('.c-refreshbutton').props().title).toEqual(initialMockProps.labelRefresh)
+    wrapper.find('.c-refreshbutton').hostNodes().simulate('click')
+    expect(initialMockProps.onRefreshClicked).toHaveBeenCalled()
   })
 })

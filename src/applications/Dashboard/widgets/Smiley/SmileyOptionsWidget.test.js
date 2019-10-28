@@ -7,7 +7,7 @@ import layout from '../../config/DefaultLayout'
 describe('widgets/Smiley/SmileyOptionsWidget', () => {
   let wrapper
   const initialMockProps = {
-    layout: layout,
+    layout: layout[0],
     onWidgetUpdate: jest.fn(),
     widget: _.cloneDeep(SmileyWidget.properties)
   }

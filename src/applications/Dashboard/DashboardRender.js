@@ -15,9 +15,10 @@ import './Dashboard.css'
 const dragApi = createDragApiRef()
 
 export const DashboardRender = ({
-  addMode, availableWidgets, currentTab, currentBreakpoint, editMode, labels, layouts, mounted, MyWidgets, onAddChange,
+  addMode, availableWidgets, currentTabIndex, currentBreakpoint, editMode, labels, layouts, mounted, MyWidgets, onAddChange,
   onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onResetEdit, onSaveEdit, onTabAdd, onTabDelete, onTabChange,
-  onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, setWidgets, widgets
+  onTabRename, onTabMove, onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate,
+  setWidgets, widgets
 }) => {
   if (!mounted) {
     return (
@@ -39,7 +40,6 @@ export const DashboardRender = ({
           />
           {addMode ? (
             <WidgetAddArea
-              currentTab={currentTab}
               availableWidgets={availableWidgets}
               labels={labels}
               currentBreakpoint={currentBreakpoint}
@@ -56,10 +56,12 @@ export const DashboardRender = ({
             mounted={mounted}
             currentBreakpoint={currentBreakpoint}
             onBreakpointChange={onBreakpointChange}
-            currentTab={currentTab}
+            currentTabIndex={currentTabIndex}
             onTabChange={onTabChange}
             onTabAdd={onTabAdd}
             onTabDelete={onTabDelete}
+            onTabRename={onTabRename}
+            onTabMove={onTabMove}
             onLayoutChange={onLayoutChange}
             onWidgetUpdate={onWidgetUpdate}
             onWidgetResize={onWidgetResize}
@@ -82,14 +84,18 @@ DashboardRender.propTypes = {
   currentBreakpoint: PT.string.isRequired,
   editMode: PT.bool.isRequired,
   labels: PT.object,
-  layouts: PT.object.isRequired,
+  layouts: PT.array.isRequired,
   onAddChange: PT.func.isRequired,
   onBreakpointChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
   onEditModeOn: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
   onResetEdit: PT.func.isRequired,
+  onTabAdd: PT.func.isRequired,
   onTabChange: PT.func.isRequired,
+  onTabRename: PT.func.isRequired,
+  onTabDelete: PT.func.isRequired,
+  onTabMove: PT.func.isRequired,
   onSaveEdit: PT.func.isRequired,
   onWidgetDelete: PT.func.isRequired,
   onWidgetResize: PT.func.isRequired,

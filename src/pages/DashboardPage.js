@@ -56,8 +56,9 @@ const DashboardPage = () => {
         </ul>
         <Dashboard
           id='eessi-pensjon-ui-demo-2'
-          defaultLayout={{
-            'Side 1': {
+          defaultLayout={[{
+            label: 'Side 1',
+            body: {
               lg: [
                 { i: 'w-1-note', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 }
               ],
@@ -67,8 +68,10 @@ const DashboardPage = () => {
               sm: [
                 { i: 'w-1-note', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 }
               ]
-            },
-            'Side 2': {
+            }
+          }, {
+            label: 'Side 2',
+            body: {
               lg: [
                 { i: 'w-2-smiley', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 }
               ],
@@ -78,8 +81,10 @@ const DashboardPage = () => {
               sm: [
                 { i: 'w-2-smiley', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 }
               ]
-            },
-            'Side 3': {
+            }
+          }, {
+            label: 'Side 3',
+            body: {
               lg: [
                 { i: 'w-3-cat', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 }
               ],
@@ -90,7 +95,7 @@ const DashboardPage = () => {
                 { i: 'w-3-cat', x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, minH: 1, maxH: 999 }
               ]
             }
-          }}
+          }]}
           defaultWidgets={[{
             i: 'w-1-note',
             type: 'note',
@@ -121,10 +126,10 @@ const DashboardPage = () => {
             margin: [10, 10],
             containerPadding: [10, 10],
             rowHeight: 30,
-            defaultTab: 'default',
+            defaultTabIndex: 0,
             version: 1
           }}
-          defaultTab='Side 1'
+          defaultTabIndex={0}
           allowedWidgets={['cat', 'smiley', 'note']}
         />
 
@@ -195,10 +200,10 @@ const DashboardPage = () => {
           '    margin: [10, 10],\n' +
           '    containerPadding: [10, 10],\n' +
           '    rowHeight: 30,\n' +
-          '    defaultTab: \'default\',\n' +
+          '    defaultTabIndex: 0,\n' +
           '    version: 1\n' +
-          '}}' +
-          'defaultTab=\'Side 1\'\n' +
+          '  }}' +
+          '  defaultTabIndex={0}\n' +
           '  allowedWidgets={[\'cat\', \'smiley\', \'note\']}\n' +
           '/>'}
         </SyntaxHighlighter>
@@ -250,10 +255,10 @@ const DashboardPage = () => {
               <td>-</td>
             </tr>
             <tr>
-              <td>defaultTab</td>
-              <td><code>string</code></td>
+              <td>defaultTaIndex</td>
+              <td><code>number</code></td>
               <td>false</td>
-              <td>Active dashboard, if there is more than one dashboard in the dashboard layout.</td>
+              <td>Active dashboard tab index, if there is more than one dashboard in the dashboard layout.</td>
               <td>-</td>
             </tr>
             <tr>

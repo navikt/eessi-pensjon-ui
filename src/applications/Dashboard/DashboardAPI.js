@@ -33,13 +33,22 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
     }
   }
 
-  if (!Object.prototype.hasOwnProperty.call(layouts, 'default') && Object.prototype.hasOwnProperty.call(layouts, 'lg')) {
-    layouts = {
-      default: {
-        lg: layouts.lg,
-        md: layouts.md,
-        sm: layouts.sm
-      }
+  // modernizing old layouts
+  if (!_.isArray(layouts)) {
+    if (!Object.prototype.hasOwnProperty.call(layouts, 'default') && Object.prototype.hasOwnProperty.call(layouts, 'lg')) {
+      layouts = [{
+        label: 'default',
+        body: {
+          lg: layouts.lg,
+          md: layouts.md,
+          sm: layouts.sm
+        }
+      }]
+    } else {
+      layouts = Object.keys(layouts).map(key => ({
+        label: key,
+        body: layouts[key]
+      }))
     }
   }
 
@@ -48,9 +57,9 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
   }) : widgets
   const widgetIds = widgets.map(w => w.i)
   if (!_.isEmpty(widgetIds)) {
-    Object.keys(layouts).forEach((tab) => {
-      Object.keys(layouts[tab]).forEach((breakpoint) => {
-        layouts[tab][breakpoint] = layouts[tab][breakpoint].filter((w) => {
+    layouts.forEach((tab, index) => {
+      Object.keys(layouts[index].body).forEach((breakpoint) => {
+        layouts[index].body[breakpoint] = layouts[index].body[breakpoint].filter((w) => {
           return _.includes(widgetIds, w.i)
         })
       })
