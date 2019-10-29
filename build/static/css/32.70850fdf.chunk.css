@@ -1,2 +1,0 @@
-.c-refreshbutton.rotating{display:inline-block;-webkit-animation:c-refreshbutton-rotating 2s linear infinite;animation:c-refreshbutton-rotating 2s linear infinite}@-webkit-keyframes c-refreshbutton-rotating{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes c-refreshbutton-rotating{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}
-/*# sourceMappingURL=32.70850fdf.chunk.css.map */

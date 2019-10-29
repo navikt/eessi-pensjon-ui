@@ -1,1 +1,0 @@
-{"version":3,"sources":["Psycho.css"],"names":[],"mappings":"AAAA,oCACE,WACF,CACA,wCACE,WAAY,CACZ,UACF","file":"25.76ef3f25.chunk.css","sourcesContent":[".c-psychoPanel .veileder__frame img {\n  height: 100%;\n}\n.c-psychoPanel .nav-veileder__frame img {\n  height: 100%;\n  width: 100%;\n}\n"]}
