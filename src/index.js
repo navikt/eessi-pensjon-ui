@@ -27,6 +27,7 @@ import IconsPage from './pages/IconsPage'
 import ModalPage from './pages/ModalPage'
 import MultipleSelectPage from './pages/MultipleSelectPage'
 import NavPage from './pages/NavPage'
+import PostalCodesPage from './pages/PostalCodesPage'
 import ProgressBarPage from './pages/ProgressBarPage'
 import PsychoPage from './pages/PsychoPage'
 import RefreshButtonPage from './pages/RefreshButtonPage'
@@ -50,6 +51,7 @@ ReactDOM.render(
       <Route exact path='/Modal' component={ModalPage} />
       <Route exact path='/MultipleSelect' component={MultipleSelectPage} />
       <Route exact path='/Nav' component={NavPage} />
+      <Route exact path='/PostalCodes' component={PostalCodesPage} />
       <Route exact path='/ProgressBar' component={ProgressBarPage} />
       <Route exact path='/Psycho' component={PsychoPage} />
       <Route exact path='/RefreshButton' component={RefreshButtonPage} />

@@ -135,6 +135,7 @@ const CountryUtilsPage = () => {
         <Normaltekst className='pb-4'>Country Filter is a collection of predefined groups of countries:</Normaltekst>
         <ul>
           <li>EEA - The <a href='https://en.wikipedia.org/wiki/European_Economic_Area'>European Economic Area countries</a>, that is, EU countries plus Switzerland, Faroe islands, Greenland, Iceland, Liechtenstein and Norway</li>
+          <li>EESSI_READY - The countries that are ESSSI-compliant</li>
           <li>EU - All 28 <a href='https://en.wikipedia.org/wiki/European_Union'>European Union countries</a></li>
           <li>NO - <a href='https://en.wikipedia.org/wiki/Norway'>Norway</a> only</li>
           <li>NORDIC - <a href='https://en.wikipedia.org/wiki/Nordic_countries'>Nordic countries</a>: Denmark, Finland, Faroe islands, Greenland, Iceland, Norway, Sweden</li>
