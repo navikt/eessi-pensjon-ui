@@ -1,5 +1,4 @@
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -16,12 +15,6 @@ module.exports = {
     publicPath: '/dist/',
     umdNamedDefine: true
   },
-  plugins: [
-    new CopyWebpackPlugin([{
-      from: 'node_modules/pdfjs-dist/build/pdf.worker.js',
-      to: 'pdf.worker.js'
-    }])
-  ],
   module: {
     rules: [{
       test: /\.less$/,

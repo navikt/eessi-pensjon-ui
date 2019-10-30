@@ -1,13 +1,9 @@
 import React from 'react'
 import PT from 'prop-types'
-import { Document, Page, pdfjs } from 'react-pdf'
+import { Document, Page } from 'react-pdf'
 import classNames from 'classnames'
 import './Pdf.css'
-if (process.env.NODE_ENV === 'production') {
-  pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.js'
-} else {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-}
+
 export const Pdf = ({ className, currentPage, file, height, labels, numberPages, onContentClick, onLoadSuccess, scale, size, width }) => (
   <div
     className={classNames('c-file-Pdf', className)}
