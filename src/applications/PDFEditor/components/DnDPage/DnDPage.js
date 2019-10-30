@@ -6,7 +6,6 @@ import classNames from 'classnames'
 import Icons from '../../../../components/Icons/Icons'
 import './DnDPage.css'
 
-
 const DnDPage = (props) => {
   const { actions, action, className, dndTarget, file, isFocused, pageNumber, pageScale, recipes, style } = props
   const [isHovering, setIsHovering] = useState(false)
