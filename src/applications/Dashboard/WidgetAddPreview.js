@@ -4,7 +4,7 @@ import { DragLayer } from 'react-dnd'
 import Widget from './Widget'
 import DashboardConfig from './config/DashboardConfig'
 
-export const WidgetAddPreview = ({ currentBreakpoint, currentOffset, initialOffset, isDragging, labels, item }) => {
+export const WidgetAddPreview = ({ currentBreakpoint, currentOffset, initialOffset, isDragging, labels, item, MyWidgets }) => {
   if (!isDragging) {
     return null
   }
@@ -57,7 +57,7 @@ export const WidgetAddPreview = ({ currentBreakpoint, currentOffset, initialOffs
   return (
     <div className='c-d-widgetAddPreview' style={layerStyles}>
       <div style={getItemStyles(initialOffset, currentOffset, dimensions)}>
-        <Widget widget={widget} labels={labels} />
+        <Widget widget={widget} MyWidgets={MyWidgets} labels={labels} />
       </div>
     </div>
   )
@@ -69,7 +69,8 @@ WidgetAddPreview.propTypes = {
   initialOffset: PT.object,
   isDragging: PT.bool,
   item: PT.object,
-  labels: PT.object
+  labels: PT.object,
+  MyWidgets: PT.object
 }
 
 const WidgetAddPreviewDragLayer = DragLayer(monitor => ({

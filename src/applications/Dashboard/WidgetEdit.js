@@ -13,7 +13,14 @@ const WidgetEdit = (props) => {
         <div className='title'>
           {labels.dragHereToMoveWidget}
           <div className='deleteButton'>
-            <a href='#delete' onClick={() => setMode('delete')}>🗑</a>
+            <a
+              href='#delete' onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setMode('delete')
+              }}
+            >🗑
+            </a>
           </div>
         </div>
       </div>

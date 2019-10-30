@@ -44,6 +44,7 @@ export const DashboardRender = ({
               labels={labels}
               currentBreakpoint={currentBreakpoint}
               widgets={widgets}
+              MyWidgets={MyWidgets}
               setWidgets={setWidgets}
               dragApi={dragApi}
             />
