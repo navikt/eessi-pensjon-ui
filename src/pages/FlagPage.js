@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from './Container'
 import Flag from '../components/Flag/Flag'
 import FlagList from '../components/Flag/FlagList'
@@ -7,10 +7,15 @@ import CountryData from '../components/CountryData/CountryData'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
-import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
+import Mustache from 'mustache'
+import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const FlagPage = () => {
+  const [country, setCountry] = useState('no')
+  let label = CountryData.findByValue('nb', country)
+  label = label ? label.label : 'Unknown'
+  console.log(label)
   return (
     <Container>
       <ReactTooltip place='top' type='dark' effect='solid' />
@@ -21,24 +26,30 @@ const FlagPage = () => {
         <Undertittel className='mt-4 mb-4'>Flag styles and sizes</Undertittel>
         <Normaltekst className='mt-4 mb-4'>At the moment, there is only two sizes: <strong>M</strong> and <strong>L</strong>, and two styles: <strong>circle</strong> and <strong>original</strong>.</Normaltekst>
 
-        <Flag country='no' label='Norge' size='M' type='original' />
+        <Input className='w-25' label='Choose country' value={country} onChange={(e) => { setCountry(e.target.value) }} />
+        <Normaltekst className='mt-4 mb-4'>Country: {label}</Normaltekst>
+        <Flag country={country} label={label} size='M' type='original' />
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<Flag country=\'no\' label=\'Norge\' size=\'M\' type=\'original\'/>'}
+          {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'M\' type=\'original\'/>',
+            { country: country, label: label })}
         </SyntaxHighlighter>
 
-        <Flag country='no' label='Norge' size='L' type='original' />
+        <Flag country={country} label={label} size='L' type='original' />
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<Flag country=\'no\' label=\'Norge\' size=\'L\' type=\'original\'/>'}
+          {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'L\' type=\'original\'/>',
+            { country: country, label: label })}
         </SyntaxHighlighter>
 
-        <Flag country='no' label='Norge' size='M' type='circle' />
+        <Flag country={country} label={label} size='M' type='circle' />
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<Flag country=\'no\' label=\'Norge\' size=\'M\' type=\'circle\'/>'}
+          {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'M\' type=\'circle\'/>',
+            { country: country, label: label })}
         </SyntaxHighlighter>
 
-        <Flag country='no' label='Norge' size='L' type='circle' />
+        <Flag country={country} label={label} size='L' type='circle' />
         <SyntaxHighlighter language='javascript' style={prism}>
-          {'<Flag country=\'no\' label=\'Norge\' size=\'L\' type=\'circle\'/>'}
+          {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'L\' type=\'circle\'/>',
+            { country: country, label: label })}
         </SyntaxHighlighter>
 
         <Undertittel className='mt-4 mb-4'>Flag list</Undertittel>
@@ -90,7 +101,7 @@ const FlagPage = () => {
           '/>'}
         </SyntaxHighlighter>
 
-        <Undertittel className='mt-4 mb-4'>Available flags</Undertittel>
+        <Undertittel className='mt-4 mb-4'>Available flags - rectangle form</Undertittel>
         <Normaltekst className='mt-4 mb-4'>Use the two-letter country code for country list. Hover the mouser cursor over the desired flag to get the country code.</Normaltekst>
 
         <div className='d-flex flex-wrap' style={{ justifyContent: 'space-evenly' }}>
@@ -98,6 +109,15 @@ const FlagPage = () => {
             <Flag key={index} className='m-1' country={country.value} label={country.label + ' - ' + country.value} />
           ))}
         </div>
+
+        <Undertittel className='mt-4 mb-4'>Available flags - circle form</Undertittel>
+
+        <div className='d-flex flex-wrap' style={{ justifyContent: 'space-evenly' }}>
+          {CountryData.getData('nb').map((country, index) => (
+            <Flag type='circle' key={index} className='m-1' country={country.value} label={country.label + ' - ' + country.value} />
+          ))}
+        </div>
+
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
         <SyntaxHighlighter language='javascript' style={prism}>
           {'import { Flag } from \'eessi-pensjon-ui\'\n' +

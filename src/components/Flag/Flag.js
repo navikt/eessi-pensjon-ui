@@ -12,10 +12,15 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
   }
 
   const getFlag = () => {
-    if (CountryData.exists(country)) {
-      return <ReactFlag code={country} />
+    let _country = country
+    if (CountryData.exists(_country)) {
+      // we are using UK as the code, but we have GB as flag's svg
+      if (country.toLowerCase() === 'uk') {
+        _country = 'gb'
+      }
+      return <ReactFlag code={_country} />
     }
-    console.error('Flag ' + country.toLowerCase() + ' not found')
+    console.error('Flag ' + _country.toLowerCase() + ' not found')
     return null
   }
 
