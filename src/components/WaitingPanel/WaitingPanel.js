@@ -6,7 +6,7 @@ const WaitingPanel = ({ className, size = 'M', message = 'Vennligst vent...' }) 
   <div className={classNames('c-waitingPanel', 'text-center', className)}>
     <Spinner type={size} />
     {message ? (
-      <Normaltekst className='c-waitingPanel__message'>
+      <Normaltekst className='c-waitingPanel__message ml-2'>
         {message}
       </Normaltekst>
     ) : null}

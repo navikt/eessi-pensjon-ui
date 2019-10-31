@@ -1,62 +1,8 @@
 .c-tableSorter {
 
-  table-layout: fixed;
-
-  &__status {
-    min-height: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    padding-left: 0.5rem;
-  }
-
-  &__subcell {
-    display: flex;
-    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  }
-
-  .checkbox {
-    width: 70px;
-  }
-
-  .header {
-    cursor: pointer;
-  }
-
-  .headerSortDesc {
-    background: #0067C5;
-    color: white;
-
-    p:after {
-      content: " ▲";
-    }
-  }
-
-  .headerSortAsc {
-    background: #0067C5;
-    color: white;
-
-    p:after {
-      content: " ▼";
-    }
-  }
-
-  &__sort-input {
-    margin-bottom: 0px !important;
-    .skjemaelement__label {
-        display: none;
-    }
-  }
-
-  &__checkbox {
-    margin-bottom: 0px !important;
-    .skjemaelement__label {
-      display: block !important;
-    }
-  }
-
   &__table {
     width: 100%;
+    table-layout: fixed;
 
     thead {
       border-bottom: 2px solid grey;
@@ -99,6 +45,63 @@
         width: 50px;
         display: block;
       }
+    }
+  }
+
+  &__status {
+    min-height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+  }
+
+  &__subcell {
+    display: flex;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  }
+
+  &__pagination {
+    justify-content: flex-end;
+  }
+
+  .checkbox {
+    width: 70px;
+  }
+
+  .header {
+    cursor: pointer;
+  }
+
+  .headerSortDesc {
+    background: #0067C5;
+    color: white;
+
+    p:after {
+      content: " ▲";
+    }
+  }
+
+  .headerSortAsc {
+    background: #0067C5;
+    color: white;
+
+    p:after {
+      content: " ▼";
+    }
+  }
+
+  &__sort-input {
+    margin-bottom: 0px !important;
+    .skjemaelement__label {
+        display: none;
+    }
+  }
+
+  &__checkbox {
+    margin-bottom: 0px !important;
+    .skjemaelement__label {
+      display: block !important;
     }
   }
 }

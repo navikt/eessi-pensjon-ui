@@ -31,6 +31,7 @@ const Container = ({ className, children }) => (
           <li><Link to='/Modal'>Modal</Link></li>
           <li><Link to='/MultipleSelect'>Multiple select</Link></li>
           <li><Link to='/Nav'>Nav elements</Link></li>
+          <li><Link to='/Pagination'>Pagination</Link></li>
           <li><Link to='/PostalCodes'>Postal codes</Link></li>
           <li><Link to='/ProgressBar'>Progress bar</Link></li>
           <li><Link to='/Psycho'>Psycho</Link></li>

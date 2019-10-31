@@ -5,11 +5,16 @@ import PT from 'prop-types'
 import * as Nav from '../../Nav'
 import WaitingPanel from '../WaitingPanel/WaitingPanel'
 import './TableSorter.css'
+import Pagination from '../Pagination/Pagination'
 
-const TableSorter = ({ className, sort = { column: '', order: '' }, context, columns = [], items = [], loading = false }) => {
+const TableSorter = ({
+  className, context, columns = [], initialPage = 1, items = [], itemsPerPage = 10,
+  loading = false, pagination = true, sort = { column: '', order: '' }
+}) => {
   const [_sort, setSort] = useState(sort)
   const [_columns, setColumns] = useState(columns)
   const [seeFilters, setSeeFilters] = useState(false)
+  const [currentPage, setCurrentPage] = useState(initialPage)
   const sortOrder = {
     '': 'asc',
     asc: 'desc',
@@ -59,7 +64,11 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
       sortedItems.reverse()
     }
 
-    return sortedItems.map((item, index) => {
+    return sortedItems.filter((item, index) => {
+      return pagination
+        ? ((currentPage - 1) * itemsPerPage <= index && index < (currentPage * itemsPerPage))
+        : true
+    }).map((item, index) => {
       const background = index % 2 === 0 ? 'white' : 'whitesmoke'
       return (
         <tr
@@ -101,31 +110,6 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
     })
   }
 
-  const header = () => {
-    return (
-      <>
-        <th>
-          <Nav.Checkbox
-            id='c-tableSorter__seefilters-checkbox-id'
-            className='c-tableSorter__checkbox'
-            label=''
-            checked={seeFilters}
-            onChange={() => setSeeFilters(!seeFilters)}
-          />
-        </th>
-        {_columns.map((column) => (
-          <th
-            key={column.id}
-            onClick={() => sortColumn(column)}
-            className={'header ' + sortClass(column)}
-          >
-            <Nav.UndertekstBold>{column.label}</Nav.UndertekstBold>
-          </th>
-        ))}
-      </>
-    )
-  }
-
   const handleFilterTextChange = (_column, newValue) => {
     setColumns(_columns.map((column) => {
       return _column.id === column.id ? {
@@ -133,27 +117,6 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
         filterText: newValue
       } : column
     }))
-  }
-
-  const filterInputs = () => {
-    return (
-      <>
-        <td />
-        {_columns.map((column) => {
-          return (
-            <td key={column.id}>
-              <Nav.Input
-                id={'c-tableSorter__sort-' + column.id + '-input-id'}
-                className='c-tableSorter__sort-input'
-                label=''
-                value={column.filterText}
-                onChange={(e) => handleFilterTextChange(column, e.target.value)}
-              />
-            </td>
-          )
-        })}
-      </>
-    )
   }
 
   return (
@@ -164,11 +127,56 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
       <div className='c-tableSorter__content'>
         <table cellSpacing='0' className='c-tableSorter__table'>
           <thead>
-            <tr>{header()}</tr>
-            {seeFilters ? <tr>{filterInputs()}</tr> : null}
+            <tr className='c-tableSorter__header'>
+              <th>
+                <Nav.Checkbox
+                  id='c-tableSorter__seefilters-checkbox-id'
+                  className='c-tableSorter__checkbox'
+                  label=''
+                  checked={seeFilters}
+                  onChange={() => setSeeFilters(!seeFilters)}
+                />
+              </th>
+              {_columns.map((column) => (
+                <th
+                  key={column.id}
+                  onClick={() => sortColumn(column)}
+                  className={'header ' + sortClass(column)}
+                >
+                  <Nav.UndertekstBold>{column.label}</Nav.UndertekstBold>
+                </th>
+              ))}
+            </tr>
+            {seeFilters ? (
+              <tr className='c-tableSorter__filter'>
+                <td />
+                {_columns.map((column) => {
+                  return (
+                    <td key={column.id}>
+                      <Nav.Input
+                        id={'c-tableSorter__sort-' + column.id + '-input-id'}
+                        className='c-tableSorter__sort-input'
+                        label=''
+                        value={column.filterText}
+                        onChange={(e) => handleFilterTextChange(column, e.target.value)}
+                      />
+                    </td>
+                  )
+                })}
+              </tr>
+            ) : null}
           </thead>
           <tbody>{rows()}</tbody>
         </table>
+        {pagination ? (
+          <Pagination
+            className='c-tableSorter__pagination'
+            numberOfItems={items.length}
+            itemsPerPage={itemsPerPage}
+            initialPage={initialPage}
+            onChange={(page) => setCurrentPage(page)}
+          />
+        ) : null}
       </div>
     </div>
   )
@@ -176,9 +184,13 @@ const TableSorter = ({ className, sort = { column: '', order: '' }, context, col
 
 TableSorter.propTypes = {
   className: PT.string,
+  context: PT.object,
   columns: PT.array,
+  initialPage: PT.number,
   items: PT.array,
+  itemsPerPage: PT.number,
   loading: PT.bool,
+  pagination: PT.bool,
   sort: PT.object
 }
 

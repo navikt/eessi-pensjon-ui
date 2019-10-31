@@ -47,8 +47,8 @@ export const DashboardGrid = (props) => {
         layouts={layouts[currentTabIndex].body || {}}
         onBreakpointChange={onBreakpointChange}
         onLayoutChange={onLayoutChange}
-        measureBeforeMount={false}
-        useCSSTransforms={false}
+        measureBeforeMount
+        useCSSTransforms
         preventCollision={false}
         draggableHandle='.draggableHandle'
         dragApiRef={dragApi}

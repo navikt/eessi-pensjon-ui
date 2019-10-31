@@ -1215,7 +1215,7 @@ class CountryData {
         currencyLabel: 'UAE Dirham',
         currency: 'AED'
       }, {
-        value: 'GB',
+        value: 'UK',
         label: 'United Kingdom',
         currencyLabel: 'Pound Sterling',
         currency: 'GBP'
@@ -2548,7 +2548,7 @@ class CountryData {
         currencyLabel: 'Sri Lanka Rupee',
         currency: 'LKR'
       }, {
-        value: 'GB',
+        value: 'UK',
         value3: 'GBR',
         label: 'Storbritannia',
         currencyLabel: 'Pound Sterling',
