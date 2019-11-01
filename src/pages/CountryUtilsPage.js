@@ -4,12 +4,16 @@ import CountrySelect from '../components/CountrySelect/CountrySelect'
 import CountryFilter from '../components/CountrySelect/CountryFilter'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import Mustache from 'mustache'
 import { Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const CountryUtilsPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const CountryUtilsPage = ({ highContrast }) => {
   const [sort, setSort] = useState('scandinaviaFirst')
   return (
     <Container>
@@ -28,7 +32,7 @@ const CountryUtilsPage = () => {
           onOptionSelected={(country) => window.alert('You selected ' + JSON.stringify(country))}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  onOptionSelected={(country) => window.alert(\'You selected \' + JSON.stringify(country))}\n' +
           '/>'}
@@ -41,7 +45,7 @@ const CountryUtilsPage = () => {
           locale='en'
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  locale=\'en\'\n' +
           '/>'}
@@ -54,7 +58,7 @@ const CountryUtilsPage = () => {
           error='Please choose a country'
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  error=\'Please choose a country\'\n' +
           '/>'}
@@ -69,7 +73,7 @@ const CountryUtilsPage = () => {
           excludeList={CountryFilter.NORDIC}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  includeList={CountryFilter.EU}\n' +
           '  excludeList={CountryFilter.NORDIC}\n' +
@@ -83,7 +87,7 @@ const CountryUtilsPage = () => {
           flags={false}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  flags={false}\n' +
           '/>'}
@@ -112,7 +116,7 @@ const CountryUtilsPage = () => {
           sort={sort}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<CountrySelect \n' +
           '  sort=\'{{sort}}\'\n' +
           '/>', { sort: sort })}
@@ -125,7 +129,7 @@ const CountryUtilsPage = () => {
           type='currency'
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  type=\'currency\'\n' +
           '/>'}
@@ -155,7 +159,7 @@ const CountryUtilsPage = () => {
         </ul>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { CountrySelect } from \'eessi-pensjon-ui\'\n' +
           'import { CountryData } from \'eessi-pensjon-ui\'\n' +
           'import { CountryFilter } from \'eessi-pensjon-ui\'\n'}
@@ -270,4 +274,4 @@ const CountryUtilsPage = () => {
   )
 }
 
-export default CountryUtilsPage
+export default connect(mapStateToProps, () => {})(CountryUtilsPage)

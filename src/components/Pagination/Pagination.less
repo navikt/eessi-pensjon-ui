@@ -1,4 +1,16 @@
 .c-pagination {
   display: flex;
   align-items: baseline;
+
+  .c-pagination__page-button.knapp--disabled {
+    background-color: #0067C5;
+    color: white;
+  }
+}
+
+.highContrast {
+  .c-pagination__page-button.knapp--disabled {
+    background: white;
+    color: black !important;
+  }
 }

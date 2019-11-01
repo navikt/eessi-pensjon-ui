@@ -6,10 +6,14 @@ import Icons from '../components/Icons/Icons'
 import { Undertittel } from 'nav-frontend-typografi'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const DashboardPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const DashboardPage = ({ highContrast }) => {
   return (
     <Container className='w-100'>
       <Panel className='p-4 w-100'>
@@ -31,7 +35,7 @@ const DashboardPage = () => {
           id='eessi-pensjon-ui-demo-1'
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Dashboard id=\'eessi-pensjon-ui-demo-1\'/>'}
         </SyntaxHighlighter>
 
@@ -133,7 +137,7 @@ const DashboardPage = () => {
           allowedWidgets={['cat', 'smiley', 'note']}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Dashboard\n' +
           '  id=\'eessi-pensjon-ui-demo\'\n' +
           '  defaultLayout={{\n' +
@@ -209,7 +213,7 @@ const DashboardPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Dashboard } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-dashboard</code></Normaltekst>
@@ -296,4 +300,4 @@ const DashboardPage = () => {
   )
 }
 
-export default DashboardPage
+export default connect(mapStateToProps, () => {})(DashboardPage)

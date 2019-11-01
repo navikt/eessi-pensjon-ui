@@ -3,14 +3,18 @@ import Container from './Container'
 import File from '../components/File/File'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import samplePDF from '../resources/tests/samplePDF'
 import sampleJPG from '../resources/tests/sampleJPG'
 import sampleOther from '../resources/tests/sampleOther'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const FilePage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const FilePage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -31,7 +35,7 @@ const FilePage = () => {
           <li><code>content</code> - An <code>object</code> with a <code>base64</code>key in it (mandatory), </li>
         </ul>
         <Normaltekst>An example of a <code>file</code> object property: </Normaltekst>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'{\n' +
           '  id: \'1\',\n' +
           '  name: \'example.pdf\',\n' +
@@ -52,7 +56,7 @@ const FilePage = () => {
             <Normaltekst>PDF file renders a page with a default width/height and a folded-corner style. </Normaltekst>
             <Normaltekst className='mt-4 mb-4'>If the PDF file has additional pages, one can see arrows in the sides of the page, when the mouse hovers the page. </Normaltekst>
             <Normaltekst className='mt-4 mb-4'>While you can override <code>width</code> and <code>height</code> params, it is easier to set a <code>scale</code> value (scale 1.0 matches a width of 100px and height of 140 px). </Normaltekst>
-            <SyntaxHighlighter language='javascript' style={prism}>
+            <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
               {'<File file={samplePDF} scale={2}/>'}
             </SyntaxHighlighter>
           </div>
@@ -65,7 +69,7 @@ const FilePage = () => {
           <div className='ml-4'>
             <Normaltekst className='mb-4'>Image file renders the base64 content of an image with a fixed <code>max-height</code> given my <code>height</code> property (with defaylt 100px as a scale 1.0).  </Normaltekst>
             <Normaltekst className='mt-4 mb-4'>Like the PDF file, you can use the <code>scale</code> property to set the image size while preserving the aspect ratio</Normaltekst>
-            <SyntaxHighlighter language='javascript' style={prism}>
+            <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
               {'<File file={sampleJPG} scale={2}/>'}
             </SyntaxHighlighter>
           </div>
@@ -77,7 +81,7 @@ const FilePage = () => {
           <File file={sampleOther} scale={1.5} />
           <div className='ml-4'>
             <Normaltekst className='mb-4'>Other files renders as a blank page with is extension (derived from filename) as the center title. </Normaltekst>
-            <SyntaxHighlighter language='javascript' style={prism}>
+            <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
               {'<File file={sampleOther} scale={1.5}/>'}
             </SyntaxHighlighter>
           </div>
@@ -108,7 +112,7 @@ const FilePage = () => {
             scale={2}
           />
           <div className='ml-4'>
-            <SyntaxHighlighter language='javascript' style={prism}>
+            <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
               {'<File \n' +
               '  file={samplePDF}\n' +
               '  buttons=\'visible\'\n' +
@@ -131,7 +135,7 @@ const FilePage = () => {
         </div>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { File } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-file</code></Normaltekst>
@@ -295,4 +299,4 @@ const FilePage = () => {
   )
 }
 
-export default FilePage
+export default connect(mapStateToProps, () => {})(FilePage)

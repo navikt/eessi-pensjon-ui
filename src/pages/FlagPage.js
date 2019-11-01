@@ -6,12 +6,16 @@ import ReactTooltip from 'react-tooltip'
 import CountryData from '../components/CountryData/CountryData'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import Mustache from 'mustache'
 import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const FlagPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const FlagPage = ({ highContrast }) => {
   const [country, setCountry] = useState('no')
   let label = CountryData.findByValue('nb', country)
   label = label ? label.label : 'Unknown'
@@ -29,25 +33,25 @@ const FlagPage = () => {
         <Input className='w-25' label='Choose country' value={country} onChange={(e) => { setCountry(e.target.value) }} />
         <Normaltekst className='mt-4 mb-4'>Country: {label}</Normaltekst>
         <Flag country={country} label={label} size='M' type='original' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'M\' type=\'original\'/>',
             { country: country, label: label })}
         </SyntaxHighlighter>
 
         <Flag country={country} label={label} size='L' type='original' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'L\' type=\'original\'/>',
             { country: country, label: label })}
         </SyntaxHighlighter>
 
         <Flag country={country} label={label} size='M' type='circle' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'M\' type=\'circle\'/>',
             { country: country, label: label })}
         </SyntaxHighlighter>
 
         <Flag country={country} label={label} size='L' type='circle' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'L\' type=\'circle\'/>',
             { country: country, label: label })}
         </SyntaxHighlighter>
@@ -63,7 +67,7 @@ const FlagPage = () => {
             { country: 'fi', label: 'Finland' }
           ]} size='M' type='circle'
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<FlagList\n' +
           '  items={[\n' +
           '    {country: \'no\', label: \'Norway\'},\n' +
@@ -87,7 +91,7 @@ const FlagPage = () => {
             { country: 'fi', label: 'Finland' }
           ]} size='M' type='circle'
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {' <FlagList \n' +
           '  overflowLimit={2}\n' +
           '  items={[\n' +
@@ -119,7 +123,7 @@ const FlagPage = () => {
         </div>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Flag } from \'eessi-pensjon-ui\'\n' +
           'import { FlagList } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
@@ -200,4 +204,4 @@ const FlagPage = () => {
   )
 }
 
-export default FlagPage
+export default connect(mapStateToProps, () => {})(FlagPage)

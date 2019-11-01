@@ -1,3 +1,5 @@
+@import '../../keyframes';
+
 .c-progressbar {
   background-color: lightgrey;
   width: 100%;
@@ -20,10 +22,13 @@
   animation: c-progressbar-animation 1s linear infinite;
 }
 
-@keyframes c-progressbar-animation {
-  0% {
-    background-position: 1rem 0;
-  } to {
-    background-position: 0 0;
+.highContrast {
+  .c-progressbar {
+    background-color: #222222;
+    border: 2px solid white;
+  }
+  .c-progressbar-bar {
+    background: #80bdff;
+    color: black;
   }
 }

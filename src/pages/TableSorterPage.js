@@ -3,12 +3,16 @@ import Container from './Container'
 import TableSorter from '../components/TableSorter/TableSorter'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import Mustache from 'mustache'
 import { Checkbox, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const TableSorterPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const TableSorterPage = ({ highContrast }) => {
   const [loading, setLoading] = useState(false)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   return (
@@ -68,7 +72,7 @@ const TableSorterPage = () => {
             { id: 'type', label: 'Occupation', type: 'tag', filterText: '', defaultSortOrder: '' }
           ]}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<TableSorter\n' +
            '  items={[\n' +
            '    { name: \'Anna\', date: new Date(1970, 2, 4), type: \'Analyst\' },\n' +
@@ -110,7 +114,7 @@ const TableSorterPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { TableSorter } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-tablesorter</code></Normaltekst>
@@ -197,4 +201,4 @@ const TableSorterPage = () => {
   )
 }
 
-export default TableSorterPage
+export default connect(mapStateToProps, () => {})(TableSorterPage)

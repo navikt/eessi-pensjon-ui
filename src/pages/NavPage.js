@@ -2,11 +2,15 @@ import React from 'react'
 import Container from './Container'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
+import dark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark'
+import light from 'react-syntax-highlighter/dist/cjs/styles/prism/prism'
+import { connect } from '../store'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const MultipleSelectPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const MultipleSelectPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -34,7 +38,7 @@ const MultipleSelectPage = () => {
         </ul>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Nav } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
 
@@ -43,4 +47,4 @@ const MultipleSelectPage = () => {
   )
 }
 
-export default MultipleSelectPage
+export default connect(mapStateToProps, () => {})(MultipleSelectPage)

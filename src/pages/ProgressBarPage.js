@@ -3,12 +3,16 @@ import Container from './Container'
 import ProgressBar from '../components/ProgressBar/ProgressBar'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const ProgressBarPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const ProgressBarPage = ({ highContrast }) => {
   const [now, setNow] = useState(50)
   return (
     <Container>
@@ -23,14 +27,14 @@ const ProgressBarPage = () => {
         />
 
         <ProgressBar now={now}>Loading... {now}%</ProgressBar>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<ProgressBar now={ {{now}} }>\n' +
            '  Loading... {{now}}%\n' +
           '</ProgressBar>', { now: now })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { ProgressBar } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-progressbar</code></Normaltekst>
@@ -68,4 +72,4 @@ const ProgressBarPage = () => {
   )
 }
 
-export default ProgressBarPage
+export default connect(mapStateToProps, () => {})(ProgressBarPage)

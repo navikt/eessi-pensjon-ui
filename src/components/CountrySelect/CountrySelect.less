@@ -33,7 +33,6 @@
   &__select {
 
      &__control {
-
       border: 1px solid @form-dark-gray;
     }
 
@@ -62,21 +61,30 @@
   }
 
   &__select__option--is-selected {
-    background: @blue;
-    color: @black !important;
+    background: @blue !important;
     font-weight: bold;
+
+    .c-countryOption__label {
+      color: @black !important;
+    }
   }
 
   &__select__option--is-focused {
-    background: @high-contrast-orange;
-    color: @black !important;
+    background: @high-contrast-orange !important;
     font-weight: bold;
+
+    .c-countryOption__label {
+      color: @black !important;
+    }
   }
 
-  .c-countryOption {
+  .c-countrySelect__select__option {
     background: @black;
   }
 
+  .c-countryOption__label {
+    color: white;
+  }
   .skjemaelement__feilmelding {
     .c-countrySelect__select__control {
        border-width: 2px;

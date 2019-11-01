@@ -3,11 +3,15 @@ import Container from './Container'
 import FileUpload from '../components/FileUpload/FileUpload'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const FileUploadPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const FileUploadPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -23,7 +27,7 @@ const FileUploadPage = () => {
             require('../resources/tests/sampleOther').default
           ]}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<FileUpload files={[\n' +
           '  require(\'../resources/tests/samplePDF\').default, \n' +
           '  require(\'../resources/tests/sampleJPG\').default,\n' +
@@ -39,7 +43,7 @@ const FileUploadPage = () => {
           maxFileSize={500000}
           maxFiles={1}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<FileUpload\n' +
           '  acceptedMimetypes={[\'application/pdf\']}\n' +
           '  maxFileSize={500000}\n' +
@@ -55,7 +59,7 @@ const FileUploadPage = () => {
           afterFileDrop={() => window.alert('After drop')}
           onFilesChanged={(files) => window.alert('I have ' + files.length + ' files')}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<FileUpload \n' +
           '  beforeFileDrop={() => console.log(\'Before drop\')}\n' +
           '  afterFileDrop={() => console.log(\'After drop\')}\n' +
@@ -66,7 +70,7 @@ const FileUploadPage = () => {
         <Undertittel className='pt-4 pb-4'>Image file</Undertittel>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { FileUpload } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-fileUpload</code></Normaltekst>
@@ -153,4 +157,4 @@ const FileUploadPage = () => {
   )
 }
 
-export default FileUploadPage
+export default connect(mapStateToProps, () => {})(FileUploadPage)

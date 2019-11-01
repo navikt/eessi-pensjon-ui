@@ -27,6 +27,7 @@
 @import 'nav-frontend-lesmerpanel-style/src/lesmerpanel-style';
 
 @import './constants';
+@import './keyframes';
 
 body {
   margin: 0;
@@ -43,4 +44,16 @@ code, pre {
 
 ol {
   list-style-type: decimal;
+}
+
+.ekspanderbartPanel--apen .ReactCollapse--collapse {
+  will-change: max-height, height;
+  max-height: 150em;
+  animation: animation-open 250ms ease;
+}
+
+.ekspanderbartPanel--lukket .ReactCollapse--collapse {
+  will-change: max-height, height;
+  max-height: 0;
+  animation: animation-close 250ms ease;
 }

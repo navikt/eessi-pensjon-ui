@@ -3,11 +3,15 @@ import Container from './Container'
 import RefreshButton from '../components/RefreshButton/RefreshButton'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Checkbox, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const RefreshButtonPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const RefreshButtonPage = ({ highContrast }) => {
   const [rotating, setRotating] = useState(false)
   return (
     <Container>
@@ -21,14 +25,14 @@ const RefreshButtonPage = () => {
           rotating={rotating}
           onRefreshClicked={() => window.alert('Refreshing')}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<RefreshButton \n' +
           '  rotating={rotating} \n' +
           '  onRefreshClicked={() => window.alert(\'Refreshing\')} />'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { RefreshButton } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-refreshbutton</code></Normaltekst>
@@ -79,4 +83,4 @@ const RefreshButtonPage = () => {
   )
 }
 
-export default RefreshButtonPage
+export default connect(mapStateToProps, () => {})(RefreshButtonPage)

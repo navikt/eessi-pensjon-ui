@@ -1,0 +1,36 @@
+.c-colorPicker {
+  &__color {
+    width: 36px;
+    height: 14px;
+    borderRadius: 2px;
+  }
+
+  &__swatch {
+    padding: 5px;
+    background: white;
+    border-radius: 1px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__popover {
+    position: sticky;
+    z-index: 2;
+  }
+
+  &__cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+}
+
+.highContrast .c-colorPicker {
+  &__swatch {
+    background: black;
+    border: 1px solid white;
+  }
+}

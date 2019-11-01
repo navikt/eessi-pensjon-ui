@@ -3,13 +3,16 @@ import Container from './Container'
 import Icons, { availableIcons } from '../components/Icons/Icons'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import ReactTooltip from 'react-tooltip'
-
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const IconsPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const IconsPage = ({ highContrast }) => {
   return (
     <Container>
       <ReactTooltip place='top' type='dark' effect='solid' />
@@ -22,13 +25,13 @@ const IconsPage = () => {
           ))}
         </div>
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'{availableIcons.map(kind => (\n' +
           '    <Icons className=\'p-2\' kind={kind} size={48} data-tip={kind} />\n' +
           '))}'}
         </SyntaxHighlighter>
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Icons } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
 
@@ -72,4 +75,4 @@ const IconsPage = () => {
   )
 }
 
-export default IconsPage
+export default connect(mapStateToProps, () => {})(IconsPage)

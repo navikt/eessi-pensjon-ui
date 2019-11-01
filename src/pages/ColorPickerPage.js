@@ -3,11 +3,15 @@ import Container from './Container'
 import ColorPicker from '../components/ColorPicker/ColorPicker'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
-import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
+import { Panel, Systemtittel, Normaltekst, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const ColorPickerPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const ColorPickerPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -19,7 +23,7 @@ const ColorPickerPage = () => {
           initialColor={{ r: 245, g: 166, b: 35, a: 0.5 }}
           onColorChanged={(color) => window.alert('color changed with  ' + JSON.stringify(color))}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<ColorPicker \n' +
           '  initialColor={{r: 245, g: 166, b: 35, a: 0.5}} \n' +
           '  onColorChanged={(color) => window.alert("color changed with  " + JSON.stringify(color))}\n' +
@@ -27,7 +31,7 @@ const ColorPickerPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { ColorPicker } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-colorPicker</code></Normaltekst>
@@ -72,4 +76,4 @@ const ColorPickerPage = () => {
   )
 }
 
-export default ColorPickerPage
+export default connect(mapStateToProps, () => {})(ColorPickerPage)

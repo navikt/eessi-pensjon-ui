@@ -69,11 +69,10 @@ const TableSorter = ({
         ? ((currentPage - 1) * itemsPerPage <= index && index < (currentPage * itemsPerPage))
         : true
     }).map((item, index) => {
-      const background = index % 2 === 0 ? 'white' : 'whitesmoke'
       return (
         <tr
           key={index}
-          style={{ background: background }}
+          className={'background-' + (index % 2 === 0 ? '-odd' : '-even')}
         >
           <td />
           {_columns.map((column, index2) => {

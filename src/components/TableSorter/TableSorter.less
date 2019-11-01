@@ -30,6 +30,14 @@
         padding-top: 0.25rem;
         padding-bottom: 0.25rem;
         border-bottom: 1px solid lightgrey;
+
+        &.background--odd {
+          background: white;
+        }
+
+        &.background--even {
+          background: whitesmoke;
+        }
       }
     }
 
@@ -102,6 +110,21 @@
     margin-bottom: 0px !important;
     .skjemaelement__label {
       display: block !important;
+    }
+  }
+}
+
+.highContrast {
+  tbody {
+    tr {
+
+      &.background--odd {
+        background: black;
+      }
+
+      &.background--even {
+        background: #333333;
+      }
     }
   }
 }

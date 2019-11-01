@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
-import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
+import './ColorPicker.css'
 
 const ColorPicker = ({ className, initialColor, onColorChanged }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
@@ -24,45 +24,19 @@ const ColorPicker = ({ className, initialColor, onColorChanged }) => {
     setColor(color.rgb)
   }
 
-  const styles = reactCSS({
-    default: {
-      color: {
-        width: '36px',
-        height: '14px',
-        borderRadius: '2px',
-        background: `rgba(${_color.r}, ${_color.g}, ${_color.b}, ${_color.a})`
-      },
-      swatch: {
-        padding: '5px',
-        background: '#fff',
-        borderRadius: '1px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-        display: 'inline-block',
-        cursor: 'pointer'
-      },
-      popover: {
-        position: 'sticky',
-        zIndex: '2'
-      },
-      cover: {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px'
-      }
-    }
-  })
-
   return (
     <div className={classNames('c-colorPicker', className)}>
-      <div className='c-colorPicker__container' style={styles.swatch} onClick={toggleColorDisplay}>
-        <div style={styles.color} />
+      <div className='c-colorPicker__swatch' onClick={toggleColorDisplay}>
+        <div
+          className='c-colorPicker__color' style={{
+            background: `rgba(${_color.r}, ${_color.g}, ${_color.b}, ${_color.a})`
+          }}
+        />
       </div>
       {displayColorPicker
         ? (
-          <div className='c-colorPicker__popover' style={styles.popover}>
-            <div className='c-colorPicker__cover' style={styles.cover} onClick={closeColorPicker} />
+          <div className='c-colorPicker__popover'>
+            <div className='c-colorPicker__cover' onClick={closeColorPicker} />
             <SketchPicker color={_color} onChangeComplete={onChangeComplete} />
           </div>
         )

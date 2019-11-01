@@ -3,11 +3,15 @@ import Container from './Container'
 import MultipleSelect from '../components/MultipleSelect/MultipleSelect'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const MultipleSelectPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const MultipleSelectPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -26,7 +30,7 @@ const MultipleSelectPage = () => {
           values={[{ label: 'VIP', value: 'vip' }]}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<MultipleSelect\n' +
           '  options={[\n' +
           '    {label: \'VIP\', value: \'vip\'},\n' +
@@ -50,7 +54,7 @@ const MultipleSelectPage = () => {
           onSelect={(values) => window.alert('You selected ' + JSON.stringify(values))}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<MultipleSelect\n' +
             '  creatable={true}\n' +
             '  options={[\n' +
@@ -69,12 +73,12 @@ const MultipleSelectPage = () => {
           error='Please select one element'
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<MultipleSelect error=\'Please select one element\'/>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { MultipleSelect } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-multipleSelect</code></Normaltekst>
@@ -161,4 +165,4 @@ const MultipleSelectPage = () => {
   )
 }
 
-export default MultipleSelectPage
+export default connect(mapStateToProps, () => {})(MultipleSelectPage)

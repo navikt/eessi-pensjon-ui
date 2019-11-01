@@ -4,11 +4,15 @@ import Psycho from '../components/Psycho/Psycho'
 import PsychoPanel from '../components/Psycho/PsychoPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const PsychoPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const PsychoPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -18,14 +22,14 @@ const PsychoPage = () => {
         <Undertittel className='pt-4 pb-4'>Single veileder</Undertittel>
 
         <Psycho />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Psycho/>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Single veileder: trist version</Undertittel>
 
         <Psycho mood='trist' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Psycho mood=\'trist\'/>'}
         </SyntaxHighlighter>
 
@@ -34,14 +38,14 @@ const PsychoPage = () => {
         <PsychoPanel closeButton>
           <div>Please log in to see your settings page</div>
         </PsychoPanel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<PsychoPanel closeButton={true}>\n' +
           '  <div>Please log in to see your settings page</div>\n' +
           ' </PsychoPanel>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Psycho } from \'eessi-pensjon-ui\'\n' +
           'import { PsychoPanel } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
@@ -87,4 +91,4 @@ const PsychoPage = () => {
   )
 }
 
-export default PsychoPage
+export default connect(mapStateToProps, () => {})(PsychoPage)

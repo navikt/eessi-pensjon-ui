@@ -6,9 +6,15 @@
     padding: 10px;
     &.selected {
        background: lightblue;
+       label {
+         color: black !important;
+       }
     }
     &.focused {
-       background: aliceblue;
+      background: aliceblue;
+      label {
+        color: black !important;
+      }
     }
 
     .skjemaelement {
@@ -98,10 +104,21 @@
 }
 
 
-.highContrast .c-multipleSelect.skjemaelement__feilmelding {
-  .multipleSelect__control {
-     border-width: 2px;
-     border-color: #BA3A26;
+.highContrast .c-multipleSelect {
+  &.skjemaelement__feilmelding {
+    .multipleSelect__control {
+      border-width: 2px;
+      border-color: #BA3A26;
+    }
+  }
+
+  .multipleSelect__multi-value {
+    border: 1px solid white;
+    background-color: black;
+  }
+
+  .multipleSelect__multi-value__label {
+    color: white;
   }
 }
 

@@ -3,12 +3,16 @@ import Container from './Container'
 import Alert from '../components/Alert/Alert'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { Checkbox, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
+import { connect } from '../store'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const IndexPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const AlertPage = ({ highContrast }) => {
   const [fixed, setFixed] = useState(false)
   return (
     <Container>
@@ -32,7 +36,7 @@ const IndexPage = () => {
           message='Close me for a function callback'
           onClose={() => window.alert('clicked')}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Alert \n' +
           '  type=\'client\' \n' +
           '  status=\'OK\' \n' +
@@ -54,7 +58,7 @@ const IndexPage = () => {
             message='Make me fixed by toggling the checkbox above'
           />
         </div>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Alert \n' +
           '   type=\'client\' \n' +
           '   status=\'WARNING\' \n' +
@@ -69,7 +73,7 @@ const IndexPage = () => {
           width.
         </Normaltekst>
         <Alert type='server' message='Banner-style alert for important server errors' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Alert \n' +
           'type=\'server\' \n' +
           'message=\'Banner-style alert for important server errors\' \n' +
@@ -77,7 +81,7 @@ const IndexPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Alert } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pt-4'>Default component's classname: <code>c-alert</code></Normaltekst>
@@ -152,4 +156,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default connect(mapStateToProps, () => {})(AlertPage)

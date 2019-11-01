@@ -3,11 +3,15 @@ import Container from './Container'
 import PostalCodes from '../components/PostalCodes/PostalCodes'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Input, Hovedknapp, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const PostalCodesPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const PostalCodesPage = ({ highContrast }) => {
   const [zipCode, setZipCode] = useState('0001')
   const [city, setCity] = useState(undefined)
   return (
@@ -28,7 +32,7 @@ const PostalCodesPage = () => {
         </Hovedknapp>
         <Normaltekst className='mt-4 mb-4'>Answer: {city}</Normaltekst>
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Hovedknapp\n' +
            '  onClick={() =>setCity(PostalCodes.get(zipCode))}\n' +
            '/>\n' +
@@ -37,7 +41,7 @@ const PostalCodesPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { PostalCodes } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
       </Panel>
@@ -45,4 +49,4 @@ const PostalCodesPage = () => {
   )
 }
 
-export default PostalCodesPage
+export default connect(mapStateToProps, () => {})(PostalCodesPage)

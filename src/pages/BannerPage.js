@@ -4,11 +4,15 @@ import Banner from '../components/Banner/Banner'
 import Psycho from '../components/Psycho/Psycho'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
+import { connect } from '../store'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const BannerPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const BannerPage = ({ highContrast }) => {
   return (
     <Container>
       <Panel className='p-4'>
@@ -22,7 +26,7 @@ const BannerPage = () => {
           header='Banner header'
           onHighContrastClicked={() => window.alert('high contrast link clicked')}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Banner \n' +
           '  header=\'Banner header\' \n' +
           '  onHighContrastClicked={() => window.alert(\'high contrast link clicked\')}\n' +
@@ -40,8 +44,9 @@ const BannerPage = () => {
           header={<Psycho />}
           onHighContrastClicked={() => {}}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Banner \n' +
+          '  style={{ backgroundColor: \'lightblue\' }}\n' +
           '  labelHighContrast=\'Alternative label\' \n' +
           '  header={<Psycho />} \n' +
           '  onHighContrastClicked={() => {}}\n' +
@@ -49,7 +54,7 @@ const BannerPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Banner } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-banner</code></Normaltekst>
@@ -108,4 +113,4 @@ const BannerPage = () => {
   )
 }
 
-export default BannerPage
+export default connect(mapStateToProps, () => {})(BannerPage)

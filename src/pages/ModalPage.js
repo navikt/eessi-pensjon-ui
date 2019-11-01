@@ -3,11 +3,15 @@ import Container from './Container'
 import Modal from '../components/Modal/Modal'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Checkbox, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const ModalPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const ModalPage = ({ highContrast }) => {
   const [modal, setModal] = useState(undefined)
   return (
     <Container>
@@ -38,7 +42,7 @@ const ModalPage = () => {
           }}
         />
 
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Modal\n' +
           '   modal={modal}\n' +
           '   onModalClose={() => setModal(undefined)}\n' +
@@ -67,7 +71,7 @@ const ModalPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Modal } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-modal</code></Normaltekst>
@@ -126,4 +130,4 @@ const ModalPage = () => {
   )
 }
 
-export default ModalPage
+export default connect(mapStateToProps, () => {})(ModalPage)

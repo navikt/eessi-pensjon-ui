@@ -3,12 +3,16 @@ import Container from './Container'
 import WaitingPanel from '../components/WaitingPanel/WaitingPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const WaitingPanelPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const WaitingPanelPage = ({ highContrast }) => {
   const [message, setMessage] = useState('Vennligst vent...')
   return (
     <Container>
@@ -22,7 +26,7 @@ const WaitingPanelPage = () => {
           onChange={(e) => setMessage(e.target.value)}
         />
         <WaitingPanel message={message} />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<WaitingPanel message=\'' +
             '{{message}}' +
             '\'/>', { message: message })}
@@ -36,7 +40,7 @@ const WaitingPanelPage = () => {
           <WaitingPanel className='pr-3' size='L' message='L' />
           <WaitingPanel className='pr-3' size='XL' message='XL' />
         </div>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<WaitingPanel size=\'XS\' message=\'XS\'/>\n' +
           '<WaitingPanel size=\'S\' message=\'S\'/>\n' +
           '<WaitingPanel size=\'M\' message=\'M\'/>\n' +
@@ -45,7 +49,7 @@ const WaitingPanelPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { WaitingPanel } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-waitingPanel</code></Normaltekst>
@@ -90,4 +94,4 @@ const WaitingPanelPage = () => {
   )
 }
 
-export default WaitingPanelPage
+export default connect(mapStateToProps, () => {})(WaitingPanelPage)

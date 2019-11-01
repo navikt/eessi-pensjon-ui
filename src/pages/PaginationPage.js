@@ -3,12 +3,16 @@ import Container from './Container'
 import Pagination from '../components/Pagination/Pagination'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import Mustache from 'mustache'
 import { Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const PaginationPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const PaginationPage = ({ highContrast }) => {
   const [numberOfItems, setNumberOfItems] = useState(50)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   return (
@@ -45,7 +49,7 @@ const PaginationPage = () => {
           itemsPerPage={itemsPerPage}
           onChange={(page) => console.log('Changed to page ' + page)}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Pagination\n' +
             '   numberOfItems={ {{numberOfItems}} }\n' +
             '   itemsPerPage={ {{itemsPerPage}} }\n' +
@@ -54,7 +58,7 @@ const PaginationPage = () => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Pagination } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-pagination</code></Normaltekst>
@@ -120,4 +124,4 @@ const PaginationPage = () => {
   )
 }
 
-export default PaginationPage
+export default connect(mapStateToProps, () => {})(PaginationPage)

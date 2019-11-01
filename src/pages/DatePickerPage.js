@@ -3,12 +3,16 @@ import Container from './Container'
 import DatePicker from '../components/DatePicker/DatePicker'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { connect } from '../store'
 import { Checkbox, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const DatePickerPage = () => {
+const mapStateToProps = (state) => ({ highContrast: state.highContrast })
+
+const DatePickerPage = ({ highContrast }) => {
   const [disabled, setDisabled] = useState(false)
   return (
     <Container>
@@ -20,7 +24,7 @@ const DatePickerPage = () => {
         <Undertittel className='pt-4 pb-4'>Default datepicker</Undertittel>
 
         <DatePicker className='w-50' />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<DatePicker/>'}
         </SyntaxHighlighter>
 
@@ -34,7 +38,7 @@ const DatePickerPage = () => {
           initialValues={{ day: 3, month: 6, year: 1986 }}
           onChange={(date) => window.alert('Date changed with  ' + JSON.stringify(date))}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<DatePicker \n' +
           '  initialValues={{day: 3, month: 6, year: 1986}} \n' +
           '  onChange={(date) => window.alert("Date changed with  " + JSON.stringify(date))}\n' +
@@ -48,7 +52,7 @@ const DatePickerPage = () => {
           initialValues={{ day: 3, month: 6, year: 2096 }}
           error='Please do not choose a date from the future'
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<DatePicker \n' +
           '  initialValues={{day: 3, month: 6, year: 2096}} \n' +
           '  error=\'Please do not choose a date from the future\'\n' +
@@ -63,14 +67,14 @@ const DatePickerPage = () => {
           className='w-50'
           disabled={disabled}
         />
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<DatePicker \n' +
           '  disabled={ {{disabled}} } \n' +
           '/>', { disabled: disabled.toString() })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
-        <SyntaxHighlighter language='javascript' style={prism}>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { DatePicker } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
         <Normaltekst className='pb-4'>Default component's classname: <code>c-datePicker</code></Normaltekst>
@@ -164,4 +168,4 @@ const DatePickerPage = () => {
   )
 }
 
-export default DatePickerPage
+export default connect(mapStateToProps, () => {})(DatePickerPage)
