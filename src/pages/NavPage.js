@@ -23,13 +23,13 @@ const MultipleSelectPage = ({ highContrast }) => {
           <li><strong>C: </strong>Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column</li>
           <li><strong>E: </strong>Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten</li>
           <li><strong>F: </strong>Fareknapp, Fieldset, Flatknapp</li>
-          <li><strong>H: </strong>Hamburgerknapp, HjeklpetekstBase, HjelpetekstAuto, HjelpetekstHoyre, HjelpetekstMidt, HjelpetekstOver, HjelpetekstUnder, HjelpetekstUnderHoyre, HjelpetekstUnderVenstre, HjelpetekstVenstre, Hovedknapp</li>
+          <li><strong>H: </strong>Hamburgerknapp, Hjelpetekst, Hovedknapp</li>
           <li><strong>I: </strong>Ikon, Ingress, Innholdstittel, Input</li>
           <li><strong>K: </strong>Knapp, KnappBase</li>
           <li><strong>L: </strong>Lenke, Lenkepanel, LenkepanelBase, Lesmerpanel, Lukknapp</li>
           <li><strong>M: </strong>Modal, Menyknapp</li>
           <li><strong>N: </strong>Nesteknapp, Normaltekst</li>
-          <li><strong>P: </strong>Panel, PanelBase</li>
+          <li><strong>P: </strong>Panel, PanelBase, Popover</li>
           <li><strong>R: </strong>Radio, RadioPanel, RadioPanelGruppe, Row</li>
           <li><strong>S: </strong>Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp</li>
           <li><strong>T: </strong>Tabs, Tekstomrade, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp</li>

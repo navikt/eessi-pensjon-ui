@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from './Container'
 import Banner from '../components/Banner/Banner'
-import Psycho from '../components/Psycho/Psycho'
+import EESSIPensjonVeileder from '../components/EESSIPensjonVeileder/EESSIPensjonVeileder'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
@@ -41,14 +41,14 @@ const BannerPage = ({ highContrast }) => {
         <Banner
           style={{ backgroundColor: 'lightblue' }}
           labelHighContrast='Alternative label'
-          header={<Psycho />}
+          header={<EESSIPensjonVeileder />}
           onHighContrastClicked={() => {}}
         />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Banner \n' +
           '  style={{ backgroundColor: \'lightblue\' }}\n' +
           '  labelHighContrast=\'Alternative label\' \n' +
-          '  header={<Psycho />} \n' +
+          '  header={<EESSIPensjonVeileder />} \n' +
           '  onHighContrastClicked={() => {}}\n' +
           '/>'}
         </SyntaxHighlighter>

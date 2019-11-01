@@ -4,7 +4,7 @@ import Chevron from 'nav-frontend-chevron'
 import Ekspanderbartpanel, { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel'
 import EtikettBase, { EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess } from 'nav-frontend-etiketter'
 import { Container, Row, Column } from 'nav-frontend-grid'
-import HjeklpetekstBase, { HjelpetekstAuto, HjelpetekstHoyre, HjelpetekstMidt, HjelpetekstOver, HjelpetekstUnder, HjelpetekstUnderHoyre, HjelpetekstUnderVenstre, HjelpetekstVenstre } from 'nav-frontend-hjelpetekst'
+import Hjelpetekst from 'nav-frontend-hjelpetekst'
 import { Hamburgerknapp, Lukknapp, Menyknapp, Nesteknapp, Systemerknapp, Søkeknapp, Tilbakeknapp } from 'nav-frontend-ikonknapper'
 import Ikon from 'nav-frontend-ikoner-assets'
 import KnappBase, { Knapp, Hovedknapp, Flatknapp, Fareknapp } from 'nav-frontend-knapper'
@@ -13,6 +13,7 @@ import Lenkepanel, { LenkepanelBase } from 'nav-frontend-lenkepanel'
 import Lesmerpanel from 'nav-frontend-lesmerpanel'
 import Modal from 'nav-frontend-modal'
 import PanelBase, { Panel } from 'nav-frontend-paneler'
+import Popover from 'nav-frontend-popover'
 import Snakkeboble from 'nav-frontend-snakkeboble'
 import Spinner from 'nav-frontend-spinner'
 import Stegindikator from 'nav-frontend-stegindikator'
@@ -44,26 +45,18 @@ EtikettFokus.displayName = 'EtikettFokus'
 EtikettInfo.displayName = 'EtikettInfo'
 EtikettSuksess.displayName = 'EtikettSuksess'
 EtikettLiten.displayName = 'EtikettLiten'
+Fareknapp.displayName = 'Fareknapp'
 Fieldset.displayName = 'Fieldset'
-HjeklpetekstBase.displayName = 'HjeklpetekstBase'
-HjelpetekstAuto.displayName = 'HjelpetekstAuto'
-HjelpetekstHoyre.displayName = 'HjelpetekstHoyre'
-HjelpetekstMidt.displayName = 'HjelpetekstMidt'
-HjelpetekstOver.displayName = 'HjelpetekstOver'
-HjelpetekstUnder.displayName = 'HjelpetekstUnder'
-HjelpetekstUnderHoyre.displayName = 'HjelpetekstUnderHoyre'
-HjelpetekstUnderVenstre.displayName = 'HjelpetekstUnderVenstre'
-HjelpetekstVenstre.displayName = 'HjelpetekstVenstre'
+Flatknapp.displayName = 'Flatknapp'
 Hamburgerknapp.displayName = 'Hamburgerknapp'
+Hjelpetekst.displayName = 'Hjelpetekst'
+Hovedknapp.displayName = 'Hovedknapp'
 Ikon.displayName = 'Ikon'
 Ingress.displayName = 'Ingress'
 Innholdstittel.displayName = 'Innholdstittel'
 Input.displayName = 'Input'
 Knapp.displayName = 'Knapp'
-Hovedknapp.displayName = 'Hovedknapp'
-Flatknapp.displayName = 'Flatknapp'
 KnappBase.displayName = 'KnappBase'
-Fareknapp.displayName = 'Fareknapp'
 Lenke.displayName = 'Lenke'
 Lenkepanel.displayName = 'Lenkepanel'
 LenkepanelBase.displayName = 'LenkepanelBase'
@@ -75,6 +68,7 @@ Nesteknapp.displayName = 'Nesteknapp'
 Normaltekst.displayName = 'Normaltekst'
 Panel.displayName = 'Panel'
 PanelBase.displayName = 'PanelBase'
+Popover.displayName = 'Popover'
 Radio.displayName = 'Radio'
 RadioPanel.displayName = 'RadioPanel'
 RadioPanelGruppe.displayName = 'RadioPanelGruppe'
@@ -107,14 +101,13 @@ export {
   Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column,
   Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten,
   Fareknapp, Fieldset, Flatknapp,
-  HjeklpetekstBase, HjelpetekstAuto, HjelpetekstHoyre, HjelpetekstMidt, HjelpetekstOver, HjelpetekstUnder, HjelpetekstUnderHoyre, HjelpetekstUnderVenstre, HjelpetekstVenstre,
-  Hamburgerknapp, Hovedknapp,
+  Hamburgerknapp, Hjelpetekst, Hovedknapp,
   Ikon, Ingress, Innholdstittel, Input,
   Knapp, KnappBase,
   Lenke, Lenkepanel, LenkepanelBase, Lesmerpanel, Lukknapp,
   Modal, Menyknapp,
   Nesteknapp, Normaltekst,
-  Panel, PanelBase,
+  Panel, PanelBase, Popover,
   Radio, RadioPanel, RadioPanelGruppe, Row,
   Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp,
   Tabs, Tekstomrade, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,

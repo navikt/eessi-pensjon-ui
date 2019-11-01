@@ -5,6 +5,7 @@ import * as uiActions from '../actions/ui'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import './Container.css'
+import { ReactComponent as NavLogo } from '../resources/images/nav.svg'
 
 const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators(uiActions, dispatch) })
@@ -14,8 +15,10 @@ const Container = ({ actions, className, children, highContrast }) => {
     <div className={classNames('_container', { highContrast: highContrast }, className)}>
       <aside>
         <nav>
+
           <div className='pb-3 ml-3'>
-            <Link className='p-0' to='/'>
+            <Link className='center' to='/'>
+              <NavLogo className='pb-3'/>
               <img
                 alt='logo' className='eessi-pensjon-logo'
                 src={require('../resources/images/earth.png')}
@@ -35,6 +38,7 @@ const Container = ({ actions, className, children, highContrast }) => {
             <li><Link to='/ColorPicker'>Color picker</Link></li>
             <li><Link to='/CountryUtils'>Country utils</Link></li>
             <li><Link to='/DatePicker'>Date picker</Link></li>
+            <li><Link to='/EESSIPensjonVeileder'>EESSI Pensjon Veileder</Link></li>
             <li><Link to='/ExpandingPanel'>Expanding panel</Link></li>
             <li><Link to='/File'>File</Link></li>
             <li><Link to='/FileUpload'>File upload</Link></li>
@@ -46,7 +50,6 @@ const Container = ({ actions, className, children, highContrast }) => {
             <li><Link to='/Pagination'>Pagination</Link></li>
             <li><Link to='/PostalCodes'>Postal codes</Link></li>
             <li><Link to='/ProgressBar'>Progress bar</Link></li>
-            <li><Link to='/Psycho'>Psycho</Link></li>
             <li><Link to='/RefreshButton'>Refresh button</Link></li>
             <li><Link to='/TableSorter'>Table sorter</Link></li>
             <li><Link to='/WaitingPanel'>Waiting panel</Link></li>

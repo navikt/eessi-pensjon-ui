@@ -99,6 +99,7 @@ const Icons = (props) => {
     case 'refresh' : return <FontAwesomeIcon {...props} icon={icons.faSyncAlt} size={_size} />
     case 'removeCircle' : return <LineRemoveCircle {...props} width={w} height={h} />
     case 'save' : return <FontAwesomeIcon {...props} icon={icons.faSave} size={_size} />
+    case 'search' : return <FontAwesomeIcon {...props} icon={icons.faSearch} width={w} height={h} />
     case 'server' : return <FontAwesomeIcon {...props} icon={icons.faServer} width={w} height={h} size='3x' />
     case 'settings' : return <FontAwesomeIcon {...props} icon={icons.faCog} size={_size} />
     case 'solidclose' : return <FontAwesomeIcon {...props} icon={icons.faTimesCircle} size={_size} />

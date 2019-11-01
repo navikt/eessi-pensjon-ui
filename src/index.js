@@ -1,10 +1,14 @@
-import 'core-js/es/object/assign' // IE 11 compatibility
-import 'core-js/es/object/entries' // IE 11 compatibility
-import 'core-js/es/object/keys' // IE 11 compatibility
-import 'core-js/es/array/includes' // IE 11 compatibility
-import 'core-js/es/array/find' // IE 11 compatibility
-import 'core-js/es/map' // IE 11 compatibility
-import 'core-js/es/set' // IE 11 compatibility
+// IE 11
+import 'core-js/es/object/assign'
+import 'core-js/es/object/entries'
+import 'core-js/es/object/keys'
+import 'core-js/es/array/includes'
+import 'core-js/es/array/find'
+import 'core-js/es/map'
+import 'core-js/es/set'
+import 'core-js/es/promise'
+import 'core-js/features/url-search-params'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route } from 'react-router'
@@ -34,7 +38,7 @@ import NavPage from './pages/NavPage'
 import PaginationPage from './pages/PaginationPage'
 import PostalCodesPage from './pages/PostalCodesPage'
 import ProgressBarPage from './pages/ProgressBarPage'
-import PsychoPage from './pages/PsychoPage'
+import EESSIPensjonVeilederPage from './pages/EESSIPensjonVeilederPage'
 import RefreshButtonPage from './pages/RefreshButtonPage'
 import TableSorterPage from './pages/TableSorterPage'
 import WaitingPanelPage from './pages/WaitingPanelPage'
@@ -61,7 +65,7 @@ ReactDOM.render(
         <Route exact path='/Pagination' component={PaginationPage} />
         <Route exact path='/PostalCodes' component={PostalCodesPage} />
         <Route exact path='/ProgressBar' component={ProgressBarPage} />
-        <Route exact path='/Psycho' component={PsychoPage} />
+        <Route exact path='/EESSIPensjonVeileder' component={EESSIPensjonVeilederPage} />
         <Route exact path='/RefreshButton' component={RefreshButtonPage} />
         <Route exact path='/TableSorter' component={TableSorterPage} />
         <Route exact path='/WaitingPanel' component={WaitingPanelPage} />

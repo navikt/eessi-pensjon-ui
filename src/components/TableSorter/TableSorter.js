@@ -2,28 +2,33 @@ import React, { useState } from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import PT from 'prop-types'
-import * as Nav from '../../Nav'
+import { Checkbox, EtikettLiten, Input, Lenke, Normaltekst } from '../../Nav'
+import Icons from '../Icons/Icons'
 import WaitingPanel from '../WaitingPanel/WaitingPanel'
 import './TableSorter.css'
 import Pagination from '../Pagination/Pagination'
 
 const TableSorter = ({
   className, context, columns = [], initialPage = 1, items = [], itemsPerPage = 10,
-  loading = false, pagination = true, sort = { column: '', order: '' }
+  loading = false, onRowSelectChange, pagination = true, sort = { column: '', order: 'none' }
 }) => {
   const [_sort, setSort] = useState(sort)
+  const [_items, setItems] = useState(items)
   const [_columns, setColumns] = useState(columns)
   const [seeFilters, setSeeFilters] = useState(false)
+  const [checkAll, setCheckAll] = useState(false)
   const [currentPage, setCurrentPage] = useState(initialPage)
+
   const sortOrder = {
-    '': 'asc',
-    asc: 'desc',
-    desc: ''
+    none: 'ascending',
+    '': 'ascending',
+    ascending: 'descending',
+    descending: 'none'
   }
   const sortClasses = {
-    asc: 'headerSortAsc',
-    desc: 'headerSortDesc',
-    '': ''
+    ascending: 'tabell__th--sortert-asc',
+    descending: 'tabell__th--sortert-desc',
+    none: ''
   }
 
   const sortColumn = (column) => {
@@ -35,11 +40,35 @@ const TableSorter = ({
   }
 
   const sortClass = (column) => {
-    return _sort.column === column.id ? sortClasses[_sort.order] : ''
+    return _sort.column === column.id ? sortClasses[_sort.order] : 'none'
+  }
+
+  const onCheckAllClicked = () => {
+    const newItems = _items.map(item => ({
+      ...item,
+      selected: !checkAll
+    }))
+
+    if (_.isFunction(onRowSelectChange)) {
+      onRowSelectChange(newItems)
+    }
+    setItems(newItems)
+    setCheckAll(!checkAll)
+  }
+
+  const onCheckClicked = (changedItem) => {
+    const newItems = _items.map(item => ({
+      ...item,
+      selected: _.isEqual(changedItem, item) ? !item.selected : item.selected
+    }))
+    if (_.isFunction(onRowSelectChange)) {
+      onRowSelectChange(newItems)
+    }
+    setItems(newItems)
   }
 
   const rows = () => {
-    const filteredItems = _.filter(items, (item) => {
+    const filteredItems = _.filter(_items, (item) => {
       return _.every(_columns, (column) => {
         const filterText = column.filterText.toLowerCase()
         switch (column.type) {
@@ -52,15 +81,15 @@ const TableSorter = ({
           default:
             return filterText
               ? column.needle
-                ? column.needle(item[column.id]).match(filterText)
-                : item[column.id].toLowerCase().match(filterText)
+                ? column.needle(item[column.id]).toLowerCase().match(filterText.toLowerCase())
+                : item[column.id].toLowerCase().match(filterText.toLowerCase())
               : true
         }
       })
     })
 
     const sortedItems = _.sortBy(filteredItems, _sort.column)
-    if (_sort.order === 'desc') {
+    if (_sort.order === 'descending') {
       sortedItems.reverse()
     }
 
@@ -70,36 +99,36 @@ const TableSorter = ({
         : true
     }).map((item, index) => {
       return (
-        <tr
-          key={index}
-          className={'background-' + (index % 2 === 0 ? '-odd' : '-even')}
-        >
-          <td />
+        <tr key={index} aria-selected={item.selected === true} className={item.selected ? 'tabell__tr--valgt' : ''}>
+          <td>
+            <Checkbox label='Velg' checked={item.selected} onClick={() => onCheckClicked(item)} />
+          </td>
           {_columns.map((column, index2) => {
             const value = item[column.id]
+            console.log(value)
             switch (column.type) {
               case 'tag':
                 return (
-                  <td key={index2}>
-                    <Nav.EtikettLiten>{value}</Nav.EtikettLiten>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sort.column === column.id })}>
+                    <EtikettLiten>{value}</EtikettLiten>
                   </td>
                 )
               case 'date':
                 return (
-                  <td key={index2}>
-                    <Nav.Normaltekst>{value.toLocaleDateString ? value.toLocaleDateString() : value.toString()}</Nav.Normaltekst>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sort.column === column.id })}>
+                    <Normaltekst>{_.isFunction(value.toLocaleDateString) ? value.toLocaleDateString() : value.toString()}</Normaltekst>
                   </td>
                 )
               case 'object':
                 return (
-                  <td key={index2}>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sort.column === column.id })}>
                     {typeof column.toTableCell === 'function' ? column.toTableCell(item, value, context) : JSON.stringify(value)}
                   </td>
                 )
               default:
                 return (
-                  <td key={index2}>
-                    <Nav.Normaltekst>{value}</Nav.Normaltekst>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sort.column === column.id })}>
+                    <Normaltekst>{value}</Normaltekst>
                   </td>
                 )
             }
@@ -119,30 +148,47 @@ const TableSorter = ({
   }
 
   return (
-    <div className={classNames('c-tableSorter', className)}>
+    <div className={classNames('c-tableSorter', 'tabell', 'tabell__td--sortert', className)}>
       <div className='c-tableSorter__status'>
         {loading ? <WaitingPanel size='XS' message='' /> : null}
       </div>
       <div className='c-tableSorter__content'>
-        <table cellSpacing='0' className='c-tableSorter__table'>
+        <table cellSpacing='0' className='c-tableSorter__table w-100'>
           <thead>
             <tr className='c-tableSorter__header'>
-              <th>
-                <Nav.Checkbox
-                  id='c-tableSorter__seefilters-checkbox-id'
-                  className='c-tableSorter__checkbox'
-                  label=''
-                  checked={seeFilters}
-                  onChange={() => setSeeFilters(!seeFilters)}
-                />
+              <th width='1'>
+                <div className='d-flex align-items-center'>
+                  <Checkbox
+                    id='c-tableSorter__checkAll-checkbox-id'
+                    className='c-tableSorter__checkAll-checkbox d-flex mr-2'
+                    checked={checkAll}
+                    onChange={onCheckAllClicked}
+                  />
+                  <Icons
+                    kind='search'
+                    size={24}
+                    className='c-tableSorter___seefilters-icon'
+                    id='c-tableSorter__seefilters-icon-id'
+                    checked={seeFilters}
+                    onClick={() => setSeeFilters(!seeFilters)}
+                  />
+                </div>
               </th>
               {_columns.map((column) => (
                 <th
+                  role='columnheader'
+                  aria-sort='none'
                   key={column.id}
-                  onClick={() => sortColumn(column)}
                   className={'header ' + sortClass(column)}
                 >
-                  <Nav.UndertekstBold>{column.label}</Nav.UndertekstBold>
+                  <Lenke
+                    href='#' onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      sortColumn(column)
+                    }}
+                  >{column.label}
+                  </Lenke>
                 </th>
               ))}
             </tr>
@@ -152,7 +198,7 @@ const TableSorter = ({
                 {_columns.map((column) => {
                   return (
                     <td key={column.id}>
-                      <Nav.Input
+                      <Input
                         id={'c-tableSorter__sort-' + column.id + '-input-id'}
                         className='c-tableSorter__sort-input'
                         label=''
@@ -189,6 +235,7 @@ TableSorter.propTypes = {
   items: PT.array,
   itemsPerPage: PT.number,
   loading: PT.bool,
+  onRowSelectChange: PT.func,
   pagination: PT.bool,
   sort: PT.object
 }
