@@ -13,6 +13,10 @@ const Pagination = ({ className, numberOfItems, initialPage, itemsPerPage, maxPa
     setNumberOfPages(Math.ceil(numberOfItems / itemsPerPage))
   }, [numberOfItems, itemsPerPage])
 
+  if (!numberOfItems || !itemsPerPage || numberOfPages === 1) {
+    return null
+  }
+
   const onPreviousButtonClicked = (e) => {
     e.preventDefault()
     e.stopPropagation()

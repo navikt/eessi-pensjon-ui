@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
-import { Hovedknapp, Knapp, Modal as NavModal, Undertittel } from '../../Nav'
+import { Hovedknapp, Lukknapp, Knapp, Modal as NavModal, Undertittel } from '../../Nav'
 import './Modal.css'
 
-export const Modal = ({ className, onModalClose, modal }) => {
+export const Modal = ({ className, onModalClose, closeButton = true, closeButtonLabel = '', modal }) => {
+  const [_modal, setModal] = useState(modal)
+
+  useEffect(() => {
+    if (!_.isEqual(_modal, modal)) {
+      setModal(modal)
+    }
+  }, [modal, _modal])
+
   const closeModal = () => {
+    if (_(onModalClose).isFunction()) {
+      onModalClose()
+    }
+  }
+
+  const onCloseButtonClicked = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
     if (_(onModalClose).isFunction()) {
       onModalClose()
     }
@@ -16,29 +32,34 @@ export const Modal = ({ className, onModalClose, modal }) => {
     <NavModal
       className={classNames('c-modal', className)}
       ariaHideApp={false}
-      isOpen={!_(modal).isNil()}
+      isOpen={!_(_modal).isNil()}
       onRequestClose={closeModal}
       closeButton={false}
       contentLabel='contentLabel'
     >
-      {modal ? (
+      {_modal ? (
         <div>
-          {modal.modalTitle
+          {closeButton ? (
+            <Lukknapp
+              className='c-modal__close-button'
+              onClick={onCloseButtonClicked}
+            >
+              {closeButtonLabel}
+            </Lukknapp>
+          ) : null}
+          {_modal.modalTitle
             ? (
-              <div className='m-3 text-center'>
-                <Undertittel className='c-modal__title'>{modal.modalTitle}</Undertittel>
-              </div>
-            )
-            : null}
-          {modal.modalContent || (
+              <Undertittel className='m-3 c-modal__title'>{_modal.modalTitle}</Undertittel>
+            ) : null}
+          {_modal.modalContent || (
             <div className='c-modal__text m-4 text-center'>
-              {modal.modalText}
+              {_modal.modalText}
             </div>
           )}
-          {modal.modalButtons
+          {_modal.modalButtons
             ? (
               <div className='c-modal__buttons text-center'>
-                {modal.modalButtons.map(button => {
+                {_modal.modalButtons.map(button => {
                   const handleClick = _(button.onClick).isFunction() ? () => {
                     button.onClick()
                     closeModal()
@@ -76,6 +97,8 @@ export const Modal = ({ className, onModalClose, modal }) => {
 
 Modal.propTypes = {
   className: PT.string,
+  closeButton: PT.bool,
+  closeButtonLabel: PT.string,
   onModalClose: PT.func,
   modal: PT.object
 }

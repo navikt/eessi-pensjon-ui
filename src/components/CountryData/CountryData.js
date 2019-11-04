@@ -22,6 +22,11 @@ class CountryData {
         currency: 'DKK',
         currencyLabel: 'Danish korner'
       }, {
+        value: 'IS',
+        label: 'Iceland',
+        currencyLabel: 'Iceland Krona',
+        currency: 'ISK'
+      }, {
         value: 'AF',
         label: 'Afghanistan',
         currency: 'AFN',
@@ -534,11 +539,6 @@ class CountryData {
         label: 'Hungary',
         currencyLabel: 'Forint',
         currency: 'HUF'
-      }, {
-        value: 'IS',
-        label: 'Iceland',
-        currencyLabel: 'Iceland Krona',
-        currency: 'ISK'
       }, {
         value: 'IN',
         label: 'India',
@@ -1284,6 +1284,12 @@ class CountryData {
         currencyLabel: 'Norsk Krone',
         currency: 'NOK'
       }, {
+        value: 'IS',
+        value3: 'ISL',
+        label: 'Island',
+        currencyLabel: 'Iceland Krona',
+        currency: 'ISK'
+      }, {
         value: 'SE',
         value3: 'SWE',
         label: 'Sverige',
@@ -1845,12 +1851,6 @@ class CountryData {
         label: 'Indonesia',
         currencyLabel: 'Rupiah',
         currency: 'IDR'
-      }, {
-        value: 'IS',
-        value3: 'ISL',
-        label: 'Island',
-        currencyLabel: 'Iceland Krona',
-        currency: 'ISK'
       }, {
         value: 'IQ',
         value3: 'IRQ',

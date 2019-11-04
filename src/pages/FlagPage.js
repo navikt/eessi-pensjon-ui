@@ -19,7 +19,6 @@ const FlagPage = ({ highContrast }) => {
   const [country, setCountry] = useState('no')
   let label = CountryData.findByValue('nb', country)
   label = label ? label.label : 'Unknown'
-  console.log(label)
   return (
     <Container>
       <ReactTooltip place='top' type='dark' effect='solid' />

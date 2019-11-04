@@ -18,7 +18,7 @@ const Container = ({ actions, className, children, highContrast }) => {
 
           <div className='pb-3 ml-3'>
             <Link className='center' to='/'>
-              <NavLogo className='pb-3'/>
+              <NavLogo className='pb-3' />
               <img
                 alt='logo' className='eessi-pensjon-logo'
                 src={require('../resources/images/earth.png')}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -11,7 +11,14 @@ const ExpandingPanel = ({
   onClick, open = false, renderContentWhenClosed
 }) => {
   const [_open, setOpen] = useState(open)
+  const [isCloseAnimation, setIsCloseAnimation] = useState(false)
   const contentId = (collapseProps && collapseProps.id) || guid()
+
+  useEffect(() => {
+    if (!open && _open) {
+      setIsCloseAnimation(true)
+    }
+  }, [open, _open])
 
   const handleOnClick = (e) => {
     setOpen(!_open)
@@ -21,8 +28,18 @@ const ExpandingPanel = ({
   }
 
   const onRestProxy = () => {
+    setIsCloseAnimation(false)
     if (collapseProps && collapseProps.onRest) {
       collapseProps.onRest()
+    }
+  }
+
+  const tabHandler = (e) => {
+    const { keyCode } = e
+    const isTab = keyCode === 9
+
+    if (isTab && isCloseAnimation) {
+      e.preventDefault()
     }
   }
 
@@ -45,7 +62,16 @@ const ExpandingPanel = ({
       >
         <div className='ekspanderbartPanel__flex-wrapper'>
           {heading}
-          <span className='ekspanderbartPanel__indikator' />
+          <button
+            className='ekspanderbartPanel__knapp'
+            onKeyDown={tabHandler}
+            onClick={onClick}
+            ariaExpanded={open}
+            type='button'
+            {...ariaControls}
+          >
+            <span className='ekspanderbartPanel__indikator' />
+          </button>
         </div>
       </div>
       <CollapseComponent

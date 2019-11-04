@@ -1,4 +1,5 @@
 const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -15,6 +16,14 @@ module.exports = {
     publicPath: '/dist/',
     umdNamedDefine: true
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: 'src/index.css',
+        to: 'nav.css'
+      }
+    ])
+  ],
   module: {
     rules: [{
       test: /\.less$/,

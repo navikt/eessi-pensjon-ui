@@ -96,6 +96,20 @@ const ModalPage = ({ highContrast }) => {
               <td>-</td>
             </tr>
             <tr>
+              <td>closeButton</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Render a close button on the top-right corner</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td>closeButtonLabel</td>
+              <td><code>string</code></td>
+              <td>false</td>
+              <td>Alternative label for the close button</td>
+              <td>-</td>
+            </tr>
+            <tr>
               <td>modal</td>
               <td><code>object</code></td>
               <td>false</td>

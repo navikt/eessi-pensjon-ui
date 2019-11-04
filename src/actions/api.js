@@ -15,7 +15,7 @@ export const fakeCall = ({ context, expectedPayload, method, type, url }) => {
     dispatch({
       type: type.request
     })
-    return new Promise((resolve) => {
+    const promise = new Promise((resolve) => {
       setTimeout(() => {
         const _payload = typeof expectedPayload === 'function' ? expectedPayload() : expectedPayload
         resolve(_payload)
@@ -33,6 +33,10 @@ export const fakeCall = ({ context, expectedPayload, method, type, url }) => {
         context: context
       })
     })
+    promise.catch((error) => {
+      console.log(JSON.stringify(error))
+    })
+    return promise
   }
 }
 
@@ -57,6 +61,8 @@ export const realCall = ({ body, context, cascadeFailureError, headers, method, 
         ...headers
       },
       body: _body
+    }).catch(error => {
+      console.log(JSON.stringify(error))
     }).then(response => {
       if (response.status >= 400) {
         const error = new Error(response.statusText)
@@ -67,7 +73,8 @@ export const realCall = ({ body, context, cascadeFailureError, headers, method, 
           error.stackTrace = json.stackTrace
           throw error
         })
-          .catch(() => {
+          .catch((error2) => {
+            console.log(JSON.stringify(error2))
             return Promise.reject(error)
           })
       } else {

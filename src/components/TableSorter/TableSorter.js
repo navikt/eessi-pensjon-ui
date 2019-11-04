@@ -105,7 +105,6 @@ const TableSorter = ({
           </td>
           {_columns.map((column, index2) => {
             const value = item[column.id]
-            console.log(value)
             switch (column.type) {
               case 'tag':
                 return (
