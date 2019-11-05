@@ -14,6 +14,9 @@ const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 
 const TableSorterPage = ({ highContrast }) => {
   const [loading, setLoading] = useState(false)
+  const [searchable, setSearchable] = useState(false)
+  const [selectable, setSelectable] = useState(false)
+  const [sortable, setSortable] = useState(false)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   return (
     <Container>
@@ -22,6 +25,9 @@ const TableSorterPage = ({ highContrast }) => {
         <Normaltekst className='pb-4'>Table with sorting capabilities</Normaltekst>
 
         <Checkbox label='Toggle loading prop' checked={loading} onChange={() => setLoading(!loading)} />
+        <Checkbox label='Toggle searchable' checked={searchable} onChange={() => setSearchable(!searchable)} />
+        <Checkbox label='Toggle selectable' checked={selectable} onChange={() => setSelectable(!selectable)} />
+        <Checkbox label='Toggle sortable' checked={sortable} onChange={() => setSortable(!sortable)} />
         <Select
           className='w-25'
           label='Number of items per page'
@@ -66,6 +72,9 @@ const TableSorterPage = ({ highContrast }) => {
           itemsPerPage={itemsPerPage}
           loading={loading}
           sort={{ column: 'name', order: 'ascending' }}
+          searchable={searchable}
+          selectable={selectable}
+          sortable={sortable}
           columns={[
             { id: 'name', label: 'Name', type: 'string', filterText: '', defaultSortOrder: 'ascending' },
             { id: 'date', label: 'Date', type: 'date', filterText: '', defaultSortOrder: '' },
@@ -103,14 +112,17 @@ const TableSorterPage = ({ highContrast }) => {
           '     { name: \'Ziggy\', date: new Date(1929, 1, 14), type: \'Zoo keeper\' }  ' +
           '   ]}\n' +
           '   itemsPerPage={ {{itemsPerPage}} }\n' +
-          '   loading={loading}\n' +
+          '   loading={ {{loading}} }\n' +
+          '   searchable={ {{searchable}} }\n' +
+          '   selectable={ {{selectable}} }\n' +
+          '   sortable={ {{sortable}} }\n' +
           '   sort={{ column: \'name\', order: \'ascending\' }}\n' +
           '   columns={[\n' +
           '     {id: \'name\', label: \'Name\', type: \'string\', filterText: \'\', defaultSortOrder: \'ascending\' },\n' +
           '     {id: \'date\', label: \'Date\', type: \'date\', filterText: \'\', defaultSortOrder: \'\' },\n' +
           '     {id: \'type\', label: \'Occupation\', type: \'tag\', filterText: \'\', defaultSortOrder: \'\' }\n' +
           '   ]}' +
-           '/>', { itemsPerPage: itemsPerPage })}
+           '/>', { loading: loading, itemsPerPage: itemsPerPage, searchable: searchable, selectable: selectable, sortable: sortable })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
@@ -192,6 +204,27 @@ const TableSorterPage = ({ highContrast }) => {
               <td><code>boolean</code></td>
               <td>false</td>
               <td>Turns pagination on the table, to keep big tables in a manageable size.</td>
+              <td>true</td>
+            </tr>
+            <tr>
+              <td>searchable</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Adds a search icon that allows row search fields to show</td>
+              <td>true</td>
+            </tr>
+            <tr>
+              <td>selectable</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Renders a first column with checkboxes that trigger the <code>onRowSelectChange</code> callback function</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>sort</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Allow sortable table headers</td>
               <td>true</td>
             </tr>
             <tr>
