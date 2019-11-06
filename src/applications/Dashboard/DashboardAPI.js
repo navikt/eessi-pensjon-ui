@@ -6,13 +6,24 @@ import defaultConfig from './config/DefaultConfig'
 import DashboardConfig from './config/DashboardConfig'
 import _ from 'lodash'
 
+let hasLocalStorage
+try {
+  hasLocalStorage = localStorage || window.localStorage
+  hasLocalStorage = true
+} catch (e) {
+  hasLocalStorage = false
+  console.error('Can\'t access localStorage')
+}
+
 const dashboardNeedsUpgrade = (instanceVersion, dashboardVersion) => {
   return dashboardVersion > instanceVersion
 }
 
 export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayout, customDefaultConfig, allowedWidgets) => {
-  let layouts, widgets
-  let config = await localStorage.getItem(id + '-config')
+  let layouts, widgets, config
+  if (hasLocalStorage) {
+    config = await localStorage.getItem(id + '-config')
+  }
   config = config ? JSON.parse(config) : customDefaultConfig
   if (!config) {
     config = defaultConfig
@@ -21,12 +32,16 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
     layouts = customDefaultLayout || defaultLayouts
     widgets = customDefaultWidgets || defaultWidgets
   } else {
-    layouts = await localStorage.getItem(id + '-layouts')
+    if (hasLocalStorage) {
+      layouts = await localStorage.getItem(id + '-layouts')
+    }
     layouts = layouts ? JSON.parse(layouts) : customDefaultLayout
     if (!layouts) {
       layouts = defaultLayouts
     }
-    widgets = await localStorage.getItem(id + '-widgets')
+    if (hasLocalStorage) {
+      widgets = await localStorage.getItem(id + '-widgets')
+    }
     widgets = widgets ? JSON.parse(widgets) : customDefaultWidgets
     if (!widgets) {
       widgets = defaultWidgets
@@ -69,16 +84,25 @@ export const loadDashboard = async (id, customDefaultWidgets, customDefaultLayou
 }
 
 export const saveDashboard = async (id, widgets, layouts, config) => {
+  if (!hasLocalStorage) {
+    return
+  }
   await localStorage.setItem(id + '-config', JSON.stringify(config))
   await localStorage.setItem(id + '-widgets', JSON.stringify(widgets))
   await localStorage.setItem(id + '-layouts', JSON.stringify(layouts))
 }
 
 export const saveWidgets = async (id, widgets) => {
+  if (!hasLocalStorage) {
+    return
+  }
   await localStorage.setItem(id + '-widgets', JSON.stringify(widgets))
 }
 
 export const resetDashboard = async (id, customDefaultWidgets, customDefaultLayout, customDefaultConfig) => {
+  if (!hasLocalStorage) {
+    return
+  }
   await localStorage.setItem(id + '-config', JSON.stringify(customDefaultConfig || defaultConfig))
   await localStorage.setItem(id + '-widgets', JSON.stringify(customDefaultWidgets || defaultWidgets))
   await localStorage.setItem(id + '-layouts', JSON.stringify(customDefaultLayout || defaultLayouts))

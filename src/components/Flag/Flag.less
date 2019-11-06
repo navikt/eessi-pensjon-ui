@@ -4,19 +4,24 @@
   display: inline-block;
 
   &.type-circle {
+
     border-radius: 50%;
     overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    position: relative;
 
     &.size-M {
 
       width: 25px;
       height: 25px;
-      min-width: 25px;
+
       img {
         height: 25px;
+        position: absolute;
+        margin: auto;
+        top: -999px;
+        left: -999px;
+        bottom: -999px;
+        right: -999px;
       }
     }
 
@@ -24,9 +29,15 @@
 
       width: 40px;
       height: 40px;
-      min-width: 40px;
+
       img {
         height: 40px;
+        position: absolute;
+        margin: auto;
+        top: -999px;
+        left: -999px;
+        bottom: -999px;
+        right: -999px;
       }
     }
   }

@@ -1,4 +1,5 @@
 // IE 11
+import 'react-app-polyfill/ie11'
 import 'core-js/es/object/assign'
 import 'core-js/es/object/entries'
 import 'core-js/es/object/keys'
@@ -6,8 +7,9 @@ import 'core-js/es/array/includes'
 import 'core-js/es/array/find'
 import 'core-js/es/map'
 import 'core-js/es/set'
-import 'core-js/es/promise'
-import 'core-js/features/url-search-params'
+import 'core-js/stable/number'
+import 'core-js/stable/promise'
+import 'core-js/stable/url-search-params'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
