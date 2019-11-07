@@ -1,6 +1,8 @@
+@import '../../../../constants';
+
 .a-pdf-dndTarget {
     .a-pdf-dndTarget-droppable {
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 10;
         overflow-y: auto;
         height : 65vh;
@@ -9,7 +11,7 @@
         box-shadow: inset 5px 5px 5px lightgrey;
 
          &-active {
-                background-color: rgba(0, 128, 0, 0.2);
+                background-color: fade(@navRod, 20%);
                 animation: dndTargetDroppablePulsate 1s ease-out;
                 animation-iteration-count: infinite;
          }
@@ -27,15 +29,15 @@
 }
 
 @keyframes dndTargetDroppablePulsate {
-    0% {
-        background-color: rgba(0,128,0,0.2);
-    }
-    50% {
-        background-color: rgba(0,128,0,0.1);
-    }
-    100% {
-        background-color: rgba(0,128,0,0.2);
-    }
+  0% {
+    background-color: fade(@navRod, 20%);
+  }
+  50% {
+    background-color: fade(@navRod, 10%);
+  }
+  100% {
+    background-color: fade(@navRod, 20%);
+  }
 }
 
 @keyframes dndTargetDraggablePulsate {

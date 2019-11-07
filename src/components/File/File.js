@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PT from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import bytes from 'bytes'
 import Other from './Other'
@@ -80,8 +81,8 @@ const File = (props) => {
       onMouseLeave={onHandleMouseLeave}
       onMouseOver={onHandleMouseOver}
       style={file.mimetype === 'application/pdf' ? {
-        maxWidth: ((width || 100) * scale) + 'px',
-        maxHeight: ((height || 140) * scale) + 'px'
+        maxWidth: _.isString(width) ? width : ((width || 100) * scale) + 'px',
+        maxHeight: _.isString(height) ? height : ((height || 140) * scale) + 'px'
       } : {}}
     >
       <div className='overlay'>
@@ -191,7 +192,7 @@ File.propTypes = {
   className: PT.string,
   buttons: PT.oneOf(['visible', 'hover', 'none']),
   file: PT.object.isRequired,
-  height: PT.number,
+  height: PT.oneOfType([PT.number, PT.string]),
   initialPage: PT.number,
   labels: PT.object,
   onAddFile: PT.func,
@@ -206,7 +207,7 @@ File.propTypes = {
   showDeleteButton: PT.bool,
   showDownloadButton: PT.bool,
   showPreviewButton: PT.bool,
-  width: PT.number
+  width: PT.oneOfType([PT.number, PT.string])
 }
 File.displayName = 'File'
 export default File

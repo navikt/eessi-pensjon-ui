@@ -9,7 +9,7 @@ import './TableSorter.css'
 import Pagination from '../Pagination/Pagination'
 
 const TableSorter = ({
-  className, context, columns = [], initialPage = 1, items = [], itemsPerPage = 10, loading = false,
+  animatable = true, className, context, columns = [], initialPage = 1, items = [], itemsPerPage = 10, loading = false,
   onRowSelectChange, pagination = true, searchable = true, selectable = false, sortable = true,
   sort = { column: '', order: 'none' }
 }) => {
@@ -19,12 +19,6 @@ const TableSorter = ({
   const [seeFilters, setSeeFilters] = useState(false)
   const [checkAll, setCheckAll] = useState(false)
   const [currentPage, setCurrentPage] = useState(initialPage)
-
-  useEffect(() => {
-    if (!_.isEqual(items, _items)) {
-      setItems(items)
-    }
-  }, [items, _items])
 
   const sortOrder = {
     none: 'ascending',
@@ -37,6 +31,15 @@ const TableSorter = ({
     descending: 'tabell__th--sortert-desc',
     none: ''
   }
+
+  useEffect(() => {
+    if (!_.isEqual(
+      items.map((e, i) => e.key || i),
+      _items.map((e, i) => e.key || i)
+    )) {
+      setItems(items)
+    }
+  }, [items, _items])
 
   const sortColumn = (column) => {
     if (!sortable) { return }
@@ -61,8 +64,8 @@ const TableSorter = ({
     if (_.isFunction(onRowSelectChange)) {
       onRowSelectChange(newItems)
     }
-    setItems(newItems)
     setCheckAll(!checkAll)
+    setItems(newItems)
   }
 
   const onCheckClicked = (changedItem) => {
@@ -108,10 +111,21 @@ const TableSorter = ({
         : true
     }).map((item, index) => {
       return (
-        <tr key={index} aria-selected={selectable && item.selected === true} className={selectable && item.selected ? 'tabell__tr--valgt' : ''}>
+        <tr
+          key={item.key || index}
+          aria-selected={selectable && item.selected === true}
+          style={{ animationDelay: (0.07 * index) + 's' }}
+          className={classNames({
+            slideAnimate: animatable,
+            'tabell__tr--valgt': selectable && item.selected
+          })}
+        >
           {selectable ? (
             <td>
-              <Checkbox label='Velg' checked={item.selected} onChange={() => onCheckClicked(item)} />
+              <Checkbox
+                label='Velg' checked={item.selected} onChange={() =>
+                  onCheckClicked(item)}
+              />
             </td>
           ) : <td />}
           {_columns.map((column, index2) => {
@@ -159,10 +173,12 @@ const TableSorter = ({
 
   return (
     <div className={classNames('c-tableSorter', 'tabell', { 'tabell__td--sortert': sortable }, className)}>
-      <div className='c-tableSorter__status'>
-        {loading ? <WaitingPanel size='XS' message='' /> : null}
-      </div>
       <div className='c-tableSorter__content'>
+        {loading ? (
+          <div className='c-tableSorter__loading'>
+            <WaitingPanel size='XL' message='' />
+          </div>
+        ) : null}
         <table cellSpacing='0' className='c-tableSorter__table w-100'>
           <thead>
             <tr className='c-tableSorter__header'>
@@ -245,6 +261,7 @@ const TableSorter = ({
 }
 
 TableSorter.propTypes = {
+  animatable: PT.bool,
   className: PT.string,
   context: PT.object,
   columns: PT.array,

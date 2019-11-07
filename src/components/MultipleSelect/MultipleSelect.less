@@ -5,15 +5,15 @@
   .c-multipleOption {
     padding: 10px;
     &.selected {
-       background: lightblue;
+       background: @navLysBla;
        label {
-         color: black !important;
+         color: @font-color !important;
        }
     }
     &.focused {
       background: aliceblue;
       label {
-        color: black !important;
+        color: @font-color !important;
       }
     }
 
@@ -22,13 +22,13 @@
     }
 
     img {
-       border: 1px solid lightgrey;
+       border: 1px solid @navGra60;
     }
   }
 
   .multipleSelect__multi-value {
       border-radius: 20px;
-      border: 1px solid grey;
+      border: 1px solid @navMorkGra;
       padding: 0.25rem;
 
       &:focus {
@@ -39,39 +39,39 @@
 
   .multipleSelect__multi-value__remove {
       border-radius: 20px;
-      border: 1px solid grey;
+      border: 1px solid @navMorkGra;
       margin-left: 0.25rem;
   }
 
   .c-multipleOption-label {
-     color: black;
+     color: @font-color;
      font-style: normal;
   }
 
   .multipleSelect__control {
-    border: 1px solid @form-dark-gray;
+    border: 1px solid @navMorkGra;
   }
 
   .multipleSelect__indicator-separator {
-    background-color: @form-dark-gray;
+    background-color: @navMorkGra;
   }
 
   .c-multipleSelect-multipleValueRemove {
-     border: 1px solid grey;
+     border: 1px solid @navMorkGra;
      border-radius: 20px;
      width: 24px;
      height: 24px;
      text-align: center;
 
      &:hover {
-       background-color: white;
+       background-color: @white;
      }
    }
 }
 
 .c-multipleSelect.skjemaelement__feilmelding {
   .multipleSelect__control {
-    border: 1px solid #BA3A26;
+    border: 1px solid @redError;
   }
 }
 
@@ -91,12 +91,12 @@
     background: @black;
 
     &.selected {
-       background: @blue;
+       background: @navBla;
        color: @black !important;
        font-weight: bold;
     }
     &.focused {
-       background: @high-contrast-orange;
+       background: @orangeFocus;
        color: @black !important;
        font-weight: bold;
     }
@@ -108,17 +108,17 @@
   &.skjemaelement__feilmelding {
     .multipleSelect__control {
       border-width: 2px;
-      border-color: #BA3A26;
+      border-color: @redError;
     }
   }
 
   .multipleSelect__multi-value {
-    border: 1px solid white;
-    background-color: black;
+    border: 1px solid @white;
+    background-color: @black;
   }
 
   .multipleSelect__multi-value__label {
-    color: white;
+    color: @white;
   }
 }
 

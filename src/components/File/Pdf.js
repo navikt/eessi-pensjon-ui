@@ -3,6 +3,7 @@ import PT from 'prop-types'
 import { Document, Page } from 'react-pdf'
 import classNames from 'classnames'
 import './Pdf.css'
+import _ from 'lodash'
 
 export const Pdf = ({ className, currentPage, file, height, labels, numberPages, onContentClick, onLoadSuccess, scale, size, width }) => (
   <div
@@ -19,8 +20,8 @@ export const Pdf = ({ className, currentPage, file, height, labels, numberPages,
         onClick={onContentClick}
       >
         <Page
-          width={(width || 100) * scale}
-          height={(height || 140) * scale}
+          width={_.isString(width) ? width: (width || 100) * scale}
+          height={_.isString(height) ? height : (height || 140) * scale}
           renderMode='svg'
           pageNumber={currentPage}
         />
@@ -33,14 +34,14 @@ Pdf.propTypes = {
   className: PT.string,
   currentPage: PT.number,
   file: PT.object.isRequired,
-  height: PT.number,
+  height: PT.oneOfType([PT.number, PT.string]),
   labels: PT.object.isRequired,
   numberPages: PT.number,
   onLoadSuccess: PT.func,
   onContentClick: PT.func,
   scale: PT.number.isRequired,
   size: PT.string,
-  width: PT.number
+  width: PT.oneOfType([PT.number, PT.string])
 }
 
 Pdf.displayName = 'Pdf'

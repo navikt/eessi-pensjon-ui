@@ -3,13 +3,13 @@
 .c-fileUpload {
   position: relative;
   min-height: 200px;
-  border: 1px solid #78706A;
+  border: 1px solid @navGra60;
   border-radius: 4px;
-  background-color: whitesmoke;
+  background-color: @navLysGra;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(0,255,0,0.1);
+    background-color: fade(@navGronn, 20%);
   }
 
   &-placeholder {
@@ -32,11 +32,11 @@
       text-align: right;
 
       &-OK {
-          color: #78706A;
+          color: @navGra60;
       }
 
       &-ERROR {
-          color: red;
+          color: @navRod;
       }
     }
   }
@@ -54,7 +54,7 @@
   }
 
   &-active {
-    background-color: rgba(0,128,0,0.2);
+    background-color: fade(@navRod, 20%);
     animation: c-fileUpload-pulsate 1s ease-out;
     animation-iteration-count: infinite;
   }
@@ -78,13 +78,13 @@
 }
 @keyframes c-fileUpload-pulsate {
   0% {
-    background-color: rgba(0,128,0,0.2);
+    background-color: fade(@navRod, 20%);
   }
   50% {
-    background-color: rgba(0,128,0,0.1);
+    background-color: fade(@navRod, 10%);
   }
   100% {
-    background-color: rgba(0,128,0,0.2);
+    background-color: fade(@navRod, 20%);
   }
 }
 

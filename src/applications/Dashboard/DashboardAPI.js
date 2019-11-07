@@ -1,4 +1,4 @@
-/* global localStorage */
+/* global window,localStorage */
 
 import defaultWidgets from './config/DefaultWidgets'
 import defaultLayouts from './config/DefaultLayout'
@@ -6,14 +6,13 @@ import defaultConfig from './config/DefaultConfig'
 import DashboardConfig from './config/DashboardConfig'
 import _ from 'lodash'
 
-let hasLocalStorage
+let hasLocalStorage = false
 try {
   hasLocalStorage = localStorage || window.localStorage
   hasLocalStorage = true
-} catch (e) {
-  hasLocalStorage = false
-  console.error('Can\'t access localStorage')
-}
+} catch (e) {}
+
+console.log('haslocalStorage', hasLocalStorage)
 
 const dashboardNeedsUpgrade = (instanceVersion, dashboardVersion) => {
   return dashboardVersion > instanceVersion

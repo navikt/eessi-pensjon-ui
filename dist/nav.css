@@ -1082,7 +1082,7 @@ body .blokk-xl {
   transform: translateX(-3px) rotate(45deg);
 }
 .alertstripe {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -1185,7 +1185,7 @@ body .blokk-xl {
   position: absolute;
   display: block;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #FFF;
   background-position: center center;
   background-repeat: no-repeat;
   border: 1px solid #78706A;
@@ -1254,18 +1254,18 @@ body .blokk-xl {
 }
 .radioknapp:checked + .skjemaelement__label:before {
   border: 2px solid #0067C5;
-  box-shadow: 0 0 0 3px #ffffff inset, 0 0 0 12px #0067C5 inset;
+  box-shadow: 0 0 0 3px #FFF inset, 0 0 0 12px #0067C5 inset;
 }
 .radioknapp:disabled:checked + .skjemaelement__label:before {
   border: 2px solid #B7B1A9;
-  box-shadow: 0 0 0 3px #ffffff inset, 0 0 0 12px #B7B1A9 inset;
+  box-shadow: 0 0 0 3px #FFF inset, 0 0 0 12px #B7B1A9 inset;
 }
 .radioknapp:focus + .skjemaelement__label:before {
-  box-shadow: 0 0 0 3px #254b6d, 0 0 0 12px #ffffff inset;
+  box-shadow: 0 0 0 3px #254b6d, 0 0 0 12px #FFF inset;
 }
 .radioknapp:checked:focus + .skjemaelement__label:before {
   transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  box-shadow: 0 0 0 3px #254b6d, 0 0 0 3px #ffffff inset, 0 0 0 12px #0067C5 inset;
+  box-shadow: 0 0 0 3px #254b6d, 0 0 0 3px #FFF inset, 0 0 0 12px #0067C5 inset;
 }
 .textarea--medMeta {
   resize: none;
@@ -1298,7 +1298,7 @@ body .blokk-xl {
 .textareamirror {
   appearance: none;
   padding: 0.5rem;
-  background-color: #ffffff;
+  background-color: #FFF;
   border-radius: 4px;
   border: 1px solid #78706A;
   box-sizing: border-box;
@@ -1424,7 +1424,7 @@ body .blokk-xl {
 .skjemaelement__input {
   appearance: none;
   padding: 0.5rem;
-  background-color: #ffffff;
+  background-color: #FFF;
   border-radius: 4px;
   border: 1px solid #78706A;
   box-sizing: border-box;
@@ -1494,7 +1494,7 @@ body .blokk-xl {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #FFF;
   border: 1px solid #3E3832;
   border-right: 0;
   color: #3E3832;
@@ -1511,7 +1511,7 @@ body .blokk-xl {
 }
 .toggle__input:checked + label {
   background-color: #005B82;
-  color: #ffffff;
+  color: #FFF;
   border-color: #005B82;
 }
 .toggle__input:focus + label {
@@ -1523,7 +1523,7 @@ body .blokk-xl {
   margin-bottom: 0.5rem;
 }
 .inputPanel {
-  background-color: #ffffff;
+  background-color: #FFF;
   border: 1px solid #78706A;
   border-radius: 0.25rem;
   display: block;
@@ -1554,7 +1554,7 @@ body .blokk-xl {
 .inputPanel__label:before {
   border: 1px solid #78706A;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #FFF;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 75%;
@@ -1625,7 +1625,7 @@ body .blokk-xl {
   border-radius: 4px;
 }
 .bekreftCheckboksPanel {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -1679,7 +1679,7 @@ body .blokk-xl {
 .knappdisabled-mixin--disabled {
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
   box-shadow: none;
   transform: none;
   cursor: not-allowed;
@@ -1695,7 +1695,7 @@ body .blokk-xl {
   box-shadow: none;
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
 }
 .knapp {
   display: inline-flex;
@@ -1725,18 +1725,18 @@ body .blokk-xl {
 }
 .knapp:hover {
   background-color: #0067C5;
-  color: #ffffff;
+  color: #FFF;
 }
 .knapp:active {
   background-color: #005B82;
   border-color: #005B82;
-  color: #ffffff;
+  color: #FFF;
 }
 .knapp:disabled,
 .knapp--disabled {
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
   box-shadow: none;
   transform: none;
   cursor: not-allowed;
@@ -1752,7 +1752,7 @@ body .blokk-xl {
   box-shadow: none;
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
 }
 .knapp .knapp__spinner {
   border: 2px solid #0067C5;
@@ -1760,8 +1760,8 @@ body .blokk-xl {
   border-bottom-color: #99c2e8;
 }
 .knapp:hover .knapp__spinner {
-  border-top-color: #ffffff;
-  border-right-color: #ffffff;
+  border-top-color: #FFF;
+  border-right-color: #FFF;
 }
 .knapp.knapp--hoved:focus .knapp__spinner {
   border-top-color: #0067C5;
@@ -1769,8 +1769,8 @@ body .blokk-xl {
 }
 .knapp.knapp--hoved .knapp__spinner,
 .knapp.knapp--hoved:hover .knapp__spinner {
-  border-top-color: #ffffff;
-  border-right-color: #ffffff;
+  border-top-color: #FFF;
+  border-right-color: #FFF;
 }
 .knapp.knapp--fare:focus .knapp__spinner {
   border-top-color: #BA3A26;
@@ -1778,7 +1778,7 @@ body .blokk-xl {
 }
 .knapp.knapp--fare .knapp__spinner,
 .knapp.knapp--fare:hover .knapp__spinner {
-  border: 2px solid #ffffff;
+  border: 2px solid #FFF;
   border-left-color: #e3b0a8;
   border-bottom-color: #e3b0a8;
 }
@@ -1788,7 +1788,7 @@ body .blokk-xl {
 }
 .knapp:disabled .knapp__spinner,
 .knapp--disabled .knapp__spinner {
-  border: 2px solid #ffffff;
+  border: 2px solid #FFF;
   border-top-color: #E9E7E7;
   border-right-color: #E9E7E7;
 }
@@ -1836,7 +1836,7 @@ body .blokk-xl {
 .knapp--hoved {
   transform: translateY(-2px);
   box-shadow: 0 2px 0 #C6C2BF;
-  color: #ffffff;
+  color: #FFF;
   border-color: #0067C5;
   background-color: #0067C5;
   position: relative;
@@ -1893,7 +1893,7 @@ body .blokk-xl {
   color: #0067C5;
 }
 .knapp--hoved:hover {
-  color: #ffffff;
+  color: #FFF;
   border-color: #0074df;
   background-color: #0074df;
 }
@@ -1909,7 +1909,7 @@ body .blokk-xl {
 .knapp--fare {
   transform: translateY(-2px);
   box-shadow: 0 2px 0 #C6C2BF;
-  color: #ffffff;
+  color: #FFF;
   border-color: #BA3A26;
   background-color: #BA3A26;
   position: relative;
@@ -1966,7 +1966,7 @@ body .blokk-xl {
   color: #BA3A26;
 }
 .knapp--fare:hover {
-  color: #ffffff;
+  color: #FFF;
   border-color: #cf412a;
   background-color: #cf412a;
 }
@@ -1992,7 +1992,7 @@ body .blokk-xl {
 .knapp--flat:active {
   background-color: #005B82;
   border: 2px solid transparent;
-  color: #ffffff;
+  color: #FFF;
 }
 .knapp--mini {
   font-size: 0.875em;
@@ -2023,13 +2023,13 @@ body .blokk-xl {
   }
 }
 .panel {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
 }
 .panel--stor {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -2039,7 +2039,7 @@ body .blokk-xl {
   border: 1px solid #C6C2BF;
 }
 .lenkepanel {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -2139,7 +2139,7 @@ body .blokk-xl {
   border: 0px;
   text-align: left;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -3520,7 +3520,7 @@ GRID
 }
 .stegindikator__steg-inner--aktiv .stegindikator__steg-num {
   background: #005B82;
-  color: #ffffff;
+  color: #FFF;
   box-shadow: none;
   transform: scale(1.2);
 }
@@ -3558,7 +3558,7 @@ GRID
   cursor: pointer;
 }
 .stegindikator__steg-inner--interaktiv:not(.stegindikator__steg-inner--disabled):hover .stegindikator__steg-num {
-  background: #ffffff;
+  background: #FFF;
   box-shadow: 0 0 0 2px #005B82;
   color: #005B82;
 }
@@ -3630,7 +3630,7 @@ GRID
   overflow: hidden;
 }
 .modal {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -3861,7 +3861,7 @@ GRID
   margin-right: 0.75rem;
 }
 .nav-veilederpanel {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -4064,7 +4064,7 @@ GRID
   top: 1px;
   width: 1rem;
   height: 1rem;
-  background: #ffffff;
+  background: #FFF;
   transform: rotate(54deg) skew(17deg);
 }
 .snakkeboble--hoyre .snakkeboble__snakkebole-pil {
@@ -4253,7 +4253,7 @@ GRID
 .hjelpetekst__apneknapp:active,
 .hjelpetekst__apneknapp:hover {
   outline: 0;
-  color: #ffffff;
+  color: #FFF;
   background: #0067C5;
 }
 .hjelpetekst__apneknapp:focus .hjelpetekst__ikon,
@@ -4303,7 +4303,7 @@ GRID
 }
 .lukknapp:hover:before,
 .lukknapp:hover:after {
-  background-color: #ffffff;
+  background-color: #FFF;
 }
 .lukknapp:active {
   color: #19548a;
@@ -4316,7 +4316,7 @@ GRID
   color: #0067C5;
 }
 .lukknapp--hvit {
-  color: #ffffff;
+  color: #FFF;
 }
 .lukknapp--hvit:hover {
   background-color: #66CBEC;
@@ -4364,18 +4364,18 @@ GRID
 }
 .toggleKnapp:hover {
   background-color: #0067C5;
-  color: #ffffff;
+  color: #FFF;
 }
 .toggleKnapp:active {
   background-color: #005B82;
   border-color: #005B82;
-  color: #ffffff;
+  color: #FFF;
 }
 .toggleKnapp:disabled,
 .toggleKnapp--disabled {
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
   box-shadow: none;
   transform: none;
   cursor: not-allowed;
@@ -4391,7 +4391,7 @@ GRID
   box-shadow: none;
   background-color: #B7B1A9;
   border-color: #B7B1A9;
-  color: #ffffff;
+  color: #FFF;
 }
 .toggleKnapp:after {
   content: '';
@@ -4458,12 +4458,12 @@ GRID
   transform: translateY(0);
   border-color: #005B82;
   background-color: #005B82;
-  color: #ffffff;
+  color: #FFF;
 }
 .toggleKnapp--pressed svg g {
-  fill: #ffffff;
-  border-color: #ffffff;
-  stroke: #ffffff;
+  fill: #FFF;
+  border-color: #FFF;
+  stroke: #FFF;
 }
 .toggleKnapp--pressed:hover,
 .toggleKnapp--pressed:active {
@@ -4505,7 +4505,7 @@ GRID
   z-index: auto;
 }
 .lesMerPanel {
-  background-color: #ffffff;
+  background-color: #FFF;
   display: block;
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 4px;
@@ -4642,6 +4642,26 @@ GRID
   border-right: 1px solid #C6C2BF;
   border-top: 1px solid #C6C2BF;
 }
+/*
+---------------
+FARGER
+---------------
+*/
+/*
+---------------
+BREKKPUNKTER
+---------------
+*/
+/*
+--------------
+CONTAINER
+--------------
+*/
+/*
+---------------
+GRID
+---------------
+*/
 @keyframes animation-open {
   0% {
     height: 0%;
@@ -4716,7 +4736,7 @@ body {
 }
 code,
 pre {
-  color: #555555;
+  color: #59514B;
 }
 ol {
   list-style-type: decimal;

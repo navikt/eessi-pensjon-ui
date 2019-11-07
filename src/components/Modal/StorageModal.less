@@ -1,10 +1,12 @@
+@import '../../constants';
+
 .c-storageModal {
 
     .body {
 
         padding: 1rem;
         margin: 1rem;
-        border: 1px solid lightgray;
+        border: 1px solid @navGra20;
         max-height: 400px;
         overflow-y: auto;
         min-height: 200px;
@@ -19,18 +21,18 @@
 
             display: flex;
             justify-content: space-between;
-            background-color: whitesmoke;
+            background-color: @navLysGra;
             text-decoration: none;
-            border: 2px solid whitesmoke;
+            border: 2px solid @navGra20;
             align-items: center;
 
             &:hover {
-                background-color: #EEE;
+                background-color: @navLysGra;
             }
 
             &.selected {
-                border: 2px solid orange;
-                background-color: aliceblue;
+                border: 2px solid @navOransje;
+                background-color: @navLysBla;
                 cursor: unset;
             }
             .fileName {

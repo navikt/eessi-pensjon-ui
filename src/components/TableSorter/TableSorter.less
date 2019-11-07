@@ -1,11 +1,21 @@
+@import '../../constants';
+
 .c-tableSorter {
 
-  &__status {
-    min-height: 30px;
+  &__content {
+    position: relative;
+  }
+
+  &__loading {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.1);
+    height: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    padding-left: 0.5rem;
+    align-items: center;
+    justify-content: center;
   }
 
   &__subcell {
@@ -24,24 +34,30 @@
   .header {
     cursor: pointer;
   }
+
+  tr.slideAnimate {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInFromLeft 0.2s forwards;
+  }
 }
 
 .highContrast {
   tbody {
     tr:nth-child(odd) {
-      background: black;
+      background: @black;
     }
 
     tr:nth-child(even) {
-      background: #333333;
+      background: @navMorkGra;
     }
   }
 
   .tabell__tr--valgt td {
-    background: orange !important;
-    color: black;
+    background: @navOransje !important;
+    color: @font-color;
     * {
-      color: black;
+      color: @font-color;
     }
   }
 }

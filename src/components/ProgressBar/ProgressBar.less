@@ -1,7 +1,8 @@
 @import '../../keyframes';
+@import '../../constants';
 
 .c-progressbar {
-  background-color: lightgrey;
+  background-color: @navGra20;
   width: 100%;
   display: block;
   border-radius: 4px;
@@ -12,10 +13,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #fff;
+  color: @white;
   text-align: center;
   white-space: nowrap;
-  background-color: #007bff;
+  background-color: @navBla;
   transition: width .6s ease;
   background-image: linear-gradient(45deg, hsla(0, 0%, 100%, .15) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .15) 0, hsla(0, 0%, 100%, .15) 75%, transparent 0, transparent);
   background-size: 1rem 1rem;
@@ -24,11 +25,11 @@
 
 .highContrast {
   .c-progressbar {
-    background-color: #222222;
-    border: 2px solid white;
+    background-color: @navMorkGra;
+    border: 2px solid @white;
   }
   .c-progressbar-bar {
-    background: #80bdff;
+    background: @navLysBla;
     color: black;
   }
 }

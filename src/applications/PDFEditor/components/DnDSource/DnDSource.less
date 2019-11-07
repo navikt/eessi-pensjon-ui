@@ -1,3 +1,5 @@
+@import '../../../../constants';
+
 .a-pdf-dndSource {
 
     position: relative;
@@ -6,12 +8,12 @@
         position: absolute;
         top: 6px;
         right: 5px;
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 5px;
     }
 
     .a-pdf-dndSource-droppable {
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 10px;
         display: flex;
         overflow-x: auto;
@@ -19,7 +21,7 @@
         box-shadow: inset 5px 5px 5px lightgrey;
 
         &-active {
-            background-color: rgba(0,128,0,0.2);
+            background-color: fade(@navRod, 20%);
             animation: dndSourceDroppablePulsate 1s ease-out;
             animation-iteration-count: infinite;
         }
@@ -37,13 +39,13 @@
 }
 @keyframes dndSourceDroppablePulsate {
     0% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navRod, 20%);
     }
     50% {
-        background-color: rgba(0,128,0,0.1);
+        background-color: fade(@navRod, 10%);
     }
     100% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navRod, 20%);
     }
 }
 

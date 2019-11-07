@@ -38,7 +38,6 @@ const Container = ({ actions, className, children, highContrast }) => {
             <li><Link to='/ColorPicker'>Color picker</Link></li>
             <li><Link to='/CountryUtils'>Country utils</Link></li>
             <li><Link to='/DatePicker'>Date picker</Link></li>
-            <li><Link to='/EESSIPensjonVeileder'>EESSI Pensjon Veileder</Link></li>
             <li><Link to='/ExpandingPanel'>Expanding panel</Link></li>
             <li><Link to='/File'>File</Link></li>
             <li><Link to='/FileUpload'>File upload</Link></li>

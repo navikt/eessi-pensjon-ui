@@ -1,9 +1,11 @@
+@import '../../../../constants';
+
 .a-pdf-dndImages {
 
     position: relative;
 
     .a-pdf-dndImages-droppable {
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 10px;
         display: flex;
         overflow-x: auto;
@@ -49,31 +51,31 @@
         position: absolute;
         top: 6px;
         right: 5px;
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 5px;
     }
 }
 
 @keyframes dndImagesPulsate {
     0% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navGronn, 80%);
     }
     50% {
-        background-color: rgba(0,128,0,0.1);
+        background-color: fade(@navGronn, 0%);
     }
     100% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navGronn, 80%);
     }
 }
 
 @keyframes dndImagesPulsateBorder {
     0% {
-        border: 2px dashed rgba(128,128,128,1);
+        border: 2px dashed @navGra60;
     }
     50% {
-        border: 2px dashed rgba(128,128,128,0);
+        border: 2px dashed fade(@navGra60, 100%);
     }
     100% {
-        border: 2px dashed rgba(128,128,128,1);
+        border: 2px dashed @navGra60;
     }
 }

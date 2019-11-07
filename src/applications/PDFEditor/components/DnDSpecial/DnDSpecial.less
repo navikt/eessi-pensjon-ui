@@ -1,9 +1,11 @@
+@import '../../../../constants';
+
 .a-pdf-dndSpecial {
 
     position: relative;
 
     .a-pdf-dndSpecial-droppable {
-        background-color: whitesmoke;
+        background-color: @navLysGra;
         padding: 10px;
         display: flex;
         overflow-x: auto;
@@ -11,7 +13,7 @@
         box-shadow: inset 5px 5px 5px lightgrey;
 
         &-active {
-            background-color: rgba(0,128,0,0.2);
+            background-color: fade(@navRod, 20%);
             animation: dndSpecialPulsate 1s ease-out;
             animation-iteration-count: infinite;
         }
@@ -49,7 +51,7 @@
     .a-pdf-dndSpecial-draggable {
 
         &-active {
-              border: 2px dashed gray;
+              border: 2px dashed @navGra60;
               padding: 2px;
               animation: dndSpecialPulsateBorder 1s ease-out;
               animation-iteration-count: infinite;
@@ -62,24 +64,24 @@
 }
 @keyframes dndSpecialPulsate {
     0% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navRod, 20%);
     }
     50% {
-        background-color: rgba(0,128,0,0.1);
+        background-color: fade(@navRod, 10%);
     }
     100% {
-        background-color: rgba(0,128,0,0.2);
+        background-color: fade(@navRod, 20%);
     }
 }
 
 @keyframes dndSpecialPulsateBorder {
     0% {
-        border: 2px dashed rgba(128,128,128,1);
+        border: 2px dashed @navGra60;
     }
     50% {
-        border: 2px dashed rgba(128,128,128,0);
+        border: 2px dashed fade(@navGra60, 100%);
     }
     100% {
-        border: 2px dashed rgba(128,128,128,1);
+        border: 2px dashed @navGra60;
     }
 }

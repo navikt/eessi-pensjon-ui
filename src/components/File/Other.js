@@ -1,5 +1,6 @@
 import React from 'react'
 import PT from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import './Other.css'
 
@@ -11,8 +12,8 @@ export const Other = ({ className, file, height, labels, onContentClick, scale, 
     <div
       className='content'
       style={{
-        width: ((width || 100) * scale) + 'px',
-        height: ((height || 140) * scale) + 'px'
+        width: _.isString(width) ? width: ((width || 100) * scale) + 'px',
+        height: _.isString(height) ? height: ((height || 140) * scale) + 'px'
       }}
       onClick={onContentClick}
     >
@@ -26,11 +27,11 @@ export const Other = ({ className, file, height, labels, onContentClick, scale, 
 Other.propTypes = {
   className: PT.string,
   file: PT.object.isRequired,
-  height: PT.number,
+  height: PT.oneOfType([PT.number, PT.string]),
   labels: PT.object.isRequired,
   onContentClick: PT.func,
   scale: PT.number.isRequired,
-  width: PT.number
+  width: PT.oneOfType([PT.number, PT.string])
 }
 Other.displayName = 'Other'
 export default Other

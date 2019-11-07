@@ -17,13 +17,13 @@ describe('components/Colorpicker', () => {
     const wrapper = mount(<ColorPicker {...initialMockProps} />)
     expect(wrapper.exists('.c-colorPicker__popover')).toBeFalsy()
 
-    wrapper.find('.c-colorPicker__container').hostNodes().simulate('click')
+    wrapper.find('.c-colorPicker__swatch').hostNodes().simulate('click')
     expect(wrapper.exists('.c-colorPicker__popover')).toBeTruthy()
 
-    wrapper.find('.c-colorPicker__container').hostNodes().simulate('click')
+    wrapper.find('.c-colorPicker__swatch').hostNodes().simulate('click')
     expect(wrapper.exists('.c-colorPicker__popover')).toBeFalsy()
 
-    wrapper.find('.c-colorPicker__container').hostNodes().simulate('click')
+    wrapper.find('.c-colorPicker__swatch').hostNodes().simulate('click')
     expect(wrapper.exists('.c-colorPicker__cover')).toBeTruthy()
 
     wrapper.find('div.c-colorPicker__cover').hostNodes().simulate('click')

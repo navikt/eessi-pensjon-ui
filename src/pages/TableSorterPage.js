@@ -14,9 +14,10 @@ const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 
 const TableSorterPage = ({ highContrast }) => {
   const [loading, setLoading] = useState(false)
-  const [searchable, setSearchable] = useState(false)
-  const [selectable, setSelectable] = useState(false)
-  const [sortable, setSortable] = useState(false)
+  const [animatable, setAnimatable] = useState(true)
+  const [searchable, setSearchable] = useState(true)
+  const [selectable, setSelectable] = useState(true)
+  const [sortable, setSortable] = useState(true)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   return (
     <Container>
@@ -25,6 +26,7 @@ const TableSorterPage = ({ highContrast }) => {
         <Normaltekst className='pb-4'>Table with sorting capabilities</Normaltekst>
 
         <Checkbox label='Toggle loading prop' checked={loading} onChange={() => setLoading(!loading)} />
+        <Checkbox label='Toggle animation' checked={animatable} onChange={() => setAnimatable(!animatable)} />
         <Checkbox label='Toggle searchable' checked={searchable} onChange={() => setSearchable(!searchable)} />
         <Checkbox label='Toggle selectable' checked={selectable} onChange={() => setSelectable(!selectable)} />
         <Checkbox label='Toggle sortable' checked={sortable} onChange={() => setSortable(!sortable)} />
@@ -42,36 +44,37 @@ const TableSorterPage = ({ highContrast }) => {
         </Select>
         <TableSorter
           items={[
-            { name: 'Anna', date: new Date(1970, 2, 4), type: 'Analyst', selected: true },
-            { name: 'Bernard', date: new Date(1980, 4, 8), type: 'Bookkeeper' },
-            { name: 'Claire', date: new Date(1972, 6, 12), type: 'CEO' },
-            { name: 'Daniel', date: new Date(1946, 2, 24), type: 'Developer' },
-            { name: 'Emma', date: new Date(1947, 7, 1), type: 'Economist', selected: true },
-            { name: 'Frank', date: new Date(1978, 11, 14), type: 'Freelancer' },
-            { name: 'Gwyneth', date: new Date(1992, 1, 4), type: 'Geographer' },
-            { name: 'Howard', date: new Date(2001, 9, 19), type: 'HR head' },
-            { name: 'Iva', date: new Date(1925, 6, 12), type: 'Investor', selected: true },
-            { name: 'John', date: new Date(1994, 3, 2), type: 'Journalist' },
-            { name: 'Karen', date: new Date(1999, 9, 22), type: 'Knowledge engineer' },
-            { name: 'Leonard', date: new Date(1991, 10, 26), type: 'Lawyer' },
-            { name: 'Mary', date: new Date(1962, 10, 25), type: 'Marketing' },
-            { name: 'Neville', date: new Date(1983, 1, 22), type: 'Nurse' },
-            { name: 'Olivia', date: new Date(1992, 7, 2), type: 'Operations manager', selected: true },
-            { name: 'Peter', date: new Date(1927, 6, 13), type: 'Project manager' },
-            { name: 'Quincey', date: new Date(1965, 3, 11), type: 'Quality control' },
-            { name: 'Ronald', date: new Date(1982, 8, 18), type: 'Realtor' },
-            { name: 'Sally', date: new Date(1942, 8, 20), type: 'Sales manager' },
-            { name: 'Ted', date: new Date(1968, 3, 22), type: 'Tester' },
-            { name: 'Uma', date: new Date(1985, 9, 17), type: 'UI expert', selected: true },
-            { name: 'Victor', date: new Date(2012, 12, 13), type: 'Video editor' },
-            { name: 'Wanda', date: new Date(1947, 2, 2), type: 'Web designer' },
-            { name: 'Xavier', date: new Date(1932, 7, 5), type: 'XML developer' },
-            { name: 'Yvonne', date: new Date(1993, 2, 28), type: 'Yoga instructor' },
-            { name: 'Ziggy', date: new Date(1929, 1, 14), type: 'Zoo keeper' }
+            { key: '01', name: 'Anna', date: new Date(1970, 2, 4), type: 'Analyst', selected: true },
+            { key: '02', name: 'Bernard', date: new Date(1980, 4, 8), type: 'Bookkeeper' },
+            { key: '03', name: 'Claire', date: new Date(1972, 6, 12), type: 'CEO' },
+            { key: '04', name: 'Daniel', date: new Date(1946, 2, 24), type: 'Developer' },
+            { key: '05', name: 'Emma', date: new Date(1947, 7, 1), type: 'Economist', selected: true },
+            { key: '06', name: 'Frank', date: new Date(1978, 11, 14), type: 'Freelancer' },
+            { key: '07', name: 'Gwyneth', date: new Date(1992, 1, 4), type: 'Geographer' },
+            { key: '08', name: 'Howard', date: new Date(2001, 9, 19), type: 'HR head' },
+            { key: '09', name: 'Iva', date: new Date(1925, 6, 12), type: 'Investor', selected: true },
+            { key: '10', name: 'John', date: new Date(1994, 3, 2), type: 'Journalist' },
+            { key: '11', name: 'Karen', date: new Date(1999, 9, 22), type: 'Knowledge engineer' },
+            { key: '12', name: 'Leonard', date: new Date(1991, 10, 26), type: 'Lawyer' },
+            { key: '13', name: 'Mary', date: new Date(1962, 10, 25), type: 'Marketing' },
+            { key: '14', name: 'Neville', date: new Date(1983, 1, 22), type: 'Nurse' },
+            { key: '15', name: 'Olivia', date: new Date(1992, 7, 2), type: 'Operations manager', selected: true },
+            { key: '16', name: 'Peter', date: new Date(1927, 6, 13), type: 'Project manager' },
+            { key: '17', name: 'Quincey', date: new Date(1965, 3, 11), type: 'Quality control' },
+            { key: '18', name: 'Ronald', date: new Date(1982, 8, 18), type: 'Realtor' },
+            { key: '19', name: 'Sally', date: new Date(1942, 8, 20), type: 'Sales manager' },
+            { key: '20', name: 'Ted', date: new Date(1968, 3, 22), type: 'Tester' },
+            { key: '21', name: 'Uma', date: new Date(1985, 9, 17), type: 'UI expert', selected: true },
+            { key: '22', name: 'Victor', date: new Date(2012, 12, 13), type: 'Video editor' },
+            { key: '23', name: 'Wanda', date: new Date(1947, 2, 2), type: 'Web designer' },
+            { key: '24', name: 'Xavier', date: new Date(1932, 7, 5), type: 'XML developer' },
+            { key: '25', name: 'Yvonne', date: new Date(1993, 2, 28), type: 'Yoga instructor' },
+            { key: '26', name: 'Ziggy', date: new Date(1929, 1, 14), type: 'Zoo keeper' }
           ]}
           itemsPerPage={itemsPerPage}
           loading={loading}
           sort={{ column: 'name', order: 'ascending' }}
+          animatable={animatable}
           searchable={searchable}
           selectable={selectable}
           sortable={sortable}
@@ -84,35 +87,36 @@ const TableSorterPage = ({ highContrast }) => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<TableSorter\n' +
            '  items={[\n' +
-           '    { name: \'Anna\', date: new Date(1970, 2, 4), type: \'Analyst\' , selected: true },\n' +
-          '     { name: \'Bernard\', date: new Date(1980, 4, 8), type: \'Bookkeeper\' },\n' +
-          '     { name: \'Claire\', date: new Date(1972, 6, 12), type: \'CEO\' },\n' +
-          '     { name: \'Daniel\', date: new Date(1946, 2, 24), type: \'Developer\' },\n' +
-          '     { name: \'Emma\', date: new Date(1947, 7, 1), type: \'Economist\' , selected: true },\n' +
-          '     { name: \'Frank\', date: new Date(1978, 11, 14), type: \'Freelancer\' },\n' +
-          '     { name: \'Gwyneth\', date: new Date(1992, 1, 4), type: \'Geographer\' },\n' +
-          '     { name: \'Howard\', date: new Date(2001, 9, 19), type: \'HR head\' },\n' +
-          '     { name: \'Iva\', date: new Date(1925, 6, 12), type: \'Investor\' , selected: true },\n' +
-          '     { name: \'John\', date: new Date(1994, 3, 2), type: \'Journalist\' },\n' +
-          '     { name: \'Karen\', date: new Date(1999, 9, 22), type: \'Knowledge engineer\' },\n' +
-          '     { name: \'Leonard\', date: new Date(1991, 10, 26), type: \'Lawyer\' },\n' +
-          '     { name: \'Mary\', date: new Date(1962, 10, 25), type: \'Marketing\' },\n' +
-          '     { name: \'Neville\', date: new Date(1983, 1, 22), type: \'Nurse\' },\n' +
-          '     { name: \'Olivia\', date: new Date(1992, 7, 2), type: \'Operations manager\' , selected: true },\n' +
-          '     { name: \'Peter\', date: new Date(1927, 6, 13), type: \'Project manager\' },\n' +
-          '     { name: \'Quincey\', date: new Date(1965, 3, 11), type: \'Quality control\' },\n' +
-          '     { name: \'Ronald\', date: new Date(1982, 8, 18), type: \'Realtor\' },\n' +
-          '     { name: \'Sally\', date: new Date(1942, 8, 20), type: \'Sales manager\' },\n' +
-          '     { name: \'Ted\', date: new Date(1968, 3, 22), type: \'Tester\' },\n' +
-          '     { name: \'Uma\', date: new Date(1985, 9, 17), type: \'UI expert\' , selected: true },\n' +
-          '     { name: \'Victor\', date: new Date(2012, 12, 13), type: \'Video editor\' },\n' +
-          '     { name: \'Wanda\', date: new Date(1947, 2, 2), type: \'Web designer\' },\n' +
-          '     { name: \'Xavier\', date: new Date(1932, 7, 5), type: \'XML developer\' },\n' +
-          '     { name: \'Yvonne\', date: new Date(1993, 2, 28), type: \'Yoga instructor\' },\n' +
-          '     { name: \'Ziggy\', date: new Date(1929, 1, 14), type: \'Zoo keeper\' }  ' +
+           '    { key: \'01\', name: \'Anna\', date: new Date(1970, 2, 4), type: \'Analyst\' , selected: true },\n' +
+          '     { key: \'02\', name: \'Bernard\', date: new Date(1980, 4, 8), type: \'Bookkeeper\' },\n' +
+          '     { key: \'03\', name: \'Claire\', date: new Date(1972, 6, 12), type: \'CEO\' },\n' +
+          '     { key: \'04\', name: \'Daniel\', date: new Date(1946, 2, 24), type: \'Developer\' },\n' +
+          '     { key: \'05\', name: \'Emma\', date: new Date(1947, 7, 1), type: \'Economist\' , selected: true },\n' +
+          '     { key: \'06\', name: \'Frank\', date: new Date(1978, 11, 14), type: \'Freelancer\' },\n' +
+          '     { key: \'07\', name: \'Gwyneth\', date: new Date(1992, 1, 4), type: \'Geographer\' },\n' +
+          '     { key: \'08\', name: \'Howard\', date: new Date(2001, 9, 19), type: \'HR head\' },\n' +
+          '     { key: \'09\', name: \'Iva\', date: new Date(1925, 6, 12), type: \'Investor\' , selected: true },\n' +
+          '     { key: \'10\', name: \'John\', date: new Date(1994, 3, 2), type: \'Journalist\' },\n' +
+          '     { key: \'11\', name: \'Karen\', date: new Date(1999, 9, 22), type: \'Knowledge engineer\' },\n' +
+          '     { key: \'12\', name: \'Leonard\', date: new Date(1991, 10, 26), type: \'Lawyer\' },\n' +
+          '     { key: \'13\', name: \'Mary\', date: new Date(1962, 10, 25), type: \'Marketing\' },\n' +
+          '     { key: \'14\', name: \'Neville\', date: new Date(1983, 1, 22), type: \'Nurse\' },\n' +
+          '     { key: \'15\', name: \'Olivia\', date: new Date(1992, 7, 2), type: \'Operations manager\' , selected: true },\n' +
+          '     { key: \'16\', name: \'Peter\', date: new Date(1927, 6, 13), type: \'Project manager\' },\n' +
+          '     { key: \'17\', name: \'Quincey\', date: new Date(1965, 3, 11), type: \'Quality control\' },\n' +
+          '     { key: \'18\', name: \'Ronald\', date: new Date(1982, 8, 18), type: \'Realtor\' },\n' +
+          '     { key: \'19\', name: \'Sally\', date: new Date(1942, 8, 20), type: \'Sales manager\' },\n' +
+          '     { key: \'20\', name: \'Ted\', date: new Date(1968, 3, 22), type: \'Tester\' },\n' +
+          '     { key: \'21\', name: \'Uma\', date: new Date(1985, 9, 17), type: \'UI expert\' , selected: true },\n' +
+          '     { key: \'22\', name: \'Victor\', date: new Date(2012, 12, 13), type: \'Video editor\' },\n' +
+          '     { key: \'23\', name: \'Wanda\', date: new Date(1947, 2, 2), type: \'Web designer\' },\n' +
+          '     { key: \'24\', name: \'Xavier\', date: new Date(1932, 7, 5), type: \'XML developer\' },\n' +
+          '     { key: \'25\', name: \'Yvonne\', date: new Date(1993, 2, 28), type: \'Yoga instructor\' },\n' +
+          '     { key: \'26\', name: \'Ziggy\', date: new Date(1929, 1, 14), type: \'Zoo keeper\' }  ' +
           '   ]}\n' +
           '   itemsPerPage={ {{itemsPerPage}} }\n' +
           '   loading={ {{loading}} }\n' +
+          '   animatable={ {{animatable}} }\n' +
           '   searchable={ {{searchable}} }\n' +
           '   selectable={ {{selectable}} }\n' +
           '   sortable={ {{sortable}} }\n' +
@@ -122,7 +126,14 @@ const TableSorterPage = ({ highContrast }) => {
           '     {id: \'date\', label: \'Date\', type: \'date\', filterText: \'\', defaultSortOrder: \'\' },\n' +
           '     {id: \'type\', label: \'Occupation\', type: \'tag\', filterText: \'\', defaultSortOrder: \'\' }\n' +
           '   ]}' +
-           '/>', { loading: loading, itemsPerPage: itemsPerPage, searchable: searchable, selectable: selectable, sortable: sortable })}
+           '/>', {
+            loading: loading,
+            itemsPerPage: itemsPerPage,
+            animatable: animatable,
+            searchable: searchable,
+            selectable: selectable,
+            sortable: sortable
+          })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
@@ -143,6 +154,13 @@ const TableSorterPage = ({ highContrast }) => {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>animatable</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Animate rows</td>
+              <td>true</td>
+            </tr>
             <tr>
               <td>className</td>
               <td><code>string</code></td>

@@ -31,9 +31,9 @@ import Tilsette from '../../resources/icons/Tilsette'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as icons from '@fortawesome/free-solid-svg-icons'
 
-const fontAwesomeIcons = ['caretLeft', 'caretRight', 'back', 'next', 'clip', 'close', 'db', 'document', 'download',
-  'export', 'file', 'file-submit', 'folder', 'form', 'menu', 'print', 'plus', 'refresh', 'save', 'settings', 'solidclose',
-  'tool', 'upload', 'user', 'view']
+const fontAwesomeIcons = ['clip', 'close', 'db', 'document', 'download',
+  'export', 'file', 'file-submit', 'folder', 'form', 'menu', 'print', 'plus', 'refresh', 'save', 'search', 'server',
+  'settings', 'solidclose', 'tool', 'upload', 'user', 'view']
 
 export const availableIcons = [
   'address', 'advarsel', 'bigclose', 'caretLeft', 'back', 'caretRight', 'next', 'checkCircle', 'calendar', 'chat',
@@ -50,17 +50,14 @@ const Icons = (props) => {
   const w = h
   let _size
   if (_.includes(fontAwesomeIcons, kind)) {
-    _size = _.isNumber(size) ? (Math.floor(size / 15)) + 'x' : size
+    _size = Math.floor(h / 15) + 'x'
   } else {
     _size = size
   }
-
   switch (kind) {
     case 'address' : return <LineExpandedGlobe {...props} width={w} height={h} />
     case 'advarsel' : return <AdvarselTrekant {...props} width={w} height={h} />
     case 'bigclose' : return <LineClose {...props} width={w} height={h} />
-    case 'caretLeft' : case 'back' : return <FontAwesomeIcon {...props} icon={icons.faCaretLeft} size={_size} />
-    case 'caretRight' : case 'next' : return <FontAwesomeIcon {...props} icon={icons.faCaretRight} size={_size} />
     case 'checkCircle' : return <LineCheckCircle {...props} width={w} height={h} />
     case 'calendar' : return <LineExpandedCalendar {...props} width={w} height={h} />
     case 'chat' : return <BubbleChat {...props} width={w} height={h} />
@@ -99,8 +96,8 @@ const Icons = (props) => {
     case 'refresh' : return <FontAwesomeIcon {...props} icon={icons.faSyncAlt} size={_size} />
     case 'removeCircle' : return <LineRemoveCircle {...props} width={w} height={h} />
     case 'save' : return <FontAwesomeIcon {...props} icon={icons.faSave} size={_size} />
-    case 'search' : return <FontAwesomeIcon {...props} icon={icons.faSearch} width={w} height={h} />
-    case 'server' : return <FontAwesomeIcon {...props} icon={icons.faServer} width={w} height={h} size='3x' />
+    case 'search' : return <FontAwesomeIcon {...props} icon={icons.faSearch} size={_size} />
+    case 'server' : return <FontAwesomeIcon {...props} icon={icons.faServer} size={_size} />
     case 'settings' : return <FontAwesomeIcon {...props} icon={icons.faCog} size={_size} />
     case 'solidclose' : return <FontAwesomeIcon {...props} icon={icons.faTimesCircle} size={_size} />
     case 'tilsette' : return <Tilsette {...props} width={w} height={h} />

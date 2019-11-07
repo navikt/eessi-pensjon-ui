@@ -20,7 +20,7 @@
     align-items: center;
 
     &__label {
-       color: black;
+       color: @font-color;
        font-style: normal;
     }
 
@@ -33,11 +33,11 @@
   &__select {
 
      &__control {
-      border: 1px solid @form-dark-gray;
+      border: 1px solid @navMorkGra;
     }
 
     &__indicator-separator {
-      background-color: @form-dark-gray;
+      background-color: @navMorkGra;
     }
 
   }
@@ -45,7 +45,7 @@
   &.skjemaelement__feilmelding {
 
     .c-countrySelect__select__control {
-      border: 1px solid #BA3A26;
+      border: 1px solid @redError;
     }
   }
 }
@@ -61,7 +61,7 @@
   }
 
   &__select__option--is-selected {
-    background: @blue !important;
+    background: @navBla !important;
     font-weight: bold;
 
     .c-countryOption__label {
@@ -70,7 +70,7 @@
   }
 
   &__select__option--is-focused {
-    background: @high-contrast-orange !important;
+    background: @orangeFocus !important;
     font-weight: bold;
 
     .c-countryOption__label {
@@ -83,12 +83,12 @@
   }
 
   .c-countryOption__label {
-    color: white;
+    color: @white;
   }
   .skjemaelement__feilmelding {
     .c-countrySelect__select__control {
        border-width: 2px;
-       border-color: #BA3A26;
+       border-color: @redError;
     }
   }
 }
