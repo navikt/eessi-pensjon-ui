@@ -174,6 +174,8 @@ const File = (props) => {
         size={_size}
         scale={scale}
         labels={_labels}
+        width={_.isString(width) && width.match(/^\d+$/) ? parseInt(width, 10) : width}
+        height={_.isString(height) && height.match(/^\d+$/) ? parseInt(height, 10) : height}
         currentPage={_currentPage}
         numberPages={_numberPages}
         onLoadSuccess={handleOnLoadSuccess}

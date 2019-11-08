@@ -12,8 +12,8 @@ export const Other = ({ className, file, height, labels, onContentClick, scale, 
     <div
       className='content'
       style={{
-        width: _.isString(width) ? width: ((width || 100) * scale) + 'px',
-        height: _.isString(height) ? height: ((height || 140) * scale) + 'px'
+        width: _.isString(width) ? width : ((width || 100) * scale) + 'px',
+        height: _.isString(height) ? height : ((height || 140) * scale) + 'px'
       }}
       onClick={onContentClick}
     >

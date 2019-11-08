@@ -7,7 +7,7 @@ import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { connect } from '../store'
 import Mustache from 'mustache'
-import { Checkbox, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
+import { Checkbox, EtikettLiten, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const mapStateToProps = (state) => ({ highContrast: state.highContrast })
@@ -81,7 +81,14 @@ const TableSorterPage = ({ highContrast }) => {
           columns={[
             { id: 'name', label: 'Name', type: 'string', filterText: '', defaultSortOrder: 'ascending' },
             { id: 'date', label: 'Date', type: 'date', filterText: '', defaultSortOrder: '' },
-            { id: 'type', label: 'Occupation', type: 'tag', filterText: '', defaultSortOrder: '' }
+            {
+              id: 'type',
+              label: 'Occupation',
+              type: 'string',
+              filterText: '',
+              defaultSortOrder: '',
+              renderCell: (item, value) => <EtikettLiten>{value}</EtikettLiten>
+            }
           ]}
         />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
@@ -112,7 +119,7 @@ const TableSorterPage = ({ highContrast }) => {
           '     { key: \'23\', name: \'Wanda\', date: new Date(1947, 2, 2), type: \'Web designer\' },\n' +
           '     { key: \'24\', name: \'Xavier\', date: new Date(1932, 7, 5), type: \'XML developer\' },\n' +
           '     { key: \'25\', name: \'Yvonne\', date: new Date(1993, 2, 28), type: \'Yoga instructor\' },\n' +
-          '     { key: \'26\', name: \'Ziggy\', date: new Date(1929, 1, 14), type: \'Zoo keeper\' }  ' +
+          '     { key: \'26\', name: \'Ziggy\', date: new Date(1929, 1, 14), type: \'Zoo keeper\' }\n' +
           '   ]}\n' +
           '   itemsPerPage={ {{itemsPerPage}} }\n' +
           '   loading={ {{loading}} }\n' +
@@ -124,7 +131,9 @@ const TableSorterPage = ({ highContrast }) => {
           '   columns={[\n' +
           '     {id: \'name\', label: \'Name\', type: \'string\', filterText: \'\', defaultSortOrder: \'ascending\' },\n' +
           '     {id: \'date\', label: \'Date\', type: \'date\', filterText: \'\', defaultSortOrder: \'\' },\n' +
-          '     {id: \'type\', label: \'Occupation\', type: \'tag\', filterText: \'\', defaultSortOrder: \'\' }\n' +
+          '     {id: \'type\', label: \'Occupation\', type: \'string\', filterText: \'\', defaultSortOrder: \'\',\n' +
+          '       renderCell: (item, value) => <EtikettLiten>{value}</EtikettLiten>\n' +
+          '     }\n' +
           '   ]}' +
            '/>', {
             loading: loading,

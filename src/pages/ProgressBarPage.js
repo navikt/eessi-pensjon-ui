@@ -6,7 +6,7 @@ import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { connect } from '../store'
-import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
+import { Input, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 
 const ProgressBarPage = ({ highContrast }) => {
   const [now, setNow] = useState(50)
+  const [status, setStatus] = useState('inprogress')
   return (
     <Container>
       <Panel className='p-4'>
@@ -26,11 +27,22 @@ const ProgressBarPage = ({ highContrast }) => {
           }}
         />
 
-        <ProgressBar now={now}>Loading... {now}%</ProgressBar>
+        <Select className='w-25' label='Choose status' value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option>todo</option>
+          <option>inprogress</option>
+          <option>done</option>
+          <option>error</option>
+        </Select>
+        <ProgressBar
+          status={status}
+          now={now}
+        >
+          Loading... {now}%
+        </ProgressBar>
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-          {Mustache.render('<ProgressBar now={ {{now}} }>\n' +
+          {Mustache.render('<ProgressBar now={ {{now}} } status=\'{{stauts}}\'>\n' +
            '  Loading... {{now}}%\n' +
-          '</ProgressBar>', { now: now })}
+          '</ProgressBar>', { now: now, status: status })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>

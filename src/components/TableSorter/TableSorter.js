@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import PT from 'prop-types'
-import { Checkbox, EtikettLiten, Input, Lenke, Normaltekst } from '../../Nav'
+import { Checkbox, Input, Lenke, Normaltekst } from '../../Nav'
 import Icons from '../Icons/Icons'
 import WaitingPanel from '../WaitingPanel/WaitingPanel'
 import './TableSorter.css'
@@ -131,12 +131,6 @@ const TableSorter = ({
           {_columns.map((column, index2) => {
             const value = item[column.id]
             switch (column.type) {
-              case 'tag':
-                return (
-                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    <EtikettLiten>{value}</EtikettLiten>
-                  </td>
-                )
               case 'date':
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
@@ -146,13 +140,13 @@ const TableSorter = ({
               case 'object':
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    {typeof column.toTableCell === 'function' ? column.toTableCell(item, value, context) : JSON.stringify(value)}
+                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst>JSON.stringify(value)</Normaltekst>}
                   </td>
                 )
               default:
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    <Normaltekst>{value}</Normaltekst>
+                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst>{value}</Normaltekst>}
                   </td>
                 )
             }
@@ -209,9 +203,9 @@ const TableSorter = ({
                   role='columnheader'
                   aria-sort='none'
                   key={column.id}
-                  className={'header ' + sortClass(column)}
+                  className={classNames('header', { [sortClass(column)]: column.label !== '' })}
                 >
-                  {sortable ? (
+                  {sortable && column.label ? (
                     <Lenke
                       href='#' onClick={(e) => {
                         e.preventDefault()

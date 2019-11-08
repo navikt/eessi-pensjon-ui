@@ -20,7 +20,7 @@ export const Pdf = ({ className, currentPage, file, height, labels, numberPages,
         onClick={onContentClick}
       >
         <Page
-          width={_.isString(width) ? width: (width || 100) * scale}
+          width={_.isString(width) ? width : (width || 100) * scale}
           height={_.isString(height) ? height : (height || 140) * scale}
           renderMode='svg'
           pageNumber={currentPage}
