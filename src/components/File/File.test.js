@@ -28,97 +28,94 @@ jest.mock('react-pdf', () => {
 })
 
 describe('components/File', () => {
+  let wrapper
   const initialMockProps = {
     onDeleteFile: jest.fn(),
     onPreviewFile: jest.fn(),
     onAddFile: jest.fn()
   }
   it('Renders', () => {
-    const wrapper = shallow(<File file={samplePDF} />)
+    wrapper = shallow(<File file={samplePDF} />)
     expect(wrapper).toMatchSnapshot()
     expect(wrapper.isEmptyRender()).toBeFalsy()
   })
 
   it('Renders Editor', () => {
-    const wrapper = shallow(<File file={samplePDF} />)
+    wrapper = shallow(<File file={samplePDF} />)
     expect(wrapper.exists('Pdf')).toBeTruthy()
     expect(wrapper.exists('Image')).toBeFalsy()
     expect(wrapper.exists('Other')).toBeFalsy()
   })
 
   it('Renders images', () => {
-    const wrapper = shallow(<File file={sampleJPG} />)
+    wrapper = shallow(<File file={sampleJPG} />)
     expect(wrapper.exists('Pdf')).toBeFalsy()
     expect(wrapper.exists('Image')).toBeTruthy()
     expect(wrapper.exists('Other')).toBeFalsy()
   })
 
   it('Renders others', () => {
-    const wrapper = shallow(<File file={sampleOther} />)
+    wrapper = shallow(<File file={sampleOther} />)
     expect(wrapper.exists('Pdf')).toBeFalsy()
     expect(wrapper.exists('Image')).toBeFalsy()
     expect(wrapper.exists('Other')).toBeTruthy()
   })
 
   it('Renders buttons on onMouseEnter', async (done) => {
-    const wrapper = mount(
-      <File file={samplePDF} initialPage={3} buttons='hover' showPreviewButton showDeleteButton showDownloadButton showAddButton />
+    wrapper = mount(
+      <File
+        file={samplePDF} initialPage={3} buttons='hover' showPreviewButton showDeleteButton showDownloadButton
+        showAddButton
+      />
     )
-    setTimeout(() => {
-      wrapper.update()
-      expect(wrapper.exists('.previousPage')).toBeFalsy()
-      expect(wrapper.exists('.nextPage')).toBeFalsy()
-      expect(wrapper.find('.link')).toHaveLength(0)
-      expect(wrapper.exists('.previewLink')).toBeFalsy()
-      expect(wrapper.exists('.deleteLink')).toBeFalsy()
-      expect(wrapper.exists('.downloadLink')).toBeFalsy()
-      expect(wrapper.exists('.addLink')).toBeFalsy()
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 750))
+    })
 
-      act(() => {
-        wrapper.simulate('mouseenter')
-      })
-      act(() => {
-        wrapper.update()
-      })
-      expect(wrapper.exists('.previousPage')).toBeTruthy()
-      expect(wrapper.exists('.nextPage')).toBeTruthy()
-      expect(wrapper.find('.link')).toHaveLength(4)
-      expect(wrapper.exists('.previewLink')).toBeTruthy()
-      expect(wrapper.exists('.deleteLink')).toBeTruthy()
-      expect(wrapper.exists('.downloadLink')).toBeTruthy()
-      expect(wrapper.exists('.addLink')).toBeTruthy()
-      done()
-    }, 750)
+    expect(wrapper.exists('.previousPage')).toBeFalsy()
+    expect(wrapper.exists('.nextPage')).toBeFalsy()
+    expect(wrapper.find('.link')).toHaveLength(0)
+    expect(wrapper.exists('.previewLink')).toBeFalsy()
+    expect(wrapper.exists('.deleteLink')).toBeFalsy()
+    expect(wrapper.exists('.downloadLink')).toBeFalsy()
+    expect(wrapper.exists('.addLink')).toBeFalsy()
+
+    wrapper.simulate('mouseenter')
+
+    expect(wrapper.exists('.previousPage')).toBeTruthy()
+    expect(wrapper.exists('.nextPage')).toBeTruthy()
+    expect(wrapper.find('.link')).toHaveLength(4)
+    expect(wrapper.exists('.previewLink')).toBeTruthy()
+    expect(wrapper.exists('.deleteLink')).toBeTruthy()
+    expect(wrapper.exists('.downloadLink')).toBeTruthy()
+    expect(wrapper.exists('.addLink')).toBeTruthy()
+    done()
   })
 
   it('Preview page', () => {
-    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showPreviewButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showPreviewButton />)
     expect(wrapper.exists('.previewLink')).toBeTruthy()
-
     wrapper.find('.previewLink').simulate('click')
     expect(initialMockProps.onPreviewFile).toHaveBeenCalled()
   })
 
   it('Delete document', () => {
-    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDeleteButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDeleteButton />)
     expect(wrapper.exists('.deleteLink')).toBeTruthy()
-
     wrapper.find('.deleteLink').simulate('click')
     expect(initialMockProps.onDeleteFile).toHaveBeenCalled()
   })
 
   it('Add document', () => {
-    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showAddButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showAddButton />)
     expect(wrapper.exists('.addLink')).toBeTruthy()
-
     wrapper.find('.addLink').simulate('click')
     expect(initialMockProps.onAddFile).toHaveBeenCalled()
   })
 
   it('Download document', () => {
-    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDownloadButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDownloadButton />)
     expect(wrapper.exists('.downloadLink')).toBeTruthy()
-
     wrapper.find('.downloadLink').simulate('click')
     expect(wrapper.find('.downloadLink > a').props().href)
       .toEqual('data:application/octet-stream;base64,' + encodeURIComponent(samplePDF.content.base64))
@@ -127,23 +124,20 @@ describe('components/File', () => {
 
   it('Changes current page', async (done) => {
     const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='hover' />)
-    act(() => {
-      wrapper.simulate('mouseover')
+    wrapper.simulate('mouseover')
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 750))
     })
-    setTimeout(() => {
-      act(() => {
-        wrapper.update()
-      })
-      expect(wrapper.find('Page').text()).toEqual('Page: 1')
-      expect(wrapper.exists('.nextPage')).toBeTruthy()
+    wrapper.update()
+    expect(wrapper.find('Page').text()).toEqual('Page: 1')
+    expect(wrapper.exists('.nextPage')).toBeTruthy()
 
-      wrapper.find('.nextPage').hostNodes().simulate('click')
-      expect(wrapper.find('Page').text()).toEqual('Page: 2')
-      expect(wrapper.exists('.previousPage')).toBeTruthy()
+    wrapper.find('.nextPage').hostNodes().simulate('click')
+    expect(wrapper.find('Page').text()).toEqual('Page: 2')
+    expect(wrapper.exists('.previousPage')).toBeTruthy()
 
-      wrapper.find('.previousPage').simulate('click')
-      expect(wrapper.find('Page').text()).toEqual('Page: 1')
-      done()
-    }, 1000)
+    wrapper.find('.previousPage').simulate('click')
+    expect(wrapper.find('Page').text()).toEqual('Page: 1')
+    done()
   })
 })

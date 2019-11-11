@@ -5,139 +5,39 @@ describe('components/TableSorter/TableSorter', () => {
   let wrapper
   const initialMockProps = {
     columns: [
-      { id: 'name', label: 'ui:title', type: 'string', filterText: '', defaultSortOrder: '' },
-      { id: 'tema', label: 'ui:tema', type: 'tag', filterText: '', defaultSortOrder: '' },
-      { id: 'date', label: 'ui:date', type: 'date', filterText: '', defaultSortOrder: '' },
+      { id: 'string', label: 'ui:string', type: 'string' },
+      { id: 'date', label: 'ui:date', type: 'date' },
       {
-        id: 'varianter',
+        id: 'object',
         label: 'ui:variant',
         type: 'object',
-        filterText: '',
-        defaultSortOrder: '',
         needle: (it) => it.label.toLowerCase(),
-        toTableCell: (item, value) => {
-          return JSON.stringify(value)
+        renderCell: (item, value) => {
+          return <span>{value.label}</span>
         }
       }
     ],
-
-    items: [{
-      raw: {
-        journalpostId: '1',
-        tittel: 'blue.pdf',
-        tema: 'foo',
-        dokumentInfoId: '4',
-        datoOpprettet: '2018-12-27T13:42:24.000Z',
-        varianter: [{
-          variantformat: 'ARKIV',
-          filnavn: '23534345.pdf'
-        }, {
-          variantformat: 'DUMMY',
-          filnavn: '908745345.pdf'
-        }]
-      },
-      journalpostId: '1',
-      dokumentInfoId: '4',
-      name: 'blue.pdf',
-      tema: 'foo',
-      date: '2018-12-27T13:42:24.000Z',
-      varianter: [{
-        variant: {
-          variantformat: 'ARKIV',
-          filnavn: '23534345.pdf'
-        },
-        label: 'ARKIV (23534345.pdf)',
-        selected: false,
-        focused: false
-      }, {
-        variant: {
-          variantformat: 'DUMMY',
-          filnavn: '908745345.pdf'
-        },
-        label: 'DUMMY (908745345.pdf)',
-        selected: false,
-        focused: false
-      }]
-    }, {
-      raw: {
-        journalpostId: '2',
-        tittel: 'red.pdf',
-        tema: 'bar',
-        dokumentInfoId: '5',
-        datoOpprettet: '2018-12-17T13:42:24.000Z',
-        varianter: [{
-          variantformat: 'ARKIV',
-          filnavn: '98734213487.pdf'
-        }, {
-          variantformat: 'DUMMY',
-          filnavn: '998424576.pdf'
-        }]
-      },
-      journalpostId: '2',
-      dokumentInfoId: '5',
-      name: 'red.pdf',
-      tema: 'bar',
-      date: '2018-12-17T13:42:24.000Z',
-      varianter: [{
-        variant: {
-          variantformat: 'ARKIV',
-          filnavn: '98734213487.pdf'
-        },
-        label: 'ARKIV (98734213487.pdf)',
-        selected: false,
-        focused: false
-      }, {
-        variant: {
-          variantformat: 'DUMMY',
-          filnavn: '998424576.pdf'
-        },
-        label: 'DUMMY (998424576.pdf)',
-        selected: false,
-        focused: false
-      }]
-    }, {
-      raw: {
-        journalpostId: '3',
-        tittel: 'yellow.pdf',
-        tema: 'fuzz',
-        dokumentInfoId: '6',
-        datoOpprettet: '2018-12-07T13:42:24.000Z',
-        varianter: [{
-          variantformat: 'ARKIV',
-          filnavn: '1078475197.pdf'
-        }, {
-          variantformat: 'DUMMY',
-          filnavn: '09873539824762.pdf'
-        }]
-      },
-      journalpostId: '3',
-      dokumentInfoId: '6',
-      name: 'yellow.pdf',
-      tema: 'fuzz',
-      date: '2018-12-07T13:42:24.000Z',
-      varianter: [{
-        variant: {
-          variantformat: 'ARKIV',
-          filnavn: '1078475197.pdf'
-        },
-        label: 'ARKIV (1078475197.pdf)',
-        selected: false,
-        focused: false
-      }, {
-        variant: {
-          variantformat: 'DUMMY',
-          filnavn: '09873539824762.pdf'
-        },
-        label: 'DUMMY (09873539824762.pdf)',
-        selected: false,
-        focused: false
-      }]
-    }],
+    items: [
+      { key: '01', string: 'String 01', date: new Date(2020, 1, 1), object: { label: 'Object 01' } },
+      { key: '02', string: 'String 02', date: new Date(2020, 1, 2), object: { label: 'Object 02' } },
+      { key: '03', string: 'String 03', date: new Date(2020, 1, 3), object: { label: 'Object 03' } },
+      { key: '04', string: 'String 04', date: new Date(2020, 1, 4), object: { label: 'Object 04' } },
+      { key: '05', string: 'String 05', date: new Date(2020, 1, 5), object: { label: 'Object 05' } },
+      { key: '06', string: 'String 06', date: new Date(2020, 1, 6), object: { label: 'Object 06' } },
+      { key: '07', string: 'String 07', date: new Date(2020, 1, 7), object: { label: 'Object 07' } },
+      { key: '08', string: 'String 08', date: new Date(2020, 1, 8), object: { label: 'Object 08' } },
+      { key: '09', string: 'String 09', date: new Date(2020, 1, 9), object: { label: 'Object 09' } },
+      { key: '10', string: 'String 10', date: new Date(2020, 1, 10), object: { label: 'Object 10' } },
+      { key: '11', string: 'String 11', date: new Date(2020, 1, 11), object: { label: 'Object 11' } }
+    ],
     loading: false,
-    sort: {
-      column: 'name',
-      order: 'desc'
-    }
+    sortable: true,
+    searchable: true,
+    selectable: true,
+    animatable: true,
+    itemsPerPage: 5,
+    onRowSelectChange: jest.fn(),
+    pagination: true
   }
 
   beforeEach(() => {
@@ -153,7 +53,76 @@ describe('components/TableSorter/TableSorter', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('Renders: Not sortable', () => {
+    wrapper = mount(<TableSorter {...initialMockProps} sortable={false} />)
+    expect(wrapper.find('thead tr th').last().exists('a')).toBeFalsy()
+  })
+
   it('Has proper HTML structure: loading', () => {
     expect(wrapper.exists('div.c-tableSorter')).toBeTruthy()
+  })
+
+  it('UseEffect: new items', () => {
+    wrapper.setProps({
+      items: initialMockProps.items.slice(initialMockProps.items.length - 1)
+    })
+    wrapper.update()
+    expect(wrapper.exists('div.c-tableSorter')).toBeTruthy()
+    expect(wrapper.find('tbody tr').length).toEqual(1)
+  })
+
+  it('Sort order', () => {
+    let lastHeader = wrapper.find('thead tr th').last()
+    expect(lastHeader.props().className).toEqual('header none')
+
+    lastHeader.find('a').simulate('click')
+    lastHeader = wrapper.find('thead tr th').last()
+    expect(lastHeader.props().className).toEqual('header tabell__th--sortert-asc')
+
+    lastHeader.find('a').simulate('click')
+    lastHeader = wrapper.find('thead tr th').last()
+    expect(lastHeader.props().className).toEqual('header tabell__th--sortert-desc')
+
+    lastHeader.find('a').simulate('click')
+    lastHeader = wrapper.find('thead tr th').last()
+    expect(lastHeader.props().className).toEqual('header none')
+  })
+
+  it('onCheckAllClicked triggered', () => {
+    initialMockProps.onRowSelectChange.mockReset()
+    wrapper.find('.c-tableSorter__checkAll-checkbox input').hostNodes().simulate('change', { target: { checked: true } })
+    expect(initialMockProps.onRowSelectChange).toHaveBeenCalledWith(initialMockProps.items.map(item => ({
+      ...item,
+      selected: true
+    })))
+    wrapper.find('.c-tableSorter__checkAll-checkbox input').hostNodes().simulate('change', { target: { checked: false } })
+    expect(initialMockProps.onRowSelectChange).toHaveBeenCalledWith(initialMockProps.items.map(item => ({
+      ...item,
+      selected: false
+    })))
+  })
+
+  it('onCheckClicked triggered', () => {
+    initialMockProps.onRowSelectChange.mockReset()
+    wrapper.find('.c-tableSorter__row-checkbox input').hostNodes().first().simulate('change', { target: { checked: true } })
+    expect(initialMockProps.onRowSelectChange).toHaveBeenCalledWith(initialMockProps.items.map((item, index) => ({
+      ...item,
+      selected: index === 0 ? true : undefined
+    })))
+    wrapper.find('.c-tableSorter__row-checkbox input').hostNodes().first().simulate('change', { target: { checked: true } })
+    expect(initialMockProps.onRowSelectChange).toHaveBeenCalledWith(initialMockProps.items.map((item, index) => ({
+      ...item,
+      selected: index === 0 ? false : undefined
+    })))
+  })
+
+  it('handleFilterTextChange()', () => {
+    initialMockProps.onRowSelectChange.mockReset()
+    wrapper.find('.c-tableSorter___seefilters-icon').hostNodes().simulate('click')
+    wrapper.update()
+    wrapper.find('.c-tableSorter__sort-input input').hostNodes().first().simulate('change', { target: { value: 'String 07' } })
+    wrapper.update()
+    expect(wrapper.find('tbody tr').length).toEqual(1)
+    expect(wrapper.find('tbody tr').render().text()).toEqual(['Velg 07', 'String 07', '2/7/2020', 'Object 07'].join(''))
   })
 })

@@ -28,7 +28,7 @@ const LinksWidget = ({ onResize, onUpdate, widget }) => {
         tittel={widget.title}
         onClick={onClick}
       >
-        <div>
+        <div className='w-LinksWidget__content'>
           <ReactResizeDetector
             handleWidth
             handleHeight

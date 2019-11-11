@@ -36,7 +36,7 @@ const fontAwesomeIcons = ['clip', 'close', 'db', 'document', 'download',
   'settings', 'solidclose', 'tool', 'upload', 'user', 'view']
 
 export const availableIcons = [
-  'address', 'advarsel', 'bigclose', 'caretLeft', 'back', 'caretRight', 'next', 'checkCircle', 'calendar', 'chat',
+  'address', 'advarsel', 'bigclose', 'checkCircle', 'calendar', 'chat',
   'clip', 'close', 'connecting', 'db', 'document', 'download', 'export', 'file', 'file-submit', 'folder', 'form',
   'menu', 'nav-birth', 'nav-child', 'nav-close', 'nav-daily', 'nav-home', 'nav-learn', 'nav-man-icon', 'nav-message-sent',
   'nav-military', 'nav-other', 'nav-sick', 'nav-unknown-icon', 'nav-voluntary', 'nav-woman-icon', 'nav-work', 'outlink',

@@ -1,9 +1,9 @@
 import React from 'react'
 import PT from 'prop-types'
+import _ from 'lodash'
 import { Document, Page } from 'react-pdf'
 import classNames from 'classnames'
 import './Pdf.css'
-import _ from 'lodash'
 
 export const Pdf = ({ className, currentPage, file, height, labels, numberPages, onContentClick, onLoadSuccess, scale, size, width }) => (
   <div

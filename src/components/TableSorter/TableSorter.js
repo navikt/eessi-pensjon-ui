@@ -29,7 +29,7 @@ const TableSorter = ({
   const sortClasses = {
     ascending: 'tabell__th--sortert-asc',
     descending: 'tabell__th--sortert-desc',
-    none: ''
+    none: 'none'
   }
 
   useEffect(() => {
@@ -43,10 +43,7 @@ const TableSorter = ({
 
   const sortColumn = (column) => {
     if (!sortable) { return }
-    let newSortOrder = sortOrder[_sort.order]
-    if (_sort.column !== column.id) {
-      newSortOrder = column.defaultSortOrder || ''
-    }
+    const newSortOrder = sortOrder[_sort.order]
     setSort({ column: column.id, order: newSortOrder })
   }
 
@@ -123,7 +120,9 @@ const TableSorter = ({
           {selectable ? (
             <td>
               <Checkbox
-                label='Velg' checked={item.selected} onChange={() =>
+                id={'c-tableSorter__row-checkbox-id-' + item.key}
+                className='c-tableSorter__row-checkbox'
+                label={'Velg ' + item.key} checked={item.selected} onChange={() =>
                   onCheckClicked(item)}
               />
             </td>
@@ -180,10 +179,10 @@ const TableSorter = ({
                 <div className='d-flex align-items-center'>
                   {selectable ? (
                     <Checkbox
-                      label='Velg'
+                      label='Velg alle'
                       id='c-tableSorter__checkAll-checkbox-id'
                       className='c-tableSorter__checkAll-checkbox d-flex mr-2'
-                      checked={checkAll}
+                      checked={checkAll ? 'checked' : ''}
                       onChange={onCheckAllClicked}
                     />
                   ) : null}

@@ -16,7 +16,8 @@ describe('components/Modal', () => {
       }]
     },
     modalOpen: true,
-    onModalClose: jest.fn()
+    onModalClose: jest.fn(),
+    closeButton: true
   }
 
   it('Renders', () => {
@@ -40,5 +41,12 @@ describe('components/Modal', () => {
 
     wrapper.find('#c-modal__other-button-id').hostNodes().simulate('click')
     expect(initialMockProps.modal.modalButtons[1].onClick).toHaveBeenCalled()
+  })
+
+  it('close buttons clicked', () => {
+    initialMockProps.onModalClose.mockReset()
+    const wrapper = mount(<Modal {...initialMockProps} />)
+    wrapper.find('.c-modal__close-button').hostNodes().simulate('click')
+    expect(initialMockProps.onModalClose).toHaveBeenCalled()
   })
 })

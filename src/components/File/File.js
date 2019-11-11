@@ -19,8 +19,8 @@ const renderBytes = (_bytes) => {
 
 const File = (props) => {
   const {
-    animate = true, className, initialPage, file, buttons = 'hover', height, labels = {},
-    onAddFile = () => {}, onContentClick = () => {}, onDeleteFile = () => {}, onLoadSuccess = () => {},
+    animate = true, className, initialPage, file, buttons = 'hover', height, labels = {}, onAddFile = () => {},
+    onContentClick = () => {}, onDeleteFile = () => {}, onDownloadFile = () => {}, onLoadSuccess = () => {},
     onPreviewFile = () => {}, onPreviousPage = () => {}, onNextPage = () => {}, showAddButton = false,
     showDeleteButton = false, showDownloadButton = false, showPreviewButton = false, scale = 1.0, width
   } = props
@@ -128,6 +128,7 @@ const File = (props) => {
               <a
                 onClick={(e) => {
                   e.stopPropagation()
+                  onDownloadFile(file)
                 }}
                 title={labels.download}
                 href={'data:application/octet-stream;base64,' + encodeURIComponent(file.content.base64)}
@@ -200,6 +201,7 @@ File.propTypes = {
   onAddFile: PT.func,
   onContentClick: PT.func,
   onDeleteFile: PT.func,
+  onDownloadFile: PT.func,
   onLoadSuccess: PT.func,
   onPreviewFile: PT.func,
   onPreviousPage: PT.func,

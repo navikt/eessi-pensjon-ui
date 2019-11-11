@@ -105,7 +105,9 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       initialMockProps.onFilesChanged.mockClear()
     })
-    wrapper.setProps({ maxFileSize: 1 })
+    act(() => {
+      wrapper.setProps({ maxFileSize: 1 })
+    })
     await act(async () => {
       wrapper.find('input').simulate('drop', { target: { files: [fileThatDrops] } })
     })
@@ -120,7 +122,9 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       initialMockProps.onFilesChanged.mockClear()
     })
-    wrapper.setProps({ acceptedMimetypes: ['application/pdf'] })
+    act(() => {
+      wrapper.setProps({ acceptedMimetypes: ['application/pdf'] })
+    })
     await act(async () => {
       wrapper.find('input').simulate('drop', { target: { files: [fileThatDrops] } })
     })
@@ -137,13 +141,9 @@ describe('components/FileUpload/FileUpload', () => {
     expect(wrapper.find('.c-file').render().text()).toEqual('Page: 1')
   })
 
-  it('Deleting a file', () => {
-    act(() => {
-      wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
-    })
-    act(() => {
-      initialMockProps.onFilesChanged.mockClear()
-    })
+  it('Deleting a file', async (done) => {
+    wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
+    initialMockProps.onFilesChanged.mockClear()
     expect(initialMockProps.onFilesChanged).not.toHaveBeenCalled()
     expect(wrapper.exists('.deleteLink')).toBeFalsy()
 
@@ -163,47 +163,48 @@ describe('components/FileUpload/FileUpload', () => {
     })
     expect(initialMockProps.onFilesChanged).toHaveBeenCalledWith([])
     expect(wrapper.find('.c-fileUpload-placeholder-status').render().text()).toEqual('ui:removed red.pdf')
+    done()
   })
 
   // async because it takes 500 ms for the mock Document to throw a onLoadSuccess with numPages
   it('With a Editor file, loaded', async (done) => {
-    wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
-    setTimeout(() => {
-      act(() => {
-        wrapper.update()
-      })
-      expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 1')
-      act(() => {
-        wrapper.find('.c-file').simulate('mouseenter')
-      })
-      act(() => {
-        wrapper.update()
-      })
+    const wrapper = mount(<FileUpload {...initialMockProps} files={[samplePDF]} />)
 
-      expect(wrapper.exists('.previewLink')).toBeTruthy()
-      act(() => {
-        wrapper.find('.previewLink').simulate('click')
-      })
-      expect(wrapper.exists('.c-modal')).toBeTruthy()
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 750))
+    })
 
-      expect(wrapper.exists('.nextPage')).toBeTruthy()
-      act(() => {
-        wrapper.find('.nextPage').simulate('click')
-      })
-      act(() => {
-        wrapper.update()
-      })
-      expect(wrapper.find('.mock-pdfpage').last().render().text()).toEqual('Page: 2')
+    expect(wrapper.find('.c-file .mock-pdfpage').render().text()).toEqual('Page: 1')
+    act(() => {
+      wrapper.find('.c-file').simulate('mouseenter')
+    })
+    act(() => {
+      wrapper.update()
+    })
 
-      expect(wrapper.exists('.previousPage')).toBeTruthy()
-      act(() => {
-        wrapper.find('.previousPage').simulate('click')
-      })
-      act(() => {
-        wrapper.update()
-      })
-      expect(wrapper.find('.c-file .mock-pdfpage').last().render().text()).toEqual('Page: 1')
-      done()
-    }, 750)
+    expect(wrapper.exists('.previewLink')).toBeTruthy()
+    act(() => {
+      wrapper.find('.previewLink').simulate('click')
+    })
+    expect(wrapper.exists('.c-modal')).toBeTruthy()
+    expect(wrapper.exists('.nextPage')).toBeTruthy()
+
+    act(() => {
+      wrapper.find('.nextPage').simulate('click')
+    })
+    act(() => {
+      wrapper.update()
+    })
+    expect(wrapper.find('.mock-pdfpage').last().render().text()).toEqual('Page: 2')
+    expect(wrapper.exists('.previousPage')).toBeTruthy()
+
+    act(() => {
+      wrapper.find('.previousPage').simulate('click')
+    })
+    act(() => {
+      wrapper.update()
+    })
+    expect(wrapper.find('.c-file .mock-pdfpage').last().render().text()).toEqual('Page: 1')
+    done()
   })
 })
