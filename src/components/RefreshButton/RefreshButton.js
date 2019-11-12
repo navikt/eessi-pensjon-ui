@@ -8,7 +8,7 @@ const RefreshButton = ({ className, labelRefresh = 'Forfriske', onRefreshClicked
   <a
     title={labelRefresh}
     href='#refresh'
-    className={classNames('c-refreshbutton', className, { rotating: rotating })}
+    className={classNames('c-refreshbutton', 'lenke', className, { rotating: rotating })}
     onClick={(e) => {
       e.preventDefault()
       e.stopPropagation()

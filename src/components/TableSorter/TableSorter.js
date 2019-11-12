@@ -176,7 +176,7 @@ const TableSorter = ({
           <thead>
             <tr className='c-tableSorter__header'>
               <th width='1'>
-                <div className='d-flex align-items-center'>
+                <div style={{display: 'flex', alignItems: 'center'}}>
                   {selectable ? (
                     <Checkbox
                       label='Velg alle'

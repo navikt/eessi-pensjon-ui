@@ -22,6 +22,12 @@ module.exports = {
         from: 'src/index.css',
         to: 'nav.css'
       }
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/minibootstrap.css',
+        to: 'minibootstrap.css'
+      }
     ])
   ],
   module: {

@@ -46,7 +46,7 @@ const DashboardTabs = ({ currentTabIndex, editMode, layouts, onTabChange, onTabA
           />
         ) : (
           editMode ? (
-            <div className='d-flex align-items-center'>
+            <div className='c-dashboardtabs__editMode'>
               {index > 0 ? (
                 <Icons
                   className='mr-2' kind='back'
@@ -93,7 +93,7 @@ const DashboardTabs = ({ currentTabIndex, editMode, layouts, onTabChange, onTabA
   }
 
   return (
-    <div className='d-flex align-items-center'>
+    <div className='c-dashboard__tabs'>
       <Tabs
         tabs={tabLabels}
         defaultAktiv={currentTabIndex}

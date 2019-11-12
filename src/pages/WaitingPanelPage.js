@@ -33,7 +33,7 @@ const WaitingPanelPage = ({ highContrast }) => {
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Spinner sizes</Undertittel>
-        <div className='d-flex align-items-center'>
+        <div style={{display: 'flex', alignItems: 'center'}}>
           <WaitingPanel className='pr-3' size='XS' message='XS' />
           <WaitingPanel className='pr-3' size='S' message='S' />
           <WaitingPanel className='pr-3' size='M' message='M' />

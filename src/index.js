@@ -17,7 +17,7 @@ import { Switch, Route } from 'react-router'
 import { HashRouter } from 'react-router-dom'
 import { StoreProvider } from 'store'
 import reducer, { initialState } from 'reducer'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './minibootstrap.css'
 import './index.css'
 import './index_highContrast.css'
 

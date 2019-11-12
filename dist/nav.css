@@ -982,6 +982,9 @@ body .blokk-xl {
     display: none !important;
   }
 }
+.ReactCollapse--collapse {
+  transition: height 400ms ease-out;
+}
 .ekspanderbartPanel {
   position: relative;
   background: white;
@@ -4716,10 +4719,21 @@ body {
 }
 code,
 pre {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #59514B;
+}
+dd {
+  margin-bottom: 0.5rem;
+  margin-left: 0;
 }
 ol {
   list-style-type: decimal;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 .ekspanderbartPanel--apen .ReactCollapse--collapse {
   will-change: max-height, height;

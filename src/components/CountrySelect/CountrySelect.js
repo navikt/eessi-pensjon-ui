@@ -102,7 +102,7 @@ CountrySelect.propTypes = {
   className: PT.string,
   error: PT.string,
   excludeList: PT.array,
-  flags: PT.bool.isRequired,
+  flags: PT.bool,
   id: PT.string,
   includeList: PT.array,
   locale: PT.string,
