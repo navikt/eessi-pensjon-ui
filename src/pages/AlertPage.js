@@ -20,12 +20,12 @@ const AlertPage = ({ highContrast }) => {
         <Systemtittel className='pt-4 pb-4'>Alert</Systemtittel>
         <Normaltekst>Alert reuses the original
           <a className='ml-2' target='_blank' rel='noopener noreferrer' href='https://design.nav.no/components/alertstripe'>AlertStripe</a>, and adds:
-          <ol>
-            <li>A close button</li>
-            <li>A fixed position mode</li>
-            <li>A borderless, wide style for banner-type alerts</li>
-          </ol>
         </Normaltekst>
+        <ol>
+          <li>A close button</li>
+          <li>A fixed position mode</li>
+          <li>A borderless, wide style for banner-type alerts</li>
+        </ol>
         <Undertittel className='pt-4 pb-4'>Close button with callback function</Undertittel>
         <Normaltekst className='pb-4'>Tip: Use the <code>onClose</code> callback function to clear the <code>message</code> prop, in order to hide the Alert; if <code>message</code> is not given, the Alert is not displayed.</Normaltekst>
         <Alert

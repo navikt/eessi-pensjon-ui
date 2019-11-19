@@ -23,6 +23,8 @@ const MultipleSelectPage = ({ highContrast }) => {
 
         <MultipleSelect
           className='w-50'
+          label='Multiple select'
+          ariaLabel='Multiple select'
           options={[
             { label: 'VIP', value: 'vip' },
             { label: 'Secret', value: 'secret' }
@@ -32,6 +34,8 @@ const MultipleSelectPage = ({ highContrast }) => {
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<MultipleSelect\n' +
+          '  label=\'Multiple select\'\n' +
+          '  ariaLabel=\'Multiple select\'\n' +
           '  options={[\n' +
           '    {label: \'VIP\', value: \'vip\'},\n' +
           '    {label: \'Secret\', value: \'secret\'}\n' +
@@ -46,6 +50,8 @@ const MultipleSelectPage = ({ highContrast }) => {
         <MultipleSelect
           className='w-50'
           creatable
+          label='Creatable multiple select'
+          ariaLabel='Creatable multiple select'
           options={[
             { label: 'VIP', value: 'vip' },
             { label: 'Secret', value: 'secret' }
@@ -57,6 +63,8 @@ const MultipleSelectPage = ({ highContrast }) => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<MultipleSelect\n' +
             '  creatable={true}\n' +
+            '  label=\'Creatable multiple select\'\n' +
+            '  ariaLabel=\'Creatable multiple select\'\n' +
             '  options={[\n' +
             '    {label: \'VIP\', value: \'vip\'},\n' +
             '    {label: \'Secret\', value: \'secret\'}\n' +
@@ -70,11 +78,17 @@ const MultipleSelectPage = ({ highContrast }) => {
 
         <MultipleSelect
           className='w-50'
+          label='Multiple select with error message'
+          ariaLabel='Multiple select with error message'
           error='Please select one element'
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-          {'<MultipleSelect error=\'Please select one element\'/>'}
+          {'<MultipleSelect \n' +
+           '  label=\'Multiple select with error message\'\n' +
+           '  ariaLabel=\'Multiple select with error message\'\n' +
+           '  error=\'Please select one element\'\n' +
+           '/>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
@@ -95,6 +109,13 @@ const MultipleSelectPage = ({ highContrast }) => {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>ariaLabel</td>
+              <td><code>string</code></td>
+              <td>false</td>
+              <td>ARIA label</td>
+              <td>-</td>
+            </tr>
             <tr>
               <td>className</td>
               <td><code>string</code></td>
@@ -129,6 +150,13 @@ const MultipleSelectPage = ({ highContrast }) => {
               <td>false</td>
               <td>ID string to use in the children components</td>
               <td>false</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><code>node</code>, <code>string</code></td>
+              <td>true</td>
+              <td>Element's label</td>
+              <td>-</td>
             </tr>
             <tr>
               <td>onSelect</td>

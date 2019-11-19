@@ -2,12 +2,13 @@ import React from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
-import { Lenke, Systemtittel } from '../../Nav'
+import { Lenke, Sidetittel } from '../../Nav'
 import './Banner.css'
 
 const Banner = ({ className, labelHighContrast = 'Høy kontrast', header, onHighContrastClicked, style }) => (
   <div
     className={classNames('c-banner', className)}
+    role='banner'
     style={style}
   >
     {_(onHighContrastClicked).isFunction() ? (
@@ -23,11 +24,11 @@ const Banner = ({ className, labelHighContrast = 'Høy kontrast', header, onHigh
       >
         {labelHighContrast}
       </Lenke>) : null}
-    <Systemtittel
+    <Sidetittel
       className='c-banner__title'
     >
       {header}
-    </Systemtittel>
+    </Sidetittel>
   </div>
 )
 
@@ -36,7 +37,7 @@ Banner.propTypes = {
   header: PT.oneOfType([PT.string, PT.element]),
   labelHighContrast: PT.string,
   onHighContrastClicked: PT.func,
-  style: PT.string
+  style: PT.object
 }
 
 Banner.displayName = 'Banner'

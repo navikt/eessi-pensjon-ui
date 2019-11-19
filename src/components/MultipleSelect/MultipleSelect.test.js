@@ -8,6 +8,9 @@ describe('components/MultipleSelect/MultipleSelect', () => {
     { label: 'mockLabel02', value: 'mockValue02' }
   ]
   const initialMockProps = {
+    id: 'mockMultipleSelectId',
+    ariaLabel: 'mockAriaLabel',
+    label: 'mockLabel',
     creatable: true,
     error: undefined,
     hideSelectedOptions: false,

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
+import { guid } from 'nav-frontend-js-utils'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
@@ -12,7 +13,8 @@ import './MultipleSelect.css'
 const animatedComponents = makeAnimated()
 
 const MultipleSelect = ({
-  className, creatable = false, error, hideSelectedOptions = false, id, onSelect, options = [], placeholder, values = []
+  ariaLabel, className, creatable = false, error, hideSelectedOptions = false, id, label,
+  onSelect, options = [], placeholder, values = []
 }) => {
   const [_values, setValues] = useState(values)
 
@@ -51,17 +53,20 @@ const MultipleSelect = ({
   }
 
   const Component = creatable ? CreatableSelect : Select
+  const inputId = id || guid()
 
   return (
     <div
       id={id}
       className={classNames('c-multipleSelect', className, { skjemaelement__feilmelding: error })}
     >
+      <label className='skjemaelement__label' htmlFor={inputId}>{label}</label>
       <Component
         id={id ? id + '-select' : null}
         className='multipleSelect'
         classNamePrefix='multipleSelect'
         placeholder={placeholder}
+        aria-label={ariaLabel}
         isMulti
         animatedComponents
         closeMenuOnSelect={false}
@@ -90,11 +95,13 @@ const MultipleSelect = ({
 }
 
 MultipleSelect.propTypes = {
+  ariaLabel: PT.string,
   className: PT.string,
   creatable: PT.bool,
   error: PT.string,
   hideSelectedOptions: PT.bool,
   id: PT.string,
+  label: PT.oneOfType([PT.node, PT.string]).isRequired,
   onSelect: PT.func,
   options: PT.array,
   placeholder: PT.string,

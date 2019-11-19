@@ -74,7 +74,7 @@ Alert.propTypes = {
   fixed: PT.bool,
   message: PT.string,
   onClose: PT.func,
-  status: PT.oneOf(['OK', 'ERROR', 'WARNING']).isRequired,
+  status: PT.oneOf(['OK', 'ERROR', 'WARNING']),
   type: PT.oneOf(['client', 'server']).isRequired
 }
 

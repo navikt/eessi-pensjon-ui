@@ -17,6 +17,7 @@ import { Switch, Route } from 'react-router'
 import { HashRouter } from 'react-router-dom'
 import { StoreProvider } from 'store'
 import reducer, { initialState } from 'reducer'
+import { IS_PRODUCTION } from 'constants/environment'
 import './minibootstrap.css'
 import './index.css'
 import './index_highContrast.css'
@@ -44,6 +45,11 @@ import EESSIPensjonVeilederPage from './pages/EESSIPensjonVeilederPage'
 import RefreshButtonPage from './pages/RefreshButtonPage'
 import TableSorterPage from './pages/TableSorterPage'
 import WaitingPanelPage from './pages/WaitingPanelPage'
+
+if (!IS_PRODUCTION) {
+  var axe = require('react-axe')
+  axe(React, ReactDOM, 1000)
+}
 
 ReactDOM.render(
   <StoreProvider initialState={initialState} reducer={reducer}>

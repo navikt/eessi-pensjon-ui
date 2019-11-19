@@ -17,7 +17,7 @@ const Container = ({ actions, className, children, highContrast }) => {
         <nav>
 
           <div className='pb-3 ml-3'>
-            <Link style={{display: 'flex', flexDirection: 'column', textAlign: 'center'}} to='/'>
+            <Link style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }} to='/'>
               <NavLogo className='pb-3' />
               <img
                 alt='logo' className='eessi-pensjon-logo'

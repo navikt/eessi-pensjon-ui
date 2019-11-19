@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 
 const CountryUtilsPage = ({ highContrast }) => {
   const [sort, setSort] = useState('scandinaviaFirst')
+  const [lang, setLang] = useState('en')
   return (
     <Container>
       <Panel className='p-4'>
@@ -26,40 +27,48 @@ const CountryUtilsPage = ({ highContrast }) => {
           <li><strong>CountryFilter</strong> - Pre-defined aliases of country groups, to use in <code>CountrySelect</code> option filters</li>
         </ul>
         <Undertittel className='pt-4 pb-4'>Country Select</Undertittel>
-        <Normaltekst className='pb-4'>This is the standard select component with default options</Normaltekst>
+        <Normaltekst className='pt-4 pb-4'>This is the standard select component with default options.
+          You can set locale to either 'en' (English) or 'nb' (Norsk bokmål - default)
+        </Normaltekst>
+        <Select
+          className='w-25'
+          label='Choose language'
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
+        >
+          <option>en</option>
+          <option>nb</option>
+        </Select>
         <CountrySelect
           className='w-50'
+          label='Standard country select'
+          ariaLabel='Standard country select'
+          lang={lang}
           onOptionSelected={(country) => window.alert('You selected ' + JSON.stringify(country))}
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-          {'<CountrySelect \n' +
+          {Mustache.render('<CountrySelect \n' +
+          '  label=\'Standard country select\'\n' +
+          '  ariaLabel=\'Standard country select\'\n' +
+          '  lang=\'{{lang}}\' \n' +
           '  onOptionSelected={(country) => window.alert(\'You selected \' + JSON.stringify(country))}\n' +
-          '/>'}
-        </SyntaxHighlighter>
-
-        <Undertittel className='pt-4 pb-4'>Country Select, different locale</Undertittel>
-        <Normaltekst className='pb-4'>You can set locale to either 'en' (English) or 'nb' (Norsk bokmål - default)</Normaltekst>
-        <CountrySelect
-          className='w-50'
-          locale='en'
-        />
-
-        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-          {'<CountrySelect \n' +
-          '  locale=\'en\'\n' +
-          '/>'}
+          '/>', { lang: lang })}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Country Select with error message</Undertittel>
         <Normaltekst className='pb-4'>In case you want to make the component mandatory, you can set an error message in the same style as the NAV designsystem components</Normaltekst>
         <CountrySelect
+          label='Country select with error message'
+          ariaLabel='Country select with error message'
           className='w-50'
           error='Please choose a country'
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
+          '  label=\'Country select with error message\'\n' +
+          '  ariaLabel=\'Country select with error message\'\n' +
           '  error=\'Please choose a country\'\n' +
           '/>'}
         </SyntaxHighlighter>
@@ -69,12 +78,16 @@ const CountryUtilsPage = ({ highContrast }) => {
         <Normaltekst className='pb-4'>In the below example, the select options include all European Union countries that are not Nordic countries.</Normaltekst>
         <CountrySelect
           className='w-50'
+          label='Country select with include / exclude list'
+          ariaLabel='Country select with include / exclude list'
           includeList={CountryFilter.EU}
           excludeList={CountryFilter.NORDIC}
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
+          '  label=\'Country select with include / exclude list\'\n' +
+          '  ariaLabel=\'Country select with include / exclude list\'\n' +
           '  includeList={CountryFilter.EU}\n' +
           '  excludeList={CountryFilter.NORDIC}\n' +
           '/>'}
@@ -84,11 +97,15 @@ const CountryUtilsPage = ({ highContrast }) => {
         <Normaltekst className='pb-4'>You can remove flag displays from the select options and current select value</Normaltekst>
         <CountrySelect
           className='w-50'
+          label='Country select without flags'
+          ariaLabel='Country select without flags'
           flags={false}
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
+          '  label=\'Country select without flags\'\n' +
+          '  ariaLabel=\'Country select without flags\'\n' +
           '  flags={false}\n' +
           '/>'}
         </SyntaxHighlighter>
@@ -113,11 +130,15 @@ const CountryUtilsPage = ({ highContrast }) => {
 
         <CountrySelect
           className='w-50'
+          label='Country select with sorting option'
+          ariaLabel='Country select with sorting option'
           sort={sort}
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<CountrySelect \n' +
+          '  label=\'Country select with sorting option\'\n' +
+          '  ariaLabel=\'Country select with sorting option\'\n' +
           '  sort=\'{{sort}}\'\n' +
           '/>', { sort: sort })}
         </SyntaxHighlighter>
@@ -125,12 +146,16 @@ const CountryUtilsPage = ({ highContrast }) => {
         <Undertittel className='pt-4 pb-4'>Currency Select</Undertittel>
         <Normaltekst className='pb-4'>You can have a currency select instead of a country select, by changing the <code>type</code> property to <code>currency</code></Normaltekst>
         <CountrySelect
+          label='Currency select'
+          ariaLabel='Currency select'
           className='w-50'
           type='currency'
         />
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
+          '  label=\'Currency select\'\n' +
+          '  ariaLabel=\'Currency select\'\n ' +
           '  type=\'currency\'\n' +
           '/>'}
         </SyntaxHighlighter>
@@ -178,6 +203,13 @@ const CountryUtilsPage = ({ highContrast }) => {
           </thead>
           <tbody>
             <tr>
+              <td>ariaLabel</td>
+              <td><code>string</code></td>
+              <td>false</td>
+              <td>ARIA label</td>
+              <td>-</td>
+            </tr>
+            <tr>
               <td>className</td>
               <td><code>string</code></td>
               <td>false</td>
@@ -217,6 +249,13 @@ const CountryUtilsPage = ({ highContrast }) => {
               <td><code>list</code></td>
               <td>false</td>
               <td>List of countries chosen to be options</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><code>node</code>, <code>string</code></td>
+              <td>true</td>
+              <td>Element's label</td>
               <td>-</td>
             </tr>
             <tr>

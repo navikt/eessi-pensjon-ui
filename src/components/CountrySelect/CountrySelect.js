@@ -3,6 +3,7 @@ import Select from 'react-select'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
+import { guid } from 'nav-frontend-js-utils'
 import CountryData from '../CountryData/CountryData'
 import CountryOption from '../CountrySelect/CountryOption'
 import CountryValue from '../CountrySelect/CountryValue'
@@ -10,7 +11,8 @@ import CountryErrorStyle from '../CountrySelect/CountryErrorStyle'
 import './CountrySelect.css'
 
 const CountrySelect = ({
-  className, error, excludeList, flags = true, id, includeList, locale = 'nb', onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
+  ariaLabel, className, error, excludeList, flags = true, id, includeList, label, locale = 'nb',
+  onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
 }) => {
   const [_value, setValue] = useState(value)
 
@@ -58,12 +60,14 @@ const CountrySelect = ({
   if (defValue && !defValue.label) {
     defValue = _(options).find({ value: defValue.value ? defValue.value : defValue })
   }
+  const inputId = id || guid()
 
   return (
     <div
       id={id}
       className={classNames('c-countrySelect', className, { skjemaelement__feilmelding: error })}
     >
+      <label className='skjemaelement__label' htmlFor={inputId}>{label}</label>
       <Select
         placeholder={placeholder}
         value={defValue || null}
@@ -78,6 +82,7 @@ const CountrySelect = ({
           id: id + '-select',
           flags: flags
         }}
+        aria-label={ariaLabel}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'
         onChange={onSelectChange}
@@ -99,12 +104,14 @@ const CountrySelect = ({
 }
 
 CountrySelect.propTypes = {
+  ariaLabel: PT.string,
   className: PT.string,
   error: PT.string,
   excludeList: PT.array,
   flags: PT.bool,
   id: PT.string,
   includeList: PT.array,
+  label: PT.oneOfType([PT.node, PT.string]).isRequired,
   locale: PT.string,
   onOptionSelected: PT.func,
   placeholder: PT.string,

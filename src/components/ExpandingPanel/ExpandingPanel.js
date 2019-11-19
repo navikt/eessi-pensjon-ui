@@ -66,9 +66,9 @@ const ExpandingPanel = ({
             className='ekspanderbartPanel__knapp'
             onKeyDown={tabHandler}
             onClick={onClick}
-            aria-expanded={open}
+            aria-expanded={_open}
             type='button'
-            {...ariaControls}
+            aria-label='open'
           >
             <span className='ekspanderbartPanel__indikator' />
           </button>

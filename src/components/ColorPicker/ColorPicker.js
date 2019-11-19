@@ -47,7 +47,7 @@ const ColorPicker = ({ className, initialColor, onColorChanged }) => {
 
 ColorPicker.propTypes = {
   className: PT.string,
-  color: PT.object.isRequired,
+  initialColor: PT.object,
   onColorChanged: PT.func.isRequired
 }
 

@@ -1036,7 +1036,7 @@ class CountryData {
         currency: 'SGD'
       }, {
         value: 'SX',
-        label: 'Sint Maarten',
+        label: 'Saint Maarten',
         currencyLabel: 'Netherlands Antillean Guilder',
         currency: 'ANG'
       }, {

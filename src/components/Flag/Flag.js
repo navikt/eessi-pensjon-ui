@@ -18,7 +18,7 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
       if (country.toLowerCase() === 'uk') {
         _country = 'gb'
       }
-      return <ReactFlag code={_country} />
+      return <ReactFlag alt={label} code={_country} />
     }
     console.error('Flag ' + _country.toLowerCase() + ' not found')
     return null

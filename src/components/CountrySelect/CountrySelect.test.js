@@ -14,6 +14,8 @@ describe('components/CountrySelect', () => {
   let wrapper
   const initialMockParams = {
     id: 'react-select-test',
+    ariaLabel: 'mockAriaLabel',
+    label: 'mockLabel',
     classNamePrefix: 'test',
     flags: true,
     locale: 'nb',
