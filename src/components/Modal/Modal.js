@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { Hovedknapp, Lukknapp, Knapp, Modal as NavModal, Undertittel } from '../../Nav'
 import './Modal.css'
 
-export const Modal = ({ className, onModalClose, closeButton = true, closeButtonLabel = '', modal }) => {
+export const Modal = ({ appElement = document.body, className, onModalClose, closeButton = true, closeButtonLabel = '', modal }) => {
   const [_modal, setModal] = useState(modal)
 
   useEffect(() => {
@@ -27,6 +27,8 @@ export const Modal = ({ className, onModalClose, closeButton = true, closeButton
       onModalClose()
     }
   }
+
+  NavModal.setAppElement(appElement)
 
   return (
     <NavModal
@@ -96,6 +98,7 @@ export const Modal = ({ className, onModalClose, closeButton = true, closeButton
 }
 
 Modal.propTypes = {
+  appElement: PT.node,
   className: PT.string,
   closeButton: PT.bool,
   closeButtonLabel: PT.string,

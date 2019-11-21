@@ -12,8 +12,8 @@ try {
   hasLocalStorage = true
 } catch (e) {}
 
-if (process && process.env && process.env.NODE_ENV === 'production') {
-  console.log('Browser has local storage', hasLocalStorage)
+if (process && process.env && process.env.NODE_ENV === 'production' && !hasLocalStorage) {
+  console.warn('Browser has no access to local storage')
 }
 
 const dashboardNeedsUpgrade = (instanceVersion, dashboardVersion) => {

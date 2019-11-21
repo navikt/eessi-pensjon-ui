@@ -5,7 +5,9 @@ import { Document, Page } from 'react-pdf'
 import classNames from 'classnames'
 import './Pdf.css'
 
-export const Pdf = ({ className, currentPage, file, height, labels, numberPages, onContentClick, onLoadSuccess, scale, size, width }) => (
+export const Pdf = ({
+  className, currentPage, file, height, labels, numberPages, onContentClick, onLoadSuccess, scale, size, tema, width
+}) => (
   <div
     className={classNames('c-file-Pdf', className)}
     title={'' + file.name + '\n' + labels.pages + ': ' + (numberPages || '0') + '\n' + labels.size + ': ' + size}
@@ -16,7 +18,7 @@ export const Pdf = ({ className, currentPage, file, height, labels, numberPages,
       onLoadSuccess={onLoadSuccess}
     >
       <div
-        className={classNames('page', 'paper')}
+        className={classNames('page', tema)}
         onClick={onContentClick}
       >
         <Page
@@ -41,6 +43,7 @@ Pdf.propTypes = {
   onContentClick: PT.func,
   scale: PT.number.isRequired,
   size: PT.string,
+  tema: PT.oneOf(['paper', 'simple']),
   width: PT.oneOfType([PT.number, PT.string])
 }
 

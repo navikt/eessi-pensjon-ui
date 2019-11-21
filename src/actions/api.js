@@ -92,14 +92,18 @@ export const realCall = ({ body, context, cascadeFailureError, headers, method, 
       if (error.status === 401) {
         dispatch({
           type: types.SERVER_UNAUTHORIZED_ERROR,
-          payload: error,
+          payload: {
+            error: error
+          },
           originalPayload: _body,
           context: context
         })
         if (cascadeFailureError) {
           dispatch({
             type: type.failure,
-            payload: error,
+            payload: {
+              error: error
+            },
             originalPayload: _body,
             context: context
           })
@@ -107,21 +111,27 @@ export const realCall = ({ body, context, cascadeFailureError, headers, method, 
       } else if (error.status === 403) {
         dispatch({
           type: type.forbidden || type.failure,
-          payload: error,
+          payload: {
+            error: error
+          },
           originalPayload: _body,
           context: context
         })
       } else if (error.status >= 500) {
         dispatch({
           type: types.SERVER_INTERNAL_ERROR,
-          payload: error,
+          payload: {
+            error: error
+          },
           originalPayload: _body,
           context: context
         })
         if (cascadeFailureError) {
           dispatch({
             type: type.failure,
-            payload: error,
+            payload: {
+              error: error
+            },
             originalPayload: _body,
             context: context
           })
@@ -129,7 +139,9 @@ export const realCall = ({ body, context, cascadeFailureError, headers, method, 
       } else {
         return dispatch({
           type: type.failure,
-          payload: error,
+          payload: {
+            error: error
+          },
           originalPayload: _body,
           context: context
         })

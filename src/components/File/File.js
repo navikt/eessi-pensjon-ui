@@ -22,7 +22,7 @@ const File = (props) => {
     animate = true, className, initialPage, file, buttons = 'hover', height, labels = {}, onAddFile = () => {},
     onContentClick = () => {}, onDeleteFile = () => {}, onDownloadFile = () => {}, onLoadSuccess = () => {},
     onPreviewFile = () => {}, onPreviousPage = () => {}, onNextPage = () => {}, showAddButton = false,
-    showDeleteButton = false, showDownloadButton = false, showPreviewButton = false, scale = 1.0, width
+    showDeleteButton = false, showDownloadButton = false, showPreviewButton = false, scale = 1.0, tema = 'paper', width
   } = props
 
   const [isHovering, setIsHovering] = useState(buttons === 'visible')
@@ -175,6 +175,7 @@ const File = (props) => {
         size={_size}
         scale={scale}
         labels={_labels}
+        tema={tema}
         width={_.isString(width) && width.match(/^\d+$/) ? parseInt(width, 10) : width}
         height={_.isString(height) && height.match(/^\d+$/) ? parseInt(height, 10) : height}
         currentPage={_currentPage}
@@ -211,6 +212,7 @@ File.propTypes = {
   showDeleteButton: PT.bool,
   showDownloadButton: PT.bool,
   showPreviewButton: PT.bool,
+  tema: PT.oneOf(['paper', 'simple']),
   width: PT.oneOfType([PT.number, PT.string])
 }
 File.displayName = 'File'
