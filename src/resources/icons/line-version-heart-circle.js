@@ -9,7 +9,7 @@ export default (props) => (
     {...props}
   >
     <g
-      fill='none' strokeMiterlimit='10' stroke='#3e3832'
+      fill='none' strokeMiterlimit='10' stroke={props.color || '#3e3832'}
       strokeLinejoin='round'
     >
       <circle r='11.5' cx='12' cy='12' />

@@ -11,8 +11,8 @@ export default (props) => (
     className={props.className} onClick={props.onClick}
   >
     <g fill='green'>
-      <path fill='none' d='M17,8.5l-7.5,7L7,13' stroke='green' />
-      <circle fill='none' r='11.5' cx='12' cy='12' stroke='green' />
+      <path fill='none' d='M17,8.5l-7.5,7L7,13' stroke={props.color || 'green'} />
+      <circle fill='none' r='11.5' cx='12' cy='12' stroke={props.color || 'green'} />
     </g>
   </svg>
 )

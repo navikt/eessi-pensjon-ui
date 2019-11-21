@@ -7,7 +7,7 @@ export default (props) => (
     preserveAspectRatio='xMidYMid meet' xmlns='http://www.w3.org/2000/svg' {...props}
   >
     <g
-      fill='none' strokeMiterlimit='10' stroke='#3e3832'
+      fill='none' strokeMiterlimit='10' stroke={props.color || '#3e3832'}
       strokeLinejoin='round' strokeLinecap='round'
     >
       <path d='M11.5 1.5h12v22h-23v-22h3' />

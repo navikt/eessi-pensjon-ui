@@ -8,7 +8,7 @@ export default (props) => (
     version='1.0' {...props}
   >
     <g
-      fill='none' strokeMiterlimit='10' stroke='#3e3832'
+      fill='none' strokeMiterlimit='10' stroke={props.color || '#3e3832'}
       strokeLinejoin='round'
     >
       <path d='M.5 14.5h4v8h-4z' />
