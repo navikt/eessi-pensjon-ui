@@ -2,7 +2,7 @@ import React from 'react'
 import PT from 'prop-types'
 import classnames from 'classnames'
 import CountryData from '../CountryData/CountryData'
-import ReactFlag from 'react-world-flags'
+import flags from './Flags'
 import './Flag.css'
 
 const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
@@ -18,7 +18,8 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
       if (country.toLowerCase() === 'uk') {
         _country = 'gb'
       }
-      return <ReactFlag alt={label} code={_country} />
+      const flag = flags['flag_' + _country.toUpperCase()]
+      return flag ? <img alt={label} src={flag} /> : null
     }
     console.error('Flag ' + _country.toLowerCase() + ' not found')
     return null
@@ -41,7 +42,8 @@ Flag.propTypes = {
   country: PT.string.isRequired,
   label: PT.oneOfType([PT.string, PT.element]),
   type: PT.string,
-  size: PT.string
+  size: PT.oneOf(['S', 'M', 'L', 'XL'])
 }
+
 Flag.displayName = 'Flag'
 export default Flag

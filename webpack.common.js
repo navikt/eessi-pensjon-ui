@@ -39,14 +39,8 @@ module.exports = {
       use: ['style-loader', 'css-loader']
     }, {
       test: /\.svg$/,
-      use: [{
-        loader: 'babel-loader'
-      }, {
-        loader: 'react-svg-loader',
-        options: {
-          jsx: true // true outputs JSX tags
-        }
-      }]
+      loader: 'svg-url-loader',
+      options: { noquotes: true }
     }, {
       test: /\.(png|jpe?g|gif)$/i,
       use: [{

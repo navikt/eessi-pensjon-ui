@@ -19,6 +19,10 @@
     background: @black !important;
   }
 
+  .knapp--disabled {
+    background-color: @navMorkGra !important;
+  }
+
   p, code, th, td, section, aside, article, header, footer, li, h1, h2, h3, h4, h5,h6, input,
   time, figcaption, select, textarea, label {
     color: @white;
@@ -44,10 +48,6 @@
     color: @navLysBla !important;
   }
 
-  .hero-link:focus, .hero-link:hover, .hero-link:active {
-    border-color: transparent;
-  }
-
   label, input, select, textarea {
     color: @white !important;
   }
@@ -64,45 +64,7 @@
     text-decoration: underline
   }
 
-  .tooltip {
-    background: @white !important;
-    color: @black !important
-  }
-
-  .tooltip .tooltip-inner {
-    background: @white !important;
-    color: @black !important
-  }
-
-  .tooltip .tooltip-arrow {
-    border-right-color: @white !important
-  }
-
-  .tooltip * {
-    background-color: @white !important
-  }
-
-  .tooltip span, .tooltip p, .tooltip div, .tooltip th, .tooltip td, .tooltip section, .tooltip aside, .tooltip article, .tooltip header, .tooltip footer, .tooltip li, .tooltip h1, .tooltip h2, .tooltip h3, .tooltip h4, .tooltip h5, .tooltip h6, .tooltip input, .tooltip time, .tooltip figcaption, .tooltip select, .tooltip textarea, .tooltip label {
-    color: @black !important
-  }
-
-  .hero-banner, .hero-banner * {
-    background: #F1F1F1 !important
-  }
-
-  .siteheader .hero-banner.nighttime, .siteheader .hero-banner.nighttime * {
-    background-color: #98B3B7 !important
-  }
-
-  ::-webkit-input-placeholder {
-    color: @white
-  }
-
-  ::-moz-placeholder {
-    color: @white
-  }
-
-  :-ms-input-placeholder {
+  *::placeholder {
     color: @white
   }
 
