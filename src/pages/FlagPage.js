@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({ highContrast: state.highContrast })
 const FlagPage = ({ highContrast }) => {
   const [country, setCountry] = useState('no')
   const [size, setSize] = useState('M')
-  let label = CountryData.findByValue('nb', country)
+  let label = CountryData.getCountryInstance('nb').findByValue(country)
   label = label ? label.label : 'Unknown'
   return (
     <Container>
@@ -107,7 +107,11 @@ const FlagPage = ({ highContrast }) => {
           <FlagList
             wrap
             overflowLimit={999}
-            items={CountryData.getData('nb').map((it) => ({ country: it.value, label: it.label + ' - ' + it.value }))}
+            items={CountryData.getCountryInstance('nb').getData().map((it) => {
+              console.log(it)
+              return { country: it.value, label: it.label + ' - ' + it.value }
+            }
+          )}
             size={size}
           />
         </div>
@@ -116,7 +120,7 @@ const FlagPage = ({ highContrast }) => {
         <FlagList
           wrap
           overflowLimit={999}
-          items={CountryData.getData('nb').map((it) => ({ country: it.value, label: it.label + ' - ' + it.value }))}
+          items={CountryData.getCountryInstance('nb').getData().map((it) => ({ country: it.value, label: it.label + ' - ' + it.value }))}
           size={size}
           type='circle'
         />

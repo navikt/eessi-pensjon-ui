@@ -5,7 +5,7 @@ import CountryData from '../CountryData/CountryData'
 import flags from './Flags'
 import './Flag.css'
 
-const countryData = CountryData.getCountryInstance()
+const countryData = CountryData.getCountryInstance('nb')
 
 const Flag = ({ className, country, label, size = 'M', style, type = 'original' }) => {
   if (['original', 'circle'].indexOf(type) < 0) {
@@ -14,16 +14,12 @@ const Flag = ({ className, country, label, size = 'M', style, type = 'original' 
   }
 
   const getFlag = () => {
-    let _country = country
-    if (countryData.exists(_country)) {
-      // we are using UK as the code, but we have GB as flag's svg
-      if (country.toLowerCase() === 'uk') {
-        _country = 'gb'
-      }
-      const flag = flags['flag' + _country.toUpperCase()]
+    // we are using UK as the code, but we have GB as flag's svg
+    if (countryData.exists(country)) {
+      const flag = flags['flag' + country.toUpperCase()]
       return flag ? <img style={style} alt={label} src={flag} /> : null
     }
-    console.error('Flag ' + _country.toLowerCase() + ' not found')
+    console.error('Flag ' + country.toLowerCase() + ' not found')
     return null
   }
 

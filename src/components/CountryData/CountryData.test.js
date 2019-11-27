@@ -10,9 +10,11 @@ describe('components/CountryData', () => {
     expect(data.getData).toBeDefined()
     expect(data.findByValue('no').label).toEqual('Norge')
 
-    data = CountryData.getCountryInstance('xx')
-    expect(data.getData).toBeDefined()
-    expect(data.findByValue('no').label).toEqual(undefined)
+    try {
+      CountryData.getCountryInstance('xx')
+    } catch (e) {
+      expect(e.message).toEqual('Locale xx not supported by CountryList. Allowed locales: en, nb')
+    }
   })
 
   it('findByValue', () => {

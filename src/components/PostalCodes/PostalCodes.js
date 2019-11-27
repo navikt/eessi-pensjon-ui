@@ -1,8 +1,9 @@
 import PostalCodesData from './Postal-codes-Norway-ansi'
 
 class PostalCodes {
-  values = {}
+
   constructor () {
+    this.values = {}
     PostalCodesData.split('\n').forEach(line => {
       const v = line.split(';')
       if (v[0]) {
