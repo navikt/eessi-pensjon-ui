@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // import { withTranslation } from 'react-i18next'
 import _ from 'lodash'
 
-import * as Nav from '../../Nav'
+import * as Nav from '../../../types/nav-frontend-ikoner-assets'
 import Alert from '../Alert/Alert'
 // import * as storageActions from 'actions/storage'
 // import * as uiActions from 'actions/ui'

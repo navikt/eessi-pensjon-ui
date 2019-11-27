@@ -3,9 +3,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
-    index: './src/dist.js',
-    nav: './src/dist-nav.js',
-    api: './src/actions/api.js'
+    index: './src/dist.tsx',
+    nav: './src/dist-nav.tsx',
+    api: './src/actions/api.tsx'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -48,7 +48,6 @@ module.exports = {
       }]
     }, {
       test: /\.js$/,
-      include: path.resolve(__dirname, 'src'),
       exclude: /(node_modules|bower_components|build)/,
       use: {
         loader: 'babel-loader',
@@ -61,9 +60,14 @@ module.exports = {
           ]
         }
       }
+    }, {
+      test: /\.tsx$/,
+      use: 'ts-loader',
+      exclude: /(node_modules|bower_components|build)/
     }]
   },
   resolve: {
+    extensions: [ '.tsx', '.ts', '.jsx', '.js', '.json' ],
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
