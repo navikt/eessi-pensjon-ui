@@ -17,13 +17,13 @@ const CountrySelect = ({
   const [_value, setValue] = useState(value)
 
   const include = (selectedCountries, allCountries) => {
-    return _(allCountries).filter(country => {
+    return _.filter(allCountries, country => {
       return selectedCountries.indexOf(country.value) >= 0
     })
   }
 
   const exclude = (selectedCountries, allCountries) => {
-    return _(allCountries).filter(country => {
+    return _.filter(allCountries, country => {
       return selectedCountries.indexOf(country.value) < 0
     })
   }
@@ -35,13 +35,18 @@ const CountrySelect = ({
     setValue(e)
   }
 
-  const optionList = CountryData.getData(locale)
+  const optionList = CountryData.getCountryInstance(locale).getData()
   let options = (includeList ? include(includeList, optionList) : optionList)
   options = (excludeList ? exclude(excludeList, options) : options)
   let _options
 
   if (sort === 'scandinaviaFirst') {
-    _options = options.concat()
+    const scandinaviaFirst = ['DK', 'SE', 'NO']
+    _options = options.concat().sort((a, b) => {
+      if (scandinaviaFirst.indexOf(b.value.toUpperCase()) - scandinaviaFirst.indexOf(a.value.toUpperCase()) > 0) return 1
+      if (scandinaviaFirst.indexOf(b.value.toUpperCase()) - scandinaviaFirst.indexOf(a.value.toUpperCase()) < 0) return -1
+      return a.label.localeCompare(b.label)
+    })
   }
 
   if (sort === 'asc') {
@@ -58,7 +63,7 @@ const CountrySelect = ({
 
   let defValue = _value
   if (defValue && !defValue.label) {
-    defValue = _(options).find({ value: defValue.value ? defValue.value : defValue })
+    defValue = _.find(options, { value: defValue.value ? defValue.value : defValue })
   }
   const inputId = id || guid()
 

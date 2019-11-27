@@ -104,18 +104,22 @@ const FlagPage = ({ highContrast }) => {
         <Normaltekst className='mt-4 mb-4'>Use the two-letter country code for country list. Hover the mouser cursor over the desired flag to get the country code.</Normaltekst>
 
         <div className='flex-wrap' style={{ justifyContent: 'space-evenly' }}>
-          {CountryData.getData('nb').map((country, index) => (
-            <Flag size={size} key={index} className='m-1' country={country.value} label={country.label + ' - ' + country.value} />
-          ))}
+          <FlagList
+            wrap
+            overflowLimit={999}
+            items={CountryData.getData('nb').map((it) => ({ country: it.value, label: it.label + ' - ' + it.value }))}
+            size={size}
+          />
         </div>
 
         <Undertittel className='mt-4 mb-4'>Available flags - circle form</Undertittel>
-
-        <div className='flex-wrap' style={{ justifyContent: 'space-evenly' }}>
-          {CountryData.getData('nb').map((country, index) => (
-            <Flag size={size} type='circle' key={index} className='m-1' country={country.value} label={country.label + ' - ' + country.value} />
-          ))}
-        </div>
+        <FlagList
+          wrap
+          overflowLimit={999}
+          items={CountryData.getData('nb').map((it) => ({ country: it.value, label: it.label + ' - ' + it.value }))}
+          size={size}
+          type='circle'
+        />
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>

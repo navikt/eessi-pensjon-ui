@@ -5,14 +5,16 @@ import Flag from '../Flag/Flag'
 import classNames from 'classnames'
 
 const CountryOption = (props) => {
-  const { data, innerProps, isSelected, isFocused, label, selectProps, value } = props
+  const { data, innerProps, isSelected, isFocused, selectProps } = props
   const _type = selectProps.selectProps.type || 'country'
-  const _label = _type === 'country' ? label : (data.currency ? data.currency + ' - ' : '') + data.currencyLabel
+  const _label = _type === 'country' ? data.label : data.currencyValue + ' - ' + data.currencyLabel
+  const _value = _type === 'country' ? data.value : data.currencyValue
+
   return (
     <components.Option {...props}>
       <div
         {...innerProps}
-        id={selectProps.id ? selectProps.id + '-' + data.value : undefined}
+        id={selectProps.id ? selectProps.id + '-' + _value : undefined}
         className={classNames('c-countryOption', {
           selected: isSelected,
           focused: isFocused
@@ -22,7 +24,7 @@ const CountryOption = (props) => {
           <Flag
             className='c-countryOption__flag mr-2'
             label={_label}
-            country={value}
+            country={data.value}
             type='original'
             size='M'
           />
@@ -34,13 +36,10 @@ const CountryOption = (props) => {
 }
 
 CountryOption.propTypes = {
-  data: PT.object,
   innerProps: PT.object,
   isSelected: PT.bool,
   isFocused: PT.bool,
-  label: PT.string,
-  selectProps: PT.object,
-  value: PT.string
+  selectProps: PT.object
 }
 CountryOption.displayName = 'CountryOption'
 export default CountryOption

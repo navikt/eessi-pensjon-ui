@@ -5,23 +5,23 @@ import classNames from 'classnames'
 import CountryData from '../CountryData/CountryData'
 import { Normaltekst } from '../../Nav'
 import Flag from './Flag'
-
 import './Flag.css'
 
 const FlagList = (props) => {
-  const { className, items, locale = 'nb', overflowLimit, size, type } = props
-
+  const { animate = true, animationDelay = 0.05, className, items, locale = 'nb', overflowLimit, size, type, wrap = false } = props
+  const countryData = CountryData.getCountryInstance(locale)
   return (
     <div
-      className={classNames('c-flaglist', className)}
+      className={classNames('c-flaglist', className, { wrap: wrap, animate: animate })}
     >
       {items.map((item, index) => {
         if (_(overflowLimit).isNumber() && index > overflowLimit - 1) {
           return null
         }
-        const label = item.label || CountryData.findByValue(locale, item.country).label
+        const label = item.label || countryData.findByValue(item.country).label
         return (
           <Flag
+            style={{ animationDelay: (animationDelay * index) + 's' }}
             className='m-1'
             size={size}
             type={type}
@@ -48,11 +48,13 @@ const FlagList = (props) => {
 }
 
 FlagList.propTypes = {
+  animate: PT.bool,
   className: PT.string,
   locale: PT.string,
   items: PT.array.isRequired,
   overflowLimit: PT.number,
-  size: PT.string
+  size: PT.string,
+  wrap: PT.bool
 }
 FlagList.displayName = 'FlagList'
 export default FlagList

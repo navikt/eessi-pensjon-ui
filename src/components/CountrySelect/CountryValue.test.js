@@ -8,7 +8,7 @@ describe('components/CountrySelect/CountryValue', () => {
       value: 'NO',
       value3: 'NOR',
       label: 'Norway',
-      currency: 'NOK',
+      currencyValue: 'NOK',
       currencyLabel: 'Norsk Krone'
     }
   }

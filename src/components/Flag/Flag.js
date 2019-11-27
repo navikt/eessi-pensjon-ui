@@ -5,7 +5,9 @@ import CountryData from '../CountryData/CountryData'
 import flags from './Flags'
 import './Flag.css'
 
-const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
+const countryData = CountryData.getCountryInstance()
+
+const Flag = ({ className, country, label, size = 'M', style, type = 'original' }) => {
   if (['original', 'circle'].indexOf(type) < 0) {
     console.error('Flag type ' + type + ' not valid')
     return null
@@ -13,13 +15,13 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
 
   const getFlag = () => {
     let _country = country
-    if (CountryData.exists(_country)) {
+    if (countryData.exists(_country)) {
       // we are using UK as the code, but we have GB as flag's svg
       if (country.toLowerCase() === 'uk') {
         _country = 'gb'
       }
-      const flag = flags['flag_' + _country.toUpperCase()]
-      return flag ? <img alt={label} src={flag} /> : null
+      const flag = flags['flag' + _country.toUpperCase()]
+      return flag ? <img style={style} alt={label} src={flag} /> : null
     }
     console.error('Flag ' + _country.toLowerCase() + ' not found')
     return null
@@ -28,6 +30,7 @@ const Flag = ({ className, country, label, size = 'M', type = 'original' }) => {
   return (
     <>
       <div
+        style={style}
         className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
         data-tip={label}
       >

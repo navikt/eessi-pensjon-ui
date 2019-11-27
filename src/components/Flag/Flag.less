@@ -18,6 +18,36 @@
   }
 }
 
+@keyframes jiggle {
+  0% {
+    opacity: 0.01;
+    transform: scale3d(1, 1, 1)
+  }
+  1% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1)
+  }
+  30% {
+    transform: scale3d(1.25, .75, 1)
+  }
+  40% {
+    transform: scale3d(.75, 1.25, 1)
+  }
+  50% {
+    transform: scale3d(1.15, .85, 1)
+  }
+  65% {
+    transform: scale3d(.95, 1.05, 1)
+  }
+  75% {
+    transform: scale3d(1.05, .95, 1)
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1)
+  }
+}
+
 .c-flag {
 
   &.type-circle {
@@ -122,4 +152,13 @@
 .c-flaglist {
   display: flex;
   flex-wrap: nowrap;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.animate .c-flag {
+    opacity: 0.01;
+    animation: jiggle 0.5s forwards;
+  }
 }

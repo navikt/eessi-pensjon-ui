@@ -3,11 +3,21 @@ import CountrySelect from './CountrySelect'
 import CountryFilter from './CountryFilter'
 
 const testData = {
+  alpha2: 'NO',
+  alpha3: 'NOR',
+  countryCallingCodes: ['+47'],
+  currencies: [{
+    currencyLabel: 'Norwegian Krone',
+    currencyValue: 'NOK'
+  }],
+  emoji: '🇳🇴',
+  ioc: 'NOR',
+  label: 'Norge',
   value: 'NO',
   value3: 'NOR',
-  label: 'Norge',
-  currency: 'NOK',
-  currencyLabel: 'Norsk Krone'
+  languages: ['nor'],
+  name: 'Norway',
+  status: 'assigned'
 }
 
 describe('components/CountrySelect', () => {
@@ -22,7 +32,8 @@ describe('components/CountrySelect', () => {
     includeList: CountryFilter.EEA,
     value: testData,
     onOptionSelected: jest.fn(),
-    error: undefined
+    error: undefined,
+    sort: 'scandinaviaFirst'
   }
 
   it('Renders', () => {
@@ -53,5 +64,14 @@ describe('components/CountrySelect', () => {
     wrapper.find('.c-countrySelect__select__dropdown-indicator').hostNodes().simulate('keyDown', { key: 'ArrowDown' })
     wrapper.find('.c-countryOption').hostNodes().last().simulate('keyDown', { key: 'Enter' })
     expect(initialMockParams.onOptionSelected).toBeCalledWith(testData)
+  })
+
+  it('Sorts as scandinaviaFirst', () => {
+    wrapper = mount(<CountrySelect {...initialMockParams} />)
+    const sortedOptions = wrapper.find('.c-countrySelect Select').props().options
+    expect(sortedOptions[0].label).toEqual('Norge')
+    expect(sortedOptions[1].label).toEqual('Sverige')
+    expect(sortedOptions[2].label).toEqual('Danmark')
+    expect(sortedOptions[3].label).toEqual('Belgia')
   })
 })

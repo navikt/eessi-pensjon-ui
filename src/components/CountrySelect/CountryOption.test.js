@@ -1,25 +1,30 @@
 import React from 'react'
 import CountryOption from './CountryOption'
-import CountryData from '../CountryData/CountryData'
 
 describe('CountryOption Rendering', () => {
-  const countryData = CountryData.getData('nb')
   const countrySelectProps = { selectProps: { type: 'country' } }
   const currencySelectProps = { selectProps: { type: 'currency' } }
   let wrapper
 
+  const initialMockProps = {
+    value: undefined,
+    label: undefined,
+    selectProps: {
+      selectProps: {}
+    },
+    data: {
+      label: 'mockLabel',
+      value: 'mockValue',
+      currencyLabel: 'mockCurrencyLabel',
+      currencyValue: 'mockCurrencyValue'
+    },
+    innerProps: {},
+    isSelected: false,
+    isFocused: false
+  }
+
   beforeEach(() => {
-    wrapper = shallow(
-      <CountryOption
-        value=''
-        label=''
-        selectProps={{ selectProps: {} }}
-        data={{}}
-        innerProps={{}}
-        isSelected={false}
-        isFocused={false}
-      />
-    )
+    wrapper = shallow(<CountryOption {...initialMockProps} />)
   })
 
   it('Renders correctly', () => {
@@ -28,12 +33,9 @@ describe('CountryOption Rendering', () => {
   })
 
   it('Has proper HTML structure', () => {
-    for (const data of countryData) {
-      wrapper.setProps({ label: data.label, selectProps: countrySelectProps, data: data })
-      expect(wrapper.find('span').text()).toEqual(data.label)
-
-      wrapper.setProps({ selectProps: currencySelectProps })
-      expect(wrapper.find('span').text()).toEqual((data.currency ? data.currency + ' - ' : '') + data.currencyLabel)
-    }
+    wrapper.setProps({ selectProps: countrySelectProps })
+    expect(wrapper.find('span').text()).toEqual('mockLabel')
+    wrapper.setProps({ selectProps: currencySelectProps })
+    expect(wrapper.find('span').text()).toEqual('mockCurrencyValue - mockCurrencyLabel')
   })
 })

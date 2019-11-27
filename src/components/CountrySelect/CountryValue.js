@@ -5,7 +5,7 @@ import Flag from '../Flag/Flag'
 const CountryValue = (props) => {
   const { selectProps, data, innerProps } = props
   const _type = selectProps.selectProps.type || 'country'
-  const _label = _type === 'country' ? data.label : (data.currency ? data.currency + ' - ' : '') + data.currencyLabel
+  const _label = _type === 'country' ? data.label : data.currencyValue + ' - ' + data.currencyLabel
 
   return (
     <div className='c-countryValue' {...innerProps}>
