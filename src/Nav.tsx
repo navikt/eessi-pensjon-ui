@@ -1,4 +1,3 @@
-import React from 'react'
 import AlertStripe, { AlertStripeAdvarsel, AlertStripeFeil, AlertStripeInfo, AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { BekreftCheckboksPanel, Checkbox, CheckboksPanel, CheckboksPanelGruppe, Fieldset, Input, Radio, RadioPanel, RadioPanelGruppe, Select, SkjemaGruppe, Textarea, TextareaControlled } from 'nav-frontend-skjema'
 import Chevron from 'nav-frontend-chevron'

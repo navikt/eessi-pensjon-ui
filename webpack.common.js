@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     index: './src/dist.tsx',
     nav: './src/dist-nav.tsx',
-    api: './src/actions/api.tsx'
+    api: './src/actions/api.ts'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -21,12 +21,15 @@ module.exports = {
       {
         from: 'src/index.css',
         to: 'nav.css'
-      }
-    ]),
-    new CopyWebpackPlugin([
-      {
+      }, {
         from: 'src/minibootstrap.css',
         to: 'minibootstrap.css'
+      }, {
+        from: 'src/dist.d.ts',
+        to: 'index.d.ts'
+      }, {
+        from: 'src/actions/api.ts',
+        to: 'api.d.ts'
       }
     ])
   ],
@@ -44,7 +47,10 @@ module.exports = {
     }, {
       test: /\.(png|jpe?g|gif)$/i,
       use: [{
-        loader: 'url-loader'
+        loader: 'url-loader',
+        options:{
+          limit: Infinity
+        }
       }]
     }, {
       test: /\.js$/,
@@ -61,7 +67,7 @@ module.exports = {
         }
       }
     }, {
-      test: /\.tsx$/,
+      test: /\.tsx?$/,
       use: 'ts-loader',
       exclude: /(node_modules|bower_components|build)/
     }]

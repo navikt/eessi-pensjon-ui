@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "src/",
-    "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "esnext",
@@ -20,7 +19,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true
   },
   "include": [
     "src"

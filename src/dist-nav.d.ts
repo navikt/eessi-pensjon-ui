@@ -1,0 +1,1 @@
+declare module 'eessi-pensjon-ui/dist/Nav';

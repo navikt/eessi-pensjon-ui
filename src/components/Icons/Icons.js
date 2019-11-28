@@ -28,6 +28,10 @@ import Vedlegg from '../../resources/icons/Vedlegg'
 import Trashcan from '../../resources/icons/Trashcan'
 import Tilsette from '../../resources/icons/Tilsette'
 
+import mann from '../../resources/icons/icon-mann.png'
+import ukjent from '../../resources/icons/icon-ukjent.png'
+import kvinne from '../../resources/icons/icon-kvinne.png'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as icons from '@fortawesome/free-solid-svg-icons'
 
@@ -79,14 +83,14 @@ const Icons = (props) => {
     case 'nav-daily' : return <LinePiggyBank {...props} width={w} height={h} />
     case 'nav-home' : return <LineHome {...props} width={w} height={h} />
     case 'nav-learn' : return <LineBookmarkArticle {...props} width={w} height={h} />
-    case 'nav-man-icon' : return <img alt='man-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-mann.png')} />
+    case 'nav-man-icon' : return <img alt='man-icon' {...props} width={w} height={h} src={mann} />
     case 'nav-message-sent' : return <LineMessageSent {...props} width={w} height={h} />
     case 'nav-military' : return <LineRankArmy {...props} width={w} height={h} />
     case 'nav-other' : return <LineHelpCircle {...props} width={w} height={h} />
     case 'nav-sick' : return <LineStethoscope {...props} width={w} height={h} />
-    case 'nav-unknown-icon' : return <img alt='ukjent-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-ukjent.png')} />
+    case 'nav-unknown-icon' : return <img alt='ukjent-icon' {...props} width={w} height={h} src={ukjent} />
     case 'nav-voluntary' : return <LineEcoGlobe {...props} width={w} height={h} />
-    case 'nav-woman-icon' : return <img alt='woman-icon' {...props} width={w} height={h} src={require('../../resources/icons/icon-kvinne.png')} />
+    case 'nav-woman-icon' : return <img alt='woman-icon' {...props} width={w} height={h} src={kvinne} />
     case 'nav-work' : return <LineHandbag {...props} width={w} height={h} />
     case 'outlink' : return <LineLogout {...props} width={w} height={h} />
     case 'paperclip' : return <FilledPaperClip {...props} width={w} height={h} />
