@@ -89,10 +89,12 @@ export const realCall: Function = ({ body, context, cascadeFailureError, headers
     const CSRF_PROTECTION = cookieGet('NAV_CSRF_PROTECTION')
       ? { NAV_CSRF_PROTECTION: cookieGet('NAV_CSRF_PROTECTION') }
       : {}
-    return fetch(url, {
+    return fetch(url + '?ts=' + new Date().getTime(), {
       method: method || 'GET',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
+//      'Cache-Control': 'no-cache, no-store, must-revalidate',
+//      'Pragma': 'no-cache',
         'X-Request-ID': uuid(),
         ...CSRF_PROTECTION,
         ...headers

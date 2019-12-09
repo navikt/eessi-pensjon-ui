@@ -1,13 +1,13 @@
 {
   "name": "eessi-pensjon-ui",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "license": "MIT",
   "description": "EESSI Pensjon UI",
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
     "build": "npm run build:css && npm run build:js",
     "build:css": "less-watch-compiler --run-once --config less.json",
-    "build:js": "cross-env NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
+    "build:js": "cross-env NODE_OPTIONS=--max-old-space-size=8192 react-scripts build",
     "dist": "npm run dist:prod",
     "dist:dev": "cross-env NODE_ENV=development npm run dist:css && npm run dist:jsdev",
     "dist:prod": "cross-env NODE_ENV=production npm run dist:css && npm run dist:jsprod",
