@@ -4,7 +4,7 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import PDFSpecialPage from '../PDFSpecialPage/PDFSpecialPage'
 import { Textarea } from '../../../../Nav'
-import ColorPicker from '../../../../components/ColorPicker/ColorPicker'
+import ColorPicker from 'components/ColorPicker/ColorPicker'
 import './DnDSpecial.css'
 
 const DnDSpecial = ({ actions, labels, separator, watermark }) => {

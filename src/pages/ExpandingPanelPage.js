@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import ExpandingPanel from '../components/ExpandingPanel/ExpandingPanel'
+import ExpandingPanel from 'components/ExpandingPanel/ExpandingPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { connect } from '../store'
 import { Hovedknapp, Normaltekst, Panel, Systemtittel } from '../Nav'
-import File from '../components/File/File'
+import File from 'components/File/File'
 import sampleJPG from '../resources/tests/sampleJPG'
 import { Undertittel } from 'nav-frontend-typografi'
 
@@ -38,7 +38,7 @@ const ExpandingPanelPage = ({ highContrast }) => {
               </Hovedknapp>
             </div>
           )}
-          onClick={(e) => setPanelNumClicks(panelNumClicks + 1)}
+          onClick={() => setPanelNumClicks(panelNumClicks + 1)}
         >
           <File animate={false} file={sampleJPG} scale={3} />
         </ExpandingPanel>

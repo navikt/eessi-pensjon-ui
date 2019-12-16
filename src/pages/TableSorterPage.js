@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import TableSorter from '../components/TableSorter/TableSorter'
+import TableSorter from 'components/TableSorter/TableSorter'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'

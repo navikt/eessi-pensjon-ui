@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from './Container'
-import File from '../components/File/File'
+import File from 'components/File/File'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'

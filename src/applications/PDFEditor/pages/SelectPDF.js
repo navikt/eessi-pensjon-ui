@@ -2,7 +2,7 @@ import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
 import { Hovedknapp, Undertittel } from '../../../Nav'
-import FileUpload from '../../../components/FileUpload/FileUpload'
+import FileUpload from 'components/FileUpload/FileUpload'
 
 const SelectPDF = ({ actions, labels, loadingPDF, files = [], setStep }) => {
   const onForwardButtonClick = () => {

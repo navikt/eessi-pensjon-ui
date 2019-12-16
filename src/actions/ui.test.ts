@@ -1,8 +1,7 @@
-import * as uiActions from "./ui"
-import * as types from '../constants/actionTypes'
+import * as uiActions from 'actions/ui'
+import * as types from 'constants/actionTypes'
 
 describe('actions/ui', () => {
-
   it('setHighContrast()', () => {
     const generatedResult = uiActions.setHighContrast()
     expect(generatedResult).toMatchObject({

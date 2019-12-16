@@ -3,7 +3,7 @@ import { Document, Page } from 'react-pdf'
 import PT from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
-import Icons from '../../../../components/Icons/Icons'
+import Icons from 'components/Icons/Icons'
 import './DnDPage.css'
 
 const DnDPage = (props) => {
@@ -143,8 +143,8 @@ DnDPage.propTypes = {
   recipes: PT.object.isRequired,
   actions: PT.object,
   file: PT.object.isRequired,
-  pageNumber: PT.number.isRequired,
-  pageScale: PT.number.isRequired,
+  pageNumber: PT.number,
+  pageScale: PT.number,
   dndTarget: PT.string,
   action: PT.string.isRequired,
   className: PT.string,

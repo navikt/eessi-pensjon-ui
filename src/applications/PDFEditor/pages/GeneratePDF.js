@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
-import File from '../../../components/File/File'
+import File from 'components/File/File'
 import * as Nav from '../../../Nav'
 
 const GeneratePDF = (props) => {
@@ -33,7 +33,7 @@ const GeneratePDF = (props) => {
     if (mounted && !_.isEmpty(generatedPDFs) && _.isEmpty(fileNames)) {
       setFileNames(setKeys(generatedPDFs))
     }
-  }, [generatedPDFs, fileNames])
+  }, [generatedPDFs, fileNames, mounted])
 
   const onBackButtonClick = () => {
     setStep('edit')

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import Flag from '../components/Flag/Flag'
-import FlagList from '../components/Flag/FlagList'
+import Flag from 'components/Flag/Flag'
+import FlagList from 'components/Flag/FlagList'
 import ReactTooltip from 'react-tooltip'
-import CountryData from '../components/CountryData/CountryData'
+import CountryData from 'components/CountryData/CountryData'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
@@ -111,7 +111,7 @@ const FlagPage = ({ highContrast }) => {
               console.log(it)
               return { country: it.value, label: it.label + ' - ' + it.value }
             }
-          )}
+            )}
             size={size}
           />
         </div>

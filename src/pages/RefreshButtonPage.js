@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import RefreshButton from '../components/RefreshButton/RefreshButton'
+import RefreshButton from 'components/RefreshButton/RefreshButton'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'

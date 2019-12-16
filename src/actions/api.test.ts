@@ -1,7 +1,7 @@
-import * as api from './api'
-import configureMockStore, {MockStoreEnhanced } from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import * as api from 'actions/api'
 import nock from 'nock'
+import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 const mockStore = configureMockStore([thunk])
 
@@ -14,7 +14,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 404 response', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(404, 'nope')
 
     return store.dispatch(api.realCall({
@@ -35,7 +35,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 200 response', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(200, { foo: 'bar' })
 
     return store.dispatch(api.realCall({
@@ -56,7 +56,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 500 response', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(500, { message: 'error' })
 
     return store.dispatch(api.realCall({
@@ -77,7 +77,7 @@ describe('actions/api', () => {
 
   it('call() with fake url, 500 response and cascading failure error', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(500, { message: 'unauthorized' })
 
     return store.dispatch(api.realCall({
@@ -100,7 +100,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 401 response', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(401, { message: 'unauthorized' })
 
     return store.dispatch(api.realCall({
@@ -121,7 +121,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 403 response with a forbidden action', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(403, { message: 'no way jose' })
 
     return store.dispatch(api.realCall({
@@ -143,7 +143,7 @@ describe('actions/api', () => {
 
   it('call() with fake url and 403 response with standard failure action', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(403, { message: 'no way jose' })
 
     return store.dispatch(api.realCall({
@@ -164,7 +164,7 @@ describe('actions/api', () => {
 
   it('call() with fake url, 401 response and cascadeFailureError', () => {
     nock('http://mockedurl')
-      .get('/')
+      .get(/\/.*/)
       .reply(401, { message: 'unauthorized' })
 
     return store.dispatch(api.realCall({

@@ -1,5 +1,5 @@
-webpack.common.js
-webpack.dev.js
-webpack.prod.js
+webpack.common.ts
+webpack.dev.ts
+webpack.prod.ts
 .eslintrc
 .gitignore

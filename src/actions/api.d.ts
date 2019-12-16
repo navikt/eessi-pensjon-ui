@@ -1,7 +1,6 @@
-declare module 'eessi-pensjon-ui/dist/api';
+/// <reference types="react" />
 
-import {ApiCallProps} from './api'
-
-export function fakeCall (props : ApiCallProps): Function;
-export function realCall (props : ApiCallProps): Function;
-export function call (props : ApiCallProps): Function;
+declare module 'eessi-pensjon-ui/dist/api' {
+  import * as api from './api'
+  exports = api
+}

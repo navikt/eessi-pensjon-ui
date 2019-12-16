@@ -1,0 +1,35 @@
+import { FileProps, IFile } from 'components/File/File'
+import { mount, ReactWrapper } from 'enzyme'
+import React from 'react'
+import Image from './Image'
+import defaultLabels from 'components/File/File.labels'
+
+const mockPNG: IFile = { name: 'teapot', size: 418, mimetype: 'image/png', content: { base64: '...' } }
+
+describe('components/File/Image', () => {
+  let wrapper: ReactWrapper
+  const initialMockProps: FileProps = {
+    size: '2 kB',
+    labels: defaultLabels,
+    file: mockPNG,
+    scale: 1,
+    onClick: jest.fn()
+  }
+
+  it('Renders', () => {
+    wrapper = mount(<Image {...initialMockProps} />)
+    expect(wrapper.isEmptyRender()).toBeFalsy()
+    expect(wrapper).toMatchSnapshot()
+  })
+
+  it('Renders the image', () => {
+    wrapper = mount(<Image {...initialMockProps} />)
+    expect(wrapper.find('img').props().alt).toEqual('teapot')
+  })
+
+  it('Handles onClick in content', () => {
+    wrapper = mount(<Image {...initialMockProps} />)
+    wrapper.find('.c-file-Image .content').simulate('click')
+    expect(initialMockProps.onClick).toHaveBeenCalled()
+  })
+})

@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from './Container'
-import MultipleSelect from '../components/MultipleSelect/MultipleSelect'
+import MultipleSelect from 'components/MultipleSelect/MultipleSelect'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'

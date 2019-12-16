@@ -1,11 +1,12 @@
-import fetch from 'cross-fetch'
 import { get as cookieGet } from 'browser-cookies'
+import * as types from 'constants/actionTypes'
+import { IS_TEST } from 'constants/environment'
+import { HOST } from 'constants/urls'
+import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
-import uuid from 'uuid/v4'
-import * as types from '../constants/actionTypes'
-import { IS_TEST } from '../constants/environment'
-import { HOST } from '../constants/urls'
 import { Dispatch } from 'redux'
+import { ActionWithPayload } from 'types'
+import uuid from 'uuid/v4'
 
 export interface ApiCallTypes {
   request: string;
@@ -31,18 +32,17 @@ class ApiError extends Error {
   public status?: number;
   public stackTrace?: any;
 
-  constructor(message?: string) {
+  constructor (message?: string) {
     // 'Error' breaks prototype chain here
-    super(message);
-
-    const actualProto = new.target.prototype;
-    if (Object.setPrototypeOf) { Object.setPrototypeOf(this, actualProto); }
-    else { (this as any).__proto__ = actualProto; }
+    super(message)
+    const actualProto = new.target.prototype
+    if (Object.setPrototypeOf) { Object.setPrototypeOf(this, actualProto) } else { (this as any).__proto__ = actualProto }
   }
-
 }
 
-export const fakeCall: Function = ({ context, expectedPayload, method, type, url } : ApiCallProps) => {
+export const fakeCall: Function = ({
+  context, expectedPayload, method, type, url
+}: ApiCallProps): (d: Dispatch) => Promise<ActionWithPayload<any>> => {
   return (dispatch: Dispatch) => {
     if (!IS_TEST) {
       /* istanbul ignore next */
@@ -51,7 +51,7 @@ export const fakeCall: Function = ({ context, expectedPayload, method, type, url
     dispatch({
       type: type.request
     })
-    const promise = new Promise((resolve) => {
+    const promise: Promise<ActionWithPayload<any>> = new Promise((resolve) => {
       setTimeout(() => {
         const _payload = typeof expectedPayload === 'function' ? expectedPayload() : expectedPayload
         resolve(_payload)
@@ -72,54 +72,56 @@ export const fakeCall: Function = ({ context, expectedPayload, method, type, url
     promise.catch((error) => {
       if (!IS_TEST) {
         /* istanbul ignore next */
-        console.log(JSON.stringify(error))
+        console.error(JSON.stringify(error))
       }
     })
     return promise
   }
 }
 
-export const realCall: Function = ({ body, context, cascadeFailureError, headers, method, payload, type, url }: ApiCallProps) => {
+export const realCall: Function = ({
+  body, context, cascadeFailureError, headers, method, payload, type, url
+}: ApiCallProps): (d: Dispatch) => Promise<ActionWithPayload<any> | undefined> => {
   return (dispatch: Dispatch) => {
     dispatch({
       type: type.request
     })
-    let _body = body || payload
+    let _body: any = body || payload
     _body = _body ? JSON.stringify(_body) : undefined
-    const CSRF_PROTECTION = cookieGet('NAV_CSRF_PROTECTION')
+    const CSRF_PROTECTION: {[k: string]: string | null} = cookieGet('NAV_CSRF_PROTECTION')
       ? { NAV_CSRF_PROTECTION: cookieGet('NAV_CSRF_PROTECTION') }
       : {}
     return fetch(url + '?ts=' + new Date().getTime(), {
       method: method || 'GET',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-//      'Cache-Control': 'no-cache, no-store, must-revalidate',
-//      'Pragma': 'no-cache',
+        //      'Cache-Control': 'no-cache, no-store, must-revalidate',
+        //      'Pragma': 'no-cache',
         'X-Request-ID': uuid(),
         ...CSRF_PROTECTION,
         ...headers
       },
       body: _body
     }).catch(error => {
-      console.log(JSON.stringify(error))
+      console.error(JSON.stringify(error))
     }).then(response => {
       if (response) {
         if (response.status >= 400) {
-          const error = new ApiError(response.statusText)
-          error.response = response
-          error.status = response.status
+          const apiError: ApiError = new ApiError(response.statusText)
+          apiError.response = response
+          apiError.status = response.status
           return response.json().then((json) => {
-            error.message = json.message
-            error.stackTrace = json.stackTrace
-            throw error
+            apiError.message = json.message
+            apiError.stackTrace = json.stackTrace
+            throw apiError
           })
-          .catch((error2) => {
-            if (!IS_TEST) {
+            .catch((error) => {
+              if (!IS_TEST) {
               /* istanbul ignore next */
-              console.log(JSON.stringify(error2))
-            }
-            return Promise.reject(error)
-          })
+                console.error(JSON.stringify(error))
+              }
+              return Promise.reject(apiError)
+            })
         } else {
           return response.json()
         }
@@ -132,7 +134,7 @@ export const realCall: Function = ({ body, context, cascadeFailureError, headers
         context: context
       })
     }).catch(error => {
-      const _body = body || payload
+      const _body: any = body || payload
       if (error.status === 401) {
         dispatch({
           type: types.SERVER_UNAUTHORIZED_ERROR,
@@ -194,4 +196,4 @@ export const realCall: Function = ({ body, context, cascadeFailureError, headers
   }
 }
 
-export const call = HOST === 'localhost' && !IS_TEST ? fakeCall : realCall
+export const call: Function = HOST === 'localhost' && !IS_TEST ? fakeCall : realCall

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import WaitingPanel from '../components/WaitingPanel/WaitingPanel'
+import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'

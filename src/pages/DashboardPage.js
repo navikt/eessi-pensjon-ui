@@ -1,8 +1,8 @@
 import React from 'react'
 import Container from './Container'
-import Dashboard from '../applications/Dashboard/Dashboard'
+import Dashboard from 'applications/Dashboard/Dashboard'
 import { Normaltekst, Panel, Systemtittel } from '../Nav'
-import Icons from '../components/Icons/Icons'
+import Icons from 'components/Icons/Icons'
 import { Undertittel } from 'nav-frontend-typografi'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
@@ -60,7 +60,7 @@ const DashboardPage = ({ highContrast }) => {
         </ul>
         <Dashboard
           id='eessi-pensjon-ui-demo-2'
-          defaultLayout={[{
+          defaultLayouts={[{
             label: 'Side 1',
             body: {
               lg: [

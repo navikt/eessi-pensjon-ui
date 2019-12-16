@@ -5,7 +5,7 @@ import { connect, bindActionCreators } from './store'
 import SelectPDF from './pages/SelectPDF'
 import EditPDF from './pages/EditPDF'
 import GeneratePDF from './pages/GeneratePDF'
-import { Modal } from '../../components/Modal/Modal'
+import { Modal } from 'components/Modal/Modal'
 import defaultLabels from './PDFEditor.labels'
 
 const mapStateToProps = (state) => (state)

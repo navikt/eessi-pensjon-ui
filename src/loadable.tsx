@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable'
-import WaitingPanel from './components/WaitingPanel/WaitingPanel'
+import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 
 const MyLoadable = (opts: any) => {
   return Loadable(Object.assign({

@@ -2045,6 +2045,16 @@ GRID
 .hjelpetekst__apneknapp:hover {
   box-shadow: 0 0 0 2px #0067C5;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 .knappmini-mixin {
   font-size: 0.875em;
   text-transform: none;
@@ -2397,6 +2407,16 @@ GRID
   to {
     transform: rotate(360deg);
   }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 .lenkepanel {
   background-color: #FFF;

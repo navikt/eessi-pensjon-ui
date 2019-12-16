@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Container from './Container'
-import DatePicker from '../components/DatePicker/DatePicker'
+import DatePicker from 'components/DatePicker/DatePicker'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
