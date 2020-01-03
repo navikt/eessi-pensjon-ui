@@ -60,7 +60,7 @@ const Dashboard = ({
     const _availableWidgets: WidgetTemplates = DashboardAPI.loadAvailableWidgets(myWidgets, allowedWidgets)
     setAvailableWidgets(_availableWidgets)
     const [_widgets, _layouts, _config]: [Widgets, LayoutTabs, Config] =
-        await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayouts, defaultConfig, allowedWidgets)
+      await DashboardAPI.loadDashboard(id, defaultWidgets, defaultLayouts, defaultConfig, allowedWidgets)
     setWidgets(_widgets)
     _setLayouts(_layouts)
     setConfig(_config)
@@ -289,13 +289,13 @@ const Dashboard = ({
   }
 
   if (!mounted) {
-    return <WaitingPanel className='c-dashboard__loading' />
+    return <WaitingPanel className='c-dashboard__loading' style={{ paddingTop: '3rem' }} message={_labels.loading} />
   }
 
   return (
     <DashboardRender
       addMode={addMode} availableWidgets={availableWidgets} currentBreakpoint={currentBreakpoint} droppingItem={droppingItem}
-      currentTabIndex={currentTabIndex} editMode={editMode} labels={_labels} layouts={layouts} mounted={mounted}
+      currentTabIndex={currentTabIndex} editMode={editMode} labels={_labels} layouts={layouts}
       myWidgets={myWidgets} onEditModeOn={onEditModeOn} onCancelEdit={onCancelEdit} onSaveEdit={onSaveEdit}
       onPlaceholderWidgetAdd={onPlaceholderWidgetAdd} onResetEdit={onResetEdit}
       onAddChange={onAddChange} onLayoutChange={onLayoutChange} onBreakpointChange={onBreakpointChange}

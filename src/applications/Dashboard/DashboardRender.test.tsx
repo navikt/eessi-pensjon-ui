@@ -13,7 +13,6 @@ describe('applications/Dashboard/Dashboard', () => {
     addMode: false,
     availableWidgets: [],
     editMode: false,
-    mounted: false,
     labels: labels,
     layouts: [{
       label: 'default',
@@ -59,7 +58,7 @@ describe('applications/Dashboard/Dashboard', () => {
   })
 
   it('Has proper HTML structure: loaded', () => {
-    wrapper = mount(<DashboardRender {...initialMockProps} mounted />)
+    wrapper = mount(<DashboardRender {...initialMockProps} />)
     expect(wrapper.exists('div.c-dashboard')).toBeTruthy()
     expect(wrapper.exists('DashboardControlPanel')).toBeTruthy()
     expect(wrapper.exists('DashboardGrid')).toBeTruthy()
@@ -69,12 +68,12 @@ describe('applications/Dashboard/Dashboard', () => {
   it('Has Add mode', () => {
     wrapper = mount(<DashboardRender {...initialMockProps} />)
     expect(wrapper.exists('WidgetAddArea')).toBeFalsy()
-    wrapper.setProps({ ...initialMockProps, mounted: true })
+    wrapper.setProps({ ...initialMockProps })
     expect(wrapper.exists('.c-dashboard__controlPanel-buttons')).toBeTruthy()
     expect(wrapper.exists('#c-dashboard__controlPanel-edit-icon-id')).toBeTruthy()
-    wrapper.setProps({ ...initialMockProps, mounted: true, editMode: true })
+    wrapper.setProps({ ...initialMockProps, editMode: true })
     expect(wrapper.exists('#c-dashboard__controlPanel-add-button-id')).toBeTruthy()
-    wrapper.setProps({ ...initialMockProps, mounted: true, addMode: true })
+    wrapper.setProps({ ...initialMockProps, addMode: true })
     expect(wrapper.exists('WidgetAddArea')).toBeTruthy()
     wrapper.unmount()
   })

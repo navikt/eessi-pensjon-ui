@@ -77,14 +77,6 @@ describe('applications/Dashboard/Dashboard', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('Mounts', () => {
-    expect(wrapper.exists(DashboardRender)).toBeFalsy()
-    act(() => {
-      wrapper.update()
-    })
-    expect(wrapper.find(DashboardRender).props().mounted).toBeTruthy()
-  })
-
   it('onLayoutChange', () => {
     act(() => {
       wrapper.update()

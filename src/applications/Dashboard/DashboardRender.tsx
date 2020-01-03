@@ -29,7 +29,6 @@ export interface DashboardRenderProps {
   editMode: boolean;
   labels: Labels;
   layouts: LayoutTabs;
-  mounted: boolean;
   myWidgets: WidgetMap;
   onAddChange: () => void;
   onBreakpointChange: (breakpoint: Breakpoint) => void;
@@ -54,65 +53,57 @@ export interface DashboardRenderProps {
 }
 
 export const DashboardRender = ({
-  addMode, availableWidgets, currentTabIndex, currentBreakpoint, droppingItem, editMode, labels, layouts, mounted,
+  addMode, availableWidgets, currentTabIndex, currentBreakpoint, droppingItem, editMode, labels, layouts,
   myWidgets, onAddChange, onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onPlaceholderWidgetAdd,
   onResetEdit, onSaveEdit, onTabAdd, onTabChange, onTabDelete, onTabRename, onTabMove, onWidgetDrop,
   onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, widgets
-}: DashboardRenderProps): JSX.Element => {
-  if (!mounted) {
-    return (
-      <WaitingPanel className='c-dashboardrender__loading' style={{ paddingTop: '3rem' }} message={labels.loading} />
+}: DashboardRenderProps): JSX.Element => (
+  <div className={classNames('c-dashboard', currentBreakpoint)}>
+    <DashboardControlPanel
+      labels={labels}
+      addMode={addMode}
+      editMode={editMode}
+      onEditModeOn={onEditModeOn}
+      onCancelEdit={onCancelEdit}
+      onSaveEdit={onSaveEdit}
+      onResetEdit={onResetEdit}
+      onAddChange={onAddChange}
+    />
+    {addMode ? (
+      <WidgetAddArea
+        availableWidgets={availableWidgets}
+        labels={labels}
+        widgets={widgets}
+        myWidgets={myWidgets}
+        onPlaceholderWidgetAdd={onPlaceholderWidgetAdd}
+      />
     )
-  } else {
-    return (
-      <div className={classNames('c-dashboard', currentBreakpoint)}>
-        <DashboardControlPanel
-          labels={labels}
-          addMode={addMode}
-          editMode={editMode}
-          onEditModeOn={onEditModeOn}
-          onCancelEdit={onCancelEdit}
-          onSaveEdit={onSaveEdit}
-          onResetEdit={onResetEdit}
-          onAddChange={onAddChange}
-        />
-        {addMode ? (
-          <WidgetAddArea
-            availableWidgets={availableWidgets}
-            labels={labels}
-            widgets={widgets}
-            myWidgets={myWidgets}
-            onPlaceholderWidgetAdd={onPlaceholderWidgetAdd}
-          />
-        )
-          : null}
-        <DashboardGrid
-          currentTabIndex={currentTabIndex}
-          droppingItem={droppingItem}
-          editMode={editMode}
-          layouts={layouts}
-          currentBreakpoint={currentBreakpoint}
-          onBreakpointChange={onBreakpointChange}
-          onLayoutChange={onLayoutChange}
-          onTabAdd={onTabAdd}
-          onTabChange={onTabChange}
-          onTabDelete={onTabDelete}
-          onTabMove={onTabMove}
-          onTabRename={onTabRename}
-          onWidgetDelete={onWidgetDelete}
-          onWidgetDrop={onWidgetDrop}
-          onWidgetFullFocus={onWidgetFullFocus}
-          onWidgetResize={onWidgetResize}
-          onWidgetRestoreFocus={onWidgetRestoreFocus}
-          onWidgetUpdate={onWidgetUpdate}
-          labels={labels}
-          widgets={widgets}
-          myWidgets={myWidgets}
-        />
-      </div>
-    )
-  }
-}
+      : null}
+    <DashboardGrid
+      currentTabIndex={currentTabIndex}
+      droppingItem={droppingItem}
+      editMode={editMode}
+      layouts={layouts}
+      currentBreakpoint={currentBreakpoint}
+      onBreakpointChange={onBreakpointChange}
+      onLayoutChange={onLayoutChange}
+      onTabAdd={onTabAdd}
+      onTabChange={onTabChange}
+      onTabDelete={onTabDelete}
+      onTabMove={onTabMove}
+      onTabRename={onTabRename}
+      onWidgetDelete={onWidgetDelete}
+      onWidgetDrop={onWidgetDrop}
+      onWidgetFullFocus={onWidgetFullFocus}
+      onWidgetResize={onWidgetResize}
+      onWidgetRestoreFocus={onWidgetRestoreFocus}
+      onWidgetUpdate={onWidgetUpdate}
+      labels={labels}
+      widgets={widgets}
+      myWidgets={myWidgets}
+    />
+  </div>
+)
 
 DashboardRender.propTypes = {
   addMode: PT.bool.isRequired,
