@@ -1,7 +1,7 @@
-import { Labels } from 'applications/Dashboard/declarations/Dashboard'
 import Icons from 'components/Icons/Icons'
 import PT from 'prop-types'
 import React from 'react'
+import { Labels } from 'types'
 import DashboardConfig from './config/DashboardConfig'
 
 export interface DashboardControlPanelProps {
@@ -15,7 +15,7 @@ export interface DashboardControlPanelProps {
   onSaveEdit: () => Promise<any>;
 }
 
-const DashboardControlPanel = ({
+const DashboardControlPanel: React.FC<DashboardControlPanelProps> = ({
   addMode, editMode, labels, onAddChange, onCancelEdit, onEditModeOn, onResetEdit, onSaveEdit
 }: DashboardControlPanelProps): JSX.Element => {
   const onResetEditHandler = (): void => {
@@ -86,7 +86,7 @@ const DashboardControlPanel = ({
 DashboardControlPanel.propTypes = {
   addMode: PT.bool.isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.object,
+  labels: PT.oneOf<Labels>([]).isRequired,
   onAddChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
   onEditModeOn: PT.func.isRequired,
@@ -94,5 +94,5 @@ DashboardControlPanel.propTypes = {
   onResetEdit: PT.func.isRequired
 }
 
-DashboardControlPanel.defaultProps = DashboardConfig
+DashboardControlPanel.defaultProps = DashboardConfig as Partial<DashboardControlPanelProps>
 export default DashboardControlPanel

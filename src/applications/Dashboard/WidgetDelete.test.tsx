@@ -1,11 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
-import WidgetDelete, { WidgetDeleteProps } from './WidgetDelete'
 import labels from './Dashboard.labels'
+import WidgetDelete, { WidgetDeleteProps } from './WidgetDelete'
 
 describe('applications/Dashboard/WidgetDelete', () => {
   let wrapper: ReactWrapper
-
   const initialMockProps: WidgetDeleteProps = {
     labels: labels,
     onResize: jest.fn(),

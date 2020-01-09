@@ -27,8 +27,8 @@ export interface FileUploadProps {
   afterFileDrop?: () => void;
   beforeFileDrop ?: () => void;
   className ?: string;
-  files: IFiles;
-  labels: Labels;
+  files?: IFiles;
+  labels?: Labels;
   maxFiles?: number;
   maxFileSize?: number;
   onFilesChanged?: (f: IFiles) => void;

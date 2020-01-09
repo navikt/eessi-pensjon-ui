@@ -1,11 +1,9 @@
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
-import WidgetAddArea, { WidgetAddAreaProps } from './WidgetAddArea'
 import labels from './Dashboard.labels'
+import WidgetAddArea, { WidgetAddAreaProps } from './WidgetAddArea'
 
-jest.mock('./WidgetAdd', () => {
-  return () => { return <div className='mock-widgetadd' /> }
-})
+jest.mock('./WidgetAdd', () => (() => (<div className='mock-widgetadd' />)))
 
 describe('applications/Dashboard/WidgetAddArea', () => {
   let wrapper: ReactWrapper

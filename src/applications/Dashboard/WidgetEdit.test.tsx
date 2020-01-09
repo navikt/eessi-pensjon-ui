@@ -5,7 +5,6 @@ import WidgetEdit, { WidgetEditProps } from './WidgetEdit'
 
 describe('applications/Dashboard/WidgetEdit', () => {
   let wrapper: ReactWrapper
-
   const initialMockProps: WidgetEditProps = {
     labels: labels,
     setMode: jest.fn(),

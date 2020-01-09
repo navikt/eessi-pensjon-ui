@@ -8,7 +8,7 @@ import React from 'react'
 import { act } from 'react-dom/test-utils'
 import mockConfig from './config/DefaultConfig'
 import mockWidgets from './config/DefaultWidgets'
-import Dashboard from './Dashboard'
+import Dashboard, { DashboardProps } from './Dashboard'
 
 const defaultLocalStorage = window.localStorage
 
@@ -34,18 +34,16 @@ const localStorageMock = (() => {
   }
 })()
 
-jest.mock('applications/Dashboard/DashboardRender', () => {
-  return () => { return <div /> }
-})
+jest.mock('applications/Dashboard/DashboardRender', () => () => (<div />))
 
 describe('applications/Dashboard/Dashboard', () => {
   let wrapper: ReactWrapper
-  const initialMockProps = {
+  const initialMockProps: DashboardProps = {
     allowedWidgets: undefined,
     initialBreakpoint: 'lg' as Breakpoint,
     labels: labels,
-    currentTabIndex: 0,
-    onLayoutChange: jest.fn(),
+    defaultTabIndex: 0,
+    afterLayoutChange: jest.fn(),
     id: 'test'
   }
 

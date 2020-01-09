@@ -1,9 +1,9 @@
 import * as api from 'actions/api'
 import nock from 'nock'
-import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store'
+import configureMockStore, { MockStoreCreator, MockStoreEnhanced } from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-const mockStore = configureMockStore([thunk])
+const mockStore: MockStoreCreator = configureMockStore([thunk])
 
 describe('actions/api', () => {
   let store: MockStoreEnhanced<unknown, {}>
@@ -26,7 +26,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(2)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'FAILURE')
@@ -47,7 +47,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(2)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'SUCCESS')
@@ -90,7 +90,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'SERVER/INTERNAL/ERROR')
@@ -112,7 +112,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(2)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
@@ -134,7 +134,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(2)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'FORBIDDEN')
@@ -155,7 +155,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(2)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'FAILURE')
@@ -177,7 +177,7 @@ describe('actions/api', () => {
       }
     }))
       .then(() => {
-        const expectedActions = store.getActions()
+        const expectedActions: any[] = store.getActions()
         expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
         expect(expectedActions[1]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
@@ -196,7 +196,7 @@ describe('actions/api', () => {
       },
       expectedPayload: mockedPayload
     })).then(() => {
-      const expectedActions = store.getActions()
+      const expectedActions: any[] = store.getActions()
       expect(expectedActions.length).toBe(2)
       expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
       expect(expectedActions[1]).toHaveProperty('type', 'SUCCESS')
@@ -211,12 +211,8 @@ describe('actions/api', () => {
 
   it('decides to use fakeCall as we are in localhost and NOT test env', () => {
     jest.resetModules()
-    jest.mock('constants/urls', () => {
-      return { HOST: 'localhost' }
-    })
-    jest.mock('constants/environment', () => {
-      return { IS_TEST: false }
-    })
+    jest.mock('constants/urls', () => ({ HOST: 'localhost' }))
+    jest.mock('constants/environment', () => ({ IS_TEST: false }))
     const newApi = require('actions/api')
     expect(newApi.call.name).toEqual('fakeCall')
 

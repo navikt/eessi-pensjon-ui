@@ -57,6 +57,18 @@ export type Currencies = Array<Currency>
   },
  */
 
+const UK = {
+  alpha2: 'UK',
+  alpha3: 'UK_',
+  countryCallingCodes: ['+44'],
+  currencies: ['GBP'],
+  emoji: '🇬🇧',
+  ioc: 'GBR',
+  languages: ['eng', 'cor', 'gle', 'gla', 'cym'],
+  name: 'United Kingdom',
+  status: 'assigned'
+}
+
 export class CountryList {
   private locale: AllowedLocaleString
   private translations: LocalizedCountryNames
@@ -69,12 +81,14 @@ export class CountryList {
       throw new Error('Locale ' + this.locale + ' not supported by CountryList. Allowed locales: ' + allowedLocales.join(', '))
     }
     this.translations = getNames(this.locale) || {}
+    this.translations.UK = this.translations.GB
     this.currencyLocale = this.locale
     this.testCurrencyTranslation = currencyToName('USD', this.currencyLocale)
     if (!this.testCurrencyTranslation) {
       this.currencyLocale = 'en'
     }
     this.countries = countries.all
+      .concat(UK)
       .filter((country: any) => country.status === 'assigned')
       .map((country: Country) => ({
         ...country,

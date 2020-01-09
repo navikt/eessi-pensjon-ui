@@ -1,24 +1,26 @@
 import {
-  Breakpoint, DroppingItem,
-  Labels,
-  Layout, LayoutBody,
+  Breakpoint,
+  DroppingItem,
+  Layout,
+  LayoutBody,
   Layouts,
   LayoutTabs,
   Widget,
-  WidgetMap, WidgetPlaceholder,
+  WidgetMap,
+  WidgetPlaceholder,
   Widgets,
   WidgetTemplates
 } from 'applications/Dashboard/declarations/Dashboard'
+import WidgetAddArea from 'applications/Dashboard/WidgetAddArea'
 import classNames from 'classnames'
 import PT from 'prop-types'
 import React from 'react'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
-import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
+import { Labels } from 'types'
 import './Dashboard.css'
 import DashboardControlPanel from './DashboardControlPanel'
 import DashboardGrid from './DashboardGrid'
-import WidgetAddArea from 'applications/Dashboard/WidgetAddArea'
 
 export interface DashboardRenderProps {
   addMode: boolean;
@@ -49,14 +51,15 @@ export interface DashboardRenderProps {
   onWidgetResize: (layout: Layout) => void;
   onWidgetRestoreFocus: () => void;
   onWidgetUpdate: (widget: Widget, layout: Layout) => void;
+  rowHeight: number;
   widgets: Widgets;
 }
 
-export const DashboardRender = ({
+export const DashboardRender: React.FC<DashboardRenderProps> = ({
   addMode, availableWidgets, currentTabIndex, currentBreakpoint, droppingItem, editMode, labels, layouts,
   myWidgets, onAddChange, onBreakpointChange, onCancelEdit, onEditModeOn, onLayoutChange, onPlaceholderWidgetAdd,
   onResetEdit, onSaveEdit, onTabAdd, onTabChange, onTabDelete, onTabRename, onTabMove, onWidgetDrop,
-  onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, widgets
+  onWidgetFullFocus, onWidgetRestoreFocus, onWidgetDelete, onWidgetResize, onWidgetUpdate, rowHeight, widgets
 }: DashboardRenderProps): JSX.Element => (
   <div className={classNames('c-dashboard', currentBreakpoint)}>
     <DashboardControlPanel
@@ -77,8 +80,7 @@ export const DashboardRender = ({
         myWidgets={myWidgets}
         onPlaceholderWidgetAdd={onPlaceholderWidgetAdd}
       />
-    )
-      : null}
+    ) : null}
     <DashboardGrid
       currentTabIndex={currentTabIndex}
       droppingItem={droppingItem}
@@ -99,6 +101,7 @@ export const DashboardRender = ({
       onWidgetRestoreFocus={onWidgetRestoreFocus}
       onWidgetUpdate={onWidgetUpdate}
       labels={labels}
+      rowHeight={rowHeight}
       widgets={widgets}
       myWidgets={myWidgets}
     />
@@ -107,10 +110,10 @@ export const DashboardRender = ({
 
 DashboardRender.propTypes = {
   addMode: PT.bool.isRequired,
-  availableWidgets: PT.array.isRequired,
-  currentBreakpoint: PT.string.isRequired,
+  availableWidgets: PT.oneOf<WidgetTemplates>([]).isRequired,
+  currentBreakpoint: PT.oneOf<Breakpoint>(['sm','md','lg']).isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.object,
+  labels: PT.oneOf<Labels>([]).isRequired,
   layouts: PT.array.isRequired,
   onAddChange: PT.func.isRequired,
   onBreakpointChange: PT.func.isRequired,
@@ -130,6 +133,6 @@ DashboardRender.propTypes = {
   onWidgetUpdate: PT.func.isRequired,
   onWidgetFullFocus: PT.func.isRequired,
   onWidgetRestoreFocus: PT.func.isRequired,
-  widgets: PT.array
+  widgets: PT.oneOf<Widgets>([]).isRequired
 }
 export default DashboardRender

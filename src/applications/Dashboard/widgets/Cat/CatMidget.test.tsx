@@ -1,11 +1,11 @@
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import CatMidget from './CatMidget'
 
 describe('widgets/Cat/CatMidget', () => {
   let wrapper: ReactWrapper
-  const initialMockProps: WidgetComponentProps = {
+  const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     widget: {
       visible: true,

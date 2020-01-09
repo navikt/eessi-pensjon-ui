@@ -1,15 +1,16 @@
-import { Labels, Layout, Widget as IWidget, WidgetFC, WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
+import { Layout, Widget as IWidget, WidgetFC, WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React from 'react'
 import WidgetDelete from 'applications/Dashboard/WidgetDelete'
 import WidgetEdit from 'applications/Dashboard/WidgetEdit'
+import { Labels } from 'types'
 
 export interface WidgetProps {
   labels: Labels;
   layout: Layout;
-  mode: string;
+  mode?: string;
   onResize: (w: number, h: number) => void;
   onUpdate: (w: IWidget) => void;
   onFullFocus: () => void;
@@ -20,7 +21,7 @@ export interface WidgetProps {
   widget: IWidget;
 }
 
-const Widget = (props: WidgetProps): JSX.Element => {
+const Widget: React.FC<WidgetProps> = (props: WidgetProps): JSX.Element => {
   const { labels, mode, myWidgets, widget } = props
   if (mode === 'edit') {
     return <WidgetEdit {...props} />
@@ -30,7 +31,7 @@ const Widget = (props: WidgetProps): JSX.Element => {
     return <WidgetDelete {...props} />
   }
 
-  const FoundWidget = _.find(myWidgets, (it: WidgetFC) => {
+  const FoundWidget: WidgetFC<WidgetProps> = _.find(myWidgets, (it: WidgetFC<WidgetProps>) => {
     return it.properties ? it.properties.type === widget.type : false
   })
 
@@ -38,14 +39,14 @@ const Widget = (props: WidgetProps): JSX.Element => {
     return <FoundWidget {...props} />
   }
 
-  return <div>{Mustache.render(labels.noWidgetForType, { type: widget.type })}</div>
+  return <div>{Mustache.render(labels.noWidgetForType!, { type: widget.type })}</div>
 }
 
 Widget.propTypes = {
-  labels: PT.object,
+  labels: PT.oneOf<Labels>([]).isRequired,
   mode: PT.string,
-  myWidgets: PT.object,
-  widget: PT.object.isRequired
+  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
+  widget: PT.oneOf<IWidget>([]).isRequired
 }
 
 export default Widget

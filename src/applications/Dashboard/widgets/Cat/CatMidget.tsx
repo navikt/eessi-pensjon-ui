@@ -1,10 +1,11 @@
-import { WidgetComponentProps, WidgetFC, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps, WidgetFC, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import ReactResizeDetector from 'react-resize-detector'
+import cat from './cat.jpg'
 import './CatMidget.css'
 
-const CatMidget: WidgetFC = ({ onResize }: WidgetComponentProps): JSX.Element => {
+const CatMidget: WidgetFC<WidgetProps> = ({ onResize }: WidgetProps): JSX.Element => {
   const [mounted, setMounted] = useState<boolean>(false)
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const CatMidget: WidgetFC = ({ onResize }: WidgetComponentProps): JSX.Element =>
         handleHeight
         onResize={onResize}
       />
-      <img alt='cat' src={require('./cat.jpg')} />
+      <img alt='cat midget' src={cat} />
     </div>
   )
 }
@@ -42,7 +43,7 @@ const properties: WidgetTemplate = {
 
 CatMidget.properties = properties
 CatMidget.propTypes = {
-  onResize: PT.func.isRequired
+  onResize: PT.func
 }
 
 export default CatMidget

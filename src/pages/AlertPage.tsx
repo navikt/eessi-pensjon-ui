@@ -9,7 +9,7 @@ import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { State } from 'types'
 import { Checkbox, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import { connect } from '../store'
-import Container from './Container'
+import Container from 'pages/Container'
 
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 

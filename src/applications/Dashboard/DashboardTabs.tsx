@@ -20,9 +20,9 @@ export interface TabLabel {
   label: JSX.Element;
 }
 
-const DashboardTabs = ({
+const DashboardTabs: React.FC<DashboardTabsProps> = ({
   currentTabIndex, editMode, layouts, onTabChange, onTabAdd, onTabRename, onTabMove, onTabDelete
-}: DashboardTabsProps): JSX.Element | null => {
+}: DashboardTabsProps): JSX.Element => {
   const [newTabLabel, setNewTabLabel] = useState<string | undefined>(undefined)
   const [seeNewTab, setSeeNewTab] = useState<boolean>(false)
   const [tabRenameIndex, setTabRenameIndex] = useState<number | undefined>(undefined)
@@ -107,7 +107,7 @@ const DashboardTabs = ({
   }))
 
   if (!editMode && tabs.length <= 1) {
-    return null
+    return <div/>
   }
 
   return (
@@ -160,7 +160,7 @@ const DashboardTabs = ({
 DashboardTabs.propTypes = {
   currentTabIndex: PT.number.isRequired,
   editMode: PT.bool.isRequired,
-  layouts: PT.array.isRequired,
+  layouts: PT.oneOf<LayoutTabs>([]).isRequired,
   onTabAdd: PT.func.isRequired,
   onTabChange: PT.func.isRequired,
   onTabDelete: PT.func.isRequired,

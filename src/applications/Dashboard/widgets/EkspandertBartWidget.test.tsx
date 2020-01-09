@@ -1,12 +1,12 @@
 import labels from 'applications/Dashboard/Dashboard.labels'
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import EkspandertBartWidget from './EkspandertBartWidget'
 
 describe('widgets/EkspandertBartWidget', () => {
   let wrapper: ReactWrapper
-  const initialMockProps: WidgetComponentProps = {
+  const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     onUpdate: jest.fn(),
     labels: labels,

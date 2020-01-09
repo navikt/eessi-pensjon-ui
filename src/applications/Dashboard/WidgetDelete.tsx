@@ -1,4 +1,4 @@
-import { Labels } from 'applications/Dashboard/declarations/Dashboard'
+import { Labels } from 'types'
 import PT from 'prop-types'
 import React from 'react'
 import ReactResizeDetector from 'react-resize-detector'
@@ -12,8 +12,10 @@ export interface WidgetDeleteProps {
   setMode: (s: string) => void;
 }
 
-const WidgetDelete = ({ labels, onResize, onDelete, setMode }: WidgetDeleteProps): JSX.Element => {
-  const onWidgetDeleteClick = (e: React.MouseEvent) => {
+const WidgetDelete: React.FC<WidgetDeleteProps> = ({
+  labels, onResize, onDelete, setMode
+}: WidgetDeleteProps): JSX.Element => {
+  const onWidgetDeleteClick = (e: React.MouseEvent): void => {
     e.stopPropagation()
     e.preventDefault()
     onDelete()
@@ -53,7 +55,7 @@ const WidgetDelete = ({ labels, onResize, onDelete, setMode }: WidgetDeleteProps
 }
 
 WidgetDelete.propTypes = {
-  labels: PT.object,
+  labels: PT.oneOf<Labels>([]).isRequired,
   onResize: PT.func.isRequired,
   onDelete: PT.func.isRequired,
   setMode: PT.func.isRequired

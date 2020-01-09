@@ -1,12 +1,11 @@
 import { WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
+import * as DashboardDefaultWidgets from 'applications/Dashboard/widgets'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import WidgetEditOptions, { WidgetEditOptionsProps } from './WidgetEditOptions'
-import * as DashboardDefaultWidgets from 'applications/Dashboard/widgets'
 
 describe('applications/Dashboard/WidgetEditOptions', () => {
   let wrapper: ReactWrapper
-
   const initialMockProps: WidgetEditOptionsProps = {
     widget: {
       type: 'note',

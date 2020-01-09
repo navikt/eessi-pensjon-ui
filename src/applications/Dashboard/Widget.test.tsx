@@ -4,9 +4,7 @@ import React from 'react'
 import labels from './Dashboard.labels'
 import * as Widgets from './widgets'
 
-jest.mock('./widgets/Links/Links', () => {
-  return () => { return <div className='mock-w-links' /> }
-})
+jest.mock('./widgets/Links/Links', () => (() => (<div className='mock-w-links' />)))
 
 describe('applications/Dashboard/Widget', () => {
   let wrapper: ReactWrapper

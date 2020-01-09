@@ -1,8 +1,9 @@
 import DashboardTabs from 'applications/Dashboard/DashboardTabs'
 import {
-  Breakpoint, DroppingItem,
-  Labels,
-  Layout, LayoutBody,
+  Breakpoint,
+  DroppingItem,
+  Layout,
+  LayoutBody,
   Layouts,
   LayoutTabs,
   Widget,
@@ -15,6 +16,7 @@ import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout'
+import { Labels } from 'types'
 import DashboardConfig from './config/DashboardConfig'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -44,13 +46,13 @@ export interface DashboardGridProps {
   widgets: Widgets
 }
 
-export const DashboardGrid = (props: DashboardGridProps): JSX.Element | null => {
+export const DashboardGrid: React.FC<DashboardGridProps> = (props: DashboardGridProps): JSX.Element => {
   const { currentTabIndex, currentBreakpoint, droppingItem, editMode, labels, layouts, myWidgets } = props
   const { onBreakpointChange, onLayoutChange, onWidgetDrop, onWidgetFullFocus, onWidgetRestoreFocus, onWidgetUpdate } = props
   const { onWidgetResize, onWidgetDelete, onTabAdd, onTabChange, onTabRename, onTabDelete, onTabMove, rowHeight, widgets } = props
 
   if (_.isEmpty(layouts) || _.isNil(currentTabIndex)) {
-    return null
+    return <div/>
   }
 
   return (
@@ -72,7 +74,7 @@ export const DashboardGrid = (props: DashboardGridProps): JSX.Element | null => 
       />
       <ResponsiveReactGridLayout
         {...props}
-        breakpoints={DashboardConfig.breakpoints}
+        breakpoints={DashboardConfig.breakpoints as unknown as {[P: string]: number}}
         droppingItem={droppingItem}
         autoSize
         margin={DashboardConfig.margin}
@@ -119,12 +121,12 @@ export const DashboardGrid = (props: DashboardGridProps): JSX.Element | null => 
 }
 
 DashboardGrid.propTypes = {
-  currentBreakpoint: PT.string.isRequired,
+  currentBreakpoint: PT.oneOf<Breakpoint>(['sm','md','lg']).isRequired,
   currentTabIndex: PT.number.isRequired,
-  droppingItem: PT.object.isRequired,
+  droppingItem: PT.oneOf<DroppingItem>([]).isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.object,
-  layouts: PT.array.isRequired,
+  labels: PT.oneOf<Labels>([]).isRequired,
+  layouts: PT.oneOf<LayoutTabs>([]).isRequired,
   onBreakpointChange: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
   onWidgetUpdate: PT.func.isRequired,
@@ -139,7 +141,7 @@ DashboardGrid.propTypes = {
   onTabRename: PT.func.isRequired,
   onTabMove: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
-  widgets: PT.array.isRequired
+  widgets: PT.oneOf<Widgets>([]).isRequired
 }
 
 DashboardGrid.defaultProps = DashboardConfig

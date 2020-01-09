@@ -25,7 +25,7 @@ export interface CountrySelectProps<T> {
   placeholder?: string;
   sort ?: string;
   type ?: string;
-  value: T | null;
+  value?: T | null;
 }
 
 const CountrySelect: React.FC<CountrySelectProps<Country>> = ({

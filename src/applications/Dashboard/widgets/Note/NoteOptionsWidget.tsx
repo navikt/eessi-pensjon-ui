@@ -1,14 +1,14 @@
-import { Widget, WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import NodeWidget from 'applications/Dashboard/widgets/Note/NoteWidget'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 
-const NoteOptionsWidget = ({ onUpdate, widget }: WidgetComponentProps): JSX.Element => {
-  const [backgroundColor, setBackgroundColor] = useState(widget!.options.backgroundColor)
+const NoteOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: WidgetProps): JSX.Element => {
+  const [backgroundColor, setBackgroundColor] = useState<string>(widget!.options.backgroundColor)
 
-  const chooseColor = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const chooseColor = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const color: string = e.target.value
     const newWidget: Widget = _.cloneDeep(widget!)
     newWidget.options.backgroundColor = color
@@ -38,9 +38,8 @@ const NoteOptionsWidget = ({ onUpdate, widget }: WidgetComponentProps): JSX.Elem
 }
 
 NoteOptionsWidget.propTypes = {
-  layout: PT.object.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.object.isRequired
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default NoteOptionsWidget

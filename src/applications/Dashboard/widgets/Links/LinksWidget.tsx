@@ -1,4 +1,4 @@
-import { Widget, WidgetComponentProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps, WidgetFC, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
@@ -8,15 +8,15 @@ import Links from './Links'
 
 import './LinksWidget.css'
 
-const LinksWidget = ({ onResize, onUpdate, widget }: WidgetComponentProps): JSX.Element => {
-  const onClick = () => {
+const LinksWidget: WidgetFC<WidgetProps> = ({ onResize, onUpdate, widget }: WidgetProps): JSX.Element => {
+  const onClick = (): void => {
     const newWidget: Widget = _.cloneDeep(widget!)
     newWidget.options.collapsed = !newWidget.options.collapsed
     onUpdate!(newWidget)
   }
 
   const _onResize = (w: number, h: number): void => {
-    if (onResize) {
+    if (_.isFunction(onResize)) {
       // give more 70 for the panel header
       onResize(w, h + 70)
     }
@@ -65,7 +65,7 @@ LinksWidget.properties = properties
 LinksWidget.propTypes = {
   onResize: PT.func.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.object.isRequired
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default LinksWidget

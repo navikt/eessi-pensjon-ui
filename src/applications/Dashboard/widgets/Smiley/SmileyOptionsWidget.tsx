@@ -1,4 +1,4 @@
-import { Widget, WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import SmileyWidget from 'applications/Dashboard/widgets/Smiley/SmileyWidget'
 import _ from 'lodash'
 import * as Nav from 'Nav'
@@ -10,8 +10,8 @@ interface Mood {
   value: string
 }
 
-const SmileyOptionsWidget = ({ onUpdate, widget }: WidgetComponentProps) => {
-  const [mood, setMood] = useState(widget!.options.mood)
+const SmileyOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: WidgetProps): JSX.Element => {
+  const [mood, setMood] = useState<string>(widget!.options.mood)
 
   const chooseMood = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newWidget: Widget = _.cloneDeep(widget)
@@ -39,9 +39,8 @@ const SmileyOptionsWidget = ({ onUpdate, widget }: WidgetComponentProps) => {
 }
 
 SmileyOptionsWidget.propTypes = {
-  layout: PT.object.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.object.isRequired
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default SmileyOptionsWidget

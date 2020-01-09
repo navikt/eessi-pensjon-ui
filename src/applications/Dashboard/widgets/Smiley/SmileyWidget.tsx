@@ -1,11 +1,11 @@
-import { WidgetComponentProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import ReactResizeDetector from 'react-resize-detector'
 import SmileyOptionsWidget from './SmileyOptionsWidget'
 import './SmileyWidget.css'
 
-const SmileyWidget = ({ onResize, widget }: WidgetComponentProps) => {
+const SmileyWidget = ({ onResize, widget }: WidgetProps) => {
   const [mounted, setMounted] = useState<boolean>(false)
 
   useEffect(() => {
@@ -63,7 +63,7 @@ SmileyWidget.edit = SmileyOptionsWidget
 
 SmileyWidget.propTypes = {
   onResize: PT.func.isRequired,
-  widget: PT.object.isRequired
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default SmileyWidget

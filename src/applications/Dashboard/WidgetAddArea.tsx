@@ -1,5 +1,4 @@
 import {
-  Labels,
   WidgetMap,
   WidgetPlaceholder,
   Widgets,
@@ -8,6 +7,7 @@ import {
 import PT from 'prop-types'
 import React from 'react'
 import './Widget.css'
+import { Labels } from 'types'
 import WidgetAdd from './WidgetAdd'
 
 export interface WidgetAddAreaProps {
@@ -18,7 +18,7 @@ export interface WidgetAddAreaProps {
   widgets: Widgets;
 }
 
-const WidgetAddArea = ({
+const WidgetAddArea: React.FC<WidgetAddAreaProps> = ({
   availableWidgets, myWidgets, onPlaceholderWidgetAdd, widgets
 }: WidgetAddAreaProps): JSX.Element => (
   <div className='c-d-widgetAddArea'>
@@ -36,10 +36,10 @@ const WidgetAddArea = ({
 
 WidgetAddArea.propTypes = {
   availableWidgets: PT.array.isRequired,
-  labels: PT.object,
-  myWidgets: PT.object,
+  labels: PT.oneOf<Labels>([]).isRequired,
+  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
   onPlaceholderWidgetAdd: PT.func.isRequired,
-  widgets: PT.array.isRequired
+  widgets: PT.oneOf<Widgets>([]).isRequired,
 }
 
 export default WidgetAddArea

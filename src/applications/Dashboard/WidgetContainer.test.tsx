@@ -3,16 +3,13 @@ import React from 'react'
 import WidgetContainer, { WidgetContainerProps } from './WidgetContainer'
 import labels from './Dashboard.labels'
 
-Object.defineProperty(document, 'getElementById', () => {
-  return {
-    offsetWidth: 0,
-    offsetHeight: 0
-  }
-})
+Object.defineProperty(document, 'getElementById', () => ({
+  offsetWidth: 0,
+  offsetHeight: 0
+}))
 
 describe('applications/Dashboard/WidgetContainer', () => {
   let wrapper: ReactWrapper
-
   const initialMockProps: WidgetContainerProps = {
     currentBreakpoint: 'lg',
     editMode: false,

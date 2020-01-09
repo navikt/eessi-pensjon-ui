@@ -1,13 +1,13 @@
-import { WidgetComponentProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetFC, WidgetProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
 import ReactResizeDetector from 'react-resize-detector'
 
-const EkspandertBartWidget = ({ onResize, onUpdate, widget }: WidgetComponentProps) => {
-  const onClick = () => {
-    const newWidget = _.cloneDeep(widget)
+const EkspandertBartWidget: WidgetFC<WidgetProps> = ({ onResize, onUpdate, widget }: WidgetProps): JSX.Element => {
+  const onClick = (): void => {
+    const newWidget: Widget = _.cloneDeep(widget)
     newWidget.options.collapsed = !newWidget.options.collapsed
     if (_.isFunction(onUpdate)) {
       onUpdate(newWidget)
@@ -15,7 +15,7 @@ const EkspandertBartWidget = ({ onResize, onUpdate, widget }: WidgetComponentPro
   }
 
   const _onResize = (w: number, h: number): void => {
-    if (onResize) {
+    if (_.isFunction(onResize)) {
       // give more 50 for the panel header
       onResize(w, h + 60)
     }
@@ -67,7 +67,7 @@ EkspandertBartWidget.propTypes = {
   content: PT.string,
   onResize: PT.func.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.object.isRequired
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default EkspandertBartWidget

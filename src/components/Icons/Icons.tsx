@@ -49,6 +49,7 @@ export const availableIcons: Array<string> = [
 
 export interface IconsProps {
   className ?: string;
+  color ?: string;
   id ?: string;
   kind: string;
   onClick ?: (e: React.MouseEvent) => void;

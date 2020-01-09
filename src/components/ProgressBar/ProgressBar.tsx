@@ -3,10 +3,12 @@ import PT from 'prop-types'
 import classNames from 'classnames'
 import './ProgressBar.css'
 
+export type ProgressBarStatus = 'todo' | 'inprogress' | 'done' | 'error'
+
 export interface ProgressBarProps {
   className?: string;
   now?: number;
-  status?: 'todo' | 'inprogress' | 'done' | 'error';
+  status?: ProgressBarStatus;
   children?: JSX.Element;
 }
 

@@ -24,7 +24,7 @@ export interface MultipleSelectProps<T> {
   onSelect?: (e: ValueType<any>) => void;
   options: Array<T>;
   placeholder?: string;
-  values: Array<T>;
+  values?: Array<T>;
 }
 
 const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({

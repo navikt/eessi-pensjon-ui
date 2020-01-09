@@ -1,7 +1,7 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
 import { State } from 'types'
-import Container from './Container'
+import Container from 'pages/Container'
 import Banner from 'components/Banner/Banner'
 import EESSIPensjonVeileder from 'components/EESSIPensjonVeileder/EESSIPensjonVeileder'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

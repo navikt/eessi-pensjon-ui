@@ -2,15 +2,13 @@ import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import { Links } from './Links'
 
-jest.mock('react-router-dom', () => {
-  return {
-    Link: () => { return <div className='mock-link' /> }
-  }
-})
+jest.mock('react-router-dom', () => ({
+  Link: () => (<div className='mock-link' />)
+}))
 
 describe('widgets/Links/Links', () => {
   let wrapper: ReactWrapper
-  const initialMockProps = {}
+  const initialMockProps: any = {}
 
   beforeEach(() => {
     wrapper = mount(<Links {...initialMockProps} />)

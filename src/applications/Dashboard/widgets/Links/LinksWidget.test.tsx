@@ -1,4 +1,4 @@
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import LinksWidget from './LinksWidget'
@@ -9,8 +9,7 @@ jest.mock('./Links', () => {
 
 describe('widgets/Links/LinksWidget', () => {
   let wrapper: ReactWrapper
-  const initialMockProps: WidgetComponentProps = {
-    labels: {},
+  const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     onUpdate: jest.fn(),
     widget: {
@@ -42,6 +41,7 @@ describe('widgets/Links/LinksWidget', () => {
   })
 
   it('It tries to save state when collapse changes', () => {
+    (initialMockProps.onUpdate as jest.Mock).mockReset()
     wrapper.find('Ekspanderbartpanel button').simulate('click')
     expect(initialMockProps.onUpdate).toHaveBeenCalledWith({
       options: {

@@ -5,14 +5,14 @@ import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import './Modal.css'
 
-interface ModalButton {
+export interface ModalButton {
   onClick?: () => void;
   disabled ?: boolean;
   main?: boolean;
   text: string;
 }
 
-interface ModalContent {
+export interface ModalContent {
   modalTitle?: string;
   modalContent ?: JSX.Element |string;
   modalText ?: string;

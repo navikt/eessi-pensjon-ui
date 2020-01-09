@@ -11,10 +11,12 @@ import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import DnDPage from '../DnDPage/DnDPage'
+import DnDPage from 'applications/PDFEditor/components/DnDPage/DnDPage'
 import './DnDImages.css'
+import { ActionCreators } from 'types'
 
 export interface DnDImagesProps {
+  actions: ActionCreators;
   setRecipes: (r: Recipes) => void;
   dndTarget: RecipeType;
   files: Files;
@@ -88,6 +90,8 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
                         {...props}
                         className={classNames({ 'a-pdf-dndImages-draggable-active': snapshot.isDragging })}
                         file={file}
+                        pageNumber={1}
+                        pageScale={1}
                         action='add'
                       />
                     </div>

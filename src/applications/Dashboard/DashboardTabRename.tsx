@@ -8,7 +8,7 @@ export interface DashboardTabRenameProps {
   handleRejectRenameTab: () => void;
 }
 
-const DashboardTabRename = ({
+const DashboardTabRename: React.FC<DashboardTabRenameProps> = ({
   initialValue, handleAcceptRenameTab, handleRejectRenameTab
 }: DashboardTabRenameProps): JSX.Element => {
   const [tabRenameLabel, setTabRenameLabel] = useState<string>(initialValue)

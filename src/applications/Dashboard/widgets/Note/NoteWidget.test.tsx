@@ -1,4 +1,4 @@
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'
 import React from 'react'
@@ -7,7 +7,7 @@ import NoteWidget from './NoteWidget'
 describe('widgets/Note/NoteWidget', () => {
   let wrapper: ReactWrapper
   let spy: jest.SpyInstance
-  const initialMockProps: WidgetComponentProps = {
+  const initialMockProps: WidgetProps = {
     id: 'mock-id',
     onResize: jest.fn(),
     onUpdate: jest.fn(),

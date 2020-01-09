@@ -1,7 +1,8 @@
 
 export interface RecipeStep {
   name: string;
-  type: 'pickImage' | 'df'
+  type: 'pickImage' | 'pickPage',
+  pageNumber ?: number;
 }
 
 export interface Watermark {

@@ -1,4 +1,4 @@
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import NoteWidget from 'applications/Dashboard/widgets/Note/NoteWidget'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'
@@ -7,7 +7,7 @@ import NoteOptionsWidget from './NoteOptionsWidget'
 
 describe('widgets/Note/NoteOptionsWidget', () => {
   let wrapper: ReactWrapper
-  const initialMockProps: WidgetComponentProps = {
+  const initialMockProps: WidgetProps = {
     onUpdate: jest.fn(),
     widget: {
       ..._.cloneDeep(NoteWidget.properties),

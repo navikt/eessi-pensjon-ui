@@ -1,4 +1,4 @@
-import { Labels } from 'applications/Dashboard/declarations/Dashboard'
+import { Labels } from 'types'
 
 export default {
   loading: 'Laster opp...',

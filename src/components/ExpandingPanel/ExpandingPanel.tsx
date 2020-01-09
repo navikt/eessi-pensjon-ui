@@ -11,7 +11,7 @@ export interface ExpandingPanelProps {
   border?: boolean;
   children : JSX.Element;
   className ?: string;
-  collapseProps: any;
+  collapseProps?: any;
   heading?: JSX.Element | string;
   onClick?: (e: React.MouseEvent) => void;
   open?: boolean;

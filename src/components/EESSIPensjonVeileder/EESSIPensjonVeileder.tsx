@@ -1,8 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import PT from 'prop-types'
-import SmilendeOrangeVeileder from './veileder/NavPensjonSmilendeOrangeVeileder'
-import TristOrangeVeileder from './veileder/NavPensjonTristOrangeVeileder'
+import SmilendeOrangeVeileder from './veileder/navPensjonSmilendeOrangeVeileder.png'
+import TristOrangeVeileder from './veileder/navPensjonTristOrangeVeileder.png'
 
 export type Mood = 'smilende' |'trist'
 
@@ -14,9 +14,12 @@ const EESSIPensjonVeileder: React.FC<EESSIPensjonVeilederProps> = ({
   className, mood = 'smilende'
 }: EESSIPensjonVeilederProps): JSX.Element => (
   <div className={classNames('c-EESSIPensjonVeileder', className)}>
-    {mood === 'trist'
-      ? <TristOrangeVeileder width='130' height='130' />
-      : <SmilendeOrangeVeileder width='130' height='130' />}
+    <img
+      width={130}
+      alt={'nav-' + mood + '-veileder'}
+      height={130}
+      src={mood === 'trist' ? TristOrangeVeileder : SmilendeOrangeVeileder}
+    />
   </div>
 )
 

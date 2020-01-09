@@ -1,20 +1,22 @@
+
+export type Breakpoint = 'lg' | 'md' | 'sm'
+
+export interface BreakpointValues {
+    lg: number;
+    md: number;
+    sm: number;
+};
+
 export interface Config {
-    cols: {
-        lg: number;
-        md: number;
-        sm: number;
-    },
-    breakpoints: {
-        lg: number;
-        md: number;
-        sm: number;
-    },
+    cols: BreakpointValues;
+    breakpoints: BreakpointValues;
     margin: [number, number];
     containerPadding: [number, number];
     rowHeight: number;
     defaultTabIndex: number;
     version: number;
 }
+
 export interface DroppingItem {
   i: string;
   w: number;
@@ -27,21 +29,6 @@ export interface DroppedItem {
   w: number;
   h: number;
 }
-
-export type Labels = {[key: string] : string}
-
-export interface LayoutTemplate {
-    minW: number;
-    maxW: number;
-    defaultW: number;
-    minH: number;
-    defaultH: number;
-    maxH: number;
-}
-
-type Breakpoint = 'lg' | 'md' | 'sm'
-
-export type LayoutTemplates = {[breakpoint in Breakpoint]: LayoutTemplate}
 
 export interface Layout {
     i: string;
@@ -66,15 +53,43 @@ export interface LayoutTab {
 
 export type LayoutTabs = Array<LayoutTab>
 
-export interface WidgetComponentProps {
+export interface LayoutTemplate {
+    minW: number;
+    maxW: number;
+    defaultW: number;
+    minH: number;
+    defaultH: number;
+    maxH: number;
+}
+
+export type LayoutTemplates = {[breakpoint in Breakpoint]: LayoutTemplate}
+
+export interface Size {
+    width?: number;
+    height?: number;
+}
+
+export type Sizes = {[k in Breakpoint]: Size}
+
+export interface Widget {
+    i: string;
+    type: string;
+    title: string;
+    visible: boolean;
+    options: {[prop: string]: any};
+}
+
+export type Widgets = Array<Widget>
+
+export interface WidgetProps {
     id ?: string;
     labels ?: Labels;
     layout ?: Layout;
-    mode?: string;
-    onFullFocus ?:(...args: any[]) => any;
-    onRestoreFocus ?:(...args: any[]) => any;
-    onResize?: (...args: any[]) => any;
-    onUpdate?: (...args: any[]) => any;
+    mode ?: string;
+    onFullFocus ?: () => void;
+    onRestoreFocus ?: () => void;
+    onResize?: (w?: number, h?: number) => void;
+    onUpdate?: (w: Widget) => void;
     widget: Widget;
 }
 
@@ -88,29 +103,15 @@ export interface WidgetTemplate {
 
 export type WidgetTemplates = Array<WidgetTemplate>;
 
-export interface WidgetFC extends Function {
+export interface WidgetFC<T> extends React.FC<T> {
     properties: WidgetTemplate;
     edit?: any;
     propTypes: PropTypes.InferProps;
-}
-
-export interface WidgetEditFC extends Function {
-    edit?: any;
-    propTypes: PropTypes.InferProps;
+    defaultProps?: any;
 }
 
 export type WidgetMap = {[k: string]: WidgetFC};
 
-export interface Widget {
-    i: string;
-    type: string;
-    title: string;
-    visible: boolean;
-    options: {[prop: string]: any};
-}
-
 export interface WidgetPlaceholder extends Widget {
     defaultLayout: {[k in Breakpoint]: LayoutTemplate};
 }
-
-export type Widgets = Array<Widget>

@@ -5,6 +5,7 @@ import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
+import { Labels } from 'types'
 import DashboardConfig from './config/DashboardConfig'
 import * as DashboardAPI from './DashboardAPI'
 import {
@@ -12,32 +13,33 @@ import {
   Config,
   DroppedItem,
   DroppingItem,
-  Labels,
-  Layout, LayoutBody,
+  Layout,
+  LayoutBody,
   Layouts,
   LayoutTab,
   LayoutTabs,
   Widget,
-  WidgetMap, WidgetPlaceholder,
+  WidgetMap,
+  WidgetPlaceholder,
   Widgets,
   WidgetTemplates
 } from './declarations/Dashboard'
 
 export interface DashboardProps {
-  allowedWidgets: Array<string> | undefined;
+  allowedWidgets?: Array<string> | undefined;
   defaultConfig?: Config;
   defaultWidgets?: Widgets;
   defaultLayouts?: LayoutTabs;
-  defaultTabIndex: number;
+  defaultTabIndex?: number;
   extraWidgets ?: WidgetMap;
   id: string;
-  initialBreakpoint: Breakpoint;
-  labels: Labels;
+  initialBreakpoint?: Breakpoint;
+  labels?: Labels;
   afterLayoutChange ?: Function;
 }
 
-const Dashboard = ({
-  afterLayoutChange, allowedWidgets = undefined, defaultConfig, defaultLayouts, defaultTabIndex, defaultWidgets,
+const Dashboard: React.FC<DashboardProps> = ({
+  afterLayoutChange, allowedWidgets = undefined, defaultConfig, defaultLayouts, defaultTabIndex = 0, defaultWidgets,
   extraWidgets, id, initialBreakpoint = 'lg', labels
 }: DashboardProps): JSX.Element => {
   const [addMode, setAddMode] = useState<boolean>(false)
@@ -45,7 +47,7 @@ const Dashboard = ({
   const [backupLayouts, setBackupLayouts] = useState<LayoutTabs>([])
   const [config, setConfig] = useState<Config>({} as Config)
   const [currentBreakpoint, setCurrentBreakpoint] = useState<Breakpoint>(initialBreakpoint)
-  const [currentTabIndex, setCurrentTabIndex] = useState<number>(defaultTabIndex || 0)
+  const [currentTabIndex, setCurrentTabIndex] = useState<number>(defaultTabIndex)
   const [editMode, setEditMode] = useState<boolean>(false)
   const [fullFocusMode, setFullFocusMode] = useState<boolean>(false)
   const [layouts, _setLayouts] = useState<LayoutTabs>([])
@@ -294,15 +296,15 @@ const Dashboard = ({
 
   return (
     <DashboardRender
-      addMode={addMode} availableWidgets={availableWidgets} currentBreakpoint={currentBreakpoint} droppingItem={droppingItem}
-      currentTabIndex={currentTabIndex} editMode={editMode} labels={_labels} layouts={layouts}
-      myWidgets={myWidgets} onEditModeOn={onEditModeOn} onCancelEdit={onCancelEdit} onSaveEdit={onSaveEdit}
-      onPlaceholderWidgetAdd={onPlaceholderWidgetAdd} onResetEdit={onResetEdit}
-      onAddChange={onAddChange} onLayoutChange={onLayoutChange} onBreakpointChange={onBreakpointChange}
-      onWidgetUpdate={onWidgetUpdate} onWidgetResize={onWidgetResize}
+      addMode={addMode} availableWidgets={availableWidgets} currentBreakpoint={currentBreakpoint}
+      currentTabIndex={currentTabIndex} droppingItem={droppingItem} editMode={editMode} labels={_labels}
+      layouts={layouts} myWidgets={myWidgets} onAddChange={onAddChange} onBreakpointChange={onBreakpointChange}
+      onCancelEdit={onCancelEdit} onEditModeOn={onEditModeOn} onLayoutChange={onLayoutChange}
+      onPlaceholderWidgetAdd={onPlaceholderWidgetAdd} onResetEdit={onResetEdit} onSaveEdit={onSaveEdit}
+      onTabAdd={onTabAdd} onTabDelete={onTabDelete} onTabChange={onTabChange} onTabRename={onTabRename}
+      onTabMove={onTabMove} onWidgetUpdate={onWidgetUpdate} onWidgetResize={onWidgetResize}
       onWidgetDelete={onWidgetDelete} onWidgetFullFocus={onWidgetFullFocus} onWidgetDrop={onWidgetDrop}
-      onWidgetRestoreFocus={onWidgetRestoreFocus} onTabAdd={onTabAdd} onTabDelete={onTabDelete}
-      onTabChange={onTabChange} onTabRename={onTabRename} onTabMove={onTabMove} widgets={widgets}
+      onWidgetRestoreFocus={onWidgetRestoreFocus} rowHeight={config.rowHeight} widgets={widgets}
     />
   )
 }
@@ -310,14 +312,14 @@ const Dashboard = ({
 Dashboard.propTypes = {
   afterLayoutChange: PT.func,
   allowedWidgets: PT.array,
-  defaultConfig: PT.object,
-  defaultLayout: PT.array,
+  defaultConfig: PT.oneOf<Config>([]),
+  defaultLayouts: PT.oneOf<LayoutTabs>([]),
   defaultTabIndex: PT.number,
   defaultWidgets: PT.array,
-  extraWidgets: PT.object,
+  extraWidgets: PT.oneOf<WidgetMap>([]),
   id: PT.string.isRequired,
-  initialBreakpoint: PT.string,
-  labels: PT.object
+  initialBreakpoint: PT.oneOf(['lg', 'md', 'sm']),
+  labels: PT.oneOf<Labels>([])
 }
 
 Dashboard.defaultProps = DashboardConfig

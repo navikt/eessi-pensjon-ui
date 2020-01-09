@@ -1,4 +1,4 @@
-import { WidgetComponentProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import SmileyWidget from 'applications/Dashboard/widgets/Smiley/SmileyWidget'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'
@@ -7,7 +7,7 @@ import SmileyOptionsWidget from './SmileyOptionsWidget'
 
 describe('widgets/Smiley/SmileyOptionsWidget', () => {
   let wrapper: ReactWrapper
-  const initialMockProps: WidgetComponentProps = {
+  const initialMockProps: WidgetProps = {
     onUpdate: jest.fn(),
     widget: {
       i: 'w-1-smiley',

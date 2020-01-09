@@ -1,4 +1,4 @@
-import { WidgetComponentProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetFC, WidgetProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
@@ -6,7 +6,7 @@ import ReactResizeDetector from 'react-resize-detector'
 import NoteOptionsWidget from './NoteOptionsWidget'
 import './NoteWidget.css'
 
-const NoteWidget = ({ id, layout, onResize, onUpdate, widget }: WidgetComponentProps) => {
+const NoteWidget: WidgetFC<WidgetProps> = ({ id, layout, onResize, onUpdate, widget }: WidgetProps): JSX.Element => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [content, setContent] = useState<JSX.Element | string>(widget!.options.content)
 
@@ -17,9 +17,9 @@ const NoteWidget = ({ id, layout, onResize, onUpdate, widget }: WidgetComponentP
     }
   }, [mounted, onResize])
 
-  const _id : string = id || 'widget-note-' + (layout !== undefined ? layout.i : '' + new Date().getTime())
+  const _id: string = id || 'widget-note-' + (layout !== undefined ? layout.i : '' + new Date().getTime())
 
-  const resize = () => {
+  const resize = (): void => {
     const el: HTMLElement | null = document.getElementById(_id)
     if (el && _.isFunction(onResize)) {
       onResize(el.offsetWidth, el.offsetHeight)
@@ -83,10 +83,10 @@ NoteWidget.edit = NoteOptionsWidget
 
 NoteWidget.propTypes = {
   id: PT.string,
-  onResize: PT.func.isRequired,
-  widget: PT.object.isRequired,
   layout: PT.object.isRequired,
-  onUpdate: PT.func.isRequired
+  onResize: PT.func.isRequired,
+  onUpdate: PT.func.isRequired,
+  widget: PT.oneOf<Widget>([]).isRequired
 }
 
 export default NoteWidget

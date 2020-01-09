@@ -41,6 +41,7 @@ describe('applications/Dashboard/Dashboard', () => {
     onTabMove: jest.fn(),
     onWidgetFullFocus: jest.fn(),
     onWidgetRestoreFocus: jest.fn(),
+    rowHeight: 30,
     widgets: []
   }
 
