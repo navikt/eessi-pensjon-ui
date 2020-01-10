@@ -3,8 +3,9 @@ import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import labels from './Dashboard.labels'
 import * as Widgets from './widgets'
+import { Widget as IWidget } from 'applications/Dashboard/declarations/Dashboard.d'
 
-jest.mock('./widgets/Links/Links', () => (() => (<div className='mock-w-links' />)))
+jest.mock('./widgets/Links/Links', () => () => (<div className='mock-w-links' />))
 
 describe('applications/Dashboard/Widget', () => {
   let wrapper: ReactWrapper
@@ -27,7 +28,7 @@ describe('applications/Dashboard/Widget', () => {
       options: {
         content: 'mockContent'
       }
-    }
+    } as IWidget
   }
 
   beforeEach(() => {
@@ -54,27 +55,27 @@ describe('applications/Dashboard/Widget', () => {
   })
 
   it('Renders EkspandertbartWidget', () => {
-    wrapper.setProps({ widget: { type: 'ekspandertbart', options: { content: 'mockContent' } } })
+    wrapper.setProps({ widget: { i: 'i', visible: true, type: 'ekspandertbart', title: 'mockTitle', options: { content: 'mockContent' } } })
     expect(wrapper.exists('.w-EkspandertbartWidget')).toBeTruthy()
   })
 
   it('Renders SmileyWidget', () => {
-    wrapper.setProps({ widget: { type: 'smiley', options: { mood: 'mockMood' } } })
+    wrapper.setProps({ widget: { i: 'i', visible: true, title: 'Smiley', type: 'smiley', options: { mood: 'mockMood' } } })
     expect(wrapper.exists('.w-SmileyWidget')).toBeTruthy()
   })
 
   it('Renders CatMidget', () => {
-    wrapper.setProps({ widget: { type: 'cat' } })
+    wrapper.setProps({ widget: { i: 'i', visible: true, title: 'Cat', type: 'cat', options: {} } })
     expect(wrapper.exists('.w-catMidget')).toBeTruthy()
   })
 
   it('Renders NoteWidget', () => {
-    wrapper.setProps({ widget: { type: 'note', options: { content: 'mockContent' } } })
+    wrapper.setProps({ widget: { i: 'i', visible: true, title: 'Note', type: 'note', options: { content: 'mockContent' } } })
     expect(wrapper.exists('.w-NoteWidget')).toBeTruthy()
   })
 
   it('Renders LinksWidget', () => {
-    wrapper.setProps({ widget: { type: 'links', options: { collapsed: false } } })
+    wrapper.setProps({ widget: { i: 'i', visible: true, title: 'Links', type: 'links', options: { collapsed: false } } })
     expect(wrapper.exists('.w-LinksWidget')).toBeTruthy()
   })
 })

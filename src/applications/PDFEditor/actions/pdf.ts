@@ -1,9 +1,10 @@
 import * as api from 'actions/api'
-import { Files, GeneratePayload, Recipes, Separator, Watermark } from 'applications/PDFEditor/declarations/PDFEditor'
+import { GeneratePayload, Recipes, Separator, Watermark } from 'applications/PDFEditor/declarations/PDFEditor'
+import { IFile } from 'components/File/File'
 import * as types from '../constants/actionTypes'
 import * as urls from '../constants/urls'
 
-export const selectPDF = (files: Files) => {
+export const selectPDF = (files: Array<IFile>) => {
   return {
     type: types.PDF_SELECTED,
     payload: files

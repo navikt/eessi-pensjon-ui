@@ -7,12 +7,26 @@ describe('CountryOption Rendering', () => {
   const currencySelectProps = { selectProps: { type: 'currency' } }
   let wrapper: ReactWrapper
 
-  // @ts-ignore
   const initialMockProps: CountryOptionProps = {
     label: 'mockLabel',
     selectProps: {
       selectProps: {}
     },
+    clearValue: jest.fn(),
+    getValue: jest.fn(),
+    hasValue: false,
+    isMulti: false,
+    setValue: jest.fn(),
+    selectOption: jest.fn(),
+    innerRef: null,
+    options: [],
+    isDisabled: false,
+    cx: jest.fn(),
+    children: undefined,
+    innerProps: {
+      onClick: jest.fn()
+    } as any,
+    type: 'option',
     data: {
       label: 'mockLabel',
       value: 'mockValue',

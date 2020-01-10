@@ -1,5 +1,6 @@
 import * as api from 'actions/api'
-import { Files, GeneratePayload, Recipes } from 'applications/PDFEditor/declarations/PDFEditor'
+import { GeneratePayload, Recipes } from 'applications/PDFEditor/declarations/PDFEditor.d'
+import { IFile } from 'components/File/File'
 import * as types from '../constants/actionTypes'
 import * as urls from '../constants/urls'
 import * as pdfActions from './pdf'
@@ -17,7 +18,7 @@ describe('actions/pdf', () => {
   })
 
   it('selectPDF()', () => {
-    const mockFiles: Files = []
+    const mockFiles: Array<IFile> = []
     const generatedResult = pdfActions.selectPDF(mockFiles)
     expect(generatedResult).toMatchObject({
       type: types.PDF_SELECTED,

@@ -29,6 +29,12 @@ describe('components/Alert/Alert', () => {
     expect(wrapper.render().text()).toEqual('mockErrorMessage')
   })
 
+  it('Has proper HTML structure with error message', () => {
+    wrapper = mount(<Alert {...initialMockProps} type='client' error={{ message: 'mockError' }} />)
+    expect(wrapper.exists('.c-alert__type-client')).toBeTruthy()
+    expect(wrapper.render().text()).toEqual('mockErrorMessage: mockError')
+  })
+
   it('Has proper HTML structure as client in OK type', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' />)
     expect(wrapper.render().hasClass('alertstripe--suksess')).toBeTruthy()

@@ -1,3 +1,4 @@
+import { LayoutTabs } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import { DashboardGrid, DashboardGridProps } from './DashboardGrid'
@@ -13,7 +14,7 @@ describe('applications/Dashboard/DashboardGrid', () => {
     layouts: [{
       label: 'default',
       body: { lg: [], md: [], sm: [] }
-    }],
+    }] as LayoutTabs,
     myWidgets: {},
     onBreakpointChange: jest.fn(),
     onLayoutChange: jest.fn(),

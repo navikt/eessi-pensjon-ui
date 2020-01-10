@@ -1,22 +1,26 @@
 import DashboardTabs from 'applications/Dashboard/DashboardTabs'
 import {
   Breakpoint,
+  BreakpointPropType,
   DroppingItem,
+  DroppingItemPropType,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTabs,
+  LayoutTabsPropType,
   Widget,
   WidgetMap,
-  Widgets
-} from 'applications/Dashboard/declarations/Dashboard'
+  Widgets,
+  WidgetsPropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import WidgetContainer from 'applications/Dashboard/WidgetContainer'
 import classNames from 'classnames'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
-import { Responsive, WidthProvider } from 'react-grid-layout'
-import { Labels } from 'types'
+import { Responsive, WidthProvider, Layout as ILayout, Layouts as ILayouts } from 'react-grid-layout'
+import { Labels, LabelsPropType } from 'types.d'
 import DashboardConfig from './config/DashboardConfig'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -52,7 +56,7 @@ export const DashboardGrid: React.FC<DashboardGridProps> = (props: DashboardGrid
   const { onWidgetResize, onWidgetDelete, onTabAdd, onTabChange, onTabRename, onTabDelete, onTabMove, rowHeight, widgets } = props
 
   if (_.isEmpty(layouts) || _.isNil(currentTabIndex)) {
-    return <div/>
+    return <div />
   }
 
   return (
@@ -77,21 +81,18 @@ export const DashboardGrid: React.FC<DashboardGridProps> = (props: DashboardGrid
         breakpoints={DashboardConfig.breakpoints as unknown as {[P: string]: number}}
         droppingItem={droppingItem}
         autoSize
-        margin={DashboardConfig.margin}
-        containerPadding={DashboardConfig.containerPadding}
+        margin={DashboardConfig.margin as [number, number]}
+        containerPadding={DashboardConfig.containerPadding as [number, number]}
         isDraggable={editMode}
         isResizable={editMode}
-        layouts={layouts[currentTabIndex].body || {}}
+        layouts={layouts[currentTabIndex].body as unknown as ILayouts}
         onBreakpointChange={onBreakpointChange}
-        onLayoutChange={onLayoutChange}
+        onLayoutChange={onLayoutChange as unknown as (currentLayout: ILayout[], allLayouts: ILayouts) => void}
         measureBeforeMount
         useCSSTransforms
         preventCollision={false}
         isDroppable
         onDrop={onWidgetDrop}
-        /* onDragStart={((layout, oldItem, newItem, placeholder, event, element) => {
-          console.log(layout, oldItem, newItem, placeholder, event, element)
-        })} */
         draggableHandle='.draggableHandle'
       >
         {_.map(layouts[currentTabIndex].body[currentBreakpoint], (layout) => {
@@ -121,12 +122,12 @@ export const DashboardGrid: React.FC<DashboardGridProps> = (props: DashboardGrid
 }
 
 DashboardGrid.propTypes = {
-  currentBreakpoint: PT.oneOf<Breakpoint>(['sm','md','lg']).isRequired,
+  currentBreakpoint: BreakpointPropType.isRequired,
   currentTabIndex: PT.number.isRequired,
-  droppingItem: PT.oneOf<DroppingItem>([]).isRequired,
+  droppingItem: DroppingItemPropType.isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.oneOf<Labels>([]).isRequired,
-  layouts: PT.oneOf<LayoutTabs>([]).isRequired,
+  labels: LabelsPropType.isRequired,
+  layouts: LayoutTabsPropType.isRequired,
   onBreakpointChange: PT.func.isRequired,
   onLayoutChange: PT.func.isRequired,
   onWidgetUpdate: PT.func.isRequired,
@@ -141,7 +142,7 @@ DashboardGrid.propTypes = {
   onTabRename: PT.func.isRequired,
   onTabMove: PT.func.isRequired,
   rowHeight: PT.number.isRequired,
-  widgets: PT.oneOf<Widgets>([]).isRequired
+  widgets: WidgetsPropType.isRequired
 }
 
 DashboardGrid.defaultProps = DashboardConfig

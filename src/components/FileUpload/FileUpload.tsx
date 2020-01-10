@@ -3,19 +3,15 @@
 import bytes from 'bytes'
 import classNames from 'classnames'
 import defaultLabels from 'components/FileUpload/FileUpload.labels'
+import Modal, { ModalContent } from 'components/Modal/Modal'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Labels } from 'types'
+import { Labels } from 'types.d'
 import FileFC, { IFile, IFiles } from '../File/File'
-import Modal from 'components/Modal/Modal'
 import './FileUpload.css'
-
-interface Modal {
-  modalContent: JSX.Element;
-}
 
 interface Status {
   type?: string;
@@ -43,7 +39,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     id: file.id || file.name + ' ' + new Date().getTime()
   })))
   const [_status, setStatus] = useState<Status>({})
-  const [modal, setModal] = useState<Modal | undefined>(undefined)
+  const [modal, setModal] = useState<ModalContent | undefined>(undefined)
   const _labels: Labels = { ...defaultLabels, ...labels }
 
   const closePreview = (): void => {
@@ -217,7 +213,17 @@ FileUpload.propTypes = {
   afterFileDrop: PT.func,
   beforeFileDrop: PT.func,
   className: PT.string,
-  files: PT.oneOf<IFiles>([]).isRequired,
+  files: PT.arrayOf(PT.shape({
+    id: PT.string,
+    size: PT.number.isRequired,
+    name: PT.string.isRequired,
+    numPages: PT.number,
+    mimetype: PT.string.isRequired,
+    content: PT.shape({
+      text: PT.string,
+      base64: PT.string
+    }).isRequired
+  }).isRequired).isRequired,
   labels: PT.object.isRequired,
   maxFiles: PT.number,
   maxFileSize: PT.number,

@@ -8,7 +8,17 @@ import './DatePicker.css'
 
 type DateElement = 'day' |'month' | 'year'
 type Labels = {[K in DateElement]?: string}
+const LabelsPropType = PT.shape({
+  day: PT.string,
+  month: PT.string,
+  year: PT.string
+})
 type DateValues = {[K in DateElement]?: string}
+const DateValuesPropType = PT.shape({
+  day: PT.string,
+  month: PT.string,
+  year: PT.string
+})
 type DateError = {[K in DateElement]?: boolean}
 
 const defaultLabels: Labels = { day: 'Dag', month: 'Måned', year: 'År' }
@@ -76,9 +86,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
     if (isNaN(yearInteger)) {
       yearInteger = 0
     }
+
     if (!moment({ year: (yearInteger || 0), month: (monthInteger || 0), day: parseInt(day, 10) }).isValid()) {
       return { day: true } as DateError
     }
+
     return undefined
   }
 
@@ -207,13 +219,13 @@ DatePicker.propTypes = {
   className: PT.string,
   disabled: PT.bool,
   error: PT.string,
-  ids: PT.oneOf<Labels>([]),
-  initialValues: PT.oneOf<DateValues>([]),
-  labels: PT.oneOf<Labels>([]),
+  ids: LabelsPropType,
+  initialValues: DateValuesPropType,
+  labels: LabelsPropType,
   onBlur: PT.func,
   onFocus: PT.func,
   onChange: PT.func,
-  placeholders: PT.oneOf<Labels>([])
+  placeholders: LabelsPropType
 }
 DatePicker.displayName = 'DatePicker'
 export default DatePicker

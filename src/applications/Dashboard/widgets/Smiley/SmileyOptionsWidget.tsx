@@ -1,4 +1,4 @@
-import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps, WidgetPropType } from 'applications/Dashboard/declarations/Dashboard.d'
 import SmileyWidget from 'applications/Dashboard/widgets/Smiley/SmileyWidget'
 import _ from 'lodash'
 import * as Nav from 'Nav'
@@ -40,7 +40,7 @@ const SmileyOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: Widget
 
 SmileyOptionsWidget.propTypes = {
   onUpdate: PT.func.isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  widget: WidgetPropType.isRequired
 }
 
 export default SmileyOptionsWidget

@@ -1,4 +1,4 @@
-import { Labels } from 'types'
+import { Labels } from 'types.d'
 
 export default {
   loading: 'Laster opp...',

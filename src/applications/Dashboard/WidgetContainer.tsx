@@ -1,15 +1,15 @@
 import {
-  Breakpoint,
-  Layout,
+  Breakpoint, BreakpointPropType,
+  Layout, LayoutPropType,
   Size,
   Sizes,
   Widget as IWidget,
-  WidgetMap
-} from 'applications/Dashboard/declarations/Dashboard'
+  WidgetMap, WidgetPropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import Widget from './Widget'
 import './Widget.css'
 
@@ -32,7 +32,6 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   currentBreakpoint, editMode, labels, layout, myWidgets, onWidgetDelete, onWidgetUpdate, onWidgetResize,
   onWidgetFullFocus, onWidgetRestoreFocus, rowHeight, widget
 }: WidgetContainerProps): JSX.Element => {
-
   const [sizes, setSizes] = useState<Sizes>({ lg: {}, md: {}, sm: {} })
   const [mouseOver, setMouseOver] = useState<boolean>(false)
   const [mounted, setMounted] = useState<boolean>(false)
@@ -120,7 +119,7 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   }
 
   if (!widget) {
-    return <div/>
+    return <div />
   }
 
   let backgroundColor: string = widget.options.backgroundColor || 'transparent'
@@ -152,17 +151,17 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
 }
 
 WidgetContainer.propTypes = {
-  currentBreakpoint: PT.oneOf<Breakpoint>(['sm','md','lg']).isRequired,
+  currentBreakpoint: BreakpointPropType.isRequired,
   editMode: PT.bool.isRequired,
-  layout: PT.oneOf<Layout>([]).isRequired,
-  labels: PT.oneOf<Labels>([]).isRequired,
+  layout: LayoutPropType.isRequired,
+  labels: LabelsPropType.isRequired,
   onWidgetUpdate: PT.func,
   onWidgetDelete: PT.func,
   onWidgetResize: PT.func,
   onWidgetFullFocus: PT.func,
   onWidgetRestoreFocus: PT.func,
   rowHeight: PT.number.isRequired,
-  widget: PT.oneOf<IWidget>([]).isRequired
+  widget: WidgetPropType.isRequired
 }
 
 export default WidgetContainer

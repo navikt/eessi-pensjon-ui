@@ -44,10 +44,11 @@ describe('widgets/Links/LinksWidget', () => {
     (initialMockProps.onUpdate as jest.Mock).mockReset()
     wrapper.find('Ekspanderbartpanel button').simulate('click')
     expect(initialMockProps.onUpdate).toHaveBeenCalledWith({
+      ...initialMockProps.widget,
       options: {
+        ...initialMockProps.widget.options,
         collapsed: true
-      },
-      title: 'mockTitle'
+      }
     })
   })
 

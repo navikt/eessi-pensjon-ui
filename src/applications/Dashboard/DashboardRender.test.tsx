@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import DashboardRender, { DashboardRenderProps } from './DashboardRender'
 import labels from './Dashboard.labels'
-
+jest.mock('components/Icons/Icons', () => () => (<div className='mock-icons' />))
 jest.mock('./Widget', () => {
   return () => { return <div className='mock-c-d-widget' /> }
 })
@@ -49,12 +49,6 @@ describe('applications/Dashboard/Dashboard', () => {
     wrapper = mount(<DashboardRender {...initialMockProps} />)
     expect(wrapper.isEmptyRender()).toBeFalsy()
     expect(wrapper).toMatchSnapshot()
-    wrapper.unmount()
-  })
-
-  it('Has proper HTML structure: loading', () => {
-    wrapper = mount(<DashboardRender {...initialMockProps} />)
-    expect(wrapper.exists('div.c-dashboardrender__loading')).toBeTruthy()
     wrapper.unmount()
   })
 

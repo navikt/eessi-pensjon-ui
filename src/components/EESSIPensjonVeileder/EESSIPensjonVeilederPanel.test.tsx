@@ -14,16 +14,9 @@ describe('EESSIPensjonVeilederPanel Rendering', () => {
     wrapper = mount(
       <EESSIPensjonVeilederPanel {...initialMockProps}>
         <div id='1' />
-        <div id='2' />
-        <div id='3' />
-        <div id='4' />
       </EESSIPensjonVeilederPanel>)
-    expect(wrapper.find('Veilederpanel').children().length).toEqual(4)
+    expect(wrapper.find('Veilederpanel').children().length).toEqual(1)
     expect(wrapper.exists('div[id="1"]')).toBeTruthy()
-    expect(wrapper.exists('div[id="2"]')).toBeTruthy()
-    expect(wrapper.exists('div[id="3"]')).toBeTruthy()
-    expect(wrapper.exists('div[id="4"]')).toBeTruthy()
-    expect(wrapper.exists('div[id="5"]')).toBeFalsy()
   })
 
   it('Render closeButton', () => {

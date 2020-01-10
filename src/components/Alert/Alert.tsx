@@ -78,8 +78,8 @@ export const Alert: React.FC<AlertProps> = ({
     return null
   }
 
-  if (error) {
-    _message += ': ' + printError(error)
+  if (!_.isEmpty(error)) {
+    _message += ': ' + printError(error!)
   }
 
   const _fixed: boolean = _.isNil(fixed) ? type === 'client' : fixed

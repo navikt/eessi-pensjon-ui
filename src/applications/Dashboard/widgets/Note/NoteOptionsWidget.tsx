@@ -1,4 +1,4 @@
-import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps, WidgetPropType } from 'applications/Dashboard/declarations/Dashboard.d'
 import NodeWidget from 'applications/Dashboard/widgets/Note/NoteWidget'
 import _ from 'lodash'
 import * as Nav from 'Nav'
@@ -38,8 +38,8 @@ const NoteOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: WidgetPr
 }
 
 NoteOptionsWidget.propTypes = {
-  onUpdate: PT.func.isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  onUpdate: PT.func,
+  widget: WidgetPropType.isRequired
 }
 
 export default NoteOptionsWidget

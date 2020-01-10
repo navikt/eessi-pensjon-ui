@@ -2,9 +2,9 @@ import {
   LayoutTemplates, WidgetFC,
   WidgetMap,
   WidgetPlaceholder,
-  Widgets,
-  WidgetTemplate
-} from 'applications/Dashboard/declarations/Dashboard'
+  WidgetTemplate,
+  WidgetTemplatePropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import { WidgetContainerProps } from 'applications/Dashboard/WidgetContainer'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -15,7 +15,6 @@ import './Widget.css'
 export interface WidgetAddProps {
   myWidgets: WidgetMap;
   onPlaceholderWidgetAdd: (w: WidgetPlaceholder) => void;
-  widgets: Widgets;
   widgetTemplate: WidgetTemplate;
 }
 
@@ -24,11 +23,11 @@ export const WidgetAdd: React.FC<WidgetAddProps> = ({
 }: WidgetAddProps): JSX.Element => {
   const [mouseOver, setMouseOver] = useState<boolean>(false)
 
-  const FoundWidget: WidgetFC<WidgetContainerProps> = _.find(myWidgets, (it) => {
+  const FoundWidget: WidgetFC<WidgetContainerProps> = _.find(_.values(myWidgets), (it) => {
     return it.properties ? it.properties.type === widgetTemplate.type : false
   })
   if (!FoundWidget) {
-    return <div/>
+    return <div />
   }
 
   return (
@@ -66,9 +65,9 @@ export const WidgetAdd: React.FC<WidgetAddProps> = ({
 }
 
 WidgetAdd.propTypes = {
-  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
+  myWidgets: PT.object.isRequired,
   onPlaceholderWidgetAdd: PT.func.isRequired,
-  widgetTemplate: PT.oneOf<WidgetTemplate>([]).isRequired
+  widgetTemplate: WidgetTemplatePropType.isRequired
 }
 
 export default WidgetAdd

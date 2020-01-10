@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types'
+import { State } from 'types.d'
 import Container from './Container'
 import EESSIPensjonVeileder from 'components/EESSIPensjonVeileder/EESSIPensjonVeileder'
 import EESSIPensjonVeilederPanel from 'components/EESSIPensjonVeileder/EESSIPensjonVeilederPanel'

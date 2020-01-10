@@ -1,13 +1,13 @@
 import {
   WidgetMap,
+  WidgetMapPropType,
   WidgetPlaceholder,
-  Widgets,
   WidgetTemplates
-} from 'applications/Dashboard/declarations/Dashboard'
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import PT from 'prop-types'
 import React from 'react'
+import { Labels, LabelsPropType } from 'types.d'
 import './Widget.css'
-import { Labels } from 'types'
 import WidgetAdd from './WidgetAdd'
 
 export interface WidgetAddAreaProps {
@@ -15,18 +15,16 @@ export interface WidgetAddAreaProps {
   labels: Labels;
   myWidgets: WidgetMap;
   onPlaceholderWidgetAdd: (w: WidgetPlaceholder) => void;
-  widgets: Widgets;
 }
 
 const WidgetAddArea: React.FC<WidgetAddAreaProps> = ({
-  availableWidgets, myWidgets, onPlaceholderWidgetAdd, widgets
+  availableWidgets, myWidgets, onPlaceholderWidgetAdd
 }: WidgetAddAreaProps): JSX.Element => (
   <div className='c-d-widgetAddArea'>
     {availableWidgets.map((widgetTemplate, i) => (
       <WidgetAdd
         key={i}
         myWidgets={myWidgets}
-        widgets={widgets}
         widgetTemplate={widgetTemplate}
         onPlaceholderWidgetAdd={onPlaceholderWidgetAdd}
       />
@@ -36,10 +34,9 @@ const WidgetAddArea: React.FC<WidgetAddAreaProps> = ({
 
 WidgetAddArea.propTypes = {
   availableWidgets: PT.array.isRequired,
-  labels: PT.oneOf<Labels>([]).isRequired,
-  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
-  onPlaceholderWidgetAdd: PT.func.isRequired,
-  widgets: PT.oneOf<Widgets>([]).isRequired,
+  labels: LabelsPropType.isRequired,
+  myWidgets: WidgetMapPropType.isRequired,
+  onPlaceholderWidgetAdd: PT.func.isRequired
 }
 
 export default WidgetAddArea

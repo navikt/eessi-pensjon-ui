@@ -53,8 +53,7 @@ describe('widgets/Note/NoteWidget', () => {
         ...initialMockProps.widget!.options,
         content: '<ul><li>Eggs</li><li>Milk</li><li>Bread</li></ul>'
       }
-    },
-    initialMockProps.layout)
+    })
   })
 
   it('Has properties', () => {

@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'types'
+import { State } from 'types.d'
 import Container from './Container'
 import Flag from 'components/Flag/Flag'
 import FlagList from 'components/Flag/FlagList'

@@ -1,8 +1,8 @@
-import { LayoutTabs } from 'applications/Dashboard/declarations/Dashboard'
+import { LayoutTabs, LayoutTabsPropType } from 'applications/Dashboard/declarations/Dashboard.d'
 import Icons from 'components/Icons/Icons'
+import { Input, Knapp, Tabs } from 'Nav'
 import PT from 'prop-types'
 import React, { useState } from 'react'
-import { Input, Knapp, Tabs } from 'Nav'
 import DashboardTabRename from './DashboardTabRename'
 
 export interface DashboardTabsProps {
@@ -107,7 +107,7 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({
   }))
 
   if (!editMode && tabs.length <= 1) {
-    return <div/>
+    return <div />
   }
 
   return (
@@ -160,7 +160,7 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({
 DashboardTabs.propTypes = {
   currentTabIndex: PT.number.isRequired,
   editMode: PT.bool.isRequired,
-  layouts: PT.oneOf<LayoutTabs>([]).isRequired,
+  layouts: LayoutTabsPropType.isRequired,
   onTabAdd: PT.func.isRequired,
   onTabChange: PT.func.isRequired,
   onTabDelete: PT.func.isRequired,

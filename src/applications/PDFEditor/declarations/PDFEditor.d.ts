@@ -1,9 +1,16 @@
+import PT from 'prop-types'
 
 export interface RecipeStep {
   name: string;
   type: 'pickImage' | 'pickPage',
   pageNumber ?: number;
 }
+
+export const RecipeStepPropType = PT.shape({
+  name: PT.string.isRequired,
+  type: PT.oneOf(['pickImage', 'pickPage']),
+  pageNumber: PT.number
+})
 
 export interface Watermark {
 
@@ -21,19 +28,12 @@ export interface GeneratePayload {
 
 export type RecipeType = 'work' | 'home' | 'sick' | 'other'
 
+export const RecipeTypePropType = PT.oneOf<RecipeType>(['work', 'home', 'sick', 'other'])
+
 export type RecipeSteps = Array<RecipeStep>
+
+export const RecipeStepsPropType = PT.arrayOf(RecipeStepPropType.isRequired)
 
 export type Recipes = {[k in RecipeType]?: RecipeSteps}
 
-export interface File {
-  name: string;
-  size: number;
-  mimetype: string;
-  content: {
-    base64: string;
-  }
-}
-
-export type Labels = {[key: string] : string}
-
-export type Files = Array<File>
+export const RecipesPropType = PT.object

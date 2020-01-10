@@ -5,7 +5,6 @@ import { WidgetAdd, WidgetAddProps } from './WidgetAdd'
 describe('applications/Dashboard/WidgetAdd', () => {
   let wrapper: ReactWrapper
   const initialMockProps: WidgetAddProps = {
-    widgets: [],
     widgetTemplate: {
       title: 'mockTitle',
       description: 'mockDescription',
@@ -17,7 +16,21 @@ describe('applications/Dashboard/WidgetAdd', () => {
         sm: { minW: 0, maxW: 0, defaultW: 0, minH: 0, defaultH: 0, maxH: 0 }
       }
     },
-    myWidgets: {},
+    myWidgets: {
+      mockWidget: {
+        properties: {
+          title: 'mockTitle',
+          description: 'mockDescription',
+          type: 'foo',
+          options: {},
+          layout: {
+            lg: { minW: 0, maxW: 0, defaultW: 0, minH: 0, defaultH: 0, maxH: 0 },
+            md: { minW: 0, maxW: 0, defaultW: 0, minH: 0, defaultH: 0, maxH: 0 },
+            sm: { minW: 0, maxW: 0, defaultW: 0, minH: 0, defaultH: 0, maxH: 0 }
+          }
+        }
+      }
+    },
     onPlaceholderWidgetAdd: jest.fn()
   }
 

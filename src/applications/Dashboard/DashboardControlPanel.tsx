@@ -1,7 +1,7 @@
 import Icons from 'components/Icons/Icons'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import DashboardConfig from './config/DashboardConfig'
 
 export interface DashboardControlPanelProps {
@@ -86,7 +86,7 @@ const DashboardControlPanel: React.FC<DashboardControlPanelProps> = ({
 DashboardControlPanel.propTypes = {
   addMode: PT.bool.isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.oneOf<Labels>([]).isRequired,
+  labels: LabelsPropType.isRequired,
   onAddChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
   onEditModeOn: PT.func.isRequired,

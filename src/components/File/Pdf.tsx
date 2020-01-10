@@ -1,9 +1,9 @@
-import { FileProps, IFile } from 'components/File/File'
-import React from 'react'
-import PT from 'prop-types'
-import _ from 'lodash'
-import { Document, Page } from 'react-pdf'
 import classNames from 'classnames'
+import { FileProps } from 'components/File/File'
+import _ from 'lodash'
+import PT from 'prop-types'
+import React from 'react'
+import { Document, Page } from 'react-pdf'
 import './Pdf.css'
 
 export const Pdf: React.FC<FileProps> = ({
@@ -36,7 +36,17 @@ export const Pdf: React.FC<FileProps> = ({
 Pdf.propTypes = {
   className: PT.string,
   currentPage: PT.number,
-  file: PT.oneOf<IFile>([]).isRequired,
+  file: PT.shape({
+    id: PT.string,
+    size: PT.number.isRequired,
+    name: PT.string.isRequired,
+    numPages: PT.number,
+    mimetype: PT.string.isRequired,
+    content: PT.shape({
+      text: PT.string,
+      base64: PT.string
+    }).isRequired
+  }).isRequired,
   height: PT.number,
   labels: PT.object.isRequired,
   numberPages: PT.number,

@@ -3,7 +3,7 @@ import React from 'react'
 import labels from './Dashboard.labels'
 import WidgetAddArea, { WidgetAddAreaProps } from './WidgetAddArea'
 
-jest.mock('./WidgetAdd', () => (() => (<div className='mock-widgetadd' />)))
+jest.mock('./WidgetAdd', () => () => (<div className='mock-widgetadd' />))
 
 describe('applications/Dashboard/WidgetAddArea', () => {
   let wrapper: ReactWrapper
@@ -11,8 +11,7 @@ describe('applications/Dashboard/WidgetAddArea', () => {
     availableWidgets: [],
     labels: labels,
     onPlaceholderWidgetAdd: jest.fn(),
-    myWidgets: {},
-    widgets: []
+    myWidgets: {}
   }
 
   beforeEach(() => {

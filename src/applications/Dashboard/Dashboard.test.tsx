@@ -1,7 +1,7 @@
 import mockLayouts from 'applications/Dashboard/config/DefaultLayouts'
 import labels from 'applications/Dashboard/Dashboard.labels'
 import DashboardRender from 'applications/Dashboard/DashboardRender'
-import { Breakpoint, Layout, Layouts, LayoutTabs } from 'applications/Dashboard/declarations/Dashboard'
+import { Breakpoint, Layout } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'
 import React from 'react'
@@ -79,14 +79,20 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    const changedLayout: Layouts = [{ i: 'i', x: 0, y: 0, minW: 0, minH: 0, maxW: 0, maxH: 0, h: 0, w: 0 }]
+
     act(() => {
-      wrapper.find(DashboardRender).props().onLayoutChange(changedLayout, (mockLayouts as LayoutTabs)[0].body)
+      wrapper.find(DashboardRender).props().onLayoutChange([], {
+        lg: [{
+          i: 'i'
+        } as Layout],
+        md: [],
+        sm: []
+      })
     })
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find(DashboardRender).props().layouts[0].body).toEqual(changedLayout)
+    expect(wrapper.find(DashboardRender).props().layouts[0].body).toEqual({ lg: [{ i: 'i' }], md: [], sm: [] })
   })
 
   it('onBreakpointChange', () => {
@@ -99,7 +105,7 @@ describe('applications/Dashboard/Dashboard', () => {
     act(() => {
       wrapper.update()
     })
-    expect(wrapper.find(DashboardRender).props().currentBreakpoint).toEqual('mockBreakpointValue')
+    expect(wrapper.find(DashboardRender).props().currentBreakpoint).toEqual('sm')
   })
 
   it('onEditModeOn', () => {
@@ -135,13 +141,13 @@ describe('applications/Dashboard/Dashboard', () => {
     })
     expect(props().editMode).toEqual(true)
     act(() => {
-      props().onLayoutChange([], (mockLayouts as LayoutTabs)[0].body)
+      props().onLayoutChange([], { lg: [], md: [], sm: [] })
     })
 
     act(() => {
       wrapper.update()
     })
-    expect(props().layouts).toEqual([{ label: 'default', body: { lg: [] } }])
+    expect(props().layouts).toEqual([{ label: 'default', body: { lg: [], md: [], sm: [] } }])
     act(() => {
       props().onCancelEdit()
     })
@@ -175,16 +181,24 @@ describe('applications/Dashboard/Dashboard', () => {
       wrapper.update()
     })
     expect(props().editMode).toEqual(true)
+
+    const newLayouts = {
+      lg: mockLayouts[0].body.lg.filter(l => l.i !== 'w-1-note'),
+      md: mockLayouts[0].body.md.filter(l => l.i !== 'w-1-note'),
+      sm: mockLayouts[0].body.sm.filter(l => l.i !== 'w-1-note')
+    }
+    const newWidgets = mockWidgets.filter(l => l.i !== 'w-1-note')
     act(() => {
-      props().onLayoutChange([], (mockLayouts as LayoutTabs)[0].body)
+      props().onLayoutChange([], newLayouts)
+      props().onWidgetDelete({ i: 'w-1-note', x: 0, y: 0, w: 4, h: 5, minW: 4, maxW: 6, minH: 5, maxH: 999 })
     })
 
     act(() => {
       wrapper.update()
     })
 
-    expect(props().layouts).toEqual([{ label: 'default', body: { lg: [] } }])
-    expect(props().widgets).toEqual([])
+    expect(props().layouts).toEqual([{ label: 'default', body: newLayouts }])
+    expect(props().widgets).toEqual(newWidgets)
     await act(async () => {
       await props().onSaveEdit()
     })
@@ -196,8 +210,8 @@ describe('applications/Dashboard/Dashboard', () => {
     const layouts: string | null = await window.localStorage.getItem('test-layouts')
 
     expect(props().editMode).toEqual(false)
-    expect(JSON.parse(layouts!)).toEqual([{ label: 'default', body: { lg: [] } }])
-    expect(JSON.parse(widgets!)).toEqual([])
+    expect(JSON.parse(layouts!)).toEqual([{ label: 'default', body: newLayouts }])
+    expect(JSON.parse(widgets!)).toEqual(newWidgets)
   })
 
   it('onAddChange', () => {

@@ -1,8 +1,8 @@
-import { Labels } from 'types'
+import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
 import ReactResizeDetector from 'react-resize-detector'
-import * as Nav from 'Nav'
+import { Labels, LabelsPropType } from 'types.d'
 import './Widget.css'
 
 export interface WidgetDeleteProps {
@@ -55,7 +55,7 @@ const WidgetDelete: React.FC<WidgetDeleteProps> = ({
 }
 
 WidgetDelete.propTypes = {
-  labels: PT.oneOf<Labels>([]).isRequired,
+  labels: LabelsPropType.isRequired,
   onResize: PT.func.isRequired,
   onDelete: PT.func.isRequired,
   setMode: PT.func.isRequired

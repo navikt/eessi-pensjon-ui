@@ -1,7 +1,8 @@
 import labels from 'applications/Dashboard/Dashboard.labels'
-import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
+import { Labels } from 'types.d'
 import EkspandertBartWidget from './EkspandertBartWidget'
 
 describe('widgets/EkspandertBartWidget', () => {
@@ -9,7 +10,7 @@ describe('widgets/EkspandertBartWidget', () => {
   const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     onUpdate: jest.fn(),
-    labels: labels,
+    labels: labels as Labels,
     widget: {
       i: 'w-1-ekspandertbart',
       type: 'ekspandertbart',
@@ -19,7 +20,7 @@ describe('widgets/EkspandertBartWidget', () => {
         content: 'mockContent',
         collapsed: false
       }
-    }
+    } as Widget
   }
 
   beforeEach(() => {
@@ -37,11 +38,11 @@ describe('widgets/EkspandertBartWidget', () => {
   it('It tries to save state when collapse changes', () => {
     wrapper.find('Ekspanderbartpanel button').simulate('click')
     expect(initialMockProps.onUpdate).toHaveBeenCalledWith({
+      ...initialMockProps.widget,
       options: {
-        content: 'mockContent',
+        ...initialMockProps.widget.options,
         collapsed: true
-      },
-      title: 'mockTitle'
+      }
     })
   })
 

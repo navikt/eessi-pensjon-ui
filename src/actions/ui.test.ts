@@ -1,6 +1,6 @@
 import * as uiActions from 'actions/ui'
 import * as types from 'constants/actionTypes'
-import { Action } from 'types'
+import { Action } from 'types.d'
 
 describe('actions/ui', () => {
   it('setHighContrast()', () => {

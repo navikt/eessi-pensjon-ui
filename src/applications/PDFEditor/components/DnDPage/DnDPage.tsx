@@ -1,12 +1,12 @@
 import { Recipes, RecipeType } from 'applications/PDFEditor/declarations/PDFEditor'
 import classNames from 'classnames'
-import { IFile } from 'components/File/File'
+import { IFile, IFilePropType } from 'components/File/File'
 import Icons from 'components/Icons/Icons'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Document, Page } from 'react-pdf'
-import { ActionCreators } from 'types'
+import { ActionCreators } from 'types.d'
 import './DnDPage.css'
 
 export interface DnDPageProps {
@@ -159,7 +159,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
 DnDPage.propTypes = {
   actions: PT.oneOf<ActionCreators>([]).isRequired,
   recipes: PT.object.isRequired,
-  file: PT.oneOf<IFile>([]).isRequired,
+  file: IFilePropType.isRequired,
   pageNumber: PT.number.isRequired,
   pageScale: PT.number.isRequired,
   dndTarget: PT.oneOf<RecipeType>([]).isRequired,

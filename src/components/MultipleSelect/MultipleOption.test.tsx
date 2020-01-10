@@ -1,5 +1,5 @@
 import { mount, ReactWrapper } from 'enzyme'
-import React, { useRef } from 'react'
+import React from 'react'
 import MultipleOption, { MultipleOptionProps } from './MultipleOption'
 
 describe('components/MultipleSelect/MultipleOption', () => {
@@ -16,7 +16,7 @@ describe('components/MultipleSelect/MultipleOption', () => {
     children: undefined,
     label: '',
     type: 'option',
-    innerRef: useRef(null),
+    innerRef: null,
     data: {
       label: 'mockLabel',
       value: 'mockValue'

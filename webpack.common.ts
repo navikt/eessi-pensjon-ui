@@ -67,9 +67,12 @@ module.exports = {
         }
       }
     }, {
-      test: /\.tsx?$/,
+      test: /(?<!\.d)\.tsx?$/,
       use: 'ts-loader',
       exclude: /(node_modules|bower_components|build)/
+    }, {
+      test: /\.d\.ts$/,
+      loader: 'ignore-loader'
     }]
   },
   resolve: {

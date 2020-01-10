@@ -43,7 +43,6 @@ describe('widgets/Note/NoteOptionsWidget', () => {
         ...initialMockProps.widget!.options,
         backgroundColor: mockColor
       }
-    },
-    initialMockProps.layout)
+    })
   })
 })

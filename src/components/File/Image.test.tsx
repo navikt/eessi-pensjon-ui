@@ -11,7 +11,7 @@ describe('components/File/Image', () => {
   const initialMockProps: FileProps = {
     size: '2 kB',
     labels: defaultLabels,
-    file: mockPNG,
+    file: mockPNG as IFile,
     scale: 1,
     onClick: jest.fn()
   }

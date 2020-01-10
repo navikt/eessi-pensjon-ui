@@ -134,11 +134,11 @@ CountrySelect.propTypes = {
   id: PT.string.isRequired,
   includeList: PT.array,
   label: PT.oneOfType([PT.element, PT.string]).isRequired,
-  locale: PT.oneOf<AllowedLocaleString>(['en', 'nb']).isRequired,
+  locale: PT.oneOf(['en' as AllowedLocaleString, 'nb' as AllowedLocaleString]).isRequired,
   onOptionSelected: PT.func,
   placeholder: PT.string,
   sort: PT.oneOf(['asc', 'desc', 'scandinaviaFirst']),
   type: PT.string,
-  value: PT.oneOf<Country>([])
+  value: PT.any
 }
 export default CountrySelect

@@ -36,6 +36,7 @@ describe('components/File', () => {
     onDeleteFile: jest.fn(),
     onPreviewFile: jest.fn(),
     onAddFile: jest.fn(),
+    onDownloadFile: jest.fn(),
     labels: {},
     scale: 1
   }
@@ -70,7 +71,12 @@ describe('components/File', () => {
     wrapper = mount(
       <File
         {...initialMockProps}
-        file={samplePDF} initialPage={3} buttons='hover' showPreviewButton showDeleteButton showDownloadButton
+        file={samplePDF}
+        initialPage={3}
+        buttons='hover'
+        showPreviewButton
+        showDeleteButton
+        showDownloadButton
         showAddButton
       />
     )

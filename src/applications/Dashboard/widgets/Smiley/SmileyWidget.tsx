@@ -1,4 +1,4 @@
-import { Widget, WidgetProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps, WidgetPropType, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard.d'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import ReactResizeDetector from 'react-resize-detector'
@@ -63,7 +63,7 @@ SmileyWidget.edit = SmileyOptionsWidget
 
 SmileyWidget.propTypes = {
   onResize: PT.func.isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  widget: WidgetPropType.isRequired
 }
 
 export default SmileyWidget

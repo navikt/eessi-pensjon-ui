@@ -1,4 +1,4 @@
-import { Labels } from 'types'
+import { Labels } from 'types.d'
 
 export default {
   download: 'Last ned',

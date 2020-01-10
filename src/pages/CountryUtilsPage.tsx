@@ -1,7 +1,7 @@
 import { AllowedLocaleString } from 'components/CountryData/CountryData'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'types'
+import { State } from 'types.d'
 import Container from './Container'
 import CountrySelect from 'components/CountrySelect/CountrySelect'
 import * as CountryFilter from 'components/CountrySelect/CountryFilter'

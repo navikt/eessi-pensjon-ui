@@ -2,10 +2,11 @@ import {
   Widget,
   WidgetFC,
   WidgetMap,
-  WidgetProps
-} from 'applications/Dashboard/declarations/Dashboard'
+  WidgetMapPropType,
+  WidgetProps,
+  WidgetPropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import _ from 'lodash'
-import PT from 'prop-types'
 import React from 'react'
 
 export interface WidgetEditOptionsProps {
@@ -16,19 +17,19 @@ export interface WidgetEditOptionsProps {
 const WidgetEditOptions: React.FC<WidgetEditOptionsProps> = (props: WidgetEditOptionsProps): JSX.Element => {
   const { myWidgets, widget } = props
 
-  const FoundWidget: WidgetFC<WidgetProps> = _.find(myWidgets, (it) => {
+  const FoundWidget: WidgetFC<WidgetProps> = _.find(_.values(myWidgets), (it) => {
     return it.properties ? it.properties.type === widget.type : false
   })
 
   if (FoundWidget && FoundWidget.edit) {
     return <FoundWidget.edit {...props} />
   }
-  return <div/>
+  return <div />
 }
 
 WidgetEditOptions.propTypes = {
-  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  myWidgets: WidgetMapPropType.isRequired,
+  widget: WidgetPropType.isRequired
 }
 
 export default WidgetEditOptions

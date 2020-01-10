@@ -5,25 +5,29 @@ import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import DashboardConfig from './config/DashboardConfig'
 import * as DashboardAPI from './DashboardAPI'
+
 import {
   Breakpoint,
+  BreakpointPropType,
   Config,
+  ConfigPropType,
   DroppedItem,
   DroppingItem,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTab,
-  LayoutTabs,
+  LayoutTabs, LayoutTabsPropType,
   Widget,
-  WidgetMap,
+  WidgetMap, WidgetMapPropType,
   WidgetPlaceholder,
-  Widgets,
+  Widgets, WidgetsPropType,
   WidgetTemplates
-} from './declarations/Dashboard'
+} from './declarations/Dashboard.d'
+jest.mock('components/Icons/Icons', () => () => (<div className='mock-icons' />))
 
 export interface DashboardProps {
   allowedWidgets?: Array<string> | undefined;
@@ -312,14 +316,14 @@ const Dashboard: React.FC<DashboardProps> = ({
 Dashboard.propTypes = {
   afterLayoutChange: PT.func,
   allowedWidgets: PT.array,
-  defaultConfig: PT.oneOf<Config>([]),
-  defaultLayouts: PT.oneOf<LayoutTabs>([]),
+  defaultConfig: ConfigPropType,
+  defaultLayouts: LayoutTabsPropType,
   defaultTabIndex: PT.number,
-  defaultWidgets: PT.array,
-  extraWidgets: PT.oneOf<WidgetMap>([]),
+  defaultWidgets: WidgetsPropType,
+  extraWidgets: WidgetMapPropType,
   id: PT.string.isRequired,
-  initialBreakpoint: PT.oneOf(['lg', 'md', 'sm']),
-  labels: PT.oneOf<Labels>([])
+  initialBreakpoint: BreakpointPropType,
+  labels: LabelsPropType
 }
 
 Dashboard.defaultProps = DashboardConfig

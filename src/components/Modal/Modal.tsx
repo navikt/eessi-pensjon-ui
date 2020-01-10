@@ -19,6 +19,18 @@ export interface ModalContent {
   modalButtons?: Array<ModalButton>
 }
 
+export const ModalContentPropType = PT.shape({
+  modalTitle: PT.string,
+  modalContent: PT.oneOf([PT.element, PT.string]),
+  modalText: PT.string,
+  modalButtons: PT.arrayOf(PT.shape({
+    onClick: PT.func,
+    disabled: PT.bool,
+    main: PT.bool,
+    text: PT.string.isRequired
+  }))
+})
+
 export interface ModalProps {
   appElement?: Element;
   className?: string;
@@ -127,7 +139,7 @@ Modal.propTypes = {
   closeButton: PT.bool,
   closeButtonLabel: PT.string,
   onModalClose: PT.func,
-  modal: PT.oneOf<ModalContent>([])
+  modal: ModalContentPropType
 }
 Modal.displayName = 'Modal'
 export default Modal

@@ -3,13 +3,9 @@ import React from 'react'
 import WidgetContainer, { WidgetContainerProps } from './WidgetContainer'
 import labels from './Dashboard.labels'
 
-Object.defineProperty(document, 'getElementById', () => ({
-  offsetWidth: 0,
-  offsetHeight: 0
-}))
-
 describe('applications/Dashboard/WidgetContainer', () => {
   let wrapper: ReactWrapper
+  let spy: jest.SpyInstance
   const initialMockProps: WidgetContainerProps = {
     currentBreakpoint: 'lg',
     editMode: false,
@@ -32,6 +28,13 @@ describe('applications/Dashboard/WidgetContainer', () => {
     }
   }
 
+  beforeAll(() => {
+    spy = jest.spyOn(document, 'getElementById')
+    spy.mockReturnValue({
+      offsetWidth: 0,
+      offsetHeight: 0
+    })
+  })
   beforeEach(() => {
     wrapper = mount(<WidgetContainer {...initialMockProps} />)
   })

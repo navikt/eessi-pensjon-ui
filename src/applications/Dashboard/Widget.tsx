@@ -1,11 +1,18 @@
-import { Layout, Widget as IWidget, WidgetFC, WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
+import {
+  Layout,
+  Widget as IWidget,
+  WidgetFC,
+  WidgetMap,
+  WidgetMapPropType,
+  WidgetPropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
+import WidgetDelete from 'applications/Dashboard/WidgetDelete'
+import WidgetEdit from 'applications/Dashboard/WidgetEdit'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React from 'react'
-import WidgetDelete from 'applications/Dashboard/WidgetDelete'
-import WidgetEdit from 'applications/Dashboard/WidgetEdit'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 
 export interface WidgetProps {
   labels: Labels;
@@ -31,7 +38,7 @@ const Widget: React.FC<WidgetProps> = (props: WidgetProps): JSX.Element => {
     return <WidgetDelete {...props} />
   }
 
-  const FoundWidget: WidgetFC<WidgetProps> = _.find(myWidgets, (it: WidgetFC<WidgetProps>) => {
+  const FoundWidget: WidgetFC<WidgetProps> = _.find(_.values(myWidgets), (it: WidgetFC<WidgetProps>) => {
     return it.properties ? it.properties.type === widget.type : false
   })
 
@@ -43,10 +50,10 @@ const Widget: React.FC<WidgetProps> = (props: WidgetProps): JSX.Element => {
 }
 
 Widget.propTypes = {
-  labels: PT.oneOf<Labels>([]).isRequired,
+  labels: LabelsPropType.isRequired,
   mode: PT.string,
-  myWidgets: PT.oneOf<WidgetMap>([]).isRequired,
-  widget: PT.oneOf<IWidget>([]).isRequired
+  myWidgets: WidgetMapPropType.isRequired,
+  widget: WidgetPropType.isRequired
 }
 
 export default Widget

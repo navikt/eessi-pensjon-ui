@@ -1,23 +1,27 @@
 import {
   Breakpoint,
+  BreakpointPropType,
   DroppingItem,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTabs,
+  LayoutTabsPropType,
   Widget,
   WidgetMap,
   WidgetPlaceholder,
   Widgets,
-  WidgetTemplates
-} from 'applications/Dashboard/declarations/Dashboard'
+  WidgetsPropType,
+  WidgetTemplates,
+  WidgetTemplatesPropType
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import WidgetAddArea from 'applications/Dashboard/WidgetAddArea'
 import classNames from 'classnames'
 import PT from 'prop-types'
 import React from 'react'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import './Dashboard.css'
 import DashboardControlPanel from './DashboardControlPanel'
 import DashboardGrid from './DashboardGrid'
@@ -76,7 +80,6 @@ export const DashboardRender: React.FC<DashboardRenderProps> = ({
       <WidgetAddArea
         availableWidgets={availableWidgets}
         labels={labels}
-        widgets={widgets}
         myWidgets={myWidgets}
         onPlaceholderWidgetAdd={onPlaceholderWidgetAdd}
       />
@@ -110,11 +113,11 @@ export const DashboardRender: React.FC<DashboardRenderProps> = ({
 
 DashboardRender.propTypes = {
   addMode: PT.bool.isRequired,
-  availableWidgets: PT.oneOf<WidgetTemplates>([]).isRequired,
-  currentBreakpoint: PT.oneOf<Breakpoint>(['sm','md','lg']).isRequired,
+  availableWidgets: WidgetTemplatesPropType.isRequired,
+  currentBreakpoint: BreakpointPropType.isRequired,
   editMode: PT.bool.isRequired,
-  labels: PT.oneOf<Labels>([]).isRequired,
-  layouts: PT.array.isRequired,
+  labels: LabelsPropType.isRequired,
+  layouts: LayoutTabsPropType.isRequired,
   onAddChange: PT.func.isRequired,
   onBreakpointChange: PT.func.isRequired,
   onCancelEdit: PT.func.isRequired,
@@ -133,6 +136,6 @@ DashboardRender.propTypes = {
   onWidgetUpdate: PT.func.isRequired,
   onWidgetFullFocus: PT.func.isRequired,
   onWidgetRestoreFocus: PT.func.isRequired,
-  widgets: PT.oneOf<Widgets>([]).isRequired
+  widgets: WidgetsPropType.isRequired
 }
 export default DashboardRender

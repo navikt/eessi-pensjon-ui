@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State, Dispatch, ActionCreators } from 'types'
+import { State, Dispatch, ActionCreators } from 'types.d'
 import { Lenke, Systemtittel, UndertekstBold } from '../Nav'
 import { connect, bindActionCreators } from '../store'
 import * as uiActions from '../actions/ui'

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import Icons from '../Icons/Icons'
 import './File.css'
 import defaultLabels from 'components/File/File.labels'
@@ -19,16 +19,28 @@ const renderBytes = (_bytes: number): string => {
 }
 
 export interface IFile {
-  id?: string;
+  id?: string | null;
   size: number;
   name: string;
-  numPages?: number;
+  numPages?: number | null | undefined;
   mimetype: string;
   content: {
-    text?: string;
-    base64?: string;
+    text?: string | null;
+    base64?: string | null;
   }
 }
+
+export const IFilePropType = PT.shape({
+  id: PT.string,
+  size: PT.number.isRequired,
+  name: PT.string.isRequired,
+  numPages: PT.number,
+  mimetype: PT.string.isRequired,
+  content: PT.shape({
+    text: PT.string,
+    base64: PT.string
+  }).isRequired
+})
 
 export type IFiles = Array<IFile>
 
@@ -258,10 +270,20 @@ File.propTypes = {
   animate: PT.bool,
   className: PT.string,
   buttons: PT.oneOf(['visible', 'hover', 'none']),
-  file: PT.oneOf<IFile>([]).isRequired,
+  file: PT.shape({
+    id: PT.string,
+    size: PT.number.isRequired,
+    name: PT.string.isRequired,
+    numPages: PT.number,
+    mimetype: PT.string.isRequired,
+    content: PT.shape({
+      text: PT.string,
+      base64: PT.string
+    }).isRequired
+  }).isRequired,
   height: PT.number,
   initialPage: PT.number,
-  initialLabels: PT.oneOf<Labels>([]),
+  initialLabels: LabelsPropType,
   onAddFile: PT.func,
   onContentClick: PT.func,
   onDeleteFile: PT.func,

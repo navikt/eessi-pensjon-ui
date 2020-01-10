@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types'
+import { State } from 'types.d'
 import Container from './Container'
 import File from 'components/File/File'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

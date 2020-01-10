@@ -1,8 +1,8 @@
-import { Widget, WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetMap } from 'applications/Dashboard/declarations/Dashboard.d'
 import WidgetEditOptions from 'applications/Dashboard/WidgetEditOptions'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels } from 'types'
+import { Labels, LabelsPropType } from 'types.d'
 import './Widget.css'
 
 export interface WidgetEditProps {
@@ -38,7 +38,7 @@ const WidgetEdit: React.FC<WidgetEditProps> = (props: WidgetEditProps): JSX.Elem
 }
 
 WidgetEdit.propTypes = {
-  labels: PT.oneOf<Labels>([]).isRequired,
+  labels: LabelsPropType.isRequired,
   setMode: PT.func.isRequired
 }
 

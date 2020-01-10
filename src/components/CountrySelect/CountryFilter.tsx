@@ -6,4 +6,4 @@ export const EU: Array<string> = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE'
   'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'GB']
 export const NO: Array<string> = ['NO']
 export const NORDIC: Array<string> = ['DK', 'FI', 'FO', 'GL', 'IS', 'NO', 'SE']
-export const SCANDINAVIA: Array<string> = ['DK', 'NO', 'SE']
+export const SCANDINAVIA: Array<string> = ['DK', 'SE', 'NO']

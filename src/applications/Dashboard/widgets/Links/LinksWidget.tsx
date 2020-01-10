@@ -1,4 +1,10 @@
-import { Widget, WidgetProps, WidgetFC, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import {
+  Widget,
+  WidgetFC,
+  WidgetProps,
+  WidgetPropType,
+  WidgetTemplate
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
@@ -40,7 +46,7 @@ const LinksWidget: WidgetFC<WidgetProps> = ({ onResize, onUpdate, widget }: Widg
             onResize={_onResize}
           />
           {widget.options.collapsed === true
-            ? null
+            ? <div />
             : <Links />}
         </div>
       </Nav.Ekspanderbartpanel>
@@ -65,7 +71,7 @@ LinksWidget.properties = properties
 LinksWidget.propTypes = {
   onResize: PT.func.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  widget: WidgetPropType.isRequired
 }
 
 export default LinksWidget

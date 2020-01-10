@@ -1,27 +1,28 @@
+import DnDPage from 'applications/PDFEditor/components/DnDPage/DnDPage'
 import {
-  Files,
-  Labels,
   Recipes,
+  RecipesPropType,
   RecipeStep,
   RecipeSteps,
-  RecipeType
-} from 'applications/PDFEditor/declarations/PDFEditor'
+  RecipeType,
+  RecipeTypePropType
+} from 'applications/PDFEditor/declarations/PDFEditor.d'
 import classNames from 'classnames'
+import { IFile, IFilePropType } from 'components/File/File'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import DnDPage from 'applications/PDFEditor/components/DnDPage/DnDPage'
+import { ActionCreators, ActionCreatorsPropType, Labels, LabelsPropType } from 'types.d'
 import './DnDImages.css'
-import { ActionCreators } from 'types'
 
 export interface DnDImagesProps {
   actions: ActionCreators;
-  setRecipes: (r: Recipes) => void;
   dndTarget: RecipeType;
-  files: Files;
+  files: Array<IFile>;
   labels: Labels;
   recipes: Recipes;
+  setRecipes: (r: Recipes) => void;
 }
 
 const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element => {
@@ -73,7 +74,7 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
             ref={provided.innerRef}
             className={classNames('a-pdf-dndImages-droppable', { 'a-pdf-dndImages-droppable-active': snapshot.isDraggingOver })}
           >
-            {files.map((file, index) => {
+            {files.map((file: IFile, index: number) => {
               if (_.find(recipes[dndTarget], { name: file.name })) {
                 return null
               }
@@ -117,10 +118,12 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
 }
 
 DnDImages.propTypes = {
-  labels: PT.oneOf<Labels>([]).isRequired,
-  setRecipes: PT.func.isRequired,
-  recipes: PT.oneOf<Recipes>([]).isRequired,
-  dndTarget: PT.oneOf<RecipeType>([]).isRequired
+  actions: ActionCreatorsPropType.isRequired,
+  dndTarget: RecipeTypePropType.isRequired,
+  files: PT.arrayOf(IFilePropType.isRequired).isRequired,
+  labels: LabelsPropType.isRequired,
+  recipes: RecipesPropType.isRequired,
+  setRecipes: PT.func.isRequired
 }
 
 export default DnDImages

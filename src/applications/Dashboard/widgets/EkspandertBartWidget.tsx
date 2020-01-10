@@ -1,4 +1,10 @@
-import { Widget, WidgetFC, WidgetProps, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import {
+  Widget,
+  WidgetFC,
+  WidgetProps,
+  WidgetPropType,
+  WidgetTemplate
+} from 'applications/Dashboard/declarations/Dashboard.d'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
@@ -67,7 +73,7 @@ EkspandertBartWidget.propTypes = {
   content: PT.string,
   onResize: PT.func.isRequired,
   onUpdate: PT.func.isRequired,
-  widget: PT.oneOf<Widget>([]).isRequired
+  widget: WidgetPropType.isRequired
 }
 
 export default EkspandertBartWidget
