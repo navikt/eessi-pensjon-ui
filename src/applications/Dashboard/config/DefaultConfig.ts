@@ -1,4 +1,4 @@
-import { Config } from 'applications/Dashboard/declarations/Dashboard'
+import { Config } from 'declarations/Dashboard.d'
 
 export default {
   cols: { lg: 12, md: 3, sm: 1 },

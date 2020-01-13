@@ -1,7 +1,7 @@
 import mockLayouts from 'applications/Dashboard/config/DefaultLayouts'
 import labels from 'applications/Dashboard/Dashboard.labels'
 import DashboardRender from 'applications/Dashboard/DashboardRender'
-import { Breakpoint, Layout } from 'applications/Dashboard/declarations/Dashboard'
+import { Breakpoint, Layout } from 'declarations/Dashboard.d'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'
 import React from 'react'
@@ -9,6 +9,7 @@ import { act } from 'react-dom/test-utils'
 import mockConfig from './config/DefaultConfig'
 import mockWidgets from './config/DefaultWidgets'
 import Dashboard, { DashboardProps } from './Dashboard'
+jest.mock('components/Icons/Icons', () => () => (<div className='mock-icons' />))
 
 const defaultLocalStorage = window.localStorage
 

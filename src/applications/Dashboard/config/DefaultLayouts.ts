@@ -1,4 +1,4 @@
-import { LayoutTabs } from 'applications/Dashboard/declarations/Dashboard'
+import { LayoutTabs } from 'declarations/Dashboard.d'
 
 export default [{
   label: 'default',

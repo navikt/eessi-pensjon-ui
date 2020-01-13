@@ -1,4 +1,4 @@
-import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'declarations/Dashboard.d'
 import SmileyWidget from 'applications/Dashboard/widgets/Smiley/SmileyWidget'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'

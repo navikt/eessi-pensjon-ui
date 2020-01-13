@@ -1,13 +1,10 @@
-export interface MainReducerState {
-  highContrast: boolean
+import { Action, State } from 'declarations/types'
+
+export const initialState: State = {
+  highContrast: false
 }
 
-export interface Action {
-  type: string,
-  payload: any
-}
-
-const mainReducer = (state: MainReducerState, action: Action) => {
+const mainReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'TOGGLE_HIGH_CONTRAST':
       return {
@@ -17,10 +14,6 @@ const mainReducer = (state: MainReducerState, action: Action) => {
     default:
       return state
   }
-}
-
-export const initialState: MainReducerState = {
-  highContrast: false
 }
 
 export default mainReducer

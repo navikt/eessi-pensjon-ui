@@ -5,29 +5,33 @@ import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import DashboardConfig from './config/DashboardConfig'
 import * as DashboardAPI from './DashboardAPI'
-
 import {
   Breakpoint,
-  BreakpointPropType,
   Config,
-  ConfigPropType,
   DroppedItem,
   DroppingItem,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTab,
-  LayoutTabs, LayoutTabsPropType,
+  LayoutTabs,
   Widget,
-  WidgetMap, WidgetMapPropType,
+  WidgetMap,
   WidgetPlaceholder,
-  Widgets, WidgetsPropType,
+  Widgets,
   WidgetTemplates
-} from './declarations/Dashboard.d'
-jest.mock('components/Icons/Icons', () => () => (<div className='mock-icons' />))
+} from 'declarations/Dashboard.d'
+import {
+  BreakpointPropType,
+  ConfigPropType,
+  LayoutTabsPropType,
+  WidgetMapPropType,
+  WidgetsPropType
+} from 'declarations/Dashboard.pt'
 
 export interface DashboardProps {
   allowedWidgets?: Array<string> | undefined;

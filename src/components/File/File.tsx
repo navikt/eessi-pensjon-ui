@@ -3,7 +3,8 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import Icons from '../Icons/Icons'
 import './File.css'
 import defaultLabels from 'components/File/File.labels'
@@ -43,6 +44,8 @@ export const IFilePropType = PT.shape({
 })
 
 export type IFiles = Array<IFile>
+
+export const IFilesPropType = PT.arrayOf(IFilePropType.isRequired)
 
 export interface FileProps {
   className ?: string;
@@ -300,5 +303,5 @@ File.propTypes = {
   tema: PT.oneOf(['paper', 'simple']),
   width: PT.number
 }
-File.displayName = 'File'
+
 export default File

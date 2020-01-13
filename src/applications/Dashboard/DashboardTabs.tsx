@@ -1,4 +1,5 @@
-import { LayoutTabs, LayoutTabsPropType } from 'applications/Dashboard/declarations/Dashboard.d'
+import { LayoutTabs } from 'declarations/Dashboard.d'
+import { LayoutTabsPropType } from 'declarations/Dashboard.pt'
 import Icons from 'components/Icons/Icons'
 import { Input, Knapp, Tabs } from 'Nav'
 import PT from 'prop-types'

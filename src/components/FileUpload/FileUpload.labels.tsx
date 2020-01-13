@@ -1,4 +1,4 @@
-import { Labels } from 'types.d'
+import { Labels } from 'declarations/types'
 
 export default {
   all: 'alle',

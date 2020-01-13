@@ -1,4 +1,4 @@
-import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'declarations/Dashboard.d'
 import NoteWidget from 'applications/Dashboard/widgets/Note/NoteWidget'
 import { mount, ReactWrapper } from 'enzyme'
 import _ from 'lodash'

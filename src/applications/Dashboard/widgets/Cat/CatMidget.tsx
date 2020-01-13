@@ -1,4 +1,4 @@
-import { WidgetProps, WidgetFC, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps, WidgetFC, WidgetTemplate } from 'declarations/Dashboard.d'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import ReactResizeDetector from 'react-resize-detector'

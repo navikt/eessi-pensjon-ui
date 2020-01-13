@@ -1,9 +1,9 @@
 import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
-import sampleJPG from '../../resources/tests/sampleJPG'
-import sampleOther from '../../resources/tests/sampleOther'
-import samplePDF from '../../resources/tests/samplePDF'
+import sampleJPG from 'resources/tests/sampleJPG'
+import sampleOther from 'resources/tests/sampleOther'
+import samplePDF from 'resources/tests/samplePDF'
 import File from './File'
 
 jest.mock('react-pdf', () => {

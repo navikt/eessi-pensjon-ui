@@ -2,10 +2,12 @@ import {
   Widget,
   WidgetFC,
   WidgetMap,
+  WidgetProps
+} from 'declarations/Dashboard.d'
+import {
   WidgetMapPropType,
-  WidgetProps,
   WidgetPropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.pt'
 import _ from 'lodash'
 import React from 'react'
 

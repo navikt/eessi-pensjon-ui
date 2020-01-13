@@ -5,7 +5,7 @@ import { HOST } from 'constants/urls'
 import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
 import { Dispatch } from 'redux'
-import { ActionWithPayload } from 'types.d'
+import { ActionWithPayload } from 'declarations/types.d'
 import uuid from 'uuid/v4'
 
 export interface ApiCallTypes {

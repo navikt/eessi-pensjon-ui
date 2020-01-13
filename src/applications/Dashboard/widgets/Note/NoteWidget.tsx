@@ -1,4 +1,5 @@
-import { WidgetFC, WidgetProps, WidgetPropType, WidgetTemplate } from 'applications/Dashboard/declarations/Dashboard.d'
+import { WidgetFC, WidgetProps, WidgetTemplate } from 'declarations/Dashboard.d'
+import { WidgetPropType } from 'declarations/Dashboard.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'

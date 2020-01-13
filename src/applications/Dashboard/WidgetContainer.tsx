@@ -1,15 +1,21 @@
 import {
-  Breakpoint, BreakpointPropType,
-  Layout, LayoutPropType,
+  Breakpoint,
+  Layout,
   Size,
   Sizes,
   Widget as IWidget,
-  WidgetMap, WidgetPropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+  WidgetMap
+} from 'declarations/Dashboard.d'
+import {
+  BreakpointPropType,
+  LayoutPropType,
+  WidgetPropType
+} from 'declarations/Dashboard.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import Widget from './Widget'
 import './Widget.css'
 

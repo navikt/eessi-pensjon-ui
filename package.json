@@ -1,6 +1,6 @@
 {
   "name": "eessi-pensjon-ui",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "license": "MIT",
   "description": "EESSI Pensjon UI",
   "scripts": {
@@ -142,6 +142,7 @@
     "@types/lodash": "^4.14.149",
     "@types/mustache": "^0.8.32",
     "@types/prop-types": "^15.7.3",
+    "@types/rc-slider": "^8.6.5",
     "@types/react": "^16.9.17",
     "@types/react-beautiful-dnd": "^11.0.4",
     "@types/react-collapse": "^5.0.0",

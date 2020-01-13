@@ -1,4 +1,5 @@
-import { Widget, WidgetProps, WidgetPropType } from 'applications/Dashboard/declarations/Dashboard.d'
+import { Widget, WidgetProps } from 'declarations/Dashboard.d'
+import { WidgetPropType } from 'declarations/Dashboard.pt'
 import NodeWidget from 'applications/Dashboard/widgets/Note/NoteWidget'
 import _ from 'lodash'
 import * as Nav from 'Nav'

@@ -2,7 +2,8 @@ import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
 import ReactResizeDetector from 'react-resize-detector'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import './Widget.css'
 
 export interface WidgetDeleteProps {

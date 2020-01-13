@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from './Container'
 import FileUpload from 'components/FileUpload/FileUpload'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -23,9 +23,9 @@ const FileUploadPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.E
       <Normaltekst className='mt-4 mb-4'>Note that the already uploaded files have context buttons when hover.</Normaltekst>
       <FileUpload
         className='w-75' files={[
-          require('../resources/tests/samplePDF').default,
-          require('../resources/tests/sampleJPG').default,
-          require('../resources/tests/sampleOther').default
+          require('resources/tests/samplePDF').default,
+          require('resources/tests/sampleJPG').default,
+          require('resources/tests/sampleOther').default
         ]}
       />
       <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>

@@ -3,7 +3,7 @@ import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import labels from './Dashboard.labels'
 import * as Widgets from './widgets'
-import { Widget as IWidget } from 'applications/Dashboard/declarations/Dashboard.d'
+import { Widget as IWidget } from 'declarations/Dashboard.d'
 
 jest.mock('./widgets/Links/Links', () => () => (<div className='mock-w-links' />))
 

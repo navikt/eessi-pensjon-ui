@@ -1,19 +1,21 @@
 import DnDPage from 'applications/PDFEditor/components/DnDPage/DnDPage'
 import {
+  PickImageStep,
   Recipes,
+  RecipeType
+} from 'declarations/PDFEditor.d'
+import {
   RecipesPropType,
-  RecipeStep,
-  RecipeSteps,
-  RecipeType,
   RecipeTypePropType
-} from 'applications/PDFEditor/declarations/PDFEditor.d'
+} from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
 import { IFile, IFilePropType } from 'components/File/File'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators, ActionCreatorsPropType, Labels, LabelsPropType } from 'types.d'
+import { ActionCreators, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
 import './DnDImages.css'
 
 export interface DnDImagesProps {
@@ -35,7 +37,7 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
     e.preventDefault()
     e.stopPropagation()
 
-    const potentialImages: RecipeSteps = []
+    const potentialImages: Array<PickImageStep> = []
 
     const newRecipes: Recipes = _.clone(recipes)
     let modified: boolean = false
@@ -49,7 +51,7 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
     if (!newRecipes[dndTarget as RecipeType]) {
       newRecipes[dndTarget as RecipeType] = []
     }
-    potentialImages.map((image: RecipeStep) => {
+    potentialImages.map((image: PickImageStep) => {
       if (!_.find(recipes[dndTarget], { name: image.name })) {
         modified = true
         return newRecipes[dndTarget]!.push(image)

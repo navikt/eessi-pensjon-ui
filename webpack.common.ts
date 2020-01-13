@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     index: './src/dist.tsx',
     nav: './src/dist-nav.tsx',
-    api: './src/actions/api.ts'
+    api: './src/actions/api.ts',
+    Dashboard: './src/applications/Dashboard/Dashboard.tsx'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -30,6 +31,9 @@ module.exports = {
       }, {
         from: 'src/actions/api.ts',
         to: 'api.d.ts'
+      }, {
+        from: 'src/declarations',
+        to: 'declarations'
       }
     ])
   ],

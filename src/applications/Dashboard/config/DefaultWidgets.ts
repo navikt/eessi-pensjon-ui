@@ -1,4 +1,4 @@
-import { Widgets } from 'applications/Dashboard/declarations/Dashboard'
+import { Widgets } from 'declarations/Dashboard.d'
 
 export default [{
   i: 'w-1-note',

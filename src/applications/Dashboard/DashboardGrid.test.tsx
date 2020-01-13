@@ -1,4 +1,4 @@
-import { LayoutTabs } from 'applications/Dashboard/declarations/Dashboard'
+import { LayoutTabs } from 'declarations/Dashboard.d'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import { DashboardGrid, DashboardGridProps } from './DashboardGrid'

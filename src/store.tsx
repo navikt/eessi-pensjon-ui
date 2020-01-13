@@ -1,13 +1,13 @@
-import React, { useContext, createContext, Context, ReactNode, Reducer } from 'react' // eslint-disable-line
-import { MainReducerState, Action } from 'reducer' // eslint-disable-line
+import React, { useContext, createContext, Context, ReactNode, Reducer } from 'react'
+import { State, Action } from 'declarations/types'
 import useThunkReducer from 'react-hook-thunk-reducer'
 
 const Store: Context<any> = createContext({})
 const useStore = () => useContext(Store)
 
 interface StoreProviderProps {
-  reducer: Reducer<MainReducerState, Action>;
-  initialState: MainReducerState;
+  reducer: Reducer<State, Action>;
+  initialState: State;
   children: ReactNode;
 }
 

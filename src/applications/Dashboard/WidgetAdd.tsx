@@ -1,10 +1,13 @@
 import {
-  LayoutTemplates, WidgetFC,
+  LayoutTemplates,
+  WidgetFC,
   WidgetMap,
   WidgetPlaceholder,
-  WidgetTemplate,
+  WidgetTemplate
+} from 'declarations/Dashboard.d'
+import {
   WidgetTemplatePropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.pt'
 import { WidgetContainerProps } from 'applications/Dashboard/WidgetContainer'
 import classNames from 'classnames'
 import _ from 'lodash'

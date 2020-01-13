@@ -1,8 +1,8 @@
 import labels from 'applications/Dashboard/Dashboard.labels'
-import { Widget, WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { Widget, WidgetProps } from 'declarations/Dashboard.d'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
-import { Labels } from 'types.d'
+import { Labels } from 'declarations/types.d'
 import EkspandertBartWidget from './EkspandertBartWidget'
 
 describe('widgets/EkspandertBartWidget', () => {

@@ -1,7 +1,8 @@
 import Icons from 'components/Icons/Icons'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import DashboardConfig from './config/DashboardConfig'
 
 export interface DashboardControlPanelProps {

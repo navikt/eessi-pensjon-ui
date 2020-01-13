@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from './Container'
 import Dashboard from 'applications/Dashboard/Dashboard'
 import { Normaltekst, Panel, Systemtittel } from '../Nav'

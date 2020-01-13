@@ -1,8 +1,9 @@
-import { Widget, WidgetMap } from 'applications/Dashboard/declarations/Dashboard.d'
+import { Widget, WidgetMap } from 'declarations/Dashboard.d'
 import WidgetEditOptions from 'applications/Dashboard/WidgetEditOptions'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import './Widget.css'
 
 export interface WidgetEditProps {

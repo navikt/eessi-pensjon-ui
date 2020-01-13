@@ -2,17 +2,20 @@ import {
   Layout,
   Widget as IWidget,
   WidgetFC,
-  WidgetMap,
+  WidgetMap
+} from 'declarations/Dashboard.d'
+import {
   WidgetMapPropType,
   WidgetPropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.pt'
 import WidgetDelete from 'applications/Dashboard/WidgetDelete'
 import WidgetEdit from 'applications/Dashboard/WidgetEdit'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 
 export interface WidgetProps {
   labels: Labels;

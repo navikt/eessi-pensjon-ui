@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from './Container'
 import DatePicker from 'components/DatePicker/DatePicker'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

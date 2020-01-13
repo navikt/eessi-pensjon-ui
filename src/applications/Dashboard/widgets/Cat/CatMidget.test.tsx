@@ -1,4 +1,4 @@
-import { WidgetProps } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetProps } from 'declarations/Dashboard.d'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import CatMidget from './CatMidget'

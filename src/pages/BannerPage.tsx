@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from 'pages/Container'
 import Banner from 'components/Banner/Banner'
 import EESSIPensjonVeileder from 'components/EESSIPensjonVeileder/EESSIPensjonVeileder'

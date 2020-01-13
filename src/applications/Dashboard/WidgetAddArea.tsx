@@ -1,12 +1,15 @@
 import {
   WidgetMap,
-  WidgetMapPropType,
   WidgetPlaceholder,
   WidgetTemplates
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.d'
+import {
+  WidgetMapPropType
+} from 'declarations/Dashboard.pt'
 import PT from 'prop-types'
 import React from 'react'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import './Widget.css'
 import WidgetAdd from './WidgetAdd'
 

@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from './Container'
 import File from 'components/File/File'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -9,9 +9,9 @@ import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { connect } from '../store'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
-import samplePDF from '../resources/tests/samplePDF'
-import sampleJPG from '../resources/tests/sampleJPG'
-import sampleOther from '../resources/tests/sampleOther'
+import samplePDF from 'resources/tests/samplePDF'
+import sampleJPG from 'resources/tests/sampleJPG'
+import sampleOther from 'resources/tests/sampleOther'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })

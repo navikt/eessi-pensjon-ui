@@ -1,26 +1,29 @@
 import DashboardTabs from 'applications/Dashboard/DashboardTabs'
 import {
   Breakpoint,
-  BreakpointPropType,
   DroppingItem,
-  DroppingItemPropType,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTabs,
-  LayoutTabsPropType,
   Widget,
   WidgetMap,
-  Widgets,
+  Widgets
+} from 'declarations/Dashboard.d'
+import {
+  BreakpointPropType,
+  DroppingItemPropType,
+  LayoutTabsPropType,
   WidgetsPropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.pt'
 import WidgetContainer from 'applications/Dashboard/WidgetContainer'
 import classNames from 'classnames'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
 import { Responsive, WidthProvider, Layout as ILayout, Layouts as ILayouts } from 'react-grid-layout'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import DashboardConfig from './config/DashboardConfig'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)

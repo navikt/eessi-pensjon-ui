@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from './Container'
-import PDFEditor from '../applications/PDFEditor'
+import PDFEditor from 'applications/PDFEditor'
 import { Normaltekst, Panel, Systemtittel } from '../Nav'
 const PDFEditorPage = () => {
   return (

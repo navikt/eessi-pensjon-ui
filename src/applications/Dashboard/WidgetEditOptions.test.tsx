@@ -1,4 +1,4 @@
-import { WidgetMap } from 'applications/Dashboard/declarations/Dashboard'
+import { WidgetMap } from 'declarations/Dashboard.d'
 import * as DashboardDefaultWidgets from 'applications/Dashboard/widgets'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'

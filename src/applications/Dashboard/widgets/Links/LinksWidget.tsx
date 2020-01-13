@@ -2,9 +2,11 @@ import {
   Widget,
   WidgetFC,
   WidgetProps,
-  WidgetPropType,
   WidgetTemplate
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.d'
+import {
+  WidgetPropType
+} from 'declarations/Dashboard.pt'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'

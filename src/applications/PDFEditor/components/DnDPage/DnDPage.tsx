@@ -1,4 +1,4 @@
-import { Recipes, RecipeType } from 'applications/PDFEditor/declarations/PDFEditor'
+import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
 import classNames from 'classnames'
 import { IFile, IFilePropType } from 'components/File/File'
 import Icons from 'components/Icons/Icons'
@@ -6,7 +6,8 @@ import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Document, Page } from 'react-pdf'
-import { ActionCreators } from 'types.d'
+import { ActionCreators } from 'declarations/types.d'
+import { ActionCreatorsPropType } from 'declarations/types.pt'
 import './DnDPage.css'
 
 export interface DnDPageProps {
@@ -16,7 +17,7 @@ export interface DnDPageProps {
   dndTarget: RecipeType;
   file: IFile;
   isFocused?: boolean;
-  pageNumber: number;
+  pageNumber?: number;
   pageScale: number;
   recipes: Recipes;
   style ?: React.CSSProperties;
@@ -30,7 +31,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
   const onHandleMouseOver = (): void => setIsHovering(true)
   const onHandleMouseLeave = (): void => setIsHovering(false)
 
-  const openPreview = (file: IFile, pageNumber: number): void => {
+  const openPreview = (file: IFile, pageNumber: number | undefined): void => {
     actions.setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={() => actions.setModal(undefined)}>
@@ -60,9 +61,9 @@ const DnDPage: React.FC<DnDPageProps> = ({
     }
 
     if (mimetype === 'application/pdf') {
-      newRecipes[dndTarget]!.push({ name: name, pageNumber: pageNumber, type: 'pickPage' })
+      newRecipes[dndTarget]!.push({ name: name, pageNumber: pageNumber } as PickPageStep)
     } else {
-      newRecipes[dndTarget]!.push({ name: name, type: 'pickImage' })
+      newRecipes[dndTarget]!.push({ name: name } as PickImageStep)
     }
     actions.setRecipes(newRecipes)
   }
@@ -157,7 +158,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
 }
 
 DnDPage.propTypes = {
-  actions: PT.oneOf<ActionCreators>([]).isRequired,
+  actions: ActionCreatorsPropType.isRequired,
   recipes: PT.object.isRequired,
   file: IFilePropType.isRequired,
   pageNumber: PT.number.isRequired,

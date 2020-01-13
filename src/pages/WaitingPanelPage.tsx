@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'types.d'
+import { State } from 'declarations/types'
 import Container from './Container'
 import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

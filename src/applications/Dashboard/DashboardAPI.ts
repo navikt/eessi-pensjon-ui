@@ -9,7 +9,7 @@ import {
   WidgetMap,
   Widgets,
   WidgetTemplate
-} from 'applications/Dashboard/declarations/Dashboard'
+} from 'declarations/Dashboard.d'
 import _ from 'lodash'
 import DashboardConfig from './config/DashboardConfig'
 import defaultConfig from './config/DefaultConfig'

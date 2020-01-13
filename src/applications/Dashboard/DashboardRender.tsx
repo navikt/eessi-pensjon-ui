@@ -1,27 +1,30 @@
 import {
   Breakpoint,
-  BreakpointPropType,
   DroppingItem,
   Layout,
   LayoutBody,
   Layouts,
   LayoutTabs,
-  LayoutTabsPropType,
   Widget,
   WidgetMap,
   WidgetPlaceholder,
   Widgets,
+  WidgetTemplates
+} from 'declarations/Dashboard.d'
+import {
+  BreakpointPropType,
+  LayoutTabsPropType,
   WidgetsPropType,
-  WidgetTemplates,
   WidgetTemplatesPropType
-} from 'applications/Dashboard/declarations/Dashboard.d'
+} from 'declarations/Dashboard.pt'
 import WidgetAddArea from 'applications/Dashboard/WidgetAddArea'
 import classNames from 'classnames'
 import PT from 'prop-types'
 import React from 'react'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
-import { Labels, LabelsPropType } from 'types.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import './Dashboard.css'
 import DashboardControlPanel from './DashboardControlPanel'
 import DashboardGrid from './DashboardGrid'
