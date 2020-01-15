@@ -6,7 +6,6 @@ export interface SpecialPageStep {
   type: 'specialPage';
 }
 
-
 export interface PickImageStep {
   name: string;
   type: 'pickImage';

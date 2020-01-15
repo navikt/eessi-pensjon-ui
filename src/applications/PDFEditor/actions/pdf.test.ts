@@ -1,6 +1,6 @@
 import * as api from 'actions/api'
 import { GeneratePayload, Recipes, Separator, Watermark } from 'declarations/PDFEditor.d'
-import { IFile } from 'components/File/File'
+import { Files } from 'declarations/types.d'
 import * as types from 'applications/PDFEditor/constants/actionTypes'
 import * as urls from 'applications/PDFEditor/constants/urls'
 import * as pdfActions from './pdf'
@@ -18,7 +18,7 @@ describe('actions/pdf', () => {
   })
 
   it('selectPDF()', () => {
-    const mockFiles: Array<IFile> = []
+    const mockFiles: Files = []
     const generatedResult = pdfActions.selectPDF(mockFiles)
     expect(generatedResult).toMatchObject({
       type: types.PDF_SELECTED,
@@ -75,7 +75,7 @@ describe('actions/pdf', () => {
   })
 
   it('setWatermark()', () => {
-    const mockPayload = { watermarkText: 'foo', watermarkTextColor: {r: 0, g: 0, b: 0, a: 0} } as Watermark
+    const mockPayload = { watermarkText: 'foo', watermarkTextColor: { r: 0, g: 0, b: 0, a: 0 } } as Watermark
     const generatedResult = pdfActions.setWatermark(mockPayload)
     expect(generatedResult).toMatchObject({
       type: types.PDF_WATERMARK_SET,
@@ -84,7 +84,7 @@ describe('actions/pdf', () => {
   })
 
   it('setSeparator()', () => {
-    const mockPayload = { separatorText: 'foo', separatorTextColor: {r: 0, g: 0, b: 0, a: 0} } as Separator
+    const mockPayload = { separatorText: 'foo', separatorTextColor: { r: 0, g: 0, b: 0, a: 0 } } as Separator
     const generatedResult = pdfActions.setSeparator(mockPayload)
     expect(generatedResult).toMatchObject({
       type: types.PDF_SEPARATOR_SET,
@@ -97,7 +97,7 @@ describe('actions/pdf', () => {
       recipes: {},
       watermark: {
         watermarkText: 'foo',
-        watermarkTextColor: {r: 0, g: 0, b: 0, a: 0}
+        watermarkTextColor: { r: 0, g: 0, b: 0, a: 0 }
       } as Watermark,
       files: []
     }

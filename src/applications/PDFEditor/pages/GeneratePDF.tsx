@@ -7,20 +7,20 @@ import {
   RecipesPropType,
   WatermarkPropType
 } from 'declarations/PDFEditor.pt'
-import File, { IFile, IFiles, IFilesPropType } from 'components/File/File'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import FileFC from 'components/File/File'
+import { ActionCreators, File, Files, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 
 type FileNames = {[k: string]: string};
-export type GeneratedPDFs = {[k: string]: IFile};
+export type GeneratedPDFs = {[k: string]: File};
 
 export interface GeneratePDFProps {
   actions: ActionCreators;
-  files: IFiles;
+  files: Files;
   generatingPDF: boolean;
   generatedPDFs: GeneratedPDFs;
   labels: Labels;
@@ -93,11 +93,11 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
       ) : (generatedPDFs ? (
         <div>
           {Object.keys(generatedPDFs).map(key => {
-            const pdf: IFile = generatedPDFs[key]
+            const pdf: File = generatedPDFs[key]
             return (
               <div key={key} className='fieldset animate'>
                 <div className='pdfrow'>
-                  <File file={pdf} />
+                  <FileFC file={pdf} />
                   <div className='ml-4'>
                     <Nav.Input
                       label={labels.filename} value={_fileNames[key]}
@@ -136,7 +136,7 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
 
 GeneratePDF.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
-  files: IFilesPropType.isRequired,
+  files: FilesPropType.isRequired,
   generatingPDF: PT.bool.isRequired,
   generatedPDFs: PT.any.isRequired,
   labels: LabelsPropType.isRequired,

@@ -9,19 +9,18 @@ import {
   RecipeTypePropType
 } from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
-import { IFile, IFilePropType } from 'components/File/File'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import { ActionCreators, File, Files, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 import './DnDImages.css'
 
 export interface DnDImagesProps {
   actions: ActionCreators;
   dndTarget: RecipeType;
-  files: Array<IFile>;
+  files: Files;
   labels: Labels;
   recipes: Recipes;
   setRecipes: (r: Recipes) => void;
@@ -76,7 +75,7 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
             ref={provided.innerRef}
             className={classNames('a-pdf-dndImages-droppable', { 'a-pdf-dndImages-droppable-active': snapshot.isDraggingOver })}
           >
-            {files.map((file: IFile, index: number) => {
+            {files.map((file: File, index: number) => {
               if (_.find(recipes[dndTarget], { name: file.name })) {
                 return null
               }
@@ -122,7 +121,7 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
 DnDImages.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
-  files: PT.arrayOf(IFilePropType.isRequired).isRequired,
+  files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,
   recipes: RecipesPropType.isRequired,
   setRecipes: PT.func.isRequired

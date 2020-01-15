@@ -15,3 +15,21 @@ export type Labels = {[k in string]? : string}
 export interface ActionWithPayload<T> extends Action {
   payload: T;
 }
+
+export interface ErrorPayload {
+  error: any
+}
+
+export interface File {
+  id?: string | null;
+  size: number;
+  name: string;
+  numPages?: number | null | undefined;
+  mimetype: string;
+  content: {
+    text?: string | null;
+    base64?: string | null;
+  }
+}
+
+export type Files = Array<File>

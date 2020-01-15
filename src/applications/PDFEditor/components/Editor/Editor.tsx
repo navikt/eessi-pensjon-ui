@@ -7,15 +7,14 @@ import {
 import {
   RecipeTypePropType
 } from 'declarations/PDFEditor.pt'
-import { IFiles, IFilesPropType } from 'components/File/File'
 import _ from 'lodash'
 import { Column, Ekspanderbartpanel, Row } from 'Nav'
 import PT from 'prop-types'
 import Collapse from 'rc-collapse'
 import 'rc-collapse/assets/index.css'
 import React from 'react'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import { ActionCreators, Files, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 import DnD from 'applications/PDFEditor/components/DnD'
 import DnDImages from '../DnDImages/DnDImages'
 import DnDSource from '../DnDSource/DnDSource'
@@ -26,7 +25,7 @@ import PDFSizeSlider from 'applications/PDFEditor/components/PDFSizeSlider'
 export interface EditorProps {
   actions: ActionCreators;
   dndTarget: RecipeType;
-  files: IFiles;
+  files: Files;
   labels: Labels;
   recipes: Recipes;
   separator: Separator;
@@ -44,15 +43,15 @@ const Editor: React.FC<EditorProps> = ({
     actions.setActiveDnDTarget(index)
   }
 
-  const getImageFiles = (files: IFiles): IFiles => {
+  const getImageFiles = (files: Files): Files => {
     return _.filter(files, (file) => file.mimetype.startsWith('image/'))
   }
 
-  const getPdfFiles = (files: IFiles) => {
+  const getPdfFiles = (files: Files) => {
     return _.filter(files, (file) => file.mimetype === 'application/pdf')
   }
 
-  const imageCollapse = (imageFiles: IFiles): JSX.Element => {
+  const imageCollapse = (imageFiles: Files): JSX.Element => {
     if (_.isEmpty(imageFiles)) { return <div /> }
     return (
       <Ekspanderbartpanel apen key='images' tittel={labels.label_images} tittelProps='undertittel'>
@@ -68,7 +67,7 @@ const Editor: React.FC<EditorProps> = ({
     )
   }
 
-  const pdfCollapse = (pdfFiles: IFiles): Array<JSX.Element> => (
+  const pdfCollapse = (pdfFiles: Files): Array<JSX.Element> => (
     pdfFiles.map((file, i) => (
       <Ekspanderbartpanel apen key={'pdf-' + i} tittel={file.name} tittelProps='undertittel'>
         <DnDSource
@@ -157,7 +156,7 @@ const Editor: React.FC<EditorProps> = ({
 Editor.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
-  files: IFilesPropType.isRequired,
+  files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,
   recipes: PT.object.isRequired,
   pageScale: PT.number.isRequired,

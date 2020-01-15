@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import _ from 'lodash'
-import { Lenke, Sidetittel } from 'Nav'
+import { Lenke } from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
 import './Banner.css'
@@ -34,11 +34,9 @@ const Banner: React.FC<BannerProps> = ({
       >
         {labelHighContrast}
       </Lenke>) : null}
-    <Sidetittel
-      className='c-banner__title'
-    >
+    <div className='c-banner__title'>
       {header}
-    </Sidetittel>
+    </div>
   </div>
 )
 

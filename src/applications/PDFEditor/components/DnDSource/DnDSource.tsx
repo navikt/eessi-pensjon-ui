@@ -9,13 +9,12 @@ import {
   RecipeTypePropType
 } from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
-import { IFile, IFilePropType } from 'components/File/File'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import { ActionCreators, Labels, File } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilePropType, LabelsPropType } from 'declarations/types.pt'
 import DnDPage from '../DnDPage/DnDPage'
 import './DnDSource.css'
 
@@ -23,7 +22,7 @@ export interface DnDSourceProps {
   actions: ActionCreators;
   setRecipes: (r: Recipes) => void;
   labels: Labels;
-  pdf: IFile;
+  pdf: File;
   recipes: Recipes;
   pageScale: number;
   dndTarget: RecipeType;
@@ -138,7 +137,7 @@ DnDSource.propTypes = {
   setRecipes: PT.func.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
   labels: LabelsPropType.isRequired,
-  pdf: IFilePropType.isRequired,
+  pdf: FilePropType.isRequired,
   pageScale: PT.number.isRequired,
   recipes: RecipesPropType.isRequired
 }

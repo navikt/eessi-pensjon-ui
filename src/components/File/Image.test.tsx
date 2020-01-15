@@ -1,17 +1,18 @@
-import { FileProps, IFile } from 'components/File/File'
+import { FileProps } from 'components/File/File'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import Image from './Image'
 import defaultLabels from 'components/File/File.labels'
+import { File } from 'declarations/types.d'
 
-const mockPNG: IFile = { name: 'teapot', size: 418, mimetype: 'image/png', content: { base64: '...' } }
+const mockPNG: File = { name: 'teapot', size: 418, mimetype: 'image/png', content: { base64: '...' } }
 
 describe('components/File/Image', () => {
   let wrapper: ReactWrapper
   const initialMockProps: FileProps = {
     size: '2 kB',
     labels: defaultLabels,
-    file: mockPNG as IFile,
+    file: mockPNG as File,
     scale: 1,
     onClick: jest.fn()
   }

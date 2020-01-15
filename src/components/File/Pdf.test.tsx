@@ -1,4 +1,4 @@
-import { IFile } from 'components/File/File'
+import { File } from 'declarations/types.d'
 import { mount } from 'enzyme'
 import React from 'react'
 import Pdf from './Pdf'
@@ -22,7 +22,7 @@ jest.mock('react-pdf', () => {
 describe('components/File/Pdf', () => {
   const initialMockProps = {
     size: '2 kB',
-    file: samplePDF as IFile,
+    file: samplePDF as File,
     currentPage: 1,
     labels: defaultLabels,
     scale: 1,

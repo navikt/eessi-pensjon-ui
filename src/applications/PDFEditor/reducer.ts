@@ -1,7 +1,6 @@
 import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
-import { IFile } from 'components/File/File'
 import _ from 'lodash'
-import { Action, State } from 'declarations/types'
+import { Action, File, State } from 'declarations/types.d'
 import * as types from './constants/actionTypes'
 
 export const initialState: State = {
@@ -47,7 +46,7 @@ const mainReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case types.PDF_SELECTED: {
       const newRecipes: Recipes = _.clone(state.recipes)
-      const existingPDF = action.payload.map((pdf: IFile) => { return pdf.name })
+      const existingPDF = action.payload.map((pdf: File) => { return pdf.name })
 
       for (var i in newRecipes) {
         newRecipes[i as RecipeType] = _.filter(newRecipes[i as RecipeType], (step) => {

@@ -1,8 +1,7 @@
 import { Recipes, RecipeType, Separator, Step, Watermark } from 'declarations/PDFEditor.d'
-import { IFiles } from 'components/File/File'
 import { Modal, ModalContent } from 'components/Modal/Modal'
 import React, { useState } from 'react'
-import { ActionCreators, Dispatch, Labels, State } from 'declarations/types.d'
+import { ActionCreators, Dispatch, Files, Labels, State } from 'declarations/types.d'
 import * as pdfActions from './actions/pdf'
 import StepIndicator from './components/StepIndicator'
 import EditPDF from './pages/EditPDF'
@@ -20,7 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export interface PDFEditorProps {
   actions: ActionCreators;
   dndTarget: RecipeType;
-  files: IFiles;
+  files: Files;
   generatingPDF: boolean;
   generatedPDFs: GeneratedPDFs;
   labels: Labels;

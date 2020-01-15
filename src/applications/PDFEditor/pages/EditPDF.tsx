@@ -11,19 +11,18 @@ import {
   SeparatorPropType,
   WatermarkPropType
 } from 'declarations/PDFEditor.pt'
-import { IFiles, IFilesPropType } from 'components/File/File'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import {  ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import { ActionCreators, Files, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 import Editor from '../components/Editor/Editor'
 
 export interface EditPDFProps {
   actions: ActionCreators;
   dndTarget: RecipeType;
-  files: IFiles;
+  files: Files;
   labels: Labels;
   pageScale: number;
   recipes: Recipes;
@@ -105,7 +104,7 @@ const EditPDF: React.FC<EditPDFProps> = ({
 EditPDF.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
-  files: IFilesPropType.isRequired,
+  files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,
   pageScale: PT.number.isRequired,
   recipes: RecipesPropType.isRequired,

@@ -1,32 +1,20 @@
 import PDFSpecialPage from 'applications/PDFEditor/components/PDFSpecialPage/PDFSpecialPage'
-import {
-  PickImageStep,
-  PickPageStep,
-  Recipes,
-  RecipeSteps,
-  RecipeType,
-  Separator
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  RecipeStepsPropType,
-  RecipeTypePropType
-} from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
-import { IFile, IFilePropType } from 'components/File/File'
+import { PickImageStep, PickPageStep, Recipes, RecipeSteps, RecipeType, Separator } from 'declarations/PDFEditor.d'
+import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
+import { ActionCreators, File, Files } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators } from 'declarations/types.d'
-import { ActionCreatorsPropType } from 'declarations/types.pt'
 import DnDPage from '../DnDPage/DnDPage'
 import './DnDTarget.css'
 
 export interface DnDTargetProps {
   actions: ActionCreators;
   dndTarget: RecipeType;
-  files: Array<IFile>;
+  files: Files;
   pageScale: number;
   recipes: Recipes;
   recipe: RecipeSteps;
@@ -45,7 +33,7 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
             className={classNames('a-pdf-dndTarget-droppable', 'text-center', { 'a-pdf-dndTarget-droppable-active ': snapshot.isDraggingOver })}
           >
             {recipe ? recipe.map((recipeStep, index) => {
-              let file: IFile
+              let file: File
               if (_.has(recipeStep, 'name')) {
                 file = _.find(files, { name: (recipeStep as PickImageStep | PickPageStep).name })!
               }
@@ -101,7 +89,7 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
 DnDTarget.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
-  files: PT.arrayOf(IFilePropType.isRequired).isRequired,
+  files: FilesPropType.isRequired,
   pageScale: PT.number.isRequired,
   recipes: RecipesPropType.isRequired,
   recipe: PT.any.isRequired, // RecipeStepsPropType.isRequired,

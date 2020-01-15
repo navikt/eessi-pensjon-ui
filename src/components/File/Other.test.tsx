@@ -1,17 +1,17 @@
-import { IFile } from 'components/File/File'
+import { File } from 'declarations/types.d'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import defaultLabels from 'components/File/File.labels'
 import Other from './Other'
 
-const mockFile: IFile = { name: 'teapot.oolong', size: 418, mimetype: 'some/thing', content: { base64: '...' } }
+const mockFile: File = { name: 'teapot.oolong', size: 418, mimetype: 'some/thing', content: { base64: '...' } }
 
 describe('components/File/Other', () => {
   let wrapper: ReactWrapper
   const initialMockProps = {
     size: '2 kB',
     labels: defaultLabels,
-    file: mockFile as IFile,
+    file: mockFile as File,
     scale: 1,
     onClick: jest.fn()
   }

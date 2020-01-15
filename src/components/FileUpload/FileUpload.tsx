@@ -9,8 +9,8 @@ import Mustache from 'mustache'
 import PT from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Labels } from 'declarations/types'
-import FileFC, { IFile, IFiles } from '../File/File'
+import { File as IFile, Files as IFiles, Labels } from 'declarations/types'
+import FileFC from '../File/File'
 import './FileUpload.css'
 
 interface Status {

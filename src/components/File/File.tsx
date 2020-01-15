@@ -1,16 +1,16 @@
 import bytes from 'bytes'
 import classNames from 'classnames'
-import _ from 'lodash'
-import PT from 'prop-types'
-import React, { useState } from 'react'
-import { Labels } from 'declarations/types.d'
-import { LabelsPropType } from 'declarations/types.pt'
-import Icons from '../Icons/Icons'
-import './File.css'
 import defaultLabels from 'components/File/File.labels'
 import Image from 'components/File/Image'
 import Other from 'components/File/Other'
 import Pdf from 'components/File/Pdf'
+import { File, Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
+import _ from 'lodash'
+import PT from 'prop-types'
+import React, { useState } from 'react'
+import Icons from '../Icons/Icons'
+import './File.css'
 
 const renderBytes = (_bytes: number): string => {
   if (!_bytes) {
@@ -19,39 +19,11 @@ const renderBytes = (_bytes: number): string => {
   return bytes(_bytes)
 }
 
-export interface IFile {
-  id?: string | null;
-  size: number;
-  name: string;
-  numPages?: number | null | undefined;
-  mimetype: string;
-  content: {
-    text?: string | null;
-    base64?: string | null;
-  }
-}
-
-export const IFilePropType = PT.shape({
-  id: PT.string,
-  size: PT.number.isRequired,
-  name: PT.string.isRequired,
-  numPages: PT.number,
-  mimetype: PT.string.isRequired,
-  content: PT.shape({
-    text: PT.string,
-    base64: PT.string
-  }).isRequired
-})
-
-export type IFiles = Array<IFile>
-
-export const IFilesPropType = PT.arrayOf(IFilePropType.isRequired)
-
 export interface FileProps {
   className ?: string;
   currentPage ?: number;
   numberPages ?: number;
-  file: IFile;
+  file: File;
   buttons?: string;
   height?: number;
   labels: Labels,
@@ -67,18 +39,18 @@ export interface ThisFileProps {
   animate?: boolean;
   buttons?: string;
   className ?: string;
-  file: IFile;
+  file: File;
   height ?: number | string;
   initialPage ?: number;
   initialLabels?: Labels;
-  onAddFile?: (file: IFile) => void;
-  onContentClick?: (file: IFile) => void;
-  onDeleteFile?: (file: IFile) => void;
-  onDownloadFile?: (file: IFile) => void;
-  onLoadSuccess?: (file: IFile) => void;
-  onPreviewFile?: (file: IFile, initialPage: number) => void;
-  onPreviousPage?: (file: IFile) => void;
-  onNextPage?: (file: IFile) => void;
+  onAddFile?: (file: File) => void;
+  onContentClick?: (file: File) => void;
+  onDeleteFile?: (file: File) => void;
+  onDownloadFile?: (file: File) => void;
+  onLoadSuccess?: (file: File) => void;
+  onPreviewFile?: (file: File, initialPage: number) => void;
+  onPreviousPage?: (file: File) => void;
+  onNextPage?: (file: File) => void;
   scale?: number;
   showAddButton?: boolean;
   showDeleteButton?: boolean;
@@ -92,9 +64,9 @@ interface LoadEvent {
   numPages: number;
 }
 
-const File: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
+const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
   const {
-    animate = true, className, initialPage, file = {} as IFile, buttons = 'hover', height, initialLabels = {} as Labels,
+    animate = true, className, initialPage, file = {} as File, buttons = 'hover', height, initialLabels = {} as Labels,
     onAddFile, onContentClick, onDeleteFile, onDownloadFile, onLoadSuccess, onPreviewFile, onPreviousPage, onNextPage,
     showAddButton = false, showDeleteButton = false, showDownloadButton = false, showPreviewButton = false, scale = 1.0,
     tema = 'paper', width
@@ -133,11 +105,11 @@ const File: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
       onLoadSuccess({
         ...file,
         numPages: e.numPages
-      } as IFile)
+      } as File)
     }
   }
 
-  const isPreviewable = (file: IFile): boolean => {
+  const isPreviewable = (file: File): boolean => {
     return file.mimetype === 'application/pdf' || file.mimetype.startsWith('image/')
   }
 
@@ -269,7 +241,7 @@ const File: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
   )
 }
 
-File.propTypes = {
+FileFC.propTypes = {
   animate: PT.bool,
   className: PT.string,
   buttons: PT.oneOf(['visible', 'hover', 'none']),
@@ -304,4 +276,4 @@ File.propTypes = {
   width: PT.number
 }
 
-export default File
+export default FileFC

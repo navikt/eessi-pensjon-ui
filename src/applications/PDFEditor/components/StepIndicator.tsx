@@ -1,7 +1,8 @@
-import { IFiles, IFilesPropType } from 'components/File/File'
 import Icons from 'components/Icons/Icons'
 import { Recipes, Step } from 'declarations/PDFEditor.d'
+import { Files } from 'declarations/types.d'
 import { RecipesPropType, StepPropType, Steps } from 'declarations/PDFEditor.pt'
+import { FilesPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import { Stegindikator } from 'Nav'
 import PT from 'prop-types'
@@ -9,7 +10,7 @@ import React, { useState } from 'react'
 import { Labels } from 'declarations/types'
 
 export interface StepIndicatorProps {
-  files: IFiles;
+  files: Files;
   labels: Labels;
   recipes: Recipes;
   step: Step;
@@ -71,7 +72,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
 }
 
 StepIndicator.propTypes = {
-  files: IFilesPropType.isRequired,
+  files: FilesPropType.isRequired,
   recipes: RecipesPropType.isRequired,
   step: StepPropType.isRequired,
   setStep: PT.func.isRequired

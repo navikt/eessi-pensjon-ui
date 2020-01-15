@@ -1,18 +1,17 @@
 import { Step } from 'declarations/PDFEditor.d'
-import { IFiles, IFilesPropType } from 'components/File/File'
 import FileUpload from 'components/FileUpload/FileUpload'
 import _ from 'lodash'
 import { Hovedknapp, Undertittel } from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
+import { ActionCreators, Files, Labels } from 'declarations/types.d'
+import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 
 export interface SelectPDFProps {
   actions: ActionCreators;
   labels: Labels;
   loadingPDF: boolean;
-  files: IFiles;
+  files: Files;
   setStep: (s: Step) => void;
 }
 
@@ -23,7 +22,7 @@ const SelectPDF: React.FC<SelectPDFProps> = ({
     setStep('edit')
   }
 
-  const handleFileChange = (files: IFiles) => {
+  const handleFileChange = (files: Files) => {
     actions.selectPDF(files)
   }
 
@@ -63,7 +62,7 @@ SelectPDF.propTypes = {
   actions: ActionCreatorsPropType.isRequired,
   labels: LabelsPropType.isRequired,
   loadingPDF: PT.bool.isRequired,
-  files: IFilesPropType.isRequired,
+  files: FilesPropType.isRequired,
   setStep: PT.func.isRequired
 }
 
