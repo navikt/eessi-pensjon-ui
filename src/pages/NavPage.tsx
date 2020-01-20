@@ -24,7 +24,7 @@ const MultipleSelectPage: React.FC<PageProps> = ({ highContrast }: PageProps): J
         <li><strong>B: </strong>BekreftCheckboksPanel</li>
         <li><strong>C: </strong>Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column</li>
         <li><strong>E: </strong>Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten</li>
-        <li><strong>F: </strong>Fareknapp, Fieldset, Flatknapp</li>
+        <li><strong>F: </strong>Fareknapp, Flatknapp</li>
         <li><strong>H: </strong>Hamburgerknapp, Hjelpetekst, Hovedknapp</li>
         <li><strong>I: </strong>Ikon, Ingress, Innholdstittel, Input</li>
         <li><strong>K: </strong>Knapp, KnappBase</li>

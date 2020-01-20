@@ -1,5 +1,5 @@
 import AlertStripe, { AlertStripeAdvarsel, AlertStripeFeil, AlertStripeInfo, AlertStripeSuksess } from 'nav-frontend-alertstriper'
-import { BekreftCheckboksPanel, Checkbox, CheckboksPanel, CheckboksPanelGruppe, Fieldset, Input, Radio, RadioPanel, RadioPanelGruppe, Select, SkjemaGruppe, Textarea, TextareaControlled } from 'nav-frontend-skjema'
+import { BekreftCheckboksPanel, Checkbox, CheckboksPanel, CheckboksPanelGruppe, Input, Radio, RadioPanel, RadioPanelGruppe, Select, SkjemaGruppe, Textarea, TextareaControlled } from 'nav-frontend-skjema'
 import Chevron from 'nav-frontend-chevron'
 import Ekspanderbartpanel, { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel'
 import EtikettBase, { EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess } from 'nav-frontend-etiketter'
@@ -46,7 +46,6 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (EtikettSuksess as unknown as React.FunctionComponent).displayName = 'EtikettSuksess';
 (EtikettLiten as unknown as React.FunctionComponent).displayName = 'EtikettLiten';
 (Fareknapp as unknown as React.FunctionComponent).displayName = 'Fareknapp';
-(Fieldset as unknown as React.FunctionComponent).displayName = 'Fieldset';
 (Flatknapp as unknown as React.FunctionComponent).displayName = 'Flatknapp';
 (Hamburgerknapp as unknown as React.FunctionComponent).displayName = 'Hamburgerknapp';
 (Hjelpetekst as unknown as React.FunctionComponent).displayName = 'Hjelpetekst';
@@ -99,7 +98,7 @@ export {
   BekreftCheckboksPanel,
   Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column,
   Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten,
-  Fareknapp, Fieldset, Flatknapp,
+  Fareknapp, Flatknapp,
   Hamburgerknapp, Hjelpetekst, Hovedknapp,
   Ikon, Ingress, Innholdstittel, Input,
   Knapp, KnappBase,

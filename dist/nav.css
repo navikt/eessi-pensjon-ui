@@ -22,7 +22,7 @@
 }
 .alertstripe--feil {
   border: 1px solid #BA3A26;
-  background-color: #e79999;
+  background-color: #e3b0a8;
 }
 .alertstripe__ikon {
   margin-right: 0.75rem;
@@ -2056,10 +2056,9 @@ GRID
   border: 0;
 }
 .knappmini-mixin {
-  font-size: 0.875em;
   text-transform: none;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  padding: calc(.25rem - 1px) 1.5rem calc(.25rem - 1px) 1.5rem;
+  min-height: 2rem;
 }
 .knappdisabled-mixin:disabled,
 .knappdisabled-mixin--disabled {
@@ -2381,14 +2380,17 @@ GRID
   color: #FFF;
 }
 .knapp--mini {
-  font-size: 0.875em;
   text-transform: none;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  padding: calc(.25rem - 1px) 1.5rem calc(.25rem - 1px) 1.5rem;
+  min-height: 2rem;
 }
 .knapp--kompakt {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+.knapp--kompakt.knapp--mini {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .knapp__spinner {
   width: 0.8em;
@@ -2818,41 +2820,21 @@ GRID
   position: absolute;
   right: 0;
 }
-.skjema__fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-.skjema__legend {
-  font-family: 'Source Sans Pro', Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.375rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
 .skjemaelement {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.375rem;
   font-weight: 400;
-  margin-bottom: 1rem;
+  position: relative;
 }
 .skjemaelement__label {
-  display: block;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
-}
-.skjemaelement__sporsmal {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.375rem;
   font-weight: 600;
-  margin-bottom: 0.94117647rem;
-  margin-top: 0;
-}
-.skjemaelement--horisontal {
-  margin-bottom: 1rem;
-  position: relative;
+  display: block;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
 .checkboks,
 .radioknapp {
@@ -2861,6 +2843,10 @@ GRID
 }
 .checkboks + .skjemaelement__label,
 .radioknapp + .skjemaelement__label {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
   padding-left: 32px;
   position: relative;
   display: inline-block;
@@ -2890,7 +2876,6 @@ GRID
 .checkboks:hover + .skjemaelement__label:before,
 .radioknapp:hover + .skjemaelement__label:before {
   border-color: #0067C5;
-  transition: border-color 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
   background-color: #cce1f3;
 }
 .checkboks:disabled + .skjemaelement__label,
@@ -3006,7 +2991,6 @@ GRID
 }
 .textareamirror:hover {
   border-color: #0067C5;
-  transition: border-color 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
 }
 .textareamirror:disabled,
 .textareamirror[readonly] {
@@ -3018,6 +3002,9 @@ GRID
 .textareamirror:disabled:hover,
 .textareamirror[readonly]:hover {
   cursor: not-allowed;
+}
+.textareamirror--mini {
+  padding: 0.25rem;
 }
 .textareamirror:focus {
   outline: 0;
@@ -3025,7 +3012,6 @@ GRID
 }
 .textareamirror:hover {
   border-color: #0067C5;
-  transition: border-color 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
 }
 .textareamirror:disabled,
 .textareamirror[readonly] {
@@ -3037,6 +3023,9 @@ GRID
 .textareamirror:disabled:hover,
 .textareamirror[readonly]:hover {
   cursor: not-allowed;
+}
+.textareamirror--mini {
+  padding: 0.25rem;
 }
 .textarea__container {
   position: relative;
@@ -3125,7 +3114,6 @@ GRID
 }
 .skjemaelement__input:hover {
   border-color: #0067C5;
-  transition: border-color 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
 }
 .skjemaelement__input:disabled,
 .skjemaelement__input[readonly] {
@@ -3138,31 +3126,36 @@ GRID
 .skjemaelement__input[readonly]:hover {
   cursor: not-allowed;
 }
-.skjema__feilomrade--harFeil {
-  margin-bottom: 1rem;
-  background-color: #F3E3E3;
-  box-shadow: 0 0 0 8px #F3E3E3;
+.skjemaelement__input--mini {
+  padding: 0.25rem;
 }
-.skjema__feilomrade--harFeil:focus {
-  box-shadow: 0 0 0 8px #F3E3E3, 0 0 0 12px #FFBD66;
+.skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked) {
+  border-color: #BA3A26;
+  box-shadow: 0 0 0 1px #BA3A26;
+}
+.skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).checkboks + .skjemaelement__label:before,
+.skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).radioknapp + .skjemaelement__label:before {
+  border-color: #BA3A26;
+  box-shadow: 0 0 0 1px #BA3A26;
+}
+.skjemagruppe--feil .inputPanel:not(.inputPanel--focused):not(.inputPanel--checked):not(.inputPanel--disabled) {
+  border-color: #BA3A26;
+  box-shadow: 0 0 0 1px #BA3A26;
 }
 .skjemaelement__feilmelding {
-  font-style: italic;
-  color: #BA3A26;
   margin-top: 0.5rem;
-  margin-bottom: 0;
 }
 .skjemaelement__feilmelding:empty {
   margin: 0;
 }
-.skjemaelement__input--harFeil {
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) {
   border-color: #BA3A26;
-  background-color: #F3E3E3;
+  box-shadow: 0 0 0 1px #BA3A26;
 }
-.skjemaelement__input--harFeil.checkboks:not(:checked) + .skjemaelement__label:before,
-.skjemaelement__input--harFeil.radio:not(:checked) + .skjemaelement__label:before {
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).checkboks:not(:checked) + .skjemaelement__label:before,
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).radio:not(:checked) + .skjemaelement__label:before {
   border-color: #BA3A26;
-  background-color: #F3E3E3;
+  box-shadow: 0 0 0 1px #BA3A26;
 }
 .toggle {
   display: flex;
@@ -3208,7 +3201,10 @@ GRID
   z-index: 999;
   box-shadow: 0 0 0 3px #FFBD66;
 }
-.inputPanelGruppe .inputPanel {
+.inputPanelGruppe__inner + div > .skjemaelement__feilmelding {
+  margin-top: 0.5rem;
+}
+.inputPanelGruppe .inputPanel:not(:last-child) {
   margin-bottom: 0.5rem;
 }
 .inputPanel {
@@ -3228,7 +3224,6 @@ GRID
 .inputPanel__field:checked + .inputPanel__label:before {
   border: 1px solid #0067C5;
   background-color: #0067C5;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
 }
 .inputPanel__field:disabled + .inputPanel__label:before {
   background-color: #E9E7E7;
@@ -3291,27 +3286,23 @@ GRID
   background-color: #99c2e8;
   border: 0;
 }
-.inputPanel:hover:not(.inputPanel--disabled):not(.bekreftCheckboksPanel) .inputPanel__field:checked + .inputPanel__label:before {
-  border: 1px solid transparent;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-}
 .inputPanel:hover:not(.inputPanel--disabled):not(.bekreftCheckboksPanel) .inputPanel__label {
   color: #0067C5;
 }
-.radioPanel.inputPanel--checked:hover:not(.inputPanel--disabled) {
-  background-color: rgba(0, 103, 197, 0.2);
-  border: 1px solid transparent;
-  box-shadow: none;
-}
-.radioPanel.inputPanel--checked:hover:not(.inputPanel--disabled) .inputPanel__field + .inputPanel__label:before {
-  background-color: #0067C5;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-}
-.radioPanel.inputPanel .inputPanel__label:before {
-  border-radius: 50%;
-}
 .checkboksPanel .inputPanel__label:before {
   border-radius: 4px;
+}
+.checkboksPanel .inputPanel__field:checked + .inputPanel__label:before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
+}
+.radioPanel.inputPanel--checked .inputPanel__label:before {
+  border: 2px solid #0067C5;
+  box-shadow: 0 0 0 3px #FFF inset, 0 0 0 12px #0067C5 inset;
+  border-radius: 50%;
+}
+.radioPanel.inputPanel--checked.inputPanel--focused .inputPanel__label:before {
+  transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
+  box-shadow: 0 0 0 3px #FFF inset, 0 0 0 12px #0067C5 inset;
 }
 .bekreftCheckboksPanel {
   background-color: #FFF;
@@ -3357,6 +3348,80 @@ GRID
 .bekreftCheckboksPanel--error {
   background-color: #F3E3E3;
   border: 1px solid transparent;
+}
+.feiloppsummering {
+  background-color: #FFF;
+  display: block;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 4px;
+  border-radius: 0px;
+  border: 4px solid #BA3A26;
+}
+.feiloppsummering:focus,
+.feiloppsummering--focus {
+  box-shadow: 0 0 0px 3px #254b6d;
+  outline: none;
+}
+.feiloppsummering__liste {
+  margin: 1rem 0;
+}
+.feiloppsummering__liste li {
+  margin-bottom: 0.25rem;
+}
+.skjemagruppe,
+.skjemagruppe fieldset,
+.skjemagruppe__fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.skjemagruppe .skjemaelement,
+.skjemagruppe fieldset .skjemaelement,
+.skjemagruppe__fieldset .skjemaelement {
+  margin-bottom: 1rem;
+}
+.skjemagruppe .skjemagruppe.inputPanelGruppe,
+.skjemagruppe fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe__fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe .skjemagruppe.radiogruppe,
+.skjemagruppe fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe__fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe .skjemagruppe.checkboxgruppe,
+.skjemagruppe fieldset .skjemagruppe.checkboxgruppe,
+.skjemagruppe__fieldset .skjemagruppe.checkboxgruppe {
+  margin-bottom: 1rem;
+}
+.skjemagruppe legend,
+.skjemagruppe__legend {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+@media (min-width: 30em) {
+  .skjemagruppe legend,
+  .skjemagruppe__legend {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+}
+.skjemagruppe.inputPanelGruppe .skjemaelement,
+.skjemagruppe.radiogruppe .skjemaelement,
+.skjemagruppe.checkboxgruppe .skjemaelement {
+  margin-bottom: 0.5rem;
+}
+.skjemagruppe.inputPanelGruppe legend,
+.skjemagruppe.radiogruppe legend,
+.skjemagruppe.checkboxgruppe legend,
+.skjemagruppe.inputPanelGruppe .skjemagruppe__legend,
+.skjemagruppe.radiogruppe .skjemagruppe__legend,
+.skjemagruppe.checkboxgruppe .skjemagruppe__legend {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 .snakkeboble {
   display: flex;
@@ -4367,6 +4432,14 @@ GRID
   font-size: 1rem;
   line-height: 1.375rem;
   font-weight: 600;
+}
+.typo-feilmelding {
+  margin: 0;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+  color: #BA3A26;
 }
 .typo-normal {
   margin: 0;

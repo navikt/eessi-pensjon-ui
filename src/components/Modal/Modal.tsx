@@ -1,35 +1,11 @@
 import classNames from 'classnames'
+import { ModalContent } from 'declarations/components'
+import { ModalContentPropType } from 'declarations/components.pt'
 import _ from 'lodash'
 import { Hovedknapp, Knapp, Lukknapp, Modal as NavModal, Undertittel } from 'Nav'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import './Modal.css'
-
-export interface ModalButton {
-  onClick?: () => void;
-  disabled ?: boolean;
-  main?: boolean;
-  text: string;
-}
-
-export interface ModalContent {
-  modalTitle?: string;
-  modalContent ?: JSX.Element |string;
-  modalText ?: string;
-  modalButtons?: Array<ModalButton>
-}
-
-export const ModalContentPropType = PT.shape({
-  modalTitle: PT.string,
-  modalContent: PT.oneOf([PT.element, PT.string]),
-  modalText: PT.string,
-  modalButtons: PT.arrayOf(PT.shape({
-    onClick: PT.func,
-    disabled: PT.bool,
-    main: PT.bool,
-    text: PT.string.isRequired
-  }))
-})
 
 export interface ModalProps {
   appElement?: Element;

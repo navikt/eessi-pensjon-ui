@@ -1,5 +1,6 @@
+import { ModalContent } from 'declarations/components'
 import { Recipes, RecipeType, Separator, Step, Watermark } from 'declarations/PDFEditor.d'
-import { Modal, ModalContent } from 'components/Modal/Modal'
+import { Modal } from 'components/Modal/Modal'
 import React, { useState } from 'react'
 import { ActionCreators, Dispatch, Files, Labels, State } from 'declarations/types.d'
 import * as pdfActions from './actions/pdf'
