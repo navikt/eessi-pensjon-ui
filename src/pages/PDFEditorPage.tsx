@@ -1,8 +1,10 @@
+import { PageProps } from 'pages/index'
 import React from 'react'
 import Container from './Container'
 import PDFEditor from 'applications/PDFEditor'
 import { Normaltekst, Panel, Systemtittel } from '../Nav'
-const PDFEditorPage = () => {
+
+const PDFEditorPage: React.FC<PageProps> = (): JSX.Element => {
   return (
     <Container>
       <Panel className='p-4'>

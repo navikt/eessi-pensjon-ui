@@ -1,19 +1,18 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import Container from './Container'
 import MultipleSelect from 'components/MultipleSelect/MultipleSelect'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const MultipleSelectPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -196,4 +195,4 @@ const MultipleSelectPage: React.FC<PageProps> = ({ highContrast }: PageProps): J
   )
 }
 
-export default connect(mapStateToProps, () => {})(MultipleSelectPage)
+export default MultipleSelectPage

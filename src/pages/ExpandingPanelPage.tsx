@@ -7,19 +7,17 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import { Hovedknapp, Normaltekst, Panel, Systemtittel } from '../Nav'
 import sampleJPG from 'resources/tests/sampleJPG'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Container from './Container'
-
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const ExpandingPanelPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
   const [panelNumClicks, setPanelNumClicks] = useState<number>(0)
   const [buttonNumClicks, setButtonNumClicks] = useState<number>(0)
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -139,4 +137,4 @@ const ExpandingPanelPage: React.FC<PageProps> = ({ highContrast }: PageProps): J
   )
 }
 
-export default connect(mapStateToProps, () => {})(ExpandingPanelPage)
+export default ExpandingPanelPage

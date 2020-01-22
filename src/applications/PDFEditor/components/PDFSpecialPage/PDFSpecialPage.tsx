@@ -1,35 +1,25 @@
-import {
-  Recipes,
-  RecipeType,
-  Separator
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  RecipeTypePropType,
-  SeparatorPropType
-} from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
+import { Recipes, RecipeType, Separator } from 'declarations/PDFEditor.d'
+import { RecipesPropType, RecipeTypePropType, SeparatorPropType } from 'declarations/PDFEditor.pt'
 import _ from 'lodash'
 import { Ikon } from 'Nav'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import './PDFSpecialPage.css'
-import { ActionCreators } from 'declarations/types.d'
-import { ActionCreatorsPropType } from 'declarations/types.pt'
 
 export interface PDFSpecialPageProps {
-  actions: ActionCreators;
   className ?: string;
   deleteLink: boolean;
   dndTarget: RecipeType;
   pageScale: number;
   recipes: Recipes;
   separator: Separator;
+  setRecipes: (r: Recipes) => void;
   style?: React.CSSProperties;
 }
 
 const PDFSpecialPage: React.FC<PDFSpecialPageProps> = ({
-  actions, className, deleteLink, dndTarget, pageScale, recipes, separator, style = {}
+  className, deleteLink, dndTarget, pageScale, recipes, separator, setRecipes, style = {}
 }: PDFSpecialPageProps): JSX.Element => {
   const [isHovering, setIsHovering] = useState<boolean>(false)
   const onHandleMouseEnter = () => setIsHovering(true)
@@ -41,7 +31,7 @@ const PDFSpecialPage: React.FC<PDFSpecialPageProps> = ({
     const index = _.findIndex(recipes[dndTarget], { separatorText: separatorText } as Separator)
     if (index >= 0) {
       newRecipes[dndTarget]!.splice(index, 1)
-      actions.setRecipes(newRecipes)
+      setRecipes(newRecipes)
     }
   }
 
@@ -70,13 +60,13 @@ const PDFSpecialPage: React.FC<PDFSpecialPageProps> = ({
 }
 
 PDFSpecialPage.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   className: PT.string,
   deleteLink: PT.bool.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
   pageScale: PT.number.isRequired,
   recipes: RecipesPropType.isRequired,
   separator: SeparatorPropType.isRequired,
+  setRecipes: PT.func.isRequired,
   style: PT.any
 }
 

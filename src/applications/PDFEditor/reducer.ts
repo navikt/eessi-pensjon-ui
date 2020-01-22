@@ -1,7 +1,23 @@
-import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
+import { ModalContent } from 'declarations/components'
+import { PickImageStep, PickPageStep, Recipes, RecipeType, Separator, Watermark } from 'declarations/PDFEditor.d'
 import _ from 'lodash'
-import { Action, File, State } from 'declarations/types.d'
+import { ActionWithPayload, File, Files } from 'declarations/types.d'
 import * as types from './constants/actionTypes'
+
+export interface State {
+  recipes: Recipes;
+  files: Files;
+  generatingPDFs: boolean;
+  generatedPDFs: any;
+  pageScale: number;
+  dndTarget: RecipeType;
+  loadingPDF: boolean;
+  modal: ModalContent | undefined;
+  watermark: Watermark;
+  separator: Separator;
+  status: string | undefined;
+  step: number;
+}
 
 export const initialState: State = {
   recipes: {},
@@ -28,7 +44,7 @@ export const initialState: State = {
   step: 0
 }
 
-const mainReducer = (state: State = initialState, action: Action) => {
+const mainReducer = (state: State = initialState, action: ActionWithPayload) => {
   let status
 
   if (_.endsWith(action.type, '/REQUEST')) {

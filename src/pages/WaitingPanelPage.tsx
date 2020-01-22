@@ -1,21 +1,20 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import Container from './Container'
 import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import { Input, Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
 import Mustache from 'mustache'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const WaitingPanelPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const WaitingPanelPage: React.FC<PageProps> = (): JSX.Element => {
   const [message, setMessage] = useState<string>('Vennligst vent...')
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -96,4 +95,4 @@ const WaitingPanelPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX
   )
 }
 
-export default connect(mapStateToProps, () => {})(WaitingPanelPage)
+export default WaitingPanelPage

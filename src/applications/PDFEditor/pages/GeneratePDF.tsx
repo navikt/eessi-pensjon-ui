@@ -1,51 +1,46 @@
-import {
-  Recipes,
-  Step,
-  Watermark
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  WatermarkPropType
-} from 'declarations/PDFEditor.pt'
+import FileFC from 'components/File/File'
+import { Recipes, Step, Watermark } from 'declarations/PDFEditor.d'
+import { File, Files, Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import FileFC from 'components/File/File'
-import { ActionCreators, File, Files, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
+import { useDispatch, useSelector } from 'react-redux'
+import * as pdfActions from '../actions/pdf'
+import { State } from '../reducer'
 
 type FileNames = {[k: string]: string};
 export type GeneratedPDFs = {[k: string]: File};
 
 export interface GeneratePDFProps {
-  actions: ActionCreators;
-  files: Files;
-  generatingPDF: boolean;
-  generatedPDFs: GeneratedPDFs;
   labels: Labels;
-  recipes: Recipes;
   setStep: (s: Step) => void;
-  watermark: Watermark;
 }
 
 const GeneratePDF: React.FC<GeneratePDFProps> = ({
-  actions, files, generatingPDF, generatedPDFs, labels, recipes, watermark, setStep
+  labels, setStep
 }: GeneratePDFProps): JSX.Element => {
   const [_fileNames, setFileNames] = useState<FileNames>({})
   const [mounted, setMounted] = useState<boolean>(false)
+  const dispatch = useDispatch()
+  const watermark = useSelector<State, Watermark>(state => state.watermark)
+  const recipes: Recipes = useSelector<State, Recipes>(state => state.recipes)
+  const files: Files = useSelector<State, Files>(state => state.files)
+  const generatingPDFs: boolean = useSelector<State, boolean>(state => state.generatingPDFs)
+  const generatedPDFs: GeneratedPDFs = useSelector<State, GeneratedPDFs>(state => state.generatedPDFs)
   const _refs: {[k: string]: any} = _.mapValues(recipes, () => React.createRef())
 
   useEffect(() => {
     if (!mounted && files) {
-      actions.generatePDF({
+      dispatch(pdfActions.generatePDF({
         recipes: recipes,
         files: files,
         watermark: watermark
-      })
+      }))
       setMounted(true)
     }
-  }, [mounted, actions, files, recipes, watermark])
+  }, [mounted, dispatch, files, recipes, watermark])
 
   const setKeys = (generatedPDFs: GeneratedPDFs): FileNames => {
     const newfileNames: FileNames = {}
@@ -66,7 +61,7 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
   }
 
   const onForwardButtonClick = () => {
-    actions.clearPDF()
+    dispatch(pdfActions.clearPDF())
   }
 
   const setFileName = (key: string, value: string) => {
@@ -81,11 +76,11 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
     })
   }
 
-  const buttonText = generatingPDF ? labels.loading_generatingPDF : labels.label_startAgain
+  const buttonText = generatingPDFs ? labels.loading_generatingPDF : labels.label_startAgain
 
   return (
     <div>
-      {generatingPDF ? (
+      {generatingPDFs ? (
         <div className='w-100 text-center'>
           <Nav.Spinner />
           <p className='typo-normal'>{labels.loading_generatingPDF}</p>
@@ -126,7 +121,7 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
       <Nav.Row className='mt-4'>
         <Nav.Column>
           <Nav.Hovedknapp className='downloadAllButton' onClick={downloadAll}>{labels.button_downloadAll}</Nav.Hovedknapp>
-          <Nav.Knapp disabled={generatingPDF} className='ml-3 forwardButton' onClick={onForwardButtonClick}>{buttonText}</Nav.Knapp>
+          <Nav.Knapp disabled={generatingPDFs} className='ml-3 forwardButton' onClick={onForwardButtonClick}>{buttonText}</Nav.Knapp>
           <Nav.Flatknapp className='backButton ml-3' onClick={onBackButtonClick}>{labels.label_back}</Nav.Flatknapp>
         </Nav.Column>
       </Nav.Row>
@@ -135,14 +130,8 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
 }
 
 GeneratePDF.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
-  files: FilesPropType.isRequired,
-  generatingPDF: PT.bool.isRequired,
-  generatedPDFs: PT.any.isRequired,
   labels: LabelsPropType.isRequired,
-  recipes: RecipesPropType.isRequired,
-  setStep: PT.func.isRequired,
-  watermark: WatermarkPropType.isRequired
+  setStep: PT.func.isRequired
 }
 
 export default GeneratePDF

@@ -1,7 +1,7 @@
 import { AllowedLocaleString } from 'components/CountryData/CountryData'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import Container from './Container'
 import CountrySelect from 'components/CountrySelect/CountrySelect'
 import * as CountryFilter from 'components/CountrySelect/CountryFilter'
@@ -9,16 +9,15 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Mustache from 'mustache'
 import { Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const CountryUtilsPage = ({ highContrast }: PageProps) => {
+const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
   const [sort, setSort] = useState<string>('scandinaviaFirst')
   const [lang, setLang] = useState<AllowedLocaleString>('en')
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -332,4 +331,4 @@ const CountryUtilsPage = ({ highContrast }: PageProps) => {
   )
 }
 
-export default connect(mapStateToProps, () => {})(CountryUtilsPage)
+export default CountryUtilsPage

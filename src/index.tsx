@@ -1,50 +1,53 @@
 // IE 11
-import 'react-app-polyfill/ie11'
+import { IS_PRODUCTION } from 'constants/environment'
+import 'core-js/es/array/find'
+import 'core-js/es/array/includes'
+import 'core-js/es/map'
 import 'core-js/es/object/assign'
 import 'core-js/es/object/entries'
 import 'core-js/es/object/keys'
-import 'core-js/es/array/includes'
-import 'core-js/es/array/find'
-import 'core-js/es/map'
 import 'core-js/es/set'
 import 'core-js/stable/number'
 import 'core-js/stable/promise'
 import 'core-js/stable/url-search-params'
-
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Switch, Route } from 'react-router'
-import { HashRouter } from 'react-router-dom'
-import { StoreProvider } from './store'
-import reducer, { initialState } from './reducer'
-import { IS_PRODUCTION } from 'constants/environment'
-import './minibootstrap.css'
-import './index.css'
-import './index_highContrast.css'
-
-import DashboardPage from 'pages/DashboardPage'
-import PDFEditorPage from 'pages/PDFEditorPage'
 import AlertPage from 'pages/AlertPage'
 import BannerPage from 'pages/BannerPage'
 import ColorPickerPage from 'pages/ColorPickerPage'
 import CountryUtilsPage from 'pages/CountryUtilsPage'
+
+import DashboardPage from 'pages/DashboardPage'
 import DatePickerPage from 'pages/DatePickerPage'
+import EESSIPensjonVeilederPage from 'pages/EESSIPensjonVeilederPage'
 import ExpandingPanelPage from 'pages/ExpandingPanelPage'
 import FilePage from 'pages/FilePage'
 import FileUploadPage from 'pages/FileUploadPage'
 import FlagPage from 'pages/FlagPage'
-import IndexPage from 'pages/IndexPage'
 import IconsPage from 'pages/IconsPage'
+import IndexPage from 'pages/IndexPage'
 import ModalPage from 'pages/ModalPage'
 import MultipleSelectPage from 'pages/MultipleSelectPage'
 import NavPage from 'pages/NavPage'
 import PaginationPage from 'pages/PaginationPage'
+import PDFEditorPage from 'pages/PDFEditorPage'
 import PostalCodesPage from 'pages/PostalCodesPage'
 import ProgressBarPage from 'pages/ProgressBarPage'
-import EESSIPensjonVeilederPage from 'pages/EESSIPensjonVeilederPage'
 import RefreshButtonPage from 'pages/RefreshButtonPage'
 import TableSorterPage from 'pages/TableSorterPage'
 import WaitingPanelPage from 'pages/WaitingPanelPage'
+
+import * as React from 'react'
+import 'react-app-polyfill/ie11'
+import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { Route, Switch } from 'react-router'
+import { HashRouter } from 'react-router-dom'
+import { createStore } from 'redux'
+import './index.css'
+import './index_highContrast.css'
+import './minibootstrap.css'
+import reducer from './reducer'
+
+const store = createStore(reducer)
 
 if (!IS_PRODUCTION) {
   var axe = require('react-axe')
@@ -52,7 +55,7 @@ if (!IS_PRODUCTION) {
 }
 
 ReactDOM.render(
-  <StoreProvider initialState={initialState} reducer={reducer}>
+  <Provider store={store}>
     <HashRouter>
       <Switch>
         <Route exact path='/Dashboard' component={DashboardPage} />
@@ -80,6 +83,6 @@ ReactDOM.render(
         <Route path='/' component={IndexPage} />
       </Switch>
     </HashRouter>
-  </StoreProvider>,
+  </Provider>,
   document.getElementById('root')
 )

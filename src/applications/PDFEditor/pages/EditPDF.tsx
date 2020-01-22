@@ -1,55 +1,41 @@
-import {
-  Recipes,
-  RecipeType,
-  Separator,
-  Step,
-  Watermark
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  RecipeTypePropType,
-  SeparatorPropType,
-  WatermarkPropType
-} from 'declarations/PDFEditor.pt'
+import { Recipes, Step } from 'declarations/PDFEditor.d'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import * as Nav from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
-import { ActionCreators, Files, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
+import { useDispatch, useSelector } from 'react-redux'
+import * as pdfActions from '../actions/pdf'
 import Editor from '../components/Editor/Editor'
+import { State } from '../reducer'
 
 export interface EditPDFProps {
-  actions: ActionCreators;
-  dndTarget: RecipeType;
-  files: Files;
   labels: Labels;
-  pageScale: number;
-  recipes: Recipes;
-  separator: Separator;
   setStep: (s: Step) => void;
-  watermark: Watermark;
 }
 
 const EditPDF: React.FC<EditPDFProps> = ({
-  actions, dndTarget, files, labels, pageScale, recipes, separator, setStep, watermark
+  labels, setStep
 }: EditPDFProps): JSX.Element => {
+  const dispatch = useDispatch()
+  const recipes = useSelector<State, Recipes>(state => state.recipes)
   const hasOnlyEmptyRecipes = (recipes: Recipes) => {
     return _.every(recipes, (recipe) => _.isEmpty(recipe))
   }
 
   const onForwardButtonClick = () => {
     if (hasOnlyEmptyRecipes(recipes)) {
-      actions.setModal({
+      dispatch(pdfActions.setModal({
         modalTitle: labels.modal_empty_title,
         modalText: labels.modal_empty_text,
         modalButtons: [{
           main: true,
           text: labels.modal_ok
         }]
-      })
+      }))
     } else {
-      actions.setModal({
+      dispatch(pdfActions.setModal({
         modalTitle: labels.modal_valid_title,
         modalText: labels.modal_valid_text,
         modalButtons: [{
@@ -59,7 +45,7 @@ const EditPDF: React.FC<EditPDFProps> = ({
         }, {
           text: labels.modal_cancel
         }]
-      })
+      }))
     }
   }
 
@@ -70,15 +56,9 @@ const EditPDF: React.FC<EditPDFProps> = ({
   return (
     <div className='documentbox fieldset m-0 mt-4'>
       <Editor
-        actions={actions}
-        dndTarget={dndTarget}
-        files={files}
         labels={labels}
-        pageScale={pageScale}
         recipes={recipes}
         targets={['work', 'home', 'sick', 'other']}
-        separator={separator}
-        watermark={watermark}
       />
       <Nav.Row className='mb-4'>
         <Nav.Column>
@@ -102,15 +82,8 @@ const EditPDF: React.FC<EditPDFProps> = ({
 }
 
 EditPDF.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
-  dndTarget: RecipeTypePropType.isRequired,
-  files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,
-  pageScale: PT.number.isRequired,
-  recipes: RecipesPropType.isRequired,
-  separator: SeparatorPropType.isRequired,
-  setStep: PT.func.isRequired,
-  watermark: WatermarkPropType.isRequired
+  setStep: PT.func.isRequired
 }
 
 export default EditPDF

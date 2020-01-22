@@ -1,3 +1,1 @@
-export interface PageProps {
-  highContrast: boolean;
-}
+export interface PageProps {}

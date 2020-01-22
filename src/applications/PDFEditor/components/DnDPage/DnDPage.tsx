@@ -1,16 +1,16 @@
-import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
 import classNames from 'classnames'
 import Icons from 'components/Icons/Icons'
+import { ModalContent } from 'declarations/components'
+import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
+import { File } from 'declarations/types.d'
+import { FilePropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Document, Page } from 'react-pdf'
-import { ActionCreators, File } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilePropType } from 'declarations/types.pt'
 import './DnDPage.css'
 
 export interface DnDPageProps {
-  actions: ActionCreators;
   action: string;
   className ?: string;
   dndTarget: RecipeType;
@@ -19,11 +19,13 @@ export interface DnDPageProps {
   pageNumber?: number;
   pageScale: number;
   recipes: Recipes;
+  setRecipes: (r: Recipes) => void;
+  setModal: (m: ModalContent |undefined) => void;
   style ?: React.CSSProperties;
 }
 
 const DnDPage: React.FC<DnDPageProps> = ({
-  actions, action, className, dndTarget, file, isFocused = false, pageNumber, pageScale, recipes, style
+  action, className, dndTarget, file, isFocused = false, pageNumber, pageScale, recipes, setModal, setRecipes, style
 }: DnDPageProps): JSX.Element => {
   const [isHovering, setIsHovering] = useState<boolean>(false)
   const onHandleMouseEnter = (): void => setIsHovering(true)
@@ -31,9 +33,9 @@ const DnDPage: React.FC<DnDPageProps> = ({
   const onHandleMouseLeave = (): void => setIsHovering(false)
 
   const openPreview = (file: File, pageNumber: number | undefined): void => {
-    actions.setModal({
+    setModal({
       modalContent: (
-        <div style={{ cursor: 'pointer' }} onClick={() => actions.setModal(undefined)}>
+        <div style={{ cursor: 'pointer' }} onClick={() => setModal(undefined)}>
           {file.mimetype === 'application/pdf'
             ? (
               <Document className='documentPreview' file={'data:application/pdf;base64,' + file.content.base64}>
@@ -64,7 +66,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
     } else {
       newRecipes[dndTarget]!.push({ name: name } as PickImageStep)
     }
-    actions.setRecipes(newRecipes)
+    setRecipes(newRecipes)
   }
 
   const removePageFromTargetPdf = (name: string, mimetype: string, pageNumber: number): void => {
@@ -78,7 +80,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
     }
     if (index >= 0) {
       newRecipes[dndTarget]!.splice(index, 1)
-      actions.setRecipes(newRecipes)
+      setRecipes(newRecipes)
     }
   }
 
@@ -157,7 +159,6 @@ const DnDPage: React.FC<DnDPageProps> = ({
 }
 
 DnDPage.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   recipes: PT.object.isRequired,
   file: FilePropType.isRequired,
   pageNumber: PT.number.isRequired,
@@ -165,6 +166,8 @@ DnDPage.propTypes = {
   dndTarget: PT.oneOf<RecipeType>([]).isRequired,
   action: PT.string.isRequired,
   className: PT.string,
+  setRecipes: PT.func.isRequired,
+  setModal: PT.func.isRequired,
   style: PT.object
 }
 

@@ -1,46 +1,46 @@
-import {
-  Recipes,
-  RecipeType,
-  Separator,
-  Watermark
-} from 'declarations/PDFEditor.d'
-import {
-  RecipeTypePropType
-} from 'declarations/PDFEditor.pt'
+import DnD from 'applications/PDFEditor/components/DnD'
+import PDFSizeSlider from 'applications/PDFEditor/components/PDFSizeSlider'
+import { ModalContent } from 'declarations/components'
+import { Recipes, RecipeType } from 'declarations/PDFEditor.d'
+import { RecipeTypePropType } from 'declarations/PDFEditor.pt'
+import { Files, Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import { Column, Ekspanderbartpanel, Row } from 'Nav'
 import PT from 'prop-types'
 import Collapse from 'rc-collapse'
 import 'rc-collapse/assets/index.css'
 import React from 'react'
-import { ActionCreators, Files, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
-import DnD from 'applications/PDFEditor/components/DnD'
+import { useDispatch, useSelector } from 'react-redux'
+import * as pdfActions from '../../actions/pdf'
+import { State } from '../../reducer'
 import DnDImages from '../DnDImages/DnDImages'
 import DnDSource from '../DnDSource/DnDSource'
 import DnDSpecial from '../DnDSpecial/DnDSpecial'
 import DnDTarget from '../DnDTarget/DnDTarget'
-import PDFSizeSlider from 'applications/PDFEditor/components/PDFSizeSlider'
 
 export interface EditorProps {
-  actions: ActionCreators;
-  dndTarget: RecipeType;
-  files: Files;
   labels: Labels;
   recipes: Recipes;
-  separator: Separator;
-  watermark: Watermark;
   targets: Array<RecipeType>;
-  pageScale: number;
 }
 
 const Editor: React.FC<EditorProps> = ({
-  actions, dndTarget, files, labels, recipes, targets = ['other'], pageScale, separator, watermark
-
+  labels, targets = ['other']
 }: EditorProps): JSX.Element => {
-  const handleAccordionChange = (index: number) => {
-    if (!index) { return }
-    actions.setActiveDnDTarget(index)
+  const dispatch = useDispatch()
+  const dndTarget: RecipeType = useSelector<State, RecipeType>(state => state.dndTarget)
+  const recipes: Recipes = useSelector<State, Recipes>(state => state.recipes)
+  const files: Files = useSelector<State, Files>(state => state.files)
+  const pageScale: number = useSelector<State, number>(state => state.pageScale)
+  const setRecipes = (newRecipes: Recipes) => dispatch(pdfActions.setRecipes(newRecipes))
+  const setModal = (modal: ModalContent | undefined) => dispatch(pdfActions.setModal(modal))
+
+  const handleAccordionChange = (dndTarget: string) => {
+    if (!dndTarget) {
+      return
+    }
+    dispatch(pdfActions.setActiveDnDTarget(dndTarget))
   }
 
   const getImageFiles = (files: Files): Files => {
@@ -56,11 +56,11 @@ const Editor: React.FC<EditorProps> = ({
     return (
       <Ekspanderbartpanel apen key='images' tittel={labels.label_images} tittelProps='undertittel'>
         <DnDImages
-          actions={actions}
           dndTarget={dndTarget}
           labels={labels}
           recipes={recipes}
-          setRecipes={actions.setRecipes}
+          setRecipes={setRecipes}
+          setModal={setModal}
           files={imageFiles}
         />
       </Ekspanderbartpanel>
@@ -71,12 +71,12 @@ const Editor: React.FC<EditorProps> = ({
     pdfFiles.map((file, i) => (
       <Ekspanderbartpanel apen key={'pdf-' + i} tittel={file.name} tittelProps='undertittel'>
         <DnDSource
-          actions={actions}
           labels={labels}
           recipes={recipes}
           pageScale={pageScale}
           dndTarget={dndTarget}
-          setRecipes={actions.setRecipes}
+          setRecipes={setRecipes}
+          setModal={setModal}
           pdf={file}
         />
       </Ekspanderbartpanel>
@@ -100,24 +100,31 @@ const Editor: React.FC<EditorProps> = ({
         <PDFSizeSlider
           labelTooltip={labels.help_sizeSliderTooltip!}
           pageScale={pageScale}
-          setPdfSize={actions.setPdfSize}
+          setPdfSize={pdfActions.setPdfSize}
           style={{ width: '25%' }}
         />
       </div>
-      <DnD recipes={recipes} setRecipes={actions.setRecipes}>
+      <DnD recipes={recipes} setRecipes={setRecipes}>
         <Row>
           <Column className='col-sm-2 mb-4'>
-            <Collapse className='dndtargets' destroyInactivePanel activeKey={dndTarget} accordion onChange={handleAccordionChange}>
+            <Collapse
+              className='dndtargets'
+              destroyInactivePanel
+              activeKey={dndTarget}
+              accordion
+              onChange={handleAccordionChange}
+            >
               {targets.map((target) => (
                 <Collapse.Panel key={target} header={labels['label_' + target] + ' (' + (recipes[target] ? recipes[target]!.length : '0') + ')'} showArrow>
                   <DnDTarget
-                    actions={actions}
                     files={files}
                     pageScale={pageScale}
                     recipes={recipes}
                     dndTarget={dndTarget}
                     recipe={recipes[target]!}
                     target={target}
+                    setRecipes={setRecipes}
+                    setModal={setModal}
                   />
                 </Collapse.Panel>
               ))}
@@ -134,12 +141,10 @@ const Editor: React.FC<EditorProps> = ({
                 <Ekspanderbartpanel apen={false} key='special' tittel={labels.title_specials} tittelProps='undertittel'>
                   <DnDSpecial
                     dndTarget={dndTarget}
-                    separator={separator}
-                    watermark={watermark}
-                    actions={actions}
                     labels={labels}
                     recipes={recipes}
                     pageScale={pageScale}
+                    setRecipes={setRecipes}
                   />
                 </Ekspanderbartpanel>
                 {imageCollapsed}
@@ -154,12 +159,8 @@ const Editor: React.FC<EditorProps> = ({
 }
 
 Editor.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
-  dndTarget: RecipeTypePropType.isRequired,
-  files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,
   recipes: PT.object.isRequired,
-  pageScale: PT.number.isRequired,
   targets: PT.arrayOf(RecipeTypePropType.isRequired).isRequired
 }
 

@@ -1,9 +1,10 @@
 import PDFSpecialPage from 'applications/PDFEditor/components/PDFSpecialPage/PDFSpecialPage'
 import classNames from 'classnames'
+import { ModalContent } from 'declarations/components'
 import { PickImageStep, PickPageStep, Recipes, RecipeSteps, RecipeType, Separator } from 'declarations/PDFEditor.d'
 import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
-import { ActionCreators, File, Files } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType } from 'declarations/types.pt'
+import { File, Files } from 'declarations/types.d'
+import { FilesPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
@@ -12,17 +13,18 @@ import DnDPage from '../DnDPage/DnDPage'
 import './DnDTarget.css'
 
 export interface DnDTargetProps {
-  actions: ActionCreators;
   dndTarget: RecipeType;
   files: Files;
   pageScale: number;
   recipes: Recipes;
   recipe: RecipeSteps;
+  setRecipes: (r: Recipes) => void;
+  setModal: (m: ModalContent | undefined) => void;
   target: string;
 }
 
 const DnDTarget: React.FC<DnDTargetProps> = ({
-  actions, dndTarget, files, recipe, recipes, pageScale, target
+  dndTarget, files, recipe, recipes, pageScale, setRecipes, setModal, target
 }: DnDTargetProps): JSX.Element => {
   return (
     <div className='a-pdf-dndTarget'>
@@ -49,20 +51,20 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
                       {recipeStep.type === 'pickPage' || recipeStep.type === 'pickImage'
                         ? (
                           <DnDPage
-                            actions={actions}
                             className={classNames({ 'a-pdf-dndTarget-draggable-active': snapshot.isDragging })}
                             dndTarget={dndTarget}
                             file={file}
                             pageScale={pageScale}
                             pageNumber={_.has(recipeStep, 'pageNumber') ? (recipeStep as PickPageStep).pageNumber : undefined}
                             recipes={recipes}
+                            setRecipes={setRecipes}
+                            setModal={setModal}
                             action='remove'
                           />
                         )
                         : recipeStep.type === 'specialPage'
                           ? (
                             <PDFSpecialPage
-                              actions={actions}
                               dndTarget={dndTarget}
                               separator={{
                                 separatorTextColor: recipeStep.separatorTextColor,
@@ -70,6 +72,7 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
                               } as Separator}
                               pageScale={pageScale}
                               recipes={recipes}
+                              setRecipes={setRecipes}
                               deleteLink
                             />
                           )
@@ -87,7 +90,6 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
 }
 
 DnDTarget.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
   files: FilesPropType.isRequired,
   pageScale: PT.number.isRequired,

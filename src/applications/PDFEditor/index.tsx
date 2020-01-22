@@ -1,16 +1,19 @@
-import React from 'react'
 import PDFEditor from 'applications/PDFEditor/PDFEditor'
-import { StoreProvider } from 'store'
-import reducer, { initialState } from 'applications/PDFEditor/reducer'
+import reducer from './reducer'
 import { Panel } from 'Nav'
+import React from 'react'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import './index.css'
 
+const store = createStore(reducer)
+
 const PDFApp: React.FC = (): JSX.Element => (
-  <StoreProvider initialState={initialState} reducer={reducer}>
+  <Provider store={store}>
     <Panel>
       <PDFEditor />
     </Panel>
-  </StoreProvider>
+  </Provider>
 )
 
 export default PDFApp

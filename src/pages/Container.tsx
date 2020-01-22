@@ -1,24 +1,23 @@
+import classNames from 'classnames'
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State, Dispatch, ActionCreators } from 'declarations/types'
-import { Lenke, Systemtittel, UndertekstBold } from '../Nav'
-import { connect, bindActionCreators } from '../store'
-import * as uiActions from '../actions/ui'
-import classNames from 'classnames'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import './Container.css'
+import { State } from 'reducer'
+import * as uiActions from '../actions/ui'
+import { Lenke, Systemtittel, UndertekstBold } from '../Nav'
 import { ReactComponent as NavLogo } from '../resources/images/nav.svg'
+import './Container.css'
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-const mapDispatchToProps = (dispatch: Dispatch) => ({ actions: bindActionCreators(uiActions, dispatch) })
 export interface ContainerProps {
-  actions: ActionCreators;
   className?: string;
   children: React.ReactNode;
 }
 const Container: React.FC<ContainerProps & PageProps> = ({
-  actions, className, children, highContrast
+  className, children
 }: ContainerProps & PageProps): JSX.Element => {
+  const dispatch = useDispatch()
+  const highContrast = useSelector<State, boolean>(state => state.highContrast)
   return (
     <div className={classNames('_container', { highContrast: highContrast }, className)}>
       <aside>
@@ -72,7 +71,7 @@ const Container: React.FC<ContainerProps & PageProps> = ({
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              actions.setHighContrast()
+              dispatch(uiActions.setHighContrast())
             }}
           >
           high contrast
@@ -84,4 +83,4 @@ const Container: React.FC<ContainerProps & PageProps> = ({
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Container)
+export default Container

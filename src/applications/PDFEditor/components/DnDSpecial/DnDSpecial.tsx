@@ -1,42 +1,36 @@
-import {
-  Recipes,
-  RecipeType,
-  Separator,
-  Watermark
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  SeparatorPropType,
-  WatermarkPropType
-} from 'declarations/PDFEditor.pt'
+import PDFSpecialPage from 'applications/PDFEditor/components/PDFSpecialPage/PDFSpecialPage'
 import classNames from 'classnames'
 import ColorPicker from 'components/ColorPicker/ColorPicker'
+import { Recipes, RecipeType, Separator, Watermark } from 'declarations/PDFEditor.d'
+import { RecipesPropType } from 'declarations/PDFEditor.pt'
+import { Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
+import { Textarea } from 'Nav'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { Textarea } from 'Nav'
 import { ColorResult } from 'react-color'
-import { ActionCreators, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, LabelsPropType } from 'declarations/types.pt'
-import PDFSpecialPage from 'applications/PDFEditor/components/PDFSpecialPage/PDFSpecialPage'
+import { useDispatch, useSelector } from 'react-redux'
+import * as pdfActions from '../../actions/pdf'
+import { State } from '../../reducer'
 import './DnDSpecial.css'
 
 export interface DnDSpecialProps {
-  actions: ActionCreators;
   dndTarget: RecipeType;
   labels: Labels;
   pageScale: number;
   recipes: Recipes;
-  separator: Separator;
-  watermark: Watermark;
+  setRecipes: (r: Recipes) => void;
   style?: React.CSSProperties;
 }
 
 const DnDSpecial: React.FC<DnDSpecialProps> = ({
-  actions, dndTarget, labels, pageScale, recipes, separator, watermark
+  dndTarget, labels, pageScale, recipes, setRecipes
 }: DnDSpecialProps): JSX.Element => {
   const [, setIsHovering] = useState<boolean>(false)
-
+  const dispatch = useDispatch()
+  const separator = useSelector<State, Separator>(state => state.separator)
+  const watermark = useSelector<State, Watermark>(state => state.watermark)
   const onHandleMouseEnter: () => void = () => {
     setIsHovering(true)
   }
@@ -50,17 +44,17 @@ const DnDSpecial: React.FC<DnDSpecialProps> = ({
       e.preventDefault()
       e.stopPropagation()
     }
-    actions.setSeparator({
-      separatorText: e.target ? e.target.value : e,
+    dispatch(pdfActions.setSeparator({
+      separatorText: e.target.value,
       separatorTextColor: separator.separatorTextColor
-    })
+    }))
   }
 
   const setSeparatorTextColor = (color: ColorResult) => {
-    actions.setSeparator({
+    dispatch(pdfActions.setSeparator({
       separatorText: separator.separatorText,
       separatorTextColor: color.rgb
-    })
+    }))
   }
 
   const setWatermarkText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -68,17 +62,17 @@ const DnDSpecial: React.FC<DnDSpecialProps> = ({
       e.preventDefault()
       e.stopPropagation()
     }
-    actions.setWatermark({
+    dispatch(pdfActions.setWatermark({
       watermarkText: e.target.value,
       watermarkTextColor: watermark.watermarkTextColor
-    })
+    }))
   }
 
   const setWatermarkTextColor = (color: ColorResult) => {
-    actions.setWatermark({
+    dispatch(pdfActions.setWatermark({
       watermarkText: watermark.watermarkText,
       watermarkTextColor: color.rgb
-    })
+    }))
   }
 
   const separatorEnabled = !!separator.separatorText
@@ -108,12 +102,12 @@ const DnDSpecial: React.FC<DnDSpecialProps> = ({
                     {...provided.dragHandleProps}
                   >
                     <PDFSpecialPage
-                      actions={actions}
                       dndTarget={dndTarget}
                       pageScale={pageScale}
                       recipes={recipes}
                       separator={separator}
                       deleteLink={false}
+                      setRecipes={setRecipes}
                       className={classNames({
                         enabled: separatorEnabled,
                         disabled: !separatorEnabled,
@@ -124,8 +118,8 @@ const DnDSpecial: React.FC<DnDSpecialProps> = ({
                   {snapshot.isDragging && (
                     <div className='cloneStyle'>
                       <PDFSpecialPage
-                        actions={actions}
                         dndTarget={dndTarget}
+                        setRecipes={setRecipes}
                         pageScale={pageScale}
                         recipes={recipes}
                         separator={separator}
@@ -152,12 +146,9 @@ const DnDSpecial: React.FC<DnDSpecialProps> = ({
 }
 
 DnDSpecial.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   labels: LabelsPropType.isRequired,
   pageScale: PT.number.isRequired,
-  recipes: RecipesPropType.isRequired,
-  separator: SeparatorPropType.isRequired,
-  watermark: WatermarkPropType.isRequired
+  recipes: RecipesPropType.isRequired
 }
 
 export default DnDSpecial

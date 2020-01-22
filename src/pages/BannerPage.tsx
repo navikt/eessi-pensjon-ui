@@ -1,6 +1,5 @@
 import { PageProps } from 'pages/index'
 import React from 'react'
-import { State } from 'declarations/types'
 import Container from 'pages/Container'
 import Banner from 'components/Banner/Banner'
 import EESSIPensjonVeileder from 'components/EESSIPensjonVeileder/EESSIPensjonVeileder'
@@ -8,13 +7,13 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
+import { State } from 'reducer'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const BannerPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const BannerPage: React.FC<PageProps> = (): JSX.Element => {
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -115,4 +114,4 @@ const BannerPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Eleme
   )
 }
 
-export default connect(mapStateToProps, () => {})(BannerPage)
+export default BannerPage

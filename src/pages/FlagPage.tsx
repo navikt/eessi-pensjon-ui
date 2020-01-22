@@ -1,6 +1,6 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import Container from './Container'
 import Flag from 'components/Flag/Flag'
 import FlagList from 'components/Flag/FlagList'
@@ -10,20 +10,19 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Mustache from 'mustache'
 import { Input, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
 type SizeType = 'S' | 'M' | 'L' | 'XL'
 
-const FlagPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const FlagPage: React.FC<PageProps> = (): JSX.Element => {
   const [country, setCountry] = useState('no')
   const [size, setSize] = useState<SizeType>('M')
   let label = CountryData.getCountryInstance('nb').findByValue(country)
   label = label ? label.label : 'Unknown'
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <ReactTooltip place='top' type='dark' effect='solid' />
@@ -212,4 +211,4 @@ const FlagPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element
   )
 }
 
-export default connect(mapStateToProps, () => {})(FlagPage)
+export default FlagPage

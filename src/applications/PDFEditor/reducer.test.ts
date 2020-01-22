@@ -8,7 +8,8 @@ describe('reducers/pdf', () => {
         ...initialState,
         [param]: initialBool
       }, {
-        type: type
+        type: type,
+        payload: undefined
       })
     ).toEqual({
       ...initialState,

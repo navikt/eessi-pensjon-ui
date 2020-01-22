@@ -1,26 +1,19 @@
-import {
-  PickPageStep,
-  Recipes,
-  RecipeSteps,
-  RecipeType
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  RecipeTypePropType
-} from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
+import { ModalContent } from 'declarations/components'
+import { PickPageStep, Recipes, RecipeSteps, RecipeType } from 'declarations/PDFEditor.d'
+import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
+import { File, Labels } from 'declarations/types.d'
+import { FilePropType, LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators, Labels, File } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilePropType, LabelsPropType } from 'declarations/types.pt'
 import DnDPage from '../DnDPage/DnDPage'
 import './DnDSource.css'
 
 export interface DnDSourceProps {
-  actions: ActionCreators;
   setRecipes: (r: Recipes) => void;
+  setModal: (r: ModalContent | undefined) => void;
   labels: Labels;
   pdf: File;
   recipes: Recipes;
@@ -29,7 +22,7 @@ export interface DnDSourceProps {
 }
 
 const DnDSource: React.FC<DnDSourceProps> = ({
-  actions, setRecipes, labels, pdf, recipes, pageScale, dndTarget
+  setRecipes, setModal, labels, pdf, recipes, pageScale, dndTarget
 }: DnDSourceProps): JSX.Element => {
   const [isHovering, setIsHovering] = useState<boolean>(false)
   const [isFocused, setIsFocused] = useState<string | undefined>(undefined)
@@ -100,7 +93,8 @@ const DnDSource: React.FC<DnDSourceProps> = ({
                     >
                       <DnDPage
                         action='add'
-                        actions={actions}
+                        setRecipes={setRecipes}
+                        setModal={setModal}
                         className={classNames({ 'a-pdf-dndSource-draggable-active': snapshot.isDragging })}
                         dndTarget={dndTarget}
                         isFocused={isFocused === key}
@@ -133,7 +127,6 @@ const DnDSource: React.FC<DnDSourceProps> = ({
 }
 
 DnDSource.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   setRecipes: PT.func.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
   labels: LabelsPropType.isRequired,

@@ -1,23 +1,22 @@
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import Container from './Container'
 import Icons, { availableIcons } from 'components/Icons/Icons'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Mustache from 'mustache'
 import { Input, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
 import ReactTooltip from 'react-tooltip'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const IconsPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const IconsPage: React.FC<PageProps> = (): JSX.Element => {
   const [color, setColor] = useState<string>('black')
   const [size, setSize] = useState<number>(48)
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <ReactTooltip place='top' type='dark' effect='solid' />
@@ -95,4 +94,4 @@ const IconsPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Elemen
   )
 }
 
-export default connect(mapStateToProps, () => {})(IconsPage)
+export default IconsPage

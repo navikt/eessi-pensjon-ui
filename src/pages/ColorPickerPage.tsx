@@ -5,16 +5,14 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import { Normaltekst, Panel, Systemtittel, Undertittel } from '../Nav'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Container from 'pages/Container'
-
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const ColorPickerPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const ColorPickerPage: React.FC<PageProps> = (): JSX.Element => {
+  const highContrast = useSelector<State, boolean>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -79,4 +77,4 @@ const ColorPickerPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.
   )
 }
 
-export default connect(mapStateToProps, () => {})(ColorPickerPage)
+export default ColorPickerPage

@@ -1,33 +1,26 @@
 import DnDPage from 'applications/PDFEditor/components/DnDPage/DnDPage'
-import {
-  PickImageStep,
-  Recipes,
-  RecipeType
-} from 'declarations/PDFEditor.d'
-import {
-  RecipesPropType,
-  RecipeTypePropType
-} from 'declarations/PDFEditor.pt'
 import classNames from 'classnames'
+import { ModalContent } from 'declarations/components'
+import { PickImageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
+import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
+import { File, Files, Labels } from 'declarations/types.d'
+import { FilesPropType, LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { ActionCreators, File, Files, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
 import './DnDImages.css'
 
 export interface DnDImagesProps {
-  actions: ActionCreators;
   dndTarget: RecipeType;
   files: Files;
   labels: Labels;
   recipes: Recipes;
   setRecipes: (r: Recipes) => void;
+  setModal: (m: ModalContent |undefined) => void;
 }
 
-const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element => {
-  const { setRecipes, dndTarget, files, labels, recipes } = props
+const DnDImages: React.FC<DnDImagesProps> = ({ dndTarget, files, labels, recipes, setRecipes, setModal }: DnDImagesProps): JSX.Element => {
   const [isHovering, setIsHovering] = useState<boolean>(false)
   const onHandleMouseEnter: () => void = () => setIsHovering(true)
   const onHandleMouseLeave: () => void = () => setIsHovering(false)
@@ -89,12 +82,15 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
                       {...provided.dragHandleProps}
                     >
                       <DnDPage
-                        {...props}
                         className={classNames({ 'a-pdf-dndImages-draggable-active': snapshot.isDragging })}
                         file={file}
                         pageNumber={1}
                         pageScale={1}
                         action='add'
+                        setModal={setModal}
+                        setRecipes={setRecipes}
+                        dndTarget={dndTarget}
+                        recipes={recipes}
                       />
                     </div>
                   )}
@@ -119,7 +115,6 @@ const DnDImages: React.FC<DnDImagesProps> = (props: DnDImagesProps): JSX.Element
 }
 
 DnDImages.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   dndTarget: RecipeTypePropType.isRequired,
   files: FilesPropType.isRequired,
   labels: LabelsPropType.isRequired,

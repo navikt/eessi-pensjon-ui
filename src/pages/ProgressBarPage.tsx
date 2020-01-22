@@ -6,18 +6,16 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
-import { State } from 'declarations/types'
+import { State } from 'reducer'
 import { Input, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
-import { connect } from '../store'
+import { useSelector } from 'react-redux'
 import Container from './Container'
-
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const ProgressBarPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const ProgressBarPage: React.FC<PageProps> = (): JSX.Element => {
   const [now, setNow] = useState(50)
   const [status, setStatus] = useState<ProgressBarStatus>('inprogress')
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -87,4 +85,4 @@ const ProgressBarPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.
   )
 }
 
-export default connect(mapStateToProps, () => {})(ProgressBarPage)
+export default ProgressBarPage

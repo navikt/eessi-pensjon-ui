@@ -1,22 +1,22 @@
+import Pagination from 'components/Pagination/Pagination'
+import Mustache from 'mustache'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import { State } from 'declarations/types'
-import Container from './Container'
-import Pagination from 'components/Pagination/Pagination'
+import { useSelector } from 'react-redux'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
-import { connect } from '../store'
-import Mustache from 'mustache'
+import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import { State } from 'reducer'
 import { Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
+import Container from './Container'
+
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
-const mapStateToProps = (state: State) => ({ highContrast: state.highContrast })
-
-const PaginationPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.Element => {
+const PaginationPage: React.FC<PageProps> = (): JSX.Element => {
   const [numberOfItems, setNumberOfItems] = useState(50)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+  const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
       <Panel className='p-4'>
@@ -126,4 +126,4 @@ const PaginationPage: React.FC<PageProps> = ({ highContrast }: PageProps): JSX.E
   )
 }
 
-export default connect(mapStateToProps, () => {})(PaginationPage)
+export default PaginationPage

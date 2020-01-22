@@ -1,6 +1,6 @@
 import * as uiActions from 'actions/ui'
 import * as types from 'constants/actionTypes'
-import { Action } from 'declarations/types.d'
+import { Action } from 'redux'
 
 describe('actions/ui', () => {
   it('setHighContrast()', () => {

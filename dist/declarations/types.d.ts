@@ -1,23 +1,13 @@
-export interface Action {
-  type: string;
-  payload?: any;
-  originalPayload ?: any;
-  context ?: any;
-}
+import { Action } from 'redux'
 
-export type ActionCreator = (...args: any[]) => void;
-export type ActionCreators = {[k: string]: ActionCreator}
-export type Dispatch = Function
-export interface State { [k: string]: any }
-export type Reducer = (s: State, a: Action) => State;
 export type Labels = {[k in string]? : string}
 
-export interface ActionWithPayload<T> extends Action {
-  payload: T;
+export interface ErrorPayload<T = any> extends Action {
+  error: T
 }
 
-export interface ErrorPayload {
-  error: any
+export interface ActionWithPayload<T = any> extends Action {
+  payload: T;
 }
 
 export interface File {
@@ -27,6 +17,7 @@ export interface File {
   numPages?: number | null | undefined;
   mimetype: string;
   content: {
+    md5?: string | null;
     text?: string | null;
     base64?: string | null;
   }

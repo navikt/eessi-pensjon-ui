@@ -1,37 +1,41 @@
-import { Step } from 'declarations/PDFEditor.d'
 import FileUpload from 'components/FileUpload/FileUpload'
+import { Step } from 'declarations/PDFEditor.d'
+import { Files, Labels } from 'declarations/types.d'
+import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import { Hovedknapp, Undertittel } from 'Nav'
 import PT from 'prop-types'
 import React from 'react'
-import { ActionCreators, Files, Labels } from 'declarations/types.d'
-import { ActionCreatorsPropType, FilesPropType, LabelsPropType } from 'declarations/types.pt'
+import { useDispatch, useSelector } from 'react-redux'
+import * as pdfActions from '../actions/pdf'
+import { State } from '../reducer'
 
 export interface SelectPDFProps {
-  actions: ActionCreators;
   labels: Labels;
-  loadingPDF: boolean;
-  files: Files;
   setStep: (s: Step) => void;
 }
 
 const SelectPDF: React.FC<SelectPDFProps> = ({
-  actions, labels, loadingPDF, files = [], setStep
+  labels, setStep
 }: SelectPDFProps): JSX.Element => {
+  const files = useSelector<State, Files>(state => state.files)
+  const loadingPDF = useSelector<State, boolean>(state => state.loadingPDF)
+  const dispatch = useDispatch()
+
   const onForwardButtonClick = () => {
     setStep('edit')
   }
 
   const handleFileChange = (files: Files) => {
-    actions.selectPDF(files)
+    dispatch(pdfActions.selectPDF(files))
   }
 
   const handleBeforeDrop = () => {
-    actions.loadingFilesStart()
+    dispatch(pdfActions.loadingFilesStart())
   }
 
   const handleAfterDrop = () => {
-    actions.loadingFilesEnd()
+    dispatch(pdfActions.loadingFilesEnd())
   }
 
   return (
@@ -59,10 +63,7 @@ const SelectPDF: React.FC<SelectPDFProps> = ({
 }
 
 SelectPDF.propTypes = {
-  actions: ActionCreatorsPropType.isRequired,
   labels: LabelsPropType.isRequired,
-  loadingPDF: PT.bool.isRequired,
-  files: FilesPropType.isRequired,
   setStep: PT.func.isRequired
 }
 
