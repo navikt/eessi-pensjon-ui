@@ -14,7 +14,6 @@ import AlertPage from 'pages/AlertPage'
 import BannerPage from 'pages/BannerPage'
 import ColorPickerPage from 'pages/ColorPickerPage'
 import CountryUtilsPage from 'pages/CountryUtilsPage'
-
 import DashboardPage from 'pages/DashboardPage'
 import DatePickerPage from 'pages/DatePickerPage'
 import EESSIPensjonVeilederPage from 'pages/EESSIPensjonVeilederPage'

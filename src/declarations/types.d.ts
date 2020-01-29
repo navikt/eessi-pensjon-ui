@@ -2,11 +2,13 @@ import { Action } from 'redux'
 
 export type Labels = {[k in string]? : string}
 
-export interface ErrorPayload<T = any> extends Action {
+export interface ErrorPayload<T = any> {
   error: T
 }
 
 export interface ActionWithPayload<T = any> extends Action {
+  originalPayload?: any;
+  context?: any;
   payload: T;
 }
 
