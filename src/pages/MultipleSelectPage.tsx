@@ -154,6 +154,13 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
               <td>false</td>
             </tr>
             <tr>
+              <td>isLoading</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Loading spinner</td>
+              <td>false</td>
+            </tr>
+            <tr>
               <td>label</td>
               <td><code>node</code>, <code>string</code></td>
               <td>true</td>

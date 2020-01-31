@@ -26,7 +26,7 @@ const WaitingPanelPage: React.FC<PageProps> = (): JSX.Element => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <WaitingPanel message={message} />
+        <WaitingPanel className='mt-4' message={message} />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<WaitingPanel message=\'' +
             '{{message}}' +
@@ -47,6 +47,16 @@ const WaitingPanelPage: React.FC<PageProps> = (): JSX.Element => {
           '<WaitingPanel size=\'M\' message=\'M\'/>\n' +
           '<WaitingPanel size=\'L\' message=\'L\'/>\n' +
           '<WaitingPanel size=\'XL\' message=\'XL\'/>'}
+        </SyntaxHighlighter>
+
+        <Undertittel className='pt-4 pb-4'>One Line</Undertittel>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <WaitingPanel className='pr-3' size='XS' message='XS' />
+          <WaitingPanel className='pr-3' size='XS' message='XS' oneLine />
+        </div>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
+          {'<WaitingPanel size=\'XS\' message=\'XS\'/>\n' +
+          '<WaitingPanel size=\'XS\' message=\'XS\' oneLine/>\n'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
@@ -80,6 +90,13 @@ const WaitingPanelPage: React.FC<PageProps> = (): JSX.Element => {
               <td>false</td>
               <td>Message to display</td>
               <td>'Vennligst vent...'</td>
+            </tr>
+            <tr>
+              <td>oneLine</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Spinner and message in a single line</td>
+              <td>false</td>
             </tr>
             <tr>
               <td>size</td>

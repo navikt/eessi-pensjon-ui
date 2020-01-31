@@ -2,21 +2,23 @@ import React from 'react'
 import PT from 'prop-types'
 import classNames from 'classnames'
 import { Spinner, Normaltekst } from 'Nav'
+import './WaitingPanel.css'
 
 export interface WaitingPanelProps {
   className?: string;
   size?: 'XXS'| 'XS' | 'S'| 'M' | 'L'| 'XL'| 'XXL' | 'XXXL';
   style?: React.CSSProperties;
-  message?: string
+  message?: string,
+  oneLine?: boolean
 }
 
 const WaitingPanel: React.FC<WaitingPanelProps> = ({
-  className, size = 'M', style = {}, message = 'Vennligst vent...'
+  className, size = 'M', style = {}, message = 'Vennligst vent...', oneLine = false
 }: WaitingPanelProps): JSX.Element | null => (
   <div style={style} className={classNames('c-waitingPanel', 'text-center', className)}>
     <Spinner type={size} />
     {message ? (
-      <Normaltekst className='c-waitingPanel__message ml-2'>
+      <Normaltekst className={classNames('c-waitingPanel__message', 'ml-2', { oneLine: oneLine })}>
         {message}
       </Normaltekst>
     ) : null}
@@ -26,6 +28,7 @@ const WaitingPanel: React.FC<WaitingPanelProps> = ({
 WaitingPanel.propTypes = {
   className: PT.string,
   message: PT.string,
+  oneLine: PT.bool,
   size: PT.oneOf(['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']),
   style: PT.object
 }

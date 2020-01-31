@@ -20,6 +20,7 @@ export interface MultipleSelectProps<T> {
   error ?: string;
   hideSelectedOptions ?: boolean;
   id ?: string;
+  isLoading?: boolean;
   label: string | JSX.Element;
   onSelect?: (e: ValueType<any>) => void;
   options: Array<T>;
@@ -29,7 +30,7 @@ export interface MultipleSelectProps<T> {
 
 const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({
   ariaLabel, className, creatable = false, error, hideSelectedOptions = false,
-  id, label, onSelect, options = [], placeholder, values = []
+  id, isLoading = false, label, onSelect, options = [], placeholder, values = []
 }: MultipleSelectProps<any>): JSX.Element => {
   const [_values, setValues] = useState<Array<any>>(values)
 
@@ -75,6 +76,7 @@ const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({
         placeholder={placeholder}
         aria-label={ariaLabel}
         isMulti
+        isLoading={isLoading}
         animatedComponents
         closeMenuOnSelect={false}
         value={_values}
@@ -108,6 +110,7 @@ MultipleSelect.propTypes = {
   error: PT.string,
   hideSelectedOptions: PT.bool,
   id: PT.string,
+  isLoading: PT.bool,
   label: PT.oneOfType([PT.element, PT.string]).isRequired,
   onSelect: PT.func,
   options: PT.array.isRequired,
