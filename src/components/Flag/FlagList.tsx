@@ -1,3 +1,4 @@
+import { FlagItems } from 'declarations/components'
 import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
@@ -11,10 +12,7 @@ export interface FlagListProps {
   animate?: boolean;
   animationDelay?: number;
   className?: string;
-  items: Array<{
-    label: string;
-    country: string;
-  }>;
+  items: FlagItems;
   locale?: AllowedLocaleString;
   overflowLimit?: number;
   size?: 'S' | 'M' | 'L' | 'XL';

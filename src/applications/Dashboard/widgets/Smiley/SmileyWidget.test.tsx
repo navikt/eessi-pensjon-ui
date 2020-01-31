@@ -7,7 +7,10 @@ import SmileyWidget from './SmileyWidget'
 describe('widgets/Smiley/SmileyWidget', () => {
   let wrapper: ReactWrapper
   const initialMockProps: WidgetProps = {
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
     onResize: jest.fn(),
+    onUpdate: jest.fn(),
     widget: {
       i: 'w-1-smiley',
       visible: true,

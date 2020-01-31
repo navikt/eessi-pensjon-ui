@@ -8,6 +8,9 @@ import NoteOptionsWidget from './NoteOptionsWidget'
 describe('widgets/Note/NoteOptionsWidget', () => {
   let wrapper: ReactWrapper
   const initialMockProps: WidgetProps = {
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
+    onResize: jest.fn(),
     onUpdate: jest.fn(),
     widget: {
       ..._.cloneDeep(NoteWidget.properties),

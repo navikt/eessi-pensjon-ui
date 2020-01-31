@@ -12,6 +12,8 @@ describe('widgets/Links/LinksWidget', () => {
   const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     onUpdate: jest.fn(),
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
     widget: {
       i: 'w-1-links',
       type: 'links',

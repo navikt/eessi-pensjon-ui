@@ -170,7 +170,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             value={(values.day !== undefined) ? values.day : ''}
             onInput={handleMaxLengthDay}
             onChange={handleChangeDay}
-            feil={(errors.day || error) ? <div /> : false}
+            feil={(errors.day || error) ? <span /> : false}
           />
         </div>
         <div className='col pl-1 pr-1'>
@@ -186,7 +186,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             value={values.month !== undefined ? values.month : ''}
             onInput={handleMaxLengthMonth}
             onChange={handleChangeMonth}
-            feil={errors.month || error ? <div /> : false}
+            feil={errors.month || error ? <span /> : false}
           />
         </div>
         <div className='col col pl-1 pr-0'>
@@ -201,7 +201,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             value={values.year !== undefined ? values.year : ''}
             onInput={handleMaxLengthYear}
             onChange={handleChangeYear}
-            feil={errors.year || error ? <div /> : false}
+            feil={errors.year || error ? <span /> : false}
           />
         </div>
       </div>

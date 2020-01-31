@@ -11,6 +11,8 @@ describe('widgets/Note/NoteWidget', () => {
     id: 'mock-id',
     onResize: jest.fn(),
     onUpdate: jest.fn(),
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
     widget: {
       i: 'w-1-note',
       visible: true,

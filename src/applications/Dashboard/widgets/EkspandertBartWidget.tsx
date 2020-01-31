@@ -17,16 +17,12 @@ const EkspandertBartWidget: WidgetFC<WidgetProps> = ({ onResize, onUpdate, widge
   const onClick = (): void => {
     const newWidget: Widget = _.cloneDeep(widget)
     newWidget.options.collapsed = !newWidget.options.collapsed
-    if (_.isFunction(onUpdate)) {
-      onUpdate(newWidget)
-    }
+    onUpdate(newWidget)
   }
 
   const _onResize = (w: number, h: number): void => {
-    if (_.isFunction(onResize)) {
-      // give more 50 for the panel header
-      onResize(w, h + 60)
-    }
+    // give more 50 for the panel header
+    onResize(w, h + 60)
   }
 
   return (

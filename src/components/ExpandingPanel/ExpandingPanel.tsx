@@ -16,11 +16,12 @@ export interface ExpandingPanelProps {
   onClick?: (e: React.MouseEvent) => void;
   open?: boolean;
   renderContentWhenClosed?: boolean;
+  style?: React.CSSProperties;
 }
 
 const ExpandingPanel: React.FC<ExpandingPanelProps> = ({
   ariaTittel, border = false, children, className, collapseProps, heading,
-  onClick, open = false, renderContentWhenClosed
+  onClick, open = false, renderContentWhenClosed, style = {}
 }: ExpandingPanelProps): JSX.Element => {
   const [_open, setOpen] = useState<boolean>(open)
   const [isCloseAnimation, setIsCloseAnimation] = useState<boolean>(false)
@@ -60,11 +61,12 @@ const ExpandingPanel: React.FC<ExpandingPanelProps> = ({
   const CollapseComponent: any = renderContentWhenClosed ? Collapse : UnmountClosed
 
   return (
-    <div className={classNames('c-expandingpanel', 'ekspanderbartPanel', className, {
-      'ekspanderbartPanel--lukket': !_open,
-      'ekspanderbartPanel--apen': _open,
-      'ekspanderbartPanel--border': border
-    })}
+    <div
+      style={style} className={classNames('c-expandingpanel', 'ekspanderbartPanel', className, {
+        'ekspanderbartPanel--lukket': !_open,
+        'ekspanderbartPanel--apen': _open,
+        'ekspanderbartPanel--border': border
+      })}
     >
       <div
         className='ekspanderbartPanel__hode'
@@ -108,7 +110,8 @@ ExpandingPanel.propTypes = {
   heading: PT.oneOfType([PT.string, PT.element]),
   onClick: PT.func,
   open: PT.bool,
-  renderContentWhenClosed: PT.bool
+  renderContentWhenClosed: PT.bool,
+  style: PT.object
 }
 
 export default ExpandingPanel

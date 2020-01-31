@@ -11,3 +11,10 @@ export interface ModalContent {
   modalText ?: string;
   modalButtons?: Array<ModalButton>
 }
+
+export interface FlagItem {
+  label: string;
+  country: string;
+}
+
+export type FlagItems = Array<FlagItem>

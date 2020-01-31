@@ -14,9 +14,7 @@ const NoteOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: WidgetPr
     const newWidget: Widget = _.cloneDeep(widget!)
     newWidget.options.backgroundColor = color
     setBackgroundColor(color)
-    if (_.isFunction(onUpdate)) {
-      onUpdate(newWidget)
-    }
+    onUpdate(newWidget)
   }
 
   return (
@@ -39,7 +37,7 @@ const NoteOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: WidgetPr
 }
 
 NoteOptionsWidget.propTypes = {
-  onUpdate: PT.func,
+  onUpdate: PT.func.isRequired,
   widget: WidgetPropType.isRequired
 }
 

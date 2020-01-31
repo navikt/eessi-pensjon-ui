@@ -90,10 +90,10 @@ export interface WidgetProps {
     labels ?: Labels;
     layout?: Layout;
     mode ?: string;
-    onFullFocus ?: () => void;
-    onRestoreFocus ?: () => void;
-    onResize?: (w?: number, h?: number) => void;
-    onUpdate?: (w: Widget) => void;
+    onFullFocus: () => void;
+    onRestoreFocus: () => void;
+    onResize: (w?: number, h?: number) => void;
+    onUpdate: (w: Widget) => void;
     widget: Widget;
 }
 

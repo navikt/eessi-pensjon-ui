@@ -13,3 +13,10 @@ export const ModalContentPropType = PT.shape({
   modalText: PT.string,
   modalButtons: PT.arrayOf(ModalButtonPropType.isRequired)
 })
+
+export const FlagItemPropType = PT.shape({
+  label: PT.string.isRequired,
+  country: PT.string.isRequired
+})
+
+export const FlagItemsPropType = PT.arrayOf(FlagItemPropType)

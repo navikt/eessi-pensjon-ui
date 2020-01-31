@@ -13,7 +13,7 @@ export interface ModalProps {
   onModalClose?: () => void;
   closeButton?: boolean;
   closeButtonLabel?: string;
-  modal?: ModalContent | undefined;
+  modal: ModalContent | undefined;
 }
 
 export const Modal: React.FC<ModalProps> = ({

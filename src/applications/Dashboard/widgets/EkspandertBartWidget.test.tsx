@@ -10,6 +10,8 @@ describe('widgets/EkspandertBartWidget', () => {
   const initialMockProps: WidgetProps = {
     onResize: jest.fn(),
     onUpdate: jest.fn(),
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
     labels: labels as Labels,
     widget: {
       i: 'w-1-ekspandertbart',

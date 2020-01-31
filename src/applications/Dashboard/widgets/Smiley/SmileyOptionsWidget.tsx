@@ -18,9 +18,7 @@ const SmileyOptionsWidget: React.FC<WidgetProps> = ({ onUpdate, widget }: Widget
     const newWidget: Widget = _.cloneDeep(widget)
     newWidget.options.mood = e.target.value
     setMood(e.target.value)
-    if (_.isFunction(onUpdate)) {
-      onUpdate(newWidget)
-    }
+    onUpdate(newWidget)
   }
 
   return (

@@ -6,6 +6,9 @@ import CatMidget from './CatMidget'
 describe('widgets/Cat/CatMidget', () => {
   let wrapper: ReactWrapper
   const initialMockProps: WidgetProps = {
+    onFullFocus: jest.fn(),
+    onRestoreFocus: jest.fn(),
+    onUpdate: jest.fn(),
     onResize: jest.fn(),
     widget: {
       visible: true,
