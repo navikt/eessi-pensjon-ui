@@ -9,11 +9,13 @@ import {
   WidgetPropType
 } from 'declarations/Dashboard.pt'
 import _ from 'lodash'
+import PT from 'prop-types'
 import React from 'react'
 
 export interface WidgetEditOptionsProps {
   myWidgets: WidgetMap;
   widget: Widget;
+  onUpdate: (w: Widget) => void;
 }
 
 const WidgetEditOptions: React.FC<WidgetEditOptionsProps> = (props: WidgetEditOptionsProps): JSX.Element => {
@@ -31,7 +33,8 @@ const WidgetEditOptions: React.FC<WidgetEditOptionsProps> = (props: WidgetEditOp
 
 WidgetEditOptions.propTypes = {
   myWidgets: WidgetMapPropType.isRequired,
-  widget: WidgetPropType.isRequired
+  widget: WidgetPropType.isRequired,
+  onUpdate: PT.func.isRequired
 }
 
 export default WidgetEditOptions

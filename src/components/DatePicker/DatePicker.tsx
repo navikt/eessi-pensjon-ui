@@ -3,7 +3,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import PT from 'prop-types'
 import React, { useState } from 'react'
-import { Input } from 'Nav'
+import { Feilmelding, Input } from 'Nav'
 import './DatePicker.css'
 
 type DateElement = 'day' |'month' | 'year'
@@ -99,6 +99,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       return undefined
     }
     const monthInteger = parseInt(date.month, 10)
+
     if (isNaN(monthInteger) || monthInteger < 1 || monthInteger > 12) {
       return { month: true }
     }
@@ -207,7 +208,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       </div>
       {error ? (
         <div role='alert' aria-live='assertive' className='feilmelding skjemaelement__feilmelding'>
-          {error}
+          <Feilmelding>{error}</Feilmelding>
         </div>
       )
         : null}

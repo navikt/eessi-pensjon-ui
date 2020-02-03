@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import defaultLabels from 'components/FileUpload/FileUpload.labels'
 import Modal from 'components/Modal/Modal'
 import { ModalContent } from 'declarations/components'
+import { FilesPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
@@ -47,7 +48,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setModal(undefined)
   }
 
-  const openPreview = (file: IFile, initialPage: number): void => {
+  const openPreview = useCallback((file: IFile, initialPage: number) => {
     setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={closePreview}>
@@ -55,7 +56,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
         </div>
       )
     })
-  }
+    return () => {}
+  }, [setModal])
 
   const updateFiles = useCallback((newFiles, statusMessage) => {
     setFiles(newFiles)
@@ -68,6 +70,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     if (_.isFunction(onFilesChanged)) {
       onFilesChanged(newFiles)
     }
+    return () => {}
   }, [_status, onFilesChanged])
 
   const processFiles = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<File>) => {
@@ -109,6 +112,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         type: 'OK'
       })
     })
+    return () => {}
   }, [_files, _labels, updateFiles])
 
   const onDrop = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<File>) => {
@@ -142,7 +146,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     }
   }
 
-  const removeFile = (file: IFile): void => {
+  const removeFile = useCallback((file: IFile) => {
     let statusMessage: string = _labels.removed!
     const newFiles: IFiles = _.filter(_files, f => {
       if (file.id === f.id) {
@@ -152,14 +156,16 @@ const FileUpload: React.FC<FileUploadProps> = ({
       return true
     })
     updateFiles(newFiles, statusMessage)
-  }
+    return () => {}
+  }, [_labels, _files])
 
-  const onLoadSuccess = (file: IFile): void => {
+  const onLoadSuccess = useCallback((file: IFile) => {
     const newFiles: IFiles = _files.map(f => {
       return file.id === f.id ? file : f
     })
     updateFiles(newFiles, undefined)
-  }
+    return () => {}
+  }, [_files, updateFiles])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: onDrop,
@@ -173,7 +179,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       className={classNames('c-fileUpload', { 'c-fileUpload-active ': isDragActive }, className)}
       {...getRootProps()}
     >
-      <Modal modal={modal} />
+      {modal ? <Modal modal={modal} onModalClose={closePreview} /> : null}
       <input {...getInputProps()} />
       <div className='c-fileUpload-placeholder'>
         <div className='c-fileUpload-placeholder-message'>
@@ -214,17 +220,7 @@ FileUpload.propTypes = {
   afterFileDrop: PT.func,
   beforeFileDrop: PT.func,
   className: PT.string,
-  files: PT.arrayOf(PT.shape({
-    id: PT.string,
-    size: PT.number.isRequired,
-    name: PT.string.isRequired,
-    numPages: PT.number,
-    mimetype: PT.string.isRequired,
-    content: PT.shape({
-      text: PT.string,
-      base64: PT.string
-    }).isRequired
-  }).isRequired).isRequired,
+  files: FilesPropType,
   labels: PT.object.isRequired,
   maxFiles: PT.number,
   maxFileSize: PT.number,

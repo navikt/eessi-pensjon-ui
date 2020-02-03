@@ -9,6 +9,7 @@ describe('applications/Dashboard/WidgetEdit', () => {
     labels: labels,
     setMode: jest.fn(),
     myWidgets: {},
+    onUpdate: jest.fn(),
     widget: {
       i: 'w-1-foo',
       type: 'foo',

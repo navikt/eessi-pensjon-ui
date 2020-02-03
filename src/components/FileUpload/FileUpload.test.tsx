@@ -7,13 +7,13 @@ import samplePDF from 'resources/tests/samplePDF'
 import FileUpload, { FileUploadProps } from './FileUpload'
 
 jest.mock('react-pdf', () => {
-  const React = require('react')
+  const { useEffect } = require('react')
   return {
     pdfjs: { GlobalWorkerOptions: { workerSrc: '' } },
     Document: (props: any) => {
-      setTimeout(() => {
+      useEffect(() => {
         props.onLoadSuccess({ numPages: 5 })
-      }, 500)
+      }, [])
       return (
         <div className='mock-pdfdocument'>
           {props.children}
@@ -187,6 +187,7 @@ describe('components/FileUpload/FileUpload', () => {
     act(() => {
       wrapper.find('.previewLink').simulate('click')
     })
+    wrapper.update()
     expect(wrapper.exists('.c-modal')).toBeTruthy()
     expect(wrapper.exists('.nextPage')).toBeTruthy()
 

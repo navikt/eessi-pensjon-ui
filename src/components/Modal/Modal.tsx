@@ -19,7 +19,7 @@ export interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({
   appElement = document.body, className, onModalClose, closeButton = true, closeButtonLabel = '', modal
 }: ModalProps): JSX.Element => {
-  const [_modal, setModal] = useState(modal)
+  const [_modal, setModal] = useState<ModalContent | undefined>(modal)
 
   useEffect(() => {
     if (!_.isEqual(_modal, modal)) {

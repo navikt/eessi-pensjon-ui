@@ -16,6 +16,7 @@ describe('applications/Dashboard/WidgetEditOptions', () => {
         backgroundColor: 'mockColor'
       }
     },
+    onUpdate: jest.fn(),
     myWidgets: { ...(DashboardDefaultWidgets as WidgetMap) }
   }
 

@@ -9,7 +9,7 @@ export const ModalButtonPropType = PT.shape({
 
 export const ModalContentPropType = PT.shape({
   modalTitle: PT.string,
-  modalContent: PT.oneOf([PT.element, PT.string]),
+  modalContent: PT.oneOfType([PT.node, PT.string]),
   modalText: PT.string,
   modalButtons: PT.arrayOf(ModalButtonPropType.isRequired)
 })

@@ -5,10 +5,10 @@ import Image from 'components/File/Image'
 import Other from 'components/File/Other'
 import Pdf from 'components/File/Pdf'
 import { File, Labels } from 'declarations/types.d'
-import { LabelsPropType } from 'declarations/types.pt'
+import { FilePropType, LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Icons from '../Icons/Icons'
 import './File.css'
 
@@ -99,7 +99,7 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
     }
   }
 
-  const handleOnLoadSuccess = (e: LoadEvent): void => {
+  const handleOnLoadSuccess = useCallback((e: LoadEvent): void => {
     setNumberPages(e.numPages)
     if (typeof onLoadSuccess === 'function') {
       onLoadSuccess({
@@ -107,7 +107,7 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
         numPages: e.numPages
       } as File)
     }
-  }
+  }, [setNumberPages, onLoadSuccess])
 
   const isPreviewable = (file: File): boolean => {
     return file.mimetype === 'application/pdf' || file.mimetype.startsWith('image/')
@@ -245,17 +245,7 @@ FileFC.propTypes = {
   animate: PT.bool,
   className: PT.string,
   buttons: PT.oneOf(['visible', 'hover', 'none']),
-  file: PT.shape({
-    id: PT.string,
-    size: PT.number.isRequired,
-    name: PT.string.isRequired,
-    numPages: PT.number,
-    mimetype: PT.string.isRequired,
-    content: PT.shape({
-      text: PT.string,
-      base64: PT.string
-    }).isRequired
-  }).isRequired,
+  file: FilePropType.isRequired,
   height: PT.number,
   initialPage: PT.number,
   initialLabels: LabelsPropType,

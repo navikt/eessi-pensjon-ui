@@ -27,86 +27,146 @@ describe('components/DatePicker', () => {
     act(() => {
       wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '99' } })
     })
+    wrapper.update()
     expect(initialMockProps.onChange).toHaveBeenCalledWith({ day: '99' })
+    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
+
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '-1' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '-1' } })
-    wrapper.update()
-    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
-
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '10' } })
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '10' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '50' } })
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '50' } })
+    })
     wrapper.update()
-    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
+    expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy();
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '31' } })
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '3' } })
+    (initialMockProps.onChange as jest.Mock).mockReset()
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '31' } })
+    })
     wrapper.update()
+    expect(initialMockProps.onChange).toHaveBeenCalledWith({ day: '31' });
+
+    (initialMockProps.onChange as jest.Mock).mockReset()
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '3' } })
+    })
+    wrapper.update()
+    expect(initialMockProps.onChange).toHaveBeenCalledWith({ day: '31', month: '3' })
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy();
 
     (initialMockProps.onChange as jest.Mock).mockReset()
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '4' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '4' } })
+    })
     wrapper.update()
     expect(initialMockProps.onChange).toHaveBeenCalledWith({ day: '31', month: '4' })
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '29' } })
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2' } })
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2001' } })
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '29' } })
+    })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2' } })
+    })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2001' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2000' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2000' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2001' } })
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '28' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2001' } })
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '28' } })
+    })
     wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeFalsy()
   })
 
   it('Correctly validates month', () => {
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'MM' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'MM' } })
+    })
+    wrapper.update()
     expect(initialMockProps.onChange).toHaveBeenCalledWith({ month: 'MM' })
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '-1' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '-1' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '1' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '1' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '12' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '12' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '13' } })
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '13' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
   })
 
   it('Correctly validates year', () => {
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'YYYY' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'YYYY' } })
+    })
+    wrapper.update()
     expect(initialMockProps.onChange).toHaveBeenCalledWith({ year: 'YYYY' })
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeTruthy()
 
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '0' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2000' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '2000' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '3000' } })
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '3000' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeFalsy()
   })
 
@@ -115,10 +175,18 @@ describe('components/DatePicker', () => {
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeFalsy()
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeFalsy()
 
-    wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '99' } })
-    wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
-    wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
-
+    act(() => {
+      wrapper.find('.DatePickerDayInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '99' } })
+    })
+    wrapper.update()
+    act(() => {
+      wrapper.find('.DatePickerMonthInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: '99' } })
+    })
+    wrapper.update()
+    act(() => {
+      wrapper.find('.DatePickerYearInput .skjemaelement__input').hostNodes().simulate('change', { target: { value: 'xxx' } })
+    })
+    wrapper.update()
     expect(wrapper.exists('.DatePickerDayInput .skjemaelement__input--harFeil')).toBeTruthy()
     expect(wrapper.exists('.DatePickerMonthInput .skjemaelement__input--harFeil')).toBeTruthy()
     expect(wrapper.exists('.DatePickerYearInput .skjemaelement__input--harFeil')).toBeTruthy()
@@ -129,41 +197,5 @@ describe('components/DatePicker', () => {
     wrapper.setProps({ error: 'ERROR' })
     expect(wrapper.exists('.feilmelding')).toBeTruthy()
     expect(wrapper.find('.feilmelding').hostNodes().text()).toEqual('ERROR')
-  })
-})
-
-describe('components/FocusGroup Event bubbling', () => {
-  jest.useFakeTimers()
-  let wrapper: ReactWrapper
-
-  it('Focus event bubbles to parent', async (done) => {
-    // @ts-ignore
-    const eventHandler = (event: FocusEvent<Element>) => {
-      expect(event.relatedTarget).toBeTruthy()
-      done()
-    }
-
-    wrapper = mount(
-      <DatePicker onFocus={eventHandler} />
-    )
-    act(() => {
-      wrapper.childAt(0).simulate('focus', { relatedTarget: true })
-    })
-  })
-
-  it('Blur event bubbles to parent', (done) => {
-    // @ts-ignore
-    const eventHandler = (e: FocusEvent<Element>) => {
-      expect(e.relatedTarget).toBeTruthy()
-      done()
-    }
-
-    wrapper = mount(
-      <DatePicker onBlur={eventHandler} />
-    )
-    act(() => {
-      wrapper.childAt(0).simulate('blur', { relatedTarget: true })
-    })
-    jest.runAllTimers()
   })
 })

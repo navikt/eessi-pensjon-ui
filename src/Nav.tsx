@@ -20,7 +20,7 @@ import Stegindikator from 'nav-frontend-stegindikator'
 import Tabs from 'nav-frontend-tabs'
 import Tekstomrade from 'nav-frontend-tekstomrade'
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle'
-import { Sidetittel, Innholdstittel, Systemtittel, Undertittel, Element, Normaltekst, EtikettLiten, Undertekst, UndertekstBold, Ingress } from 'nav-frontend-typografi'
+import { Sidetittel, Innholdstittel, Systemtittel, Undertittel, Element, Feilmelding, Normaltekst, EtikettLiten, Undertekst, UndertekstBold, Ingress } from 'nav-frontend-typografi'
 import Veileder from 'nav-frontend-veileder'
 import Veilederpanel from 'nav-frontend-veilederpanel'
 
@@ -46,6 +46,7 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (EtikettSuksess as unknown as React.FunctionComponent).displayName = 'EtikettSuksess';
 (EtikettLiten as unknown as React.FunctionComponent).displayName = 'EtikettLiten';
 (Fareknapp as unknown as React.FunctionComponent).displayName = 'Fareknapp';
+(Feilmelding as unknown as React.FunctionComponent).displayName = 'Feilmelding';
 (Flatknapp as unknown as React.FunctionComponent).displayName = 'Flatknapp';
 (Hamburgerknapp as unknown as React.FunctionComponent).displayName = 'Hamburgerknapp';
 (Hjelpetekst as unknown as React.FunctionComponent).displayName = 'Hjelpetekst';
@@ -98,7 +99,7 @@ export {
   BekreftCheckboksPanel,
   Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column,
   Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten,
-  Fareknapp, Flatknapp,
+  Fareknapp, Feilmelding, Flatknapp,
   Hamburgerknapp, Hjelpetekst, Hovedknapp,
   Ikon, Ingress, Innholdstittel, Input,
   Knapp, KnappBase,

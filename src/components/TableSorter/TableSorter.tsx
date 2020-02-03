@@ -162,7 +162,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
               <Checkbox
                 id={'c-tableSorter__row-checkbox-id-' + item.key}
                 className='c-tableSorter__row-checkbox'
-                label={'Velg ' + item.key} checked={item.selected} onChange={() =>
+                label={'Velg ' + item.key} checked={!!item.selected} onChange={() =>
                   onCheckClicked(item)}
               />
             </td>
@@ -267,7 +267,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
                         id={'c-tableSorter__sort-' + column.id + '-input-id'}
                         className='c-tableSorter__sort-input'
                         label=''
-                        value={column.filterText}
+                        value={column.filterText || ''}
                         onChange={(e) => handleFilterTextChange(column, e.target.value)}
                       />
                     </td>
