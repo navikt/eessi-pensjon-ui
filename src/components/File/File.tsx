@@ -107,7 +107,7 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
         numPages: e.numPages
       } as File)
     }
-  }, [setNumberPages, onLoadSuccess])
+  }, [file, setNumberPages, onLoadSuccess])
 
   const isPreviewable = (file: File): boolean => {
     return file.mimetype === 'application/pdf' || file.mimetype.startsWith('image/')

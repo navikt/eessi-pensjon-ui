@@ -157,7 +157,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     })
     updateFiles(newFiles, statusMessage)
     return () => {}
-  }, [_labels, _files])
+  }, [_labels, _files, updateFiles])
 
   const onLoadSuccess = useCallback((file: IFile) => {
     const newFiles: IFiles = _files.map(f => {

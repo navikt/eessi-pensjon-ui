@@ -4,8 +4,8 @@ import { IS_TEST } from 'constants/environment'
 import { HOST } from 'constants/urls'
 import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
-import { Dispatch } from 'redux'
-import { ActionWithPayload } from 'declarations/types.d'
+import { ActionWithPayload, MyThunkDispatch, ThunkResult } from 'declarations/types.d'
+import { ActionCreator } from 'redux'
 import uuid from 'uuid/v4'
 
 export interface ApiCallTypes {
@@ -40,10 +40,10 @@ class ApiError extends Error {
   }
 }
 
-export const fakeCall: Function = ({
+export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
   context, expectedPayload, method, type, url
-}: ApiCallProps): (d: Dispatch) => Promise<ActionWithPayload<any>> => {
-  return (dispatch: Dispatch) => {
+}: ApiCallProps): (d: MyThunkDispatch) => Promise<ActionWithPayload> => {
+  return (dispatch: MyThunkDispatch) => {
     if (!IS_TEST) {
       /* istanbul ignore next */
       console.log('FAKE API REQUEST FOR ' + (method || 'GET') + ' ' + url)
@@ -51,7 +51,7 @@ export const fakeCall: Function = ({
     dispatch({
       type: type.request
     })
-    const promise: Promise<ActionWithPayload<any>> = new Promise((resolve) => {
+    const promise: Promise<ActionWithPayload> = new Promise((resolve) => {
       setTimeout(() => {
         const _payload = typeof expectedPayload === 'function' ? expectedPayload() : expectedPayload
         resolve(_payload)
@@ -79,10 +79,10 @@ export const fakeCall: Function = ({
   }
 }
 
-export const realCall: Function = ({
+export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
   body, context, cascadeFailureError, headers, method, payload, type, url
-}: ApiCallProps): (d: Dispatch) => Promise<ActionWithPayload<any> | undefined> => {
-  return (dispatch: Dispatch) => {
+}: ApiCallProps): (d: MyThunkDispatch) => Promise<ActionWithPayload | undefined> => {
+  return (dispatch: MyThunkDispatch) => {
     dispatch({
       type: type.request
     })
