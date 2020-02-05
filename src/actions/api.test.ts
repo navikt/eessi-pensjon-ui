@@ -212,7 +212,11 @@ describe('actions/api', () => {
   it('decides to use fakeCall as we are in localhost and NOT test env', () => {
     jest.resetModules()
     jest.mock('constants/urls', () => ({ HOST: 'localhost' }))
-    jest.mock('constants/environment', () => ({ IS_TEST: false }))
+    jest.mock('constants/environment', () => ({
+      __esModule: true,
+      default: 'production',
+      IS_TEST: false
+    }))
     const newApi = require('actions/api')
     expect(newApi.call.name).toEqual('fakeCall')
 

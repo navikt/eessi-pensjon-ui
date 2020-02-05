@@ -3129,6 +3129,14 @@ GRID
 .skjemaelement__input--mini {
   padding: 0.25rem;
 }
+.skjemaelement__input-fodselsnr::-webkit-outer-spin-button,
+.skjemaelement__input-fodselsnr::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.skjemaelement__input-fodselsnr [type='number'] {
+  -moz-appearance: textfield;
+}
 .skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked) {
   border-color: #BA3A26;
   box-shadow: 0 0 0 1px #BA3A26;

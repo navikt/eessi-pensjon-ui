@@ -1,6 +1,6 @@
 import { get as cookieGet } from 'browser-cookies'
 import * as types from 'constants/actionTypes'
-import { IS_TEST } from 'constants/environment'
+import env, { IS_TEST, RUNNING_IN_BROWSER } from 'constants/environment'
 import { HOST } from 'constants/urls'
 import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
@@ -44,7 +44,8 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
   context, expectedPayload, method, type, url
 }: ApiCallProps): (d: MyThunkDispatch) => Promise<ActionWithPayload> => {
   return (dispatch: MyThunkDispatch) => {
-    if (!IS_TEST) {
+    const inTest = !RUNNING_IN_BROWSER &&  HOST === 'localhost'
+    if (!inTest) {
       /* istanbul ignore next */
       console.log('FAKE API REQUEST FOR ' + (method || 'GET') + ' ' + url)
     }
@@ -55,9 +56,9 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       setTimeout(() => {
         const _payload = typeof expectedPayload === 'function' ? expectedPayload() : expectedPayload
         resolve(_payload)
-      }, Math.floor(Math.random() * 2000))
+      }, inTest ? 1 : Math.floor(Math.random() * 2000))
     }).then(payload => {
-      if (!IS_TEST) {
+      if (!inTest) {
         /* istanbul ignore next */
         console.log('FAKE API SUCCESS FOR ' + (method || 'GET') + ' ' + url)
         /* istanbul ignore next */
