@@ -38,7 +38,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 }: FileUploadProps): JSX.Element => {
   const [_files, setFiles] = useState<IFiles>(files.map(file => ({
     ...file,
-    id: file.id || file.name + ' ' + new Date().getTime()
+    id: file.id || file.name + '-' + new Date().getTime()
   })))
   const [_status, setStatus] = useState<Status>({})
   const [modal, setModal] = useState<ModalContent | undefined>(undefined)

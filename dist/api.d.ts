@@ -1,6 +1,6 @@
 import { get as cookieGet } from 'browser-cookies'
 import * as types from 'constants/actionTypes'
-import env, { IS_TEST, RUNNING_IN_BROWSER } from 'constants/environment'
+import { IS_TEST, RUNNING_IN_BROWSER } from 'constants/environment'
 import { HOST } from 'constants/urls'
 import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
@@ -42,9 +42,9 @@ class ApiError extends Error {
 
 export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
   context, expectedPayload, method, type, url
-}: ApiCallProps): (d: MyThunkDispatch) => Promise<ActionWithPayload> => {
+}: ApiCallProps): ThunkResult<ActionWithPayload> => {
   return (dispatch: MyThunkDispatch) => {
-    const inTest = !RUNNING_IN_BROWSER &&  HOST === 'localhost'
+    const inTest = !RUNNING_IN_BROWSER && HOST === 'localhost'
     if (!inTest) {
       /* istanbul ignore next */
       console.log('FAKE API REQUEST FOR ' + (method || 'GET') + ' ' + url)
@@ -82,7 +82,7 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
 
 export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
   body, context, cascadeFailureError, headers, method, payload, type, url
-}: ApiCallProps): (d: MyThunkDispatch) => Promise<ActionWithPayload | undefined> => {
+}: ApiCallProps): ThunkResult<ActionWithPayload> => {
   return (dispatch: MyThunkDispatch) => {
     dispatch({
       type: type.request
