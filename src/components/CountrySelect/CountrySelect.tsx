@@ -1,4 +1,5 @@
 import * as CountryFilter from 'components/CountrySelect/CountryFilter'
+import { Feilmelding } from 'Nav'
 import React, { useState } from 'react'
 import Select, { ValueType } from 'react-select'
 import PT from 'prop-types'
@@ -116,8 +117,8 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
       />
       {error
         ? (
-          <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-            {error}
+          <div role='alert' aria-live='assertive' className='feilmelding skjemaelement__feilmelding'>
+            <Feilmelding>{error}</Feilmelding>
           </div>
         )
         : null}

@@ -1,3 +1,4 @@
+import { Feilmelding } from 'Nav'
 import React, { useState } from 'react'
 import Select, { ValueType } from 'react-select'
 import CreatableSelect from 'react-select/creatable'
@@ -44,15 +45,15 @@ const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({
   const selectStyle = () => ({
     container: (styles: any, state: any) => ({
       ...styles,
-      backgroundColor: error ? '#f3e3e3' : '#fff',
+      backgroundColor: error ? '#BA3A26' : '#fff',
       borderRadius: 4,
       borderColor: error ? '1 px solid #ba3a26' : '20px solid #b7b1a9',
-      boxShadow: state.isFocused ? '0 0 0 3px #254b6d' : ''
+      boxShadow: state.isFocused ? '0 0 0 3px #FFBD66' : (error ? '0 0 0 1px #BA3A26' : '')
     }),
     control: (styles: any) => ({
       ...styles,
       borderColor: error ? '#ba3a26' : '#b7b1a9',
-      backgroundColor: error ? '#f3e3e3' : '#fff',
+      backgroundColor: '#fff',
       ':hover': {
         borderColor: '#0067c5',
         transition: 'border-color 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946)'
@@ -94,8 +95,8 @@ const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({
 
       {error
         ? (
-          <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-            {error}
+          <div role='alert' aria-live='assertive' className='feilmelding skjemaelement__feilmelding'>
+            <Feilmelding>{error}</Feilmelding>
           </div>
         )
         : null}
