@@ -9,7 +9,8 @@ export interface ModalContent {
   modalTitle?: string;
   modalContent ?: JSX.Element |string;
   modalText ?: string;
-  modalButtons?: Array<ModalButton>
+  modalButtons?: Array<ModalButton>;
+  closeButton?: boolean;
 }
 
 export interface FlagItem {

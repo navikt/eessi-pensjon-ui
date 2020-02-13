@@ -11,7 +11,8 @@ export const ModalContentPropType = PT.shape({
   modalTitle: PT.string,
   modalContent: PT.oneOfType([PT.node, PT.string]),
   modalText: PT.string,
-  modalButtons: PT.arrayOf(ModalButtonPropType.isRequired)
+  modalButtons: PT.arrayOf(ModalButtonPropType.isRequired),
+  closeButton: PT.bool
 })
 
 export const FlagItemPropType = PT.shape({

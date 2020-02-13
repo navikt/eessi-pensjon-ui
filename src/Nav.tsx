@@ -18,7 +18,6 @@ import Snakkeboble from 'nav-frontend-snakkeboble'
 import Spinner from 'nav-frontend-spinner'
 import Stegindikator from 'nav-frontend-stegindikator'
 import Tabs from 'nav-frontend-tabs'
-import Tekstomrade from 'nav-frontend-tekstomrade'
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle'
 import { Sidetittel, Innholdstittel, Systemtittel, Undertittel, Element, Feilmelding, Normaltekst, EtikettLiten, Undertekst, UndertekstBold, Ingress } from 'nav-frontend-typografi'
 import Veileder from 'nav-frontend-veileder'
@@ -82,7 +81,6 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (Systemerknapp as unknown as React.FunctionComponent).displayName = 'Systemerknapp';
 (Søkeknapp as unknown as React.FunctionComponent).displayName = 'Søkeknapp';
 (Tabs as unknown as React.FunctionComponent).displayName = 'Tabs';
-(Tekstomrade as unknown as React.FunctionComponent).displayName = 'Tekstomrade';
 (Textarea as unknown as React.FunctionComponent).displayName = 'Textarea';
 (TextareaControlled as unknown as React.FunctionComponent).displayName = 'TextareaControlled';
 (Tilbakeknapp as unknown as React.FunctionComponent).displayName = 'Tilbakeknapp';
@@ -109,7 +107,7 @@ export {
   Panel, PanelBase, Popover,
   Radio, RadioPanel, RadioPanelGruppe, Row,
   Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp,
-  Tabs, Tekstomrade, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,
+  Tabs, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,
   Undertittel, Undertekst, UndertekstBold,
   Veileder, Veilederpanel
 }

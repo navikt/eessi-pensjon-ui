@@ -31,7 +31,6 @@ class ApiError extends Error {
   public response?: Response;
   public status?: number;
   public stackTrace?: any;
-
   constructor (message?: string) {
     // 'Error' breaks prototype chain here
     super(message)
@@ -53,13 +52,13 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       type: type.request
     })
     const promise: Promise<ActionWithPayload> = new Promise((resolve) => {
-      setTimeout(() => {
+      setTimeout(/* istanbul ignore next */ () => {
         const _payload = typeof expectedPayload === 'function' ? expectedPayload() : expectedPayload
         resolve(_payload)
-      }, inTest ? 1 : Math.floor(Math.random() * 2000))
+      }, inTest ? 1 : /* istanbul ignore next */ Math.floor(Math.random() * 2000))
     }).then(payload => {
+      /* istanbul ignore next */
       if (!inTest) {
-        /* istanbul ignore next */
         console.log('FAKE API SUCCESS FOR ' + (method || 'GET') + ' ' + url)
         /* istanbul ignore next */
         console.log('Payload', payload)
@@ -71,8 +70,8 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       })
     })
     promise.catch((error) => {
+      /* istanbul ignore next */
       if (!IS_TEST) {
-        /* istanbul ignore next */
         console.error(JSON.stringify(error))
       }
     })
@@ -88,7 +87,9 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       type: type.request
     })
     let _body: any = body || payload
+    /* istanbul ignore next */
     _body = _body ? JSON.stringify(_body) : undefined
+    /* istanbul ignore next */
     const CSRF_PROTECTION: {[k: string]: string | null} = cookieGet('NAV_CSRF_PROTECTION')
       ? { NAV_CSRF_PROTECTION: cookieGet('NAV_CSRF_PROTECTION') }
       : {}
@@ -96,15 +97,14 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       method: method || 'GET',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        //      'Cache-Control': 'no-cache, no-store, must-revalidate',
-        //      'Pragma': 'no-cache',
         'X-Request-ID': uuid(),
         ...CSRF_PROTECTION,
         ...headers
       },
       body: _body
-    }).catch(error => {
+    }).catch(/* istanbul ignore next */error => {
       console.error(JSON.stringify(error))
+      return Promise.reject(error)
     }).then(response => {
       if (response) {
         if (response.status >= 400) {

@@ -43,7 +43,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
           <li><strong>S: </strong>Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel,
             Systemerknapp, Søkeknapp
           </li>
-          <li><strong>T: </strong>Tabs, Tekstomrade, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe,
+          <li><strong>T: </strong>Tabs, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe,
             ToggleKnapp
           </li>
           <li><strong>U: </strong>Undertittel, Undertekst, UndertekstBold</li>
