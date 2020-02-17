@@ -14,7 +14,7 @@ describe('components/File/Other', () => {
     file: mockFile as File,
     scale: 1,
     onClick: jest.fn(),
-    overlay: <div/>,
+    overlay: <div />,
     width: 100,
     height: 100
   }

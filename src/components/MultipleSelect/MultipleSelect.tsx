@@ -1,15 +1,16 @@
+import classNames from 'classnames'
+import MultipleValueLabel from 'components/MultipleSelect/MultipleValueLabel'
+import MultipleValueRemove from 'components/MultipleSelect/MultipleValueRemove'
+import _ from 'lodash'
 import { Feilmelding } from 'Nav'
-import React, { useState } from 'react'
-import Select, { ValueType } from 'react-select'
-import CreatableSelect from 'react-select/creatable'
-import makeAnimated from 'react-select/animated'
 import { guid } from 'nav-frontend-js-utils'
 import PT from 'prop-types'
-import _ from 'lodash'
-import classNames from 'classnames'
+import React, { useState } from 'react'
+import Select, { ValueType } from 'react-select'
+import makeAnimated from 'react-select/animated'
+import CreatableSelect from 'react-select/creatable'
 import { SelectComponents } from 'react-select/src/components'
 import MultipleOption from './MultipleOption'
-import MultipleValueRemove from 'components/MultipleSelect/MultipleValueRemove'
 import './MultipleSelect.css'
 
 const animatedComponents: SelectComponents<any> = makeAnimated()
@@ -85,7 +86,8 @@ const MultipleSelect: React.FC<MultipleSelectProps<any>> = ({
         components={{
           ...animatedComponents,
           Option: MultipleOption,
-          MultiValueRemove: MultipleValueRemove
+          MultiValueRemove: MultipleValueRemove,
+          MultiValueLabel: MultipleValueLabel
         }}
         onChange={onSelectChange}
         hideSelectedOptions={hideSelectedOptions || false}
