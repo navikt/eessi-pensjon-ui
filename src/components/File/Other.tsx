@@ -6,17 +6,18 @@ import { FileProps } from './File'
 import './Other.css'
 
 export const Other: React.FC<FileProps> = ({
-  className, file, height, labels, onClick, scale, width
+  className, file, height, labels, onClick, overlay, width
 }: FileProps): JSX.Element => (
   <div
     className={classNames('c-file-Other', className)}
     title={file.name + '\n' + labels.size + ': ' + file.size}
   >
+    {overlay}
     <div
       className='content'
       style={{
-        width: ((width || 100) * scale!) + 'px',
-        height: ((height || 140) * scale!) + 'px'
+        width: width + 'px',
+        height: height + 'px'
       }}
       onClick={onClick}
     >
@@ -30,10 +31,10 @@ export const Other: React.FC<FileProps> = ({
 Other.propTypes = {
   className: PT.string,
   file: FilePropType.isRequired,
-  height: PT.number,
+  height: PT.number.isRequired,
   labels: PT.object.isRequired,
   onClick: PT.func.isRequired,
-  scale: PT.number.isRequired,
-  width: PT.number
+  overlay: PT.element.isRequired,
+  width: PT.number.isRequired
 }
 export default Other

@@ -20,7 +20,7 @@ const RefreshButtonPage: React.FC<PageProps> = (): JSX.Element => {
         <Systemtittel className='pt-4 pb-4'>Refresh button</Systemtittel>
         <Normaltekst className='pb-4'>Spinning refresh button. Click on the checkbox to toggle <code>rotating</code> boolean prop.</Normaltekst>
 
-        <Checkbox label='Toggle rotating' checked={rotating} onChange={() => setRotating(!rotating)} />
+        <Checkbox className='mb2' label='Toggle rotating' checked={rotating} onChange={() => setRotating(!rotating)} />
 
         <RefreshButton
           rotating={rotating}

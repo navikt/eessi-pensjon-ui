@@ -10,17 +10,78 @@
 
     .overlay {
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
     }
 
-    .top-overlay {
+    .overlay-inside {
         position: absolute;
-        top: 0px;
-        display: flex;
-        flex-direction: row-reverse;
-        width: 100%;
+        flex-direction: column;
+
+        .overlay-top {
+            position: absolute;
+            top: 0px;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .previousPage {
+            left:0px;
+        }
+
+        .nextPage {
+            right:0px;
+        }
+
+        .previousPage, .nextPage {
+            text-decoration: none;
+            font-size: 1.2rem;
+            position: absolute;
+            top:45%;
+            z-index: 2;
+            -webkit-text-stroke: 2px white;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .pageNumber {
+            position: absolute;
+            bottom: 0px;
+            right : 0px;
+            z-index: 2;
+            background-color: @white;
+            padding: 0px 3px;
+        }
     }
+
+    .overlay-header {
+        position: relative;
+        flex-direction: row;
+
+        .overlay-top {
+            display: flex;
+        }
+
+        .previousPage, .nextPage {
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 2;
+            -webkit-text-stroke: 2px white;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .pageNumber {
+            z-index: 2;
+            background-color: @white;
+            padding: 0px 3px;
+        }
+    }
+
+
 
     .link {
         z-index: 10;
@@ -34,35 +95,7 @@
         }
     }
 
-    .previousPage {
-        left:0px;
-    }
 
-    .nextPage {
-        right:0px;
-    }
-
-    .previousPage, .nextPage {
-        text-decoration: none;
-        font-size: 1.2rem;
-        position: absolute;
-        top:45%;
-        z-index: 2;
-        -webkit-text-stroke: 2px white;
-
-        &:hover {
-            text-decoration: none;
-        }
-    }
-
-    .pageNumber {
-        position: absolute;
-        bottom: 0px;
-        right : 0px;
-        z-index: 2;
-        background-color: @white;
-        padding: 0px 3px;
-    }
 }
 
 @keyframes c-file-FadeIn {

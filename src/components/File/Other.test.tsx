@@ -13,7 +13,10 @@ describe('components/File/Other', () => {
     labels: defaultLabels,
     file: mockFile as File,
     scale: 1,
-    onClick: jest.fn()
+    onClick: jest.fn(),
+    overlay: <div/>,
+    width: 100,
+    height: 100
   }
 
   it('Renders', () => {

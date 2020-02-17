@@ -73,7 +73,7 @@ describe('components/File', () => {
         {...initialMockProps}
         file={samplePDF}
         initialPage={3}
-        buttons='hover'
+        buttonsVisibility='hover'
         showPreviewButton
         showDeleteButton
         showDownloadButton
@@ -105,28 +105,28 @@ describe('components/File', () => {
   })
 
   it('Preview page', () => {
-    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showPreviewButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttonsVisibility='always' showPreviewButton />)
     expect(wrapper.exists('.previewLink')).toBeTruthy()
     wrapper.find('.previewLink').simulate('click')
     expect(initialMockProps.onPreviewFile).toHaveBeenCalled()
   })
 
   it('Delete document', () => {
-    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDeleteButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttonsVisibility='always' showDeleteButton />)
     expect(wrapper.exists('.deleteLink')).toBeTruthy()
     wrapper.find('.deleteLink').simulate('click')
     expect(initialMockProps.onDeleteFile).toHaveBeenCalled()
   })
 
   it('Add document', () => {
-    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showAddButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttonsVisibility='always' showAddButton />)
     expect(wrapper.exists('.addLink')).toBeTruthy()
     wrapper.find('.addLink').simulate('click')
     expect(initialMockProps.onAddFile).toHaveBeenCalled()
   })
 
   it('Download document', () => {
-    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='visible' showDownloadButton />)
+    wrapper = mount(<File {...initialMockProps} file={samplePDF} buttonsVisibility='always' showDownloadButton />)
     expect(wrapper.exists('.downloadLink')).toBeTruthy()
     wrapper.find('.downloadLink').simulate('click')
     expect(wrapper.find('.downloadLink > a').props().href)
@@ -135,7 +135,7 @@ describe('components/File', () => {
   })
 
   it('Changes current page', async (done) => {
-    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttons='hover' />)
+    const wrapper = mount(<File {...initialMockProps} file={samplePDF} buttonsVisibility='hover' />)
     wrapper.simulate('mouseover')
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 750))

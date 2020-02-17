@@ -27,7 +27,10 @@ describe('components/File/Pdf', () => {
     labels: defaultLabels,
     scale: 1,
     onClick: jest.fn(),
-    onLoadSuccess: jest.fn()
+    onLoadSuccess: jest.fn(),
+    overlay: <div/>,
+    width: 100,
+    height: 100
   }
 
   it('Renders', () => {

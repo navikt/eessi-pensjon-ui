@@ -6,16 +6,17 @@ import React from 'react'
 import './Image.css'
 
 export const Image: React.FC<FileProps> = ({
-  className, file, height, labels, onClick, scale, size
+  className, file, height, labels, onClick, overlay, size
 }: FileProps): JSX.Element => (
   <div
     className={classNames('c-file-Image', className)}
     title={'' + file.name + '\n' + labels.size + ': ' + size}
   >
+    {overlay}
     <div className='content' onClick={onClick}>
       <img
         alt={file.name}
-        style={{ maxHeight: ((height || 100) * scale!) + 'px' }}
+        style={{ maxHeight: height + 'px' }}
         src={'data:' + file.mimetype + ';base64,' + file.content.base64}
       />
     </div>
@@ -25,10 +26,10 @@ export const Image: React.FC<FileProps> = ({
 Image.propTypes = {
   className: PT.string,
   file: FilePropType.isRequired,
-  height: PT.number,
+  height: PT.number.isRequired,
   labels: PT.object.isRequired,
   onClick: PT.func.isRequired,
-  scale: PT.number.isRequired,
+  overlay: PT.element.isRequired,
   size: PT.string.isRequired
 }
 Image.displayName = 'Image'

@@ -48,7 +48,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setModal(undefined)
   }
 
-  const openPreview = useCallback((file: IFile, initialPage: number) => {
+  const openPreview = useCallback((file: IFile, initialPage?: number) => {
     setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={closePreview}>

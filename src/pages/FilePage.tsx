@@ -1,5 +1,7 @@
+import Mustache from 'mustache'
+import { Checkbox, Select } from 'Nav'
 import { PageProps } from 'pages/index'
-import React from 'react'
+import React, { useState } from 'react'
 import { State } from 'reducer'
 import Container from './Container'
 import File from 'components/File/File'
@@ -16,6 +18,9 @@ SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const FilePage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
+  const [buttonsPosition, setButtonsPosition] = useState<'inside' | 'header'>('inside')
+  const [buttonsVisibility, setButtonsVisibility] = useState<'always' | 'hover' | 'none'>('always')
+  const [viewOnePage, setViewOnePage] = useState<boolean>(true)
   return (
     <Container>
       <Panel className='p-4'>
@@ -72,7 +77,10 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='mt-4 mb-4'>Image file</Undertittel>
 
         <div className='d-flex'>
-          <File file={sampleJPG} scale={2} />
+          <File
+            file={sampleJPG} buttonsVisibility='always'
+            buttonsPosition='header' showDownloadButton scale={2}
+          />
           <div className='ml-4'>
             <Normaltekst className='mb-4'>Image file renders the base64 content of an image with a
               fixed <code>max-height</code> given my <code>height</code> property (with defaylt 100px as a scale 1.0).
@@ -110,10 +118,40 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
           is easier to set a <code>scale</code> value (scale 1.0 matches a width of 100px and height of 140 px).
         </Normaltekst>
 
+        <div className='mb-4 d-flex flex-row'>
+          <Select
+            className='w-25'
+            label='Buttons position'
+            value={buttonsPosition}
+            onChange={(e) => setButtonsPosition(e.target.value as 'inside' | 'header')}
+          >
+            <option>inside</option>
+            <option>header</option>
+          </Select>
+          <Select
+            className='w-25'
+            label='Buttons visibility'
+            value={buttonsVisibility}
+            onChange={(e) => setButtonsVisibility(e.target.value as 'always' | 'hover' |'none')}
+          >
+            <option>always</option>
+            <option>hover</option>
+            <option>none</option>
+          </Select>
+          <Checkbox
+            className='w-25'
+            label='view one Page'
+            checked={viewOnePage}
+            onChange={() => setViewOnePage(!viewOnePage)}
+          />
+        </div>
+
         <div className='d-flex'>
           <File
             file={samplePDF}
-            buttons='visible'
+            buttonsVisibility={buttonsVisibility!}
+            buttonsPosition={buttonsPosition!}
+            viewOnePage={viewOnePage}
             initialPage={2}
             showAddButton
             showDeleteButton
@@ -130,9 +168,11 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
           />
           <div className='ml-4'>
             <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-              {'<File \n' +
+              {Mustache.render('<File \n' +
               '  file={samplePDF}\n' +
-              '  buttons=\'visible\'\n' +
+              '  buttonsVisibility=\'{{buttonsVisibility}}\'\n' +
+              '  buttonsPosition=\'{{buttonsPosition}}\'\n' +
+              '  viewOnePage={{viewOnePage}}\n' +
               '  initialPage={2}\n' +
               '  showAddButton\n' +
               '  showDeleteButton\n' +
@@ -146,7 +186,7 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               '  onPreviousPage={(file) => console.log(\'onPreviousPage clicked with file \', file)}\n' +
               '  onNextPage={(file) => console.log(\'onNextPage clicked with file \', file)}\n' +
               '  scale={2}' +
-              '/>'}
+              '/>', { buttonsPosition: buttonsPosition, buttonsVisibility: buttonsVisibility, viewOnePage: viewOnePage })}
             </SyntaxHighlighter>
           </div>
         </div>
@@ -177,11 +217,20 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               <td><code>true</code></td>
             </tr>
             <tr>
-              <td>buttons</td>
+              <td>buttonsPosition</td>
               <td><code>string</code></td>
               <td>false</td>
-              <td>When to show context buttons. It can be one of values <code>visible</code> (always
-              visible), <code>hover</code> (visible only when hovering file), or <code>none</code>
+              <td>When to place context buttons. It can be one of values <code>inside</code> (over the file div) or
+                <code>header</code> above the file div
+              </td>
+              <td><code>inside</code></td>
+            </tr>
+            <tr>
+              <td>buttonsVisibility</td>
+              <td><code>string</code></td>
+              <td>false</td>
+              <td>When to show context buttons. It can be one of values <code>always</code> (always
+                visible), <code>hover</code> (visible only when hovering file), or <code>none</code>
               </td>
               <td><code>hover</code></td>
             </tr>
@@ -303,6 +352,13 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               <td>false</td>
               <td>Display toggle for the Preview button</td>
               <td>false</td>
+            </tr>
+            <tr>
+              <td>viewOnePage</td>
+              <td><code>boolean</code></td>
+              <td>true</td>
+              <td>For PDFs, toggle between view one page at a time, or render all pages at once</td>
+              <td>true</td>
             </tr>
             <tr>
               <td>width</td>

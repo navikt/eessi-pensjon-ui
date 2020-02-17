@@ -1,6 +1,7 @@
 import bytes from 'bytes'
 import classNames from 'classnames'
 import defaultLabels from 'components/File/File.labels'
+import FileOverlay from 'components/File/FileOverlay'
 import Image from 'components/File/Image'
 import Other from 'components/File/Other'
 import Pdf from 'components/File/Pdf'
@@ -9,7 +10,6 @@ import { FilePropType, LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useCallback, useState } from 'react'
-import Icons from '../Icons/Icons'
 import './File.css'
 
 const renderBytes = (_bytes: number): string => {
@@ -24,20 +24,22 @@ export interface FileProps {
   currentPage ?: number;
   numberPages ?: number;
   file: File;
-  buttons?: string;
-  height?: number;
+  height: number;
   labels: Labels,
   onClick: (e: React.MouseEvent) => void;
   onLoadSuccess ?: (e: LoadEvent) => void;
+  overlay: JSX.Element;
   scale?: number;
   size: string;
   tema?: string;
-  width?: number;
+  viewOnePage?: boolean;
+  width: number;
 }
 
 export interface ThisFileProps {
   animate?: boolean;
-  buttons?: string;
+  buttonsVisibility?: 'always' | 'hover' | 'none';
+  buttonsPosition?: 'header' | 'inside';
   className ?: string;
   file: File;
   height ?: number | string;
@@ -48,7 +50,7 @@ export interface ThisFileProps {
   onDeleteFile?: (file: File) => void;
   onDownloadFile?: (file: File) => void;
   onLoadSuccess?: (file: File) => void;
-  onPreviewFile?: (file: File, initialPage: number) => void;
+  onPreviewFile?: (file: File, initialPage?: number) => void;
   onPreviousPage?: (file: File) => void;
   onNextPage?: (file: File) => void;
   scale?: number;
@@ -57,6 +59,7 @@ export interface ThisFileProps {
   showDownloadButton?: boolean;
   showPreviewButton?: boolean;
   tema?: string;
+  viewOnePage?: boolean;
   width?: string | number;
 }
 
@@ -66,20 +69,26 @@ interface LoadEvent {
 
 const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
   const {
-    animate = true, className, initialPage, file = {} as File, buttons = 'hover', height, initialLabels = {} as Labels,
-    onAddFile, onContentClick, onDeleteFile, onDownloadFile, onLoadSuccess, onPreviewFile, onPreviousPage, onNextPage,
-    showAddButton = false, showDeleteButton = false, showDownloadButton = false, showPreviewButton = false, scale = 1.0,
-    tema = 'paper', width
+    animate = true, className, initialPage, file = {} as File, buttonsVisibility = 'hover', buttonsPosition = 'inside',
+    height, initialLabels = {} as Labels, onAddFile, onContentClick, onDeleteFile, onDownloadFile, onLoadSuccess,
+    onPreviewFile, onPreviousPage, onNextPage, showAddButton = false, showDeleteButton = false,
+    showDownloadButton = false, showPreviewButton = false, scale = 1.0, tema = 'paper', viewOnePage = true, width
   } = props
-
-  const [isHovering, setIsHovering] = useState<boolean>(buttons === 'visible')
+  const [isHovering, setIsHovering] = useState<boolean>(viewOnePage && buttonsVisibility === 'always')
   const [_currentPage, setCurrentPage] = useState<number>(initialPage || 1)
   const [_numberPages, setNumberPages] = useState<number>(0)
   const _size: string = file && file.size !== undefined ? renderBytes(file.size) : '-'
   const _labels: Labels = { ...defaultLabels, ...initialLabels }
-  const onHandleMouseEnter = () => { if (buttons === 'hover') setIsHovering(true) }
-  const onHandleMouseOver = () => { if (buttons === 'hover') setIsHovering(true) }
-  const onHandleMouseLeave = () => { if (buttons === 'hover') setIsHovering(false) }
+  const onHandleMouseEnter = () => { if (viewOnePage && buttonsVisibility === 'hover') setIsHovering(true) }
+  const onHandleMouseOver = () => { if (viewOnePage && buttonsVisibility === 'hover') setIsHovering(true) }
+  const onHandleMouseLeave = () => { if (viewOnePage && buttonsVisibility === 'hover') setIsHovering(false) }
+
+  let _width = (_.isString(width) && (width as string).match(/^\d+$/) ? parseInt(width, 10) : width) as number
+  let _height = (_.isString(height) && (height as string).match(/^\d+$/) ? parseInt(height, 10) : height) as number
+  if (!_width) {
+    _width = 100 * scale
+    _height = 140 * scale
+  }
 
   const handlePreviousPageRequest = (e: React.MouseEvent): void => {
     e.stopPropagation()
@@ -109,10 +118,6 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
     }
   }, [file, setNumberPages, onLoadSuccess])
 
-  const isPreviewable = (file: File): boolean => {
-    return file.mimetype === 'application/pdf' || file.mimetype.startsWith('image/')
-  }
-
   let Component: React.FC<FileProps> = Other
 
   if (file && file.mimetype && file.mimetype === 'application/pdf') {
@@ -128,107 +133,41 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
       onMouseEnter={onHandleMouseEnter}
       onMouseLeave={onHandleMouseLeave}
       onMouseOver={onHandleMouseOver}
-      style={file.mimetype === 'application/pdf' ? {
-        maxWidth: _.isString(width) ? width : ((width || 100) * scale) + 'px',
-        maxHeight: _.isString(height) ? height : ((height || 140) * scale) + 'px'
-      } : {}}
     >
-      <div className='overlay'>
-        <div className='top-overlay'>
-          {showAddButton && isHovering && onAddFile ? (
-            <div
-              className='link addLink'
-              onClick={(e: React.MouseEvent) => {
-                e.preventDefault()
-                e.stopPropagation()
-                onAddFile(file)
-              }}
-            >
-              <Icons kind='vedlegg' size={20} />
-            </div>
-          ) : null}
-          {showDeleteButton && onDeleteFile && isHovering ? (
-            <div
-              className='link deleteLink'
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                onDeleteFile(file)
-              }}
-            >
-              <Icons kind='trashcan' size={16} />
-            </div>
-          ) : null}
-          {showPreviewButton && isHovering && onPreviewFile && isPreviewable(file) ? (
-            <div
-              className='link previewLink'
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                onPreviewFile(file, _currentPage)
-              }}
-            >
-              <Icons style={{ cursor: 'pointer' }} size={16} kind='view' />
-            </div>
-          ) : null}
-          {showDownloadButton && isHovering && onDownloadFile && file.content && file.content.base64 ? (
-            <div className='link downloadLink'>
-              <a
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onDownloadFile(file)
-                }}
-                title={_labels.download}
-                href={'data:application/octet-stream;base64,' + encodeURIComponent(file.content.base64)}
-                download={file.name}
-              >
-                <Icons size={16} kind='download' />
-              </a>
-            </div>
-          ) : null}
-        </div>
-        <div className='middle-overlay'>
-          {_currentPage > 1 && isHovering
-            ? (
-              <a
-                href='#previousPage'
-                className='previousPage'
-                onClick={handlePreviousPageRequest}
-              >
-                ◀
-              </a>
-            ) : null}
-          {_currentPage < _numberPages && isHovering
-            ? (
-              <a
-                href='#nextPage'
-                className='nextPage'
-                onClick={handleNextPageRequest}
-              >
-                ▶
-              </a>
-            ) : null}
-        </div>
-        <div className='bottom-overlay'>
-          {isHovering && file.mimetype === 'application/pdf'
-            ? (
-              <div className='pageNumber'>
-                {_currentPage}
-              </div>
-            ) : null}
-        </div>
-      </div>
       <Component
         {...props}
-        size={_size}
-        scale={scale}
-        labels={_labels}
         tema={tema}
-        width={(_.isString(width) && (width as string).match(/^\d+$/) ? parseInt(width, 10) : width) as number}
-        height={(_.isString(height) && (height as string).match(/^\d+$/) ? parseInt(height, 10) : height) as number}
+        size={_size}
+        labels={_labels}
+        width={_width}
+        height={_height}
         currentPage={_currentPage}
         numberPages={_numberPages}
         onLoadSuccess={handleOnLoadSuccess}
+        overlay={(
+          <FileOverlay
+            buttonsVisibility={buttonsVisibility}
+            buttonsPosition={buttonsPosition}
+            currentPage={_currentPage}
+            file={file}
+            handleNextPageRequest={handleNextPageRequest}
+            handlePreviousPageRequest={handlePreviousPageRequest}
+            height={_height}
+            isHovering={isHovering}
+            labels={_labels}
+            numberPages={_numberPages}
+            onAddFile={onAddFile}
+            onDeleteFile={onDeleteFile}
+            onDownloadFile={onDownloadFile}
+            onPreviewFile={onPreviewFile}
+            showAddButton={showAddButton}
+            showDeleteButton={showDeleteButton}
+            showDownloadButton={showDownloadButton}
+            showPreviewButton={showPreviewButton}
+            viewOnePage={viewOnePage}
+            width={_width}
+          />
+        )}
         onClick={(e: React.MouseEvent) => {
           e.preventDefault()
           e.stopPropagation()
@@ -244,7 +183,9 @@ const FileFC: React.FC<ThisFileProps> = (props: ThisFileProps): JSX.Element => {
 FileFC.propTypes = {
   animate: PT.bool,
   className: PT.string,
-  buttons: PT.oneOf(['visible', 'hover', 'none']),
+  buttonsVisibility: PT.oneOf(['always', 'hover', 'none']),
+  buttonsPosition: PT.oneOf(['header', 'inside']),
+  viewOnePage: PT.bool,
   file: FilePropType.isRequired,
   height: PT.number,
   initialPage: PT.number,
