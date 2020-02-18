@@ -54,7 +54,7 @@ const Editor: React.FC<EditorProps> = ({
   const imageCollapse = (imageFiles: Files): JSX.Element => {
     if (_.isEmpty(imageFiles)) { return <div /> }
     return (
-      <Ekspanderbartpanel apen key='images' tittel={labels.label_images} tittelProps='undertittel'>
+      <Ekspanderbartpanel apen key='images' tittel={labels.label_images}>
         <DnDImages
           dndTarget={dndTarget}
           labels={labels}
@@ -69,7 +69,7 @@ const Editor: React.FC<EditorProps> = ({
 
   const pdfCollapse = (pdfFiles: Files): Array<JSX.Element> => (
     pdfFiles.map((file, i) => (
-      <Ekspanderbartpanel apen key={'pdf-' + i} tittel={file.name} tittelProps='undertittel'>
+      <Ekspanderbartpanel apen key={'pdf-' + i} tittel={file.name}>
         <DnDSource
           labels={labels}
           recipes={recipes}
@@ -138,7 +138,7 @@ const Editor: React.FC<EditorProps> = ({
                 destroyInactivePanel={false}
                 accordion={false}
               >
-                <Ekspanderbartpanel apen={false} key='special' tittel={labels.title_specials} tittelProps='undertittel'>
+                <Ekspanderbartpanel apen={false} key='special' tittel={labels.title_specials}>
                   <DnDSpecial
                     dndTarget={dndTarget}
                     labels={labels}

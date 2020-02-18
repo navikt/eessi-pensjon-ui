@@ -32,6 +32,21 @@ describe('components/TableSorter/TableSorter', () => {
       { key: '11', string: 'String 11', date: new Date(2020, 1, 11), object: { label: 'Object 11' } }
     ],
     loading: false,
+    labels: {
+      string: {
+        'string 01': 'Tooltip for string 01',
+        'string 02': 'Tooltip for string 02',
+        'string 03': 'Tooltip for string 03',
+        'string 04': 'Tooltip for string 04',
+        'string 05': 'Tooltip for string 05',
+        'string 06': 'Tooltip for string 06',
+        'string 07': 'Tooltip for string 07',
+        'string 08': 'Tooltip for string 08',
+        'string 09': 'Tooltip for string 09',
+        'string 10': 'Tooltip for string 10',
+        'string 11': 'Tooltip for string 11'
+      }
+    },
     sortable: true,
     searchable: true,
     selectable: true,

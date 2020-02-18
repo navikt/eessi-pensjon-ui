@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
 import classNames from 'classnames'
-import PT from 'prop-types'
-import { Checkbox, Input, Lenke, Normaltekst } from '../../Nav'
-import Icons from '../Icons/Icons'
 import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
-import './TableSorter.css'
+import _ from 'lodash'
+import PT from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import ReactTooltip from 'react-tooltip'
+import { Checkbox, Input, Lenke, Normaltekst } from 'Nav'
+import Icons from '../Icons/Icons'
 import Pagination from '../Pagination/Pagination'
+import './TableSorter.css'
 
 export interface Item {
   key: string;
@@ -39,6 +40,7 @@ export interface TableSorterProps {
   initialPage?: number;
   items?: Items;
   itemsPerPage ?: number;
+  labels?: any;
   loading?: boolean;
   onRowSelectChange ?: (i: Items) => void;
   pagination?: boolean;
@@ -49,9 +51,11 @@ export interface TableSorterProps {
 }
 
 const TableSorter: React.FC<TableSorterProps> = ({
-  animatable = true, className, context, columns = [], initialPage = 1, items = [], itemsPerPage = 10, loading = false,
-  onRowSelectChange, pagination = true, searchable = true, selectable = false, sortable = true,
-  sort = { column: '', order: 'none' }
+  animatable = true, className, context, columns = [],
+  initialPage = 1, items = [], itemsPerPage = 10,
+  labels = {}, loading = false, onRowSelectChange,
+  pagination = true, searchable = true, selectable = false,
+  sortable = true, sort = { column: '', order: 'none' }
 }: TableSorterProps): JSX.Element => {
   const [_sort, setSort] = useState<Sort>(sort)
   const [_items, setItems] = useState<Items>(items)
@@ -185,7 +189,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
               default:
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst>{value}</Normaltekst>}
+                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</Normaltekst>}
                   </td>
                 )
             }
@@ -206,6 +210,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
 
   return (
     <div className={classNames('c-tableSorter', 'tabell', { 'tabell__td--sortert': sortable }, className)}>
+      <ReactTooltip place='top' type='dark' effect='solid' />
       <div className='c-tableSorter__content'>
         {loading ? (
           <div className='c-tableSorter__loading'>
@@ -300,6 +305,7 @@ TableSorter.propTypes = {
   initialPage: PT.number,
   items: PT.array,
   itemsPerPage: PT.number,
+  labels: PT.any,
   loading: PT.bool,
   onRowSelectChange: PT.func,
   pagination: PT.bool,
