@@ -2845,6 +2845,12 @@ GRID
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
+.skjemaelement__label + .skjemaelement__description {
+  margin-top: -0.25rem;
+}
+.skjemaelement__description {
+  margin-bottom: 0.5rem;
+}
 .checkboks,
 .radioknapp {
   position: absolute;
@@ -3406,6 +3412,9 @@ GRID
 .skjemagruppe .skjemagruppe.checkboxgruppe,
 .skjemagruppe fieldset .skjemagruppe.checkboxgruppe,
 .skjemagruppe__fieldset .skjemagruppe.checkboxgruppe {
+  margin-bottom: 1rem;
+}
+.skjemagruppe__description {
   margin-bottom: 1rem;
 }
 .skjemagruppe legend,

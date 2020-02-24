@@ -93,7 +93,9 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
     const CSRF_PROTECTION: {[k: string]: string | null} = cookieGet('NAV_CSRF_PROTECTION')
       ? { NAV_CSRF_PROTECTION: cookieGet('NAV_CSRF_PROTECTION') }
       : {}
-    return fetch(url + '?ts=' + new Date().getTime(), {
+    const now: number = new Date().getTime()
+    const _url: string = url.match(/\?./) ? url + '&ts=' + now : url + '?ts=' + now
+    return fetch(_url, {
       method: method || 'GET',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
