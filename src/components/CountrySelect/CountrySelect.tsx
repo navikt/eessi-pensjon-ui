@@ -22,6 +22,7 @@ export interface CountrySelectProps<T> {
   includeList?: Array<any>;
   label: string | JSX.Element;
   locale: AllowedLocaleString;
+  menuPortalTarget?: any;
   onOptionSelected ?: (e: ValueType<T>) => void;
   placeholder?: string;
   sort ?: string;
@@ -31,7 +32,7 @@ export interface CountrySelectProps<T> {
 
 const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
   ariaLabel, className, error, excludeList, flags = true, id, includeList, label, locale = 'nb',
-  onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
+  menuPortalTarget, onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
 }) => {
   const [_value, setValue] = useState<ValueType<Country> | null>(value)
 
@@ -105,12 +106,14 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
           id: id + '-select',
           flags: flags
         }}
+        menuPortalTarget={menuPortalTarget || undefined}
         aria-label={ariaLabel}
         className='c-countrySelect__select'
         classNamePrefix='c-countrySelect__select'
         onChange={onSelectChange}
         styles={{
-          ...CountryErrorStyle(error)
+          ...CountryErrorStyle(error),
+          menuPortal: base => ({ ...base, zIndex: 9999 })
         }}
         tabSelectsValue={false}
         multi={false}
@@ -136,6 +139,7 @@ CountrySelect.propTypes = {
   includeList: PT.array,
   label: PT.oneOfType([PT.element, PT.string]).isRequired,
   locale: PT.oneOf(['en' as AllowedLocaleString, 'nb' as AllowedLocaleString]).isRequired,
+  menuPortalTarget: PT.any,
   onOptionSelected: PT.func,
   placeholder: PT.string,
   sort: PT.oneOf(['asc', 'desc', 'scandinaviaFirst']),

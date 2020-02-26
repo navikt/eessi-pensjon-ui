@@ -46,6 +46,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
           className='w-50'
           label='Standard country select'
           ariaLabel='Standard country select'
+          menuPortalTarget={document.body}
           locale={lang}
           error={undefined}
           onOptionSelected={(country) => window.alert('You selected ' + JSON.stringify(country))}
