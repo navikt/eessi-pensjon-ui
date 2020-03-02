@@ -1,48 +1,15 @@
-import _ from 'lodash'
-import isoCountries, { getNames, LocalizedCountryNames } from 'i18n-iso-countries'
-// @ts-ignore
-import { countries } from 'country-data-list'
-// @ts-ignore
 import currencyToName from '@piotrgorecki/i18n-currency-name'
+import { countries } from 'country-data-list'
+import { AllowedLocaleString, Countries, Country, Currencies, Currency } from 'declarations/components'
+import isoCountries, { getNames, LocalizedCountryNames } from 'i18n-iso-countries'
+import _ from 'lodash'
 
 isoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'))
 isoCountries.registerLocale(require('i18n-iso-countries/langs/nb.json'))
 
 const allowedLocales = ['en', 'nb']
-export type AllowedLocaleString = 'en' | 'nb'
+
 export type CountryDataInstance = {[k in AllowedLocaleString]? : any}
-
-interface RawCountry {
-  alpha2: string;
-  alpha3: string;
-  countryCallingCodes: Array<string>;
-  emoji: string;
-  ioc: string;
-  languages: Array<string>;
-  name: string;
-  status: string;
-}
-interface AddedCountry {
-  label: string
-  value: string;
-  value3: string;
-  currencies: Array<{
-    currencyValue: string;
-    currencyLabel: string;
-  }>
-}
-
-interface AddedCurrency {
-  label: string
-  value: string;
-  currencyValue: string;
-  currencyLabel: string;
-}
-
-export type Country = RawCountry & AddedCountry
-export type Countries = Array<Country>
-export type Currency = RawCountry & AddedCurrency
-export type Currencies = Array<Currency>
 
 /* countries: {
     alpha2: 'AC',

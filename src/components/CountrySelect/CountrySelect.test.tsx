@@ -1,4 +1,4 @@
-import { Country } from 'components/CountryData/CountryData'
+import { Country } from 'declarations/components'
 import { mount, ReactWrapper } from 'enzyme'
 import React from 'react'
 import CountrySelect, { CountrySelectProps } from './CountrySelect'

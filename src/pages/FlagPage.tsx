@@ -1,3 +1,4 @@
+import { Country } from 'declarations/components'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
 import { State } from 'reducer'
@@ -5,7 +6,7 @@ import Container from './Container'
 import Flag from 'components/Flag/Flag'
 import FlagList from 'components/Flag/FlagList'
 import ReactTooltip from 'react-tooltip'
-import CountryData, { Country } from 'components/CountryData/CountryData'
+import CountryData from 'components/CountryData/CountryData'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
@@ -25,7 +26,7 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
-      <ReactTooltip place='top' type='dark' effect='solid' />
+      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Flag</Systemtittel>
         <Normaltekst>Flag component renders any world flag in SVG format.</Normaltekst>

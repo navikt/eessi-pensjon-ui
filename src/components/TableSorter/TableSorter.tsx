@@ -189,7 +189,11 @@ const TableSorter: React.FC<TableSorterProps> = ({
               default:
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</Normaltekst>}
+                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : (
+                      <Normaltekst>
+                        <span data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</span>
+                      </Normaltekst>
+                    )}
                   </td>
                 )
             }
@@ -210,7 +214,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
 
   return (
     <div className={classNames('c-tableSorter', 'tabell', { 'tabell__td--sortert': sortable }, className)}>
-      <ReactTooltip place='top' type='dark' effect='solid' />
+      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <div className='c-tableSorter__content'>
         {loading ? (
           <div className='c-tableSorter__loading'>

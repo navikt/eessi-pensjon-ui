@@ -1,4 +1,4 @@
-import { AllowedLocaleString } from 'components/CountryData/CountryData'
+import { AllowedLocaleString } from 'declarations/components'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
 import { State } from 'reducer'

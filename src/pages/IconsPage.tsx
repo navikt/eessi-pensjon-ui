@@ -19,7 +19,7 @@ const IconsPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
-      <ReactTooltip place='top' type='dark' effect='solid' />
+      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>Icons</Systemtittel>
         <Normaltekst className='mt-4 mb-4'>Icon component that combines icons from <code>FontAwesome</code> and external SVG icons from NAV Ikoner DB</Normaltekst>
