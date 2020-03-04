@@ -59,9 +59,9 @@ export const Alert: React.FC<AlertProps> = ({
     if (_.isString(error)) {
       return error
     }
-    if (error.status) {
+    /* if (error.status) {
       errorMessage.push(error.status)
-    }
+    } */
     if (error.message) {
       errorMessage.push(error.message)
     }

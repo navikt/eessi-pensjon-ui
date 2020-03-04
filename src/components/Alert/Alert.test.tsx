@@ -64,7 +64,7 @@ describe('components/Alert/Alert', () => {
       uuid: 'uuid'
     }
     wrapper = mount(<Alert {...initialMockProps} type='server' error={error} />)
-    expect(wrapper.render().text()).toEqual('mockErrorMessage: 500 - message - error - uuid')
+    expect(wrapper.render().text()).toEqual('mockErrorMessage: message - error - uuid')
   })
 
   it('Pretty prints a string error', () => {

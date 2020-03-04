@@ -113,8 +113,9 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
           const apiError: ApiError = new ApiError(response.statusText)
           apiError.response = response
           apiError.status = response.status
+          // 404s may have body
           return response.json().then((json) => {
-            apiError.message = json.message
+            apiError.message = json.message || json.error
             apiError.stackTrace = json.stackTrace
             throw apiError
           })
