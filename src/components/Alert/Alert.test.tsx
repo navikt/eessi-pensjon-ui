@@ -66,4 +66,10 @@ describe('components/Alert/Alert', () => {
     wrapper = mount(<Alert {...initialMockProps} type='server' error={error} />)
     expect(wrapper.render().text()).toEqual('mockErrorMessage: 500 - message - error - uuid')
   })
+
+  it('Pretty prints a string error', () => {
+    const error = 'error'
+    wrapper = mount(<Alert {...initialMockProps} type='client' error={error} />)
+    expect(wrapper.render().text()).toEqual('mockErrorMessage: error')
+  })
 })

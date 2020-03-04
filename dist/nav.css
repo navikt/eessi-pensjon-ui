@@ -881,6 +881,7 @@ img {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+  white-space: nowrap;
 }
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
@@ -2063,6 +2064,7 @@ GRID
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+  white-space: nowrap;
 }
 .knappmini-mixin {
   text-transform: none;
@@ -2428,6 +2430,7 @@ GRID
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+  white-space: nowrap;
 }
 .lenkepanel {
   background-color: #FFF;

@@ -22,13 +22,20 @@ interface AlertError {
 
 export interface AlertProps {
   className ?: string;
-  error?: AlertError;
+  error?: AlertError | string;
   fixed?: boolean;
   message?: string;
   onClose?: () => void;
   status?: AlertStatus;
   type?: AlertType;
 }
+
+const AlertErrorPropType = PT.shape({
+  status: PT.string,
+  message: PT.string,
+  error: PT.string,
+  uuid: PT.string
+})
 
 export const errorTypes: AlertStatusClasses = {
   OK: 'suksess',
@@ -47,8 +54,11 @@ export const Alert: React.FC<AlertProps> = ({
     }
   }
 
-  const printError = (error: AlertError): string => {
+  const printError = (error: AlertError | string): string => {
     const errorMessage: Array<string> = []
+    if (_.isString(error)) {
+      return error
+    }
     if (error.status) {
       errorMessage.push(error.status)
     }
@@ -96,7 +106,7 @@ export const Alert: React.FC<AlertProps> = ({
 
 Alert.propTypes = {
   className: PT.string,
-  error: PT.object,
+  error: PT.oneOfType([AlertErrorPropType, PT.string]),
   fixed: PT.bool,
   message: PT.string,
   onClose: PT.func,
