@@ -24,26 +24,31 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
     <Container>
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Table Sorter</Systemtittel>
-        <Normaltekst className='pb-4'>Table with sorting capabilities</Normaltekst>
+        <Normaltekst className='pb-4'>Table with sorting, searching, selecting capabilities</Normaltekst>
 
-        <Checkbox label='Toggle loading prop' checked={loading} onChange={() => setLoading(!loading)} />
-        <Checkbox label='Toggle animation' checked={animatable} onChange={() => setAnimatable(!animatable)} />
-        <Checkbox label='Toggle searchable' checked={searchable} onChange={() => setSearchable(!searchable)} />
-        <Checkbox label='Toggle selectable' checked={selectable} onChange={() => setSelectable(!selectable)} />
-        <Checkbox label='Toggle sortable' checked={sortable} onChange={() => setSortable(!sortable)} />
-        <Select
-          className='w-25'
-          label='Number of items per page'
-          value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(parseInt(e.target.value, 10))}
-        >
-          <option>2</option>
-          <option>5</option>
-          <option>10</option>
-          <option>20</option>
-          <option>50</option>
-        </Select>
+        <div className='d-flex'>
+          <div className='w-33 mr-4'>
+            <Checkbox label='Toggle loading prop' checked={loading} onChange={() => setLoading(!loading)} />
+            <Checkbox label='Toggle animation' checked={animatable} onChange={() => setAnimatable(!animatable)} />
+            <Checkbox label='Toggle searchable' checked={searchable} onChange={() => setSearchable(!searchable)} />
+            <Checkbox label='Toggle selectable' checked={selectable} onChange={() => setSelectable(!selectable)} />
+            <Checkbox label='Toggle sortable' checked={sortable} onChange={() => setSortable(!sortable)} />
+          </div>
+          <Select
+            className='w-33'
+            label='Number of items per page'
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(parseInt(e.target.value, 10))}
+          >
+            <option>2</option>
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+          </Select>
+        </div>
         <TableSorter
+          className='mt-4 mb-4'
           items={[
             { key: '01', name: 'Anna', date: new Date(1970, 2, 4), type: 'Analyst', selected: true },
             { key: '02', name: 'Bernard', date: new Date(1980, 4, 8), type: 'Bookkeeper' },

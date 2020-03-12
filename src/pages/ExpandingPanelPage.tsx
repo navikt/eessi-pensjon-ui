@@ -23,10 +23,10 @@ const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>Expanding panel </Systemtittel>
         <Normaltekst className='mt-4 mb-4'>Same as Ekspandertbartbase, but it doesn't use a button, therefore in Internet Explorer it allows clickable elements in the heading </Normaltekst>
-        <Normaltekst className='mt-4 mb-4'>Unless you want clickable elements, you should use NAV's EkspanderbartPanel instead </Normaltekst>
+        <Normaltekst className='mt-4 mb-4'>Unless you want clickable elements, you should use <a href='https://design.nav.no/components/ekspanderbartpanel'>NAV's EkspanderbartPanel</a> instead.</Normaltekst>
         <ExpandingPanel
           border
-          className='w-100'
+          className='w-50'
           heading={(
             <div className='d-flex flex-column'>
               <Normaltekst className='mb-4'>Expanding panel title clicked {panelNumClicks} times</Normaltekst>
@@ -40,7 +40,7 @@ const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
           )}
           onClick={() => setPanelNumClicks(panelNumClicks + 1)}
         >
-          <File animate={false} file={sampleJPG} scale={3} />
+          <File animate={false} file={sampleJPG} scale={2} />
         </ExpandingPanel>
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
@@ -48,7 +48,9 @@ const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
           '   border\n' +
           '   heading={(\n' +
           '     <div className=\'d-flex flex-column\'>\n' +
-          '        <Normaltekst className=\'mb-4\'>Expanding panel title clicked {panelNumClicks} times</Normaltekst>\n' +
+          '        <Normaltekst className=\'mb-4\'>\n + ' +
+          '          Expanding panel title clicked {panelNumClicks} times\n' +
+          '         </Normaltekst>\n' +
           '        <Hovedknapp onClick={(e) => {\n' +
           '             e.stopPropagation()\n' +
           '             setButtonNumClicks((buttonNumClicks + 1))\n' +
@@ -59,7 +61,7 @@ const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
           '  )}\n' +
           '  onClick={(e) => setPanelNumClicks(panelNumClicks + 1)}\n' +
           '  >\n' +
-          '    <File animate={false} file={sampleJPG} scale={3} />\n' +
+          '    <File animate={false} file={sampleJPG} scale={2} />\n' +
           '  </ExpandingPanel>'}
         </SyntaxHighlighter>
 
@@ -104,7 +106,7 @@ const ExpandingPanelPage: React.FC<PageProps> = (): JSX.Element => {
             </tr>
             <tr>
               <td>heading</td>
-              <td><code>string</code>, <code>component</code></td>
+              <td><code>string</code>, <code>element</code></td>
               <td>true</td>
               <td>Heading string or component</td>
               <td>-</td>

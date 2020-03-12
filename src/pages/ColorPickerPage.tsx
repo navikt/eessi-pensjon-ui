@@ -17,10 +17,13 @@ const ColorPickerPage: React.FC<PageProps> = (): JSX.Element => {
     <Container>
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Color picker</Systemtittel>
-        <Normaltekst>Color picker used in the PDF Editor application, as a standalone component.</Normaltekst>
-        <Normaltekst className='pb-4'>Click on the bottom button to open the color picker dialog. Click outside of the color picker to close it.</Normaltekst>
+        <Normaltekst>Color picker used in the PDF Editor application, based on <code>react-color</code>.</Normaltekst>
+        <Normaltekst>Click on the bottom button to open the color picker dialog.</Normaltekst>
+        <Normaltekst>Click on a color to select it.</Normaltekst>
+        <Normaltekst>Click outside of the color picker to exit it without choosing a color.</Normaltekst>
 
         <ColorPicker
+          className='mt-4 mb-4'
           initialColor={{ r: 245, g: 166, b: 35, a: 0.5 }}
           onColorChanged={(color) => window.alert('color changed with  ' + JSON.stringify(color))}
         />
@@ -35,7 +38,11 @@ const ColorPickerPage: React.FC<PageProps> = (): JSX.Element => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { ColorPicker } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
-        <Normaltekst className='pb-4'>Default component's classname: <code>c-colorPicker</code></Normaltekst>
+
+        <Undertittel className='pt-4 pb-4'>HTML classes</Undertittel>
+        <Normaltekst>Container class: <code>c-colorPicker</code></Normaltekst>
+        <Normaltekst>Button class: <code>c-colorPicker__swatch</code></Normaltekst>
+        <Normaltekst>Color class: <code>c-colorPicker__color</code></Normaltekst>
 
         <Undertittel className='pt-4 pb-4'>React props</Undertittel>
         <table className='tabell'>

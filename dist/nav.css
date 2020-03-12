@@ -4845,10 +4845,13 @@ body {
   line-height: 1.42857143;
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
-code,
 pre {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #59514B;
+}
+code.block {
+  display: block;
+  white-space: pre-wrap;
 }
 dd {
   margin-bottom: 0.5rem;

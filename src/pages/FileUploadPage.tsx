@@ -28,7 +28,7 @@ const FileUploadPage: React.FC<PageProps> = (): JSX.Element => {
           hover.
         </Normaltekst>
         <FileUpload
-          className='w-75' files={[
+          className='w-75 mb-4' files={[
             require('resources/tests/samplePDF').default,
             require('resources/tests/sampleJPG').default,
             require('resources/tests/sampleOther').default
@@ -47,7 +47,7 @@ const FileUploadPage: React.FC<PageProps> = (): JSX.Element => {
         </Undertittel>
 
         <FileUpload
-          className='w-75'
+          className='w-75  mb-4'
           acceptedMimetypes={['application/pdf']}
           maxFileSize={500000}
           maxFiles={1}
@@ -63,7 +63,7 @@ const FileUploadPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>File Upload callback functions</Undertittel>
 
         <FileUpload
-          className='w-75'
+          className='w-75  mb-4'
           beforeFileDrop={() => window.alert('Before drop')}
           afterFileDrop={() => window.alert('After drop')}
           onFilesChanged={(files) => window.alert('I have ' + files.length + ' files')}

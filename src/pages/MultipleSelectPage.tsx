@@ -23,7 +23,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='mb-4'>This is the basic select with a given set of options and already selected values</Normaltekst>
 
         <MultipleSelect
-          className='w-50'
+          className='w-50 mb-4'
           label='Multiple select'
           ariaLabel='Multiple select'
           options={[
@@ -49,7 +49,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='mb-4'>You can allow the user to add new options, by typing them in the select area.</Normaltekst>
 
         <MultipleSelect
-          className='w-50'
+          className='w-50  mb-4'
           creatable
           label='Creatable multiple select'
           ariaLabel='Creatable multiple select'
@@ -78,7 +78,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>Multiple select with error style</Undertittel>
 
         <MultipleSelect
-          className='w-50'
+          className='w-50  mb-4'
           options={[]}
           label='Multiple select with error message'
           ariaLabel='Multiple select with error message'

@@ -22,26 +22,28 @@ const ProgressBarPage: React.FC<PageProps> = (): JSX.Element => {
         <Systemtittel className='mt-4 mb-4'>Progress bar </Systemtittel>
         <Normaltekst className='mt-4 mb-4'>This component renders an animated progress bar with custom text inside</Normaltekst>
 
-        <Input
-          className='w-25' label='Progress bar percentage' type='number' min={0} max={100} value={now} onChange={(e) => {
-            setNow(parseInt(e.target.value, 10))
-          }}
-        />
-
-        <Select className='w-25' label='Choose status' value={status} onChange={(e) => setStatus(e.target.value as ProgressBarStatus)}>
-          <option>todo</option>
-          <option>inprogress</option>
-          <option>done</option>
-          <option>error</option>
-        </Select>
+        <div className='d-flex'>
+          <Input
+            className='w-33 mr-3' label='Progress bar percentage' type='number' min={0} max={100} value={now} onChange={(e) => {
+              setNow(parseInt(e.target.value, 10))
+            }}
+          />
+          <Select className='w-25' label='Choose status' value={status} onChange={(e) => setStatus(e.target.value as ProgressBarStatus)}>
+            <option>todo</option>
+            <option>inprogress</option>
+            <option>done</option>
+            <option>error</option>
+          </Select>
+        </div>
         <ProgressBar
+          className='mt-4 mb-4'
           status={status}
           now={now}
         >
           <span>Loading... {now}%</span>
         </ProgressBar>
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-          {Mustache.render('<ProgressBar now={ {{now}} } status=\'{{stauts}}\'>\n' +
+          {Mustache.render('<ProgressBar now={ {{now}} } status=\'{{status}}\'>\n' +
            '  Loading... {{now}}%\n' +
           '</ProgressBar>', { now: now, status: status })}
         </SyntaxHighlighter>

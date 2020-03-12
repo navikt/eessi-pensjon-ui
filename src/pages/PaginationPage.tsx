@@ -22,31 +22,33 @@ const PaginationPage: React.FC<PageProps> = (): JSX.Element => {
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Pagination</Systemtittel>
         <Normaltekst className='pb-4'>Buttons for page navigation</Normaltekst>
+        <div className='d-flex'>
+          <Select
+            className='w-33 mr-3'
+            label='Number of items'
+            value={numberOfItems}
+            onChange={(e) => setNumberOfItems(parseInt(e.target.value, 10))}
+          >
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+            <option>200</option>
+          </Select>
 
-        <Select
-          className='w-25'
-          label='Number of items'
-          value={numberOfItems}
-          onChange={(e) => setNumberOfItems(parseInt(e.target.value, 10))}
-        >
-          <option>10</option>
-          <option>20</option>
-          <option>50</option>
-          <option>100</option>
-          <option>200</option>
-        </Select>
-
-        <Select
-          className='w-25'
-          label='Number of items per page'
-          value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(parseInt(e.target.value, 10))}
-        >
-          <option>5</option>
-          <option>10</option>
-          <option>20</option>
-        </Select>
+          <Select
+            className='w-33'
+            label='Number of items per page'
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(parseInt(e.target.value, 10))}
+          >
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+          </Select>
+        </div>
         <Pagination
+          className='mt-4 mb-4'
           numberOfItems={numberOfItems}
           itemsPerPage={itemsPerPage}
           onChange={(page) => console.log('Changed to page ' + page)}

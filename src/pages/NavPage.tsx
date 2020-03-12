@@ -17,7 +17,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>NAV components</Systemtittel>
         <Normaltekst>This is an utility import that merges all NAV components from the
-          <a href='/NavPage.js/design.nav.no'>
+          <a className='m-1' href='/NavPage.js/design.nav.no'>
             NAV Designsystemet
           </a>
           into one import object.
@@ -53,6 +53,10 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Nav } from \'eessi-pensjon-ui\''}
+        </SyntaxHighlighter>
+        <Normaltekst>Or, if you want to import only the NAV components without the EESSI Pensjon UI components</Normaltekst>
+        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
+          {'import * as Nav from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
 
       </Panel>

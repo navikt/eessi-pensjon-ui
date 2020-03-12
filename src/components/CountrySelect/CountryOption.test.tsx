@@ -30,8 +30,10 @@ describe('CountryOption Rendering', () => {
     data: {
       label: 'mockLabel',
       value: 'mockValue',
-      currencyLabel: 'mockCurrencyLabel',
-      currencyValue: 'mockCurrencyValue'
+      currencies: [{
+        currencyLabel: 'mockCurrencyLabel',
+        currencyValue: 'mockCurrencyValue'
+      }]
     },
     isSelected: false,
     isFocused: false,

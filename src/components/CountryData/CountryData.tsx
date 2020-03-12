@@ -11,19 +11,6 @@ const allowedLocales = ['en', 'nb']
 
 export type CountryDataInstance = {[k in AllowedLocaleString]? : any}
 
-/* countries: {
-    alpha2: 'AC',
-    alpha3: '',
-    countryCallingCodes: ['+247'],
-    currencies: ['USD'],
-    emoji: '',
-    ioc: 'SHP',
-    languages: ['eng'],
-    name: 'Ascension Island',
-    status: 'reserved',
-  },
- */
-
 const UK = {
   alpha2: 'UK',
   alpha3: 'UK_',

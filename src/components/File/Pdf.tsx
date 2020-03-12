@@ -15,11 +15,11 @@ export const Pdf: React.FC<FileProps> = ({
   return (
     <div
       className={classNames('c-file-Pdf', className)}
+      style={{ width: width + 'px', height: height + 'px' }}
       title={'' + file.name + '\n' + labels.pages + ': ' + (numberPages || '0') + '\n' + labels.size + ': ' + size}
     >
       {overlay}
       <Document
-        className='position-relative'
         file={'data:application/pdf;base64,' + file.content.base64}
         onLoadSuccess={onLoadSuccess}
       >

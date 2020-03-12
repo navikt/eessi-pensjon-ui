@@ -8,8 +8,8 @@ export type CountryOptionProps = OptionProps<any>
 const CountryOption: React.FC<CountryOptionProps> = (props: CountryOptionProps): JSX.Element => {
   const { data, innerProps, isSelected, isFocused, selectProps } = props
   const _type: string = selectProps.selectProps.type || 'country'
-  const _label: string = _type === 'country' ? data.label : data.currencyValue + ' - ' + data.currencyLabel
-  const _value: string = _type === 'country' ? data.value : data.currencyValue
+  const _label: string = _type === 'country' ? data.label : data.currencies[0]?.currencyValue + ' - ' + data.currencies[0]?.currencyLabel
+  const _value: string = _type === 'country' ? data.value : data.currencies[0]?.currencyValue
 
   return (
     <components.Option {...props}>

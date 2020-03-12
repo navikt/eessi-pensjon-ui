@@ -18,9 +18,9 @@ const BannerPage: React.FC<PageProps> = (): JSX.Element => {
     <Container>
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Banner</Systemtittel>
-        <Normaltekst>Banner renders the default EESSI Pensjon banner with its assigned orange color.</Normaltekst>
+        <Normaltekst>Banner renders in the default EESSI Pensjon index page with its assigned orange color.</Normaltekst>
         <Normaltekst>It contains a 'high contrast' link in the corner that triggers a callback function for toggling CSS styles.</Normaltekst>
-        <Normaltekst>You may want to use this banner for your index page decoration.</Normaltekst>
+        <Normaltekst>You can change the Banner CSS/class to fit your app styles.</Normaltekst>
         <Undertittel className='pt-4 pb-4'>Default mode</Undertittel>
 
         <Banner
@@ -37,10 +37,13 @@ const BannerPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>Custom mode</Undertittel>
 
         <Normaltekst>The <code>header</code> can be assigned to another React component, as the example below shows.</Normaltekst>
-        <Normaltekst className='pb-4'>You can also pass a <code>style</code> prop to override the default background color</Normaltekst>
-
+        <Normaltekst className='pb-4'>You can either pass a <code>style</code> prop to override the default background color, or a <code>className</code> prop</Normaltekst>
+        <style>
+          {'.withBorder { border: 1px solid black; }'}
+        </style>
         <Banner
           style={{ backgroundColor: 'lightblue' }}
+          className='withBorder'
           labelHighContrast='Alternative label'
           header={<EESSIPensjonVeileder />}
           onHighContrastClicked={() => {}}
@@ -48,6 +51,7 @@ const BannerPage: React.FC<PageProps> = (): JSX.Element => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Banner \n' +
           '  style={{ backgroundColor: \'lightblue\' }}\n' +
+          '  className=\'withBorder\'\n' +
           '  labelHighContrast=\'Alternative label\' \n' +
           '  header={<EESSIPensjonVeileder />} \n' +
           '  onHighContrastClicked={() => {}}\n' +
@@ -58,7 +62,11 @@ const BannerPage: React.FC<PageProps> = (): JSX.Element => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Banner } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
-        <Normaltekst className='pb-4'>Default component's classname: <code>c-banner</code></Normaltekst>
+
+        <Undertittel className='pt-4 pb-4'>HTML classes</Undertittel>
+        <Normaltekst>Container class: <code>c-banner</code></Normaltekst>
+        <Normaltekst>Title class: <code>c-banner__title</code></Normaltekst>
+        <Normaltekst>High contrast link class: <code>c-banner__highcontrast-link</code></Normaltekst>
 
         <Undertittel className='pt-4 pb-4'>React props</Undertittel>
         <table className='tabell'>

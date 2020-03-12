@@ -19,26 +19,27 @@ const PostalCodesPage: React.FC<PageProps> = (): JSX.Element => {
     <Container>
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>Postal Code util </Systemtittel>
-        <Normaltekst className='mt-4 mb-4'>This JS class loads all Norwegian zip codes in key/value</Normaltekst>
+        <Normaltekst className='mt-4 mb-4'>This JS class loads all Norwegian zip codes in a key/value object</Normaltekst>
 
-        <Input
-          className='w-25' label='Zip Code' value={zipCode} onChange={(e) => {
-            setZipCode(e.target.value)
-          }}
-        />
-        <Hovedknapp
-          onClick={() => setCity(PostalCodes.get(zipCode))}
-        >
-          Find city
-        </Hovedknapp>
+        <div className='d-flex align-items-end'>
+          <Input
+            className='w-33 mr-3' label='Zip Code' value={zipCode} onChange={(e) => {
+              setZipCode(e.target.value)
+            }}
+          />
+          <Hovedknapp
+            onClick={() => setCity(PostalCodes.get(zipCode))}
+          >
+            Find city
+          </Hovedknapp>
+        </div>
         <Normaltekst className='mt-4 mb-4'>Answer: {city}</Normaltekst>
 
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Hovedknapp\n' +
-           '  onClick={() =>setCity(PostalCodes.get(zipCode))}\n' +
-           '/>\n' +
-          '  Find City\n' +
-          '</Hovedknapp>'}
+           '  onClick={() => setCity(PostalCodes.get(zipCode))}\n' +
+           '/>Find City</Hovedknapp>\n' +
+          '<Normaltekst>Answer: {city}</Normaltekst>'}
         </SyntaxHighlighter>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>

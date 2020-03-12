@@ -24,7 +24,7 @@ const DatePickerPage: React.FC<PageProps> = (): JSX.Element => {
 
         <Undertittel className='pt-4 pb-4'>Default datepicker</Undertittel>
 
-        <DatePicker className='w-50' />
+        <DatePicker className='w-50 pb-4' />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<DatePicker/>'}
         </SyntaxHighlighter>
@@ -35,7 +35,7 @@ const DatePickerPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='pb-4'>The <code>onChange</code> callback function will give you an object with day, month and year.</Normaltekst>
 
         <DatePicker
-          className='w-50'
+          className='w-50 pb-4'
           initialValues={{ day: '3', month: '6', year: '1986' }}
           onChange={(date) => window.alert('Date changed with  ' + JSON.stringify(date))}
         />
@@ -49,7 +49,7 @@ const DatePickerPage: React.FC<PageProps> = (): JSX.Element => {
         <Systemtittel className='pt-4 pb-4'>Date picker with error style</Systemtittel>
 
         <DatePicker
-          className='w-50'
+          className='w-50 pb-4'
           initialValues={{ day: '3', month: '6', year: '2096' }}
           error='Please do not choose a date from the future'
         />
@@ -62,10 +62,10 @@ const DatePickerPage: React.FC<PageProps> = (): JSX.Element => {
 
         <Systemtittel className='pt-4 pb-4'>Disabled date picker</Systemtittel>
 
-        <Checkbox label='Disable the datepicker' checked={disabled} onChange={() => setDisabled(!disabled)} />
+        <Checkbox className='pb-4' label='Disable the datepicker' checked={disabled} onChange={() => setDisabled(!disabled)} />
 
         <DatePicker
-          className='w-50'
+          className='w-50 pb-4'
           disabled={disabled}
         />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>

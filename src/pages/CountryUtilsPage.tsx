@@ -1,6 +1,9 @@
+import CountryData from 'components/CountryData/CountryData'
+import Flag from 'components/Flag/Flag'
 import { AllowedLocaleString } from 'declarations/components'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
+import ReactTooltip from 'react-tooltip'
 import { State } from 'reducer'
 import Container from './Container'
 import CountrySelect from 'components/CountrySelect/CountrySelect'
@@ -20,6 +23,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
+      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Country utils</Systemtittel>
         <Normaltekst>Assorted utils for country lists, which includes:</Normaltekst>
@@ -28,12 +32,12 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
           <li><strong>CountryData</strong> - An util class for country search, validation, data retrieval</li>
           <li><strong>CountryFilter</strong> - Pre-defined aliases of country groups, to use in <code>CountrySelect</code> option filters</li>
         </ul>
-        <Undertittel className='pt-4 pb-4'>Country Select</Undertittel>
+        <Undertittel className='pt-4'>Country Select</Undertittel>
         <Normaltekst className='pt-4 pb-4'>This is the standard select component with default options.
           You can set locale to either 'en' (English) or 'nb' (Norsk bokmål - default)
         </Normaltekst>
         <Select
-          className='w-25'
+          className='w-25 pb-4'
           label='Choose language'
           value={lang}
           onChange={(e) => setLang(e.target.value as AllowedLocaleString)}
@@ -43,7 +47,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         </Select>
         <CountrySelect
           id='standard-country-select'
-          className='w-50'
+          className='w-50 pb-4'
           label='Standard country select'
           ariaLabel='Standard country select'
           menuPortalTarget={document.body}
@@ -67,7 +71,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
           id='standard-country-select-2'
           label='Country select with error message'
           ariaLabel='Country select with error message'
-          className='w-50'
+          className='w-50 pb-4'
           locale={lang}
           error='Please choose a country'
         />
@@ -85,7 +89,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='pb-4'>In the below example, the select options include all European Union countries that are not Nordic countries.</Normaltekst>
         <CountrySelect
           id='standard-country-select-3'
-          className='w-50'
+          className='w-50 pb-4'
           locale={lang}
           label='Country select with include / exclude list'
           ariaLabel='Country select with include / exclude list'
@@ -107,7 +111,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='pb-4'>You can remove flag displays from the select options and current select value</Normaltekst>
         <CountrySelect
           id='standard-country-select-4'
-          className='w-50'
+          className='w-50 pb-4'
           label='Country select without flags'
           ariaLabel='Country select without flags'
           flags={false}
@@ -129,7 +133,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='pb-4'><code>scandinaviaFirst</code> puts Scandinavian countries on top of the list first. </Normaltekst>
         <Select
           label='Sort value'
-          className='w-25'
+          className='w-25 pb-4'
           onChange={(e) => {
             e.stopPropagation()
             e.preventDefault()
@@ -143,7 +147,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
 
         <CountrySelect
           id='standard-country-select-5'
-          className='w-50'
+          className='w-50 pb-4'
           label='Country select with sorting option'
           ariaLabel='Country select with sorting option'
           locale={lang}
@@ -165,7 +169,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
           id='standard-country-select-6'
           label='Currency select'
           ariaLabel='Currency select'
-          className='w-50'
+          className='w-50 pb-4'
           type='currency'
           locale={lang}
           error={undefined}
@@ -174,7 +178,7 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<CountrySelect \n' +
           '  label=\'Currency select\'\n' +
-          '  ariaLabel=\'Currency select\'\n ' +
+          '  ariaLabel=\'Currency select\'\n' +
           '  type=\'currency\'\n' +
           '/>'}
         </SyntaxHighlighter>
@@ -182,12 +186,30 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>Country Filter</Undertittel>
         <Normaltekst className='pb-4'>Country Filter is a collection of predefined groups of countries:</Normaltekst>
         <ul>
-          <li>EEA - The <a href='https://en.wikipedia.org/wiki/European_Economic_Area'>European Economic Area countries</a>, that is, EU countries plus Switzerland, Faroe islands, Greenland, Iceland, Liechtenstein and Norway</li>
-          <li>EESSI_READY - The countries that are ESSSI-compliant</li>
-          <li>EU - All 28 <a href='https://en.wikipedia.org/wiki/European_Union'>European Union countries</a></li>
-          <li>NO - <a href='https://en.wikipedia.org/wiki/Norway'>Norway</a> only</li>
-          <li>NORDIC - <a href='https://en.wikipedia.org/wiki/Nordic_countries'>Nordic countries</a>: Denmark, Finland, Faroe islands, Greenland, Iceland, Norway, Sweden</li>
-          <li>SCANDINAVIA - <a href='https://en.wikipedia.org/wiki/Scandinavia'>Scandinavia countries</a>: Denmark, Norway, Sweden</li>
+          <li>
+            <div>EEA - The <a href='https://en.wikipedia.org/wiki/European_Economic_Area'>European Economic Area countries</a>, that is, EU countries plus Switzerland, Faroe islands, Greenland, Iceland, Liechtenstein and Norway</div>
+            <div className='mt-2 mb-2'>{CountryFilter.EEA.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
+          <li>
+            <div>EESSI_READY - The countries that are ESSSI-compliant</div>
+            <div className='mt-2 mb-2'>{CountryFilter.EESSI_READY.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
+          <li>
+            <div>EU - All 28 <a href='https://en.wikipedia.org/wiki/European_Union'>European Union countries</a></div>
+            <div className='mt-2 mb-2'>{CountryFilter.EU.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
+          <li>
+            <div>NO - <a href='https://en.wikipedia.org/wiki/Norway'>Norway</a> only</div>
+            <div className='mt-2 mb-2'>{CountryFilter.NO.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
+          <li>
+            <div>NORDIC - <a href='https://en.wikipedia.org/wiki/Nordic_countries'>Nordic countries</a>: Denmark, Finland, Faroe islands, Greenland, Iceland, Norway, Sweden</div>
+            <div className='mt-2 mb-2'>{CountryFilter.NORDIC.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
+          <li>
+            <div>SCANDINAVIA - <a href='https://en.wikipedia.org/wiki/Scandinavia'>Scandinavia countries</a>: Denmark, Norway, Sweden</div>
+            <div className='mt-2 mb-2'>{CountryFilter.SCANDINAVIA.map(el => (<Flag key={el} className='m-1' country={el} label={CountryData.getCountryInstance('nb').findByValue(el).name} />))}</div>
+          </li>
         </ul>
 
         <Undertittel className='pt-4 pb-4'>Country Data</Undertittel>
@@ -202,6 +224,20 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
           <li> <code>filterByValueOnArray(locale, countries)</code> - same as findByValue, but it takes a list as argument, and returns a list of found countries</li>
         </ul>
 
+        <Normaltekst className='pt-4 pb-4'>Each country is an object with the following key/values:</Normaltekst>
+
+        <code className='block'>{'{\n\
+  alpha2: \'UK\',\n\
+  alpha3: \'UK_\',\n\
+  countryCallingCodes: [\'+44\'],\n\
+  currencies: [\'GBP\'],\n\
+  emoji: \'🇬🇧\',\n\
+  ioc: \'GBR\',\n\
+  languages: [\'eng\', \'cor\', \'gle\', \'gla\', \'cym\'],\n\
+  name: \'United Kingdom\',\n\
+  status: \'assigned\'\n\
+}'}
+        </code>
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { CountrySelect } from \'eessi-pensjon-ui\'\n' +

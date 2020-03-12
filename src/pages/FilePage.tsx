@@ -59,8 +59,10 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='mt-4 mb-4'>PDF File</Undertittel>
 
         <div className='d-flex'>
-          <File file={samplePDF} scale={2} />
-          <div className='ml-4'>
+          <div className='w-33'>
+            <File file={samplePDF} scale={2} />
+          </div>
+          <div className='w-66 ml-4'>
             <Normaltekst>PDF file renders a page with a default width/height and a folded-corner style. </Normaltekst>
             <Normaltekst className='mt-4 mb-4'>If the PDF file has additional pages, one can see arrows in the sides of
               the page, when the mouse hovers the page.
@@ -77,11 +79,13 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='mt-4 mb-4'>Image file</Undertittel>
 
         <div className='d-flex'>
-          <File
-            file={sampleJPG} buttonsVisibility='always'
-            buttonsPosition='header' showDownloadButton scale={2}
-          />
-          <div className='ml-4'>
+          <div className='w-33'>
+            <File
+              file={sampleJPG} buttonsVisibility='always'
+              buttonsPosition='header' showDownloadButton scale={1.5}
+            />
+          </div>
+          <div className='w-66 ml-4'>
             <Normaltekst className='mb-4'>Image file renders the base64 content of an image with a
               fixed <code>max-height</code> given my <code>height</code> property (with defaylt 100px as a scale 1.0).
             </Normaltekst>
@@ -89,7 +93,7 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               image size while preserving the aspect ratio
             </Normaltekst>
             <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
-              {'<File file={sampleJPG} scale={2}/>'}
+              {'<File file={sampleJPG} scale={1.5}/>'}
             </SyntaxHighlighter>
           </div>
         </div>
@@ -97,8 +101,10 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='pt-4 pb-4'>Other file</Undertittel>
 
         <div className='d-flex'>
-          <File file={sampleOther} scale={1.5} />
-          <div className='ml-4'>
+          <div className='w-33'>
+            <File file={sampleOther} scale={1.5} />
+          </div>
+          <div className='w-66 ml-4'>
             <Normaltekst className='mb-4'>Other files renders as a blank page with is extension (derived from filename)
               as the center title.
             </Normaltekst>
@@ -118,9 +124,9 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
           is easier to set a <code>scale</code> value (scale 1.0 matches a width of 100px and height of 140 px).
         </Normaltekst>
 
-        <div className='mb-4 d-flex flex-row'>
+        <div className='mb-4 d-flex flex-row align-items-center'>
           <Select
-            className='w-25'
+            className='w-25 mr-3'
             label='Buttons position'
             value={buttonsPosition}
             onChange={(e) => setButtonsPosition(e.target.value as 'inside' | 'header')}
@@ -129,7 +135,7 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
             <option>header</option>
           </Select>
           <Select
-            className='w-25'
+            className='w-25 mr-3'
             label='Buttons visibility'
             value={buttonsVisibility}
             onChange={(e) => setButtonsVisibility(e.target.value as 'always' | 'hover' |'none')}
@@ -147,26 +153,28 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
         </div>
 
         <div className='d-flex'>
-          <File
-            file={samplePDF}
-            buttonsVisibility={buttonsVisibility!}
-            buttonsPosition={buttonsPosition!}
-            viewOnePage={viewOnePage}
-            initialPage={2}
-            showAddButton
-            showDeleteButton
-            showDownloadButton
-            showPreviewButton
-            onAddFile={(file) => console.log('onAddFile clicked with file ', file)}
-            onDeleteFile={(file) => console.log('onDeleteFile clicked with file ', file)}
-            onDownloadFile={(file) => console.log('onDownloadFile clicked with file ', file)}
-            onPreviewFile={(file) => console.log('onPreviewFile clicked with file ', file)}
-            onContentClick={(file) => console.log('onContentClick clicked with file ', file)}
-            onPreviousPage={(file) => console.log('onPreviousPage clicked with file ', file)}
-            onNextPage={(file) => console.log('onNextPage clicked with file ', file)}
-            scale={2}
-          />
-          <div className='ml-4'>
+          <div className='w-33'>
+            <File
+              file={samplePDF}
+              buttonsVisibility={buttonsVisibility!}
+              buttonsPosition={buttonsPosition!}
+              viewOnePage={viewOnePage}
+              initialPage={2}
+              showAddButton
+              showDeleteButton
+              showDownloadButton
+              showPreviewButton
+              onAddFile={(file) => console.log('onAddFile: ', file)}
+              onDeleteFile={(file) => console.log('onDeleteFile: ', file)}
+              onDownloadFile={(file) => console.log('onDownloadFile: ', file)}
+              onPreviewFile={(file) => console.log('onPreviewFile: ', file)}
+              onContentClick={(file) => console.log('onContentClick: ', file)}
+              onPreviousPage={(file) => console.log('onPreviousPage: ', file)}
+              onNextPage={(file) => console.log('onNextPage: ', file)}
+              scale={2}
+            />
+          </div>
+          <div className='w-66 ml-4'>
             <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
               {Mustache.render('<File \n' +
               '  file={samplePDF}\n' +
@@ -178,13 +186,13 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               '  showDeleteButton\n' +
               '  showDownloadButton\n' +
               '  showPreviewButton\n' +
-              '  onAddFile={(file) => console.log(\'onAddFile clicked with file \', file)}\n' +
-              '  onDeleteFile={(file) => console.log(\'onDeleteFile clicked with file \', file)}\n' +
-              '  onDownloadFile={(file) => console.log(\'onDownloadFile clicked with file \', file)}\n' +
-              '  onPreviewFile={(file) => console.log(\'onPreviewFile clicked with file \', file)}\n' +
-              '  onContentClick={(file) => console.log(\'onContentClick clicked with file \', file)}\n' +
-              '  onPreviousPage={(file) => console.log(\'onPreviousPage clicked with file \', file)}\n' +
-              '  onNextPage={(file) => console.log(\'onNextPage clicked with file \', file)}\n' +
+              '  onAddFile={(file) => console.log(\'onAddFile: \', file)}\n' +
+              '  onDeleteFile={(file) => console.log(\'onDeleteFile: \', file)}\n' +
+              '  onDownloadFile={(file) => console.log(\'onDownloadFile: \', file)}\n' +
+              '  onPreviewFile={(file) => console.log(\'onPreviewFile: \', file)}\n' +
+              '  onContentClick={(file) => console.log(\'onContentClick: \', file)}\n' +
+              '  onPreviousPage={(file) => console.log(\'onPreviousPage: \', file)}\n' +
+              '  onNextPage={(file) => console.log(\'onNextPage: \', file)}\n' +
               '  scale={2}' +
               '/>', { buttonsPosition: buttonsPosition, buttonsVisibility: buttonsVisibility, viewOnePage: viewOnePage })}
             </SyntaxHighlighter>

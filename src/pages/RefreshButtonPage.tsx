@@ -23,6 +23,7 @@ const RefreshButtonPage: React.FC<PageProps> = (): JSX.Element => {
         <Checkbox className='mb2' label='Toggle rotating' checked={rotating} onChange={() => setRotating(!rotating)} />
 
         <RefreshButton
+          className='mt-4 mb-4'
           rotating={rotating}
           onRefreshClicked={() => window.alert('Refreshing')}
         />

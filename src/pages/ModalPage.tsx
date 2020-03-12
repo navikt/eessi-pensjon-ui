@@ -23,6 +23,7 @@ const ModalPage: React.FC<PageProps> = (): JSX.Element => {
 
         <Modal modal={modal} onModalClose={() => setModal(undefined)} />
         <Checkbox
+          className='mb-4'
           label='Click me to trigger the modal'
           checked={modal !== undefined}
           onChange={() => {

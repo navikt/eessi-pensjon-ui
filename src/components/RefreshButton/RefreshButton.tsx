@@ -14,18 +14,20 @@ export interface RefreshButtonProps {
 const RefreshButton: React.FC<RefreshButtonProps> = ({
   className, labelRefresh = 'Forfriske', onRefreshClicked = () => {}, rotating = false
 }: RefreshButtonProps): JSX.Element => (
-  <a
-    title={labelRefresh}
-    href='#refresh'
-    className={classNames('c-refreshbutton', 'lenke', className, { rotating: rotating })}
-    onClick={(e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      onRefreshClicked()
-    }}
-  >
-    <Icons kind='refresh' />
-  </a>
+  <div className={classNames('c-refreshbutton', className)}>
+    <a
+      title={labelRefresh}
+      href='#refresh'
+      className={classNames('lenke', { rotating: rotating })}
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        onRefreshClicked()
+      }}
+    >
+      <Icons kind='refresh' />
+    </a>
+  </div>
 )
 
 RefreshButton.propTypes = {

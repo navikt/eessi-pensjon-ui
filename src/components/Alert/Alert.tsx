@@ -15,7 +15,7 @@ type AlertType = 'client' | 'server'
 
 interface AlertError {
   status?: string;
-  message ?: string;
+  message ?: JSX.Element | string;
   error?: string;
   uuid ?: string;
 }
@@ -24,7 +24,7 @@ export interface AlertProps {
   className ?: string;
   error?: AlertError | string;
   fixed?: boolean;
-  message?: string;
+  message?: JSX.Element | string;
   onClose?: () => void;
   status?: AlertStatus;
   type?: AlertType;
@@ -46,7 +46,7 @@ export const errorTypes: AlertStatusClasses = {
 export const Alert: React.FC<AlertProps> = ({
   className, error, fixed, message, onClose, status = 'ERROR', type
 }: AlertProps): JSX.Element | null => {
-  let _message: string | undefined = message
+  let _message: JSX.Element | string | undefined = message
 
   const onCloseIconClicked = (): void => {
     if (_.isFunction(onClose)) {
@@ -55,7 +55,7 @@ export const Alert: React.FC<AlertProps> = ({
   }
 
   const printError = (error: AlertError | string): string => {
-    const errorMessage: Array<string> = []
+    const errorMessage: Array<JSX.Element | string> = []
     if (_.isString(error)) {
       return error
     }
@@ -108,7 +108,7 @@ Alert.propTypes = {
   className: PT.string,
   error: PT.oneOfType([AlertErrorPropType, PT.string]),
   fixed: PT.bool,
-  message: PT.string,
+  message: PT.oneOfType([PT.string, PT.element]),
   onClose: PT.func,
   status: PT.oneOf(['OK', 'ERROR', 'WARNING']),
   type: PT.oneOf(['client', 'server'])

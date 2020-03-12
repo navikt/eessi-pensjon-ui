@@ -34,22 +34,24 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
         <Undertittel className='mt-4 mb-4'>Flag styles and sizes</Undertittel>
         <Normaltekst className='mt-4 mb-4'>At the moment, there is only two sizes: <strong>M</strong> and <strong>L</strong>, and two styles: <strong>circle</strong> and <strong>original</strong>.</Normaltekst>
 
-        <Input className='w-25' label='Choose country' value={country} onChange={(e) => { setCountry(e.target.value) }} />
-        <Select className='w-25' label='Choose size' value={size} onChange={(e) => { setSize(e.target.value as SizeType) }}>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-        </Select>
+        <div className='d-flex'>
+          <Input className='w-25 mr-3' label='Choose country' value={country} onChange={(e) => { setCountry(e.target.value) }} />
+          <Select className='w-25' label='Choose size' value={size} onChange={(e) => { setSize(e.target.value as SizeType) }}>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+          </Select>
+        </div>
 
-        <Normaltekst className='mt-4 mb-4'>Country: {label}</Normaltekst>
-        <Flag country={country} label={label} size={size} type='original' />
-        <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
+        <Normaltekst className='mb-4'>Country: {label}</Normaltekst>
+        <Flag className='mb-4' country={country} label={label} size={size} type='original' />
+        <SyntaxHighlighter className='mb-4' language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'{{size}}\' type=\'original\'/>',
             { country: country, label: label, size: size })}
         </SyntaxHighlighter>
 
-        <Flag country={country} label={label} size={size} type='circle' />
+        <Flag className='mb-4' country={country} label={label} size={size} type='circle' />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {Mustache.render('<Flag country=\'{{country}}\' label=\'{{label}}\' size=\'{{size}}\' type=\'circle\'/>',
             { country: country, label: label, size: size })}
@@ -59,6 +61,7 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='mt-4 mb-4'>The <code>FlagList</code> component can render a list of flags, as follows.</Normaltekst>
         <Normaltekst className='mt-4 mb-4'><strong>Note</strong>: you need to add into your project the <code>ReactTooltip</code> component from the <code>react-tooltip</code> npm package in order to see the label tooltips.</Normaltekst>
         <FlagList
+          className='mb-4'
           items={[
             { country: 'no', label: 'Norway' },
             { country: 'se', label: 'Sweden' },
@@ -82,6 +85,7 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
         <Normaltekst className='pt-4 pb-4'>We can set an overflow limit to the flag list.</Normaltekst>
 
         <FlagList
+          className='mb-4'
           overflowLimit={2}
           items={[
             { country: 'no', label: 'Norway' },
@@ -109,6 +113,7 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
 
         <div className='flex-wrap' style={{ justifyContent: 'space-evenly' }}>
           <FlagList
+            className='mb-4'
             wrap
             overflowLimit={999}
             items={CountryData.getCountryInstance('nb').getData().map((it: Country) => {
@@ -122,6 +127,7 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
 
         <Undertittel className='mt-4 mb-4'>Available flags - circle form</Undertittel>
         <FlagList
+          className='mb-4'
           wrap
           overflowLimit={999}
           items={CountryData.getCountryInstance('nb').getData().map((it: Country) => ({ country: it.value, label: it.label + ' - ' + it.value })

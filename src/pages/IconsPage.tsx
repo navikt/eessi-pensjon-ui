@@ -22,17 +22,19 @@ const IconsPage: React.FC<PageProps> = (): JSX.Element => {
       <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>Icons</Systemtittel>
-        <Normaltekst className='mt-4 mb-4'>Icon component that combines icons from <code>FontAwesome</code> and external SVG icons from NAV Ikoner DB</Normaltekst>
+        <Normaltekst className='mt-4 mb-4'>Icon component that combines icons from <a href='https://fontawesome.com'>FontAwesome</a> and external SVG icons from NAV Ikoner DB</Normaltekst>
 
-        <Input className='w-50' value={color} label='Set color' onChange={(e) => setColor(e.target.value)} />
-        <Select className='w-50' value={size} label='Set size' onChange={(e) => setSize(parseInt(e.target.value, 10))}>
-          <option>32</option>
-          <option>48</option>
-          <option>64</option>
-          <option>96</option>
-          <option>128</option>
-        </Select>
-        <div className='d-flex flex-wrap' style={{ justifyContent: 'space-evenly' }}>
+        <div className='d-flex mb-4'>
+          <Input className='w-33 mr-3' value={color} label='Set color' onChange={(e) => setColor(e.target.value)} />
+          <Select className='w-33' value={size} label='Set size' onChange={(e) => setSize(parseInt(e.target.value, 10))}>
+            <option>32</option>
+            <option>48</option>
+            <option>64</option>
+            <option>96</option>
+            <option>128</option>
+          </Select>
+        </div>
+        <div className='d-flex flex-wrap mb-4' style={{ justifyContent: 'space-evenly' }}>
           {availableIcons.map(kind => (
             <Icons className='p-2' key={kind} kind={kind} size={size} data-tip={kind} color={color} />
           ))}

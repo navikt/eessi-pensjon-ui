@@ -157,7 +157,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       onBlur={handleOnBlur}
       onFocus={handleOnFocus}
     >
-      <div className='row pr-2'>
+      <div className='row no-gutters pr-2'>
         <div className='col pl-2 pr-1'>
           <Input
             className='DatePickerDayInput'

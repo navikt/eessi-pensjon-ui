@@ -24,26 +24,27 @@ const AlertPage: React.FC<PageProps> = (): JSX.Element => {
         </Normaltekst>
         <ol>
           <li>A close button</li>
+          <li>Easier to remember types OK, WARNING, ERROR</li>
           <li>A fixed position mode</li>
           <li>A borderless, wide style for banner-type alerts</li>
         </ol>
         <Undertittel className='pt-4 pb-4'>Close button with callback function</Undertittel>
-        <Normaltekst className='pb-4'>Tip: Use the <code>onClose</code> callback function to clear the <code>message</code> prop, in order to hide the Alert; if <code>message</code> is not given, the Alert is not displayed.</Normaltekst>
+        <Normaltekst className='pb-4'>Add a <code>onClose</code> callback function to allow users to hide the Alert.</Normaltekst>
+        <Normaltekst className='pb-4'>Note that you can add other React components in the <code>message</code> prop.</Normaltekst>
         <Alert
           className='w-50'
           type='client'
           fixed={false}
           status='OK'
-          message='Close me for a function callback'
-          onClose={() => window.alert('clicked')}
+          message={<Systemtittel>Close me for a function callback</Systemtittel>}
+          onClose={() => window.alert('Closing button clicked')}
         />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Alert \n' +
           '  type=\'client\' \n' +
           '  status=\'OK\' \n' +
-          '  fixed={false} \n' +
-          '  message=\'Close me for a function callback\' \n' +
-          '  onClose={() => window.alert(\'clicked\')}\n' +
+          '  message={<Systemtittel>Close me for a function callback</Systemtittel>}\n' +
+          '  onClose={() => window.alert(\'Closing button clicked\')}\n' +
           '/>'}
         </SyntaxHighlighter>
 
@@ -63,7 +64,7 @@ const AlertPage: React.FC<PageProps> = (): JSX.Element => {
           {Mustache.render('<Alert \n' +
           '   type=\'client\' \n' +
           '   status=\'WARNING\' \n' +
-          '   fixed={ {{fixed}} } \n' +
+          '   fixed={ {{fixed}} }\n' +
           '   message=\'Make me fixed by toggling the checkbox above\' \n' +
           '/>', { fixed: fixed.toString() })}
         </SyntaxHighlighter>
@@ -76,8 +77,8 @@ const AlertPage: React.FC<PageProps> = (): JSX.Element => {
         <Alert type='server' message='Banner-style alert for important server errors' />
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'<Alert \n' +
-          'type=\'server\' \n' +
-          'message=\'Banner-style alert for important server errors\' \n' +
+          '   type=\'server\' \n' +
+          '   message=\'Banner-style alert for important server errors\' \n' +
           '/>'}
         </SyntaxHighlighter>
 
@@ -85,9 +86,11 @@ const AlertPage: React.FC<PageProps> = (): JSX.Element => {
         <SyntaxHighlighter language='javascript' style={highContrast ? dark : light}>
           {'import { Alert } from \'eessi-pensjon-ui\''}
         </SyntaxHighlighter>
-        <Normaltekst className='pt-4'>Default component's classname: <code>c-alert</code></Normaltekst>
-        <Normaltekst>Type classname: <code>c-alert__type-client</code>, <code>c-alert__type-server</code></Normaltekst>
-        <Normaltekst className='pb-4'>Status classname: <code>c-alert__status-OK</code>, <code>c-alert__status-ERROR</code>, <code>c-alert__status-WARNING</code></Normaltekst>
+
+        <Undertittel className='pt-4 pb-4'>HTML classes</Undertittel>
+        <Normaltekst>Container class: <code>c-alert</code></Normaltekst>
+        <Normaltekst>Type class: <code>c-alert__type-client</code>, <code>c-alert__type-server</code></Normaltekst>
+        <Normaltekst>Status class: <code>c-alert__status-OK</code>, <code>c-alert__status-ERROR</code>, <code>c-alert__status-WARNING</code></Normaltekst>
 
         <Undertittel className='pt-4 pb-4'>React props</Undertittel>
         <table className='tabell'>
@@ -124,7 +127,7 @@ const AlertPage: React.FC<PageProps> = (): JSX.Element => {
             </tr>
             <tr>
               <td>message</td>
-              <td><code>string</code></td>
+              <td><code>string | element</code></td>
               <td>false</td>
               <td>Message to display in the alert panel. If there is no message, the alert will not be rendered.</td>
               <td>-</td>
