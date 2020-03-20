@@ -60,7 +60,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const newRange: Array<number> = [pages[0], pages[pages.length - 1]]
     let spread: number = 0
     let direction: number = 1
-    while (newRange.length <= maxPageButtons) {
+    while (newRange.length < maxPageButtons) {
       const currentPageIndex: number = pages.indexOf(currentPage)
       const nextIndex: number = currentPageIndex + (spread * direction)
       if (nextIndex in pages) {

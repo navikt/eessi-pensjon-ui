@@ -29,7 +29,7 @@ describe('components/Pagination/Pagination', () => {
   })
 
   it('Renders 12 buttons (10 pages plus two arrows)', () => {
-    expect(wrapper.find('.c-pagination__button').hostNodes().length).toEqual(12)
+    expect(wrapper.find('.c-pagination__button').hostNodes().length).toEqual(11)
   })
 
   it('Renders next page', () => {
