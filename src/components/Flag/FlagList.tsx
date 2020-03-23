@@ -54,7 +54,7 @@ const FlagList: React.FC<FlagListProps> = ({
             .join(', ')}
           className='pt-2'
         >
-            +{items.length - overflowLimit}
+          +{items.length - overflowLimit}
         </Normaltekst>
       ) : null}
     </div>

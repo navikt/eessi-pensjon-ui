@@ -74,7 +74,7 @@ const Container: React.FC<ContainerProps & PageProps> = ({
               dispatch(uiActions.setHighContrast())
             }}
           >
-          high contrast
+            high contrast
           </Lenke>
         </div>
         {children}
