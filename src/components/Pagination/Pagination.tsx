@@ -84,7 +84,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div>
         <Flatknapp
           className='c-pagination__button c-pagination__prev-button'
-          form='kompakt'
+          kompakt
           disabled={currentPage === 1}
           onClick={onPreviousButtonClicked}
         >◄
@@ -96,7 +96,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <Flatknapp
             key={page}
             className='c-pagination__button c-pagination__page-button'
-            form='kompakt'
+            kompakt
             disabled={page === currentPage}
             onClick={() => onPageClicked(page)}
           >
@@ -107,7 +107,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div>
         <Flatknapp
           className='c-pagination__button c-pagination__next-button'
-          form='kompakt'
+          kompakt
           disabled={currentPage === numberOfPages}
           onClick={onNextButtonClicked}
         >►
