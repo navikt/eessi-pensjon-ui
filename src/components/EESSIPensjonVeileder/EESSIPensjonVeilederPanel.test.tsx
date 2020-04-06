@@ -5,7 +5,8 @@ import EESSIPensjonVeilederPanel, { EESSIPensjonVeilederPanelProps } from './EES
 describe('EESSIPensjonVeilederPanel Rendering', () => {
   let wrapper: ReactWrapper
   const initialMockProps: EESSIPensjonVeilederPanelProps = {}
-  it('Renders without crashing', () => {
+
+  it('Renders', () => {
     wrapper = mount(<EESSIPensjonVeilederPanel><div className='child' /></EESSIPensjonVeilederPanel>)
     expect(wrapper).toMatchSnapshot()
   })

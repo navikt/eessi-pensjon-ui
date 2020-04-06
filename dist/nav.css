@@ -44,6 +44,17 @@
   display: block;
   flex: 1;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
 .chevron--ned {
   display: inline-block;
   flex-shrink: 0;
@@ -373,11 +384,6 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-/*
--------------
-CLEARFIX
--------------
-*/
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Change the default font family in all browsers (opinionated).
@@ -2518,6 +2524,7 @@ GRID
   width: 1em;
   height: 1em;
   fill: #0067C5;
+  stroke: #0067C5;
   vertical-align: middle;
   position: relative;
   top: -0.125em;
@@ -2528,6 +2535,7 @@ GRID
 }
 .lenkemedikon-mixin:focus svg {
   fill: white;
+  stroke: white;
 }
 .lenke {
   color: #0067C5;
@@ -2555,6 +2563,7 @@ GRID
   width: 1em;
   height: 1em;
   fill: #0067C5;
+  stroke: #0067C5;
   vertical-align: middle;
   position: relative;
   top: -0.125em;
@@ -2565,6 +2574,7 @@ GRID
 }
 .lenke:focus svg {
   fill: white;
+  stroke: white;
 }
 .lesMerPanel {
   background-color: #FFF;
@@ -3616,8 +3626,8 @@ GRID
   max-width: 10rem;
 }
 .stegindikator__steg--labelled:after {
-  width: 10.25rem;
-  left: 5rem;
+  width: 9.25rem;
+  left: 6rem;
   right: auto;
 }
 .stegindikator__steg-inner {

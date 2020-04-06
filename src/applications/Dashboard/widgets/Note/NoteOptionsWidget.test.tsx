@@ -29,6 +29,7 @@ describe('widgets/Note/NoteOptionsWidget', () => {
 
   it('Renders', () => {
     expect(wrapper.isEmptyRender()).toBeFalsy()
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('Has proper HTML structure', () => {

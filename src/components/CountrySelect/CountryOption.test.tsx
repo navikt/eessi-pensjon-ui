@@ -44,7 +44,7 @@ describe('CountryOption Rendering', () => {
     wrapper = mount(<CountryOption {...initialMockProps} />)
   })
 
-  it('Renders correctly', () => {
+  it('Renders', () => {
     expect(wrapper.isEmptyRender()).toBeFalsy()
     expect(wrapper).toMatchSnapshot()
   })

@@ -20,6 +20,7 @@ export interface ApiCallProps {
   context?: any;
   cascadeFailureError?: boolean;
   expectedPayload?: any;
+  expectedFailure?: boolean;
   headers?: any;
   method?: string;
   payload?: any;
@@ -40,7 +41,7 @@ class ApiError extends Error {
 }
 
 export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
-  context, expectedPayload, method, type, url
+  context, expectedPayload, expectedFailure, method, type, url
 }: ApiCallProps): ThunkResult<ActionWithPayload> => {
   return (dispatch: MyThunkDispatch) => {
     const inTest = !RUNNING_IN_BROWSER && HOST === 'localhost'
@@ -64,7 +65,7 @@ export const fakeCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
         console.log('Payload', payload)
       }
       return dispatch({
-        type: type.success,
+        type: expectedFailure ? type.failure : type.success,
         payload: payload,
         context: context
       })

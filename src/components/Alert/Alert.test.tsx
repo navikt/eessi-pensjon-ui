@@ -20,19 +20,19 @@ describe('components/Alert/Alert', () => {
   it('Has proper HTML structure as server', () => {
     wrapper = mount(<Alert {...initialMockProps} type='server' />)
     expect(wrapper.exists('.c-alert__type-server')).toBeTruthy()
-    expect(wrapper.render().text()).toEqual('mockErrorMessage')
+    expect(wrapper.find('.alertstripe__tekst').hostNodes().render().text()).toEqual('mockErrorMessage')
   })
 
   it('Has proper HTML structure as client', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' />)
     expect(wrapper.exists('.c-alert__type-client')).toBeTruthy()
-    expect(wrapper.render().text()).toEqual('mockErrorMessage')
+    expect(wrapper.find('.alertstripe__tekst').hostNodes().render().text()).toEqual('mockErrorMessage')
   })
 
   it('Has proper HTML structure with error message', () => {
     wrapper = mount(<Alert {...initialMockProps} type='client' error={{ message: 'mockError' }} />)
     expect(wrapper.exists('.c-alert__type-client')).toBeTruthy()
-    expect(wrapper.render().text()).toEqual('mockErrorMessage: mockError')
+    expect(wrapper.find('.alertstripe__tekst').hostNodes().render().text()).toEqual('mockErrorMessage: mockError')
   })
 
   it('Has proper HTML structure as client in OK type', () => {
@@ -64,12 +64,12 @@ describe('components/Alert/Alert', () => {
       uuid: 'uuid'
     }
     wrapper = mount(<Alert {...initialMockProps} type='server' error={error} />)
-    expect(wrapper.render().text()).toEqual('mockErrorMessage: message - error - uuid')
+    expect(wrapper.find('.alertstripe__tekst').hostNodes().render().text()).toEqual('mockErrorMessage: message - error - uuid')
   })
 
   it('Pretty prints a string error', () => {
     const error = 'error'
     wrapper = mount(<Alert {...initialMockProps} type='client' error={error} />)
-    expect(wrapper.render().text()).toEqual('mockErrorMessage: error')
+    expect(wrapper.find('.alertstripe__tekst').hostNodes().render().text()).toEqual('mockErrorMessage: error')
   })
 })

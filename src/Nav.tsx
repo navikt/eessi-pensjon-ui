@@ -12,7 +12,7 @@ import Lenke from 'nav-frontend-lenker'
 import Lenkepanel, { LenkepanelBase } from 'nav-frontend-lenkepanel'
 import Lesmerpanel from 'nav-frontend-lesmerpanel'
 import Modal from 'nav-frontend-modal'
-import PanelBase, { Panel } from 'nav-frontend-paneler'
+import Panel from 'nav-frontend-paneler'
 import Popover from 'nav-frontend-popover'
 import Snakkeboble from 'nav-frontend-snakkeboble'
 import Spinner from 'nav-frontend-spinner'
@@ -66,7 +66,6 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (Nesteknapp as unknown as React.FunctionComponent).displayName = 'Nesteknapp';
 (Normaltekst as unknown as React.FunctionComponent).displayName = 'Normaltekst';
 (Panel as unknown as React.FunctionComponent).displayName = 'Panel';
-(PanelBase as unknown as React.FunctionComponent).displayName = 'PanelBase';
 (Popover as unknown as React.FunctionComponent).displayName = 'Popover';
 (Radio as unknown as React.FunctionComponent).displayName = 'Radio';
 (RadioPanel as unknown as React.FunctionComponent).displayName = 'RadioPanel';
@@ -104,7 +103,7 @@ export {
   Lenke, Lenkepanel, LenkepanelBase, Lesmerpanel, Lukknapp,
   Modal, Menyknapp,
   Nesteknapp, Normaltekst,
-  Panel, PanelBase, Popover,
+  Panel, Popover,
   Radio, RadioPanel, RadioPanelGruppe, Row,
   Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp,
   Tabs, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,

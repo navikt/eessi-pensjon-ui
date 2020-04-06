@@ -42,8 +42,8 @@ describe('components/File', () => {
   }
   it('Renders', () => {
     wrapper = shallow(<File {...initialMockProps} file={samplePDF} />)
-    expect(wrapper).toMatchSnapshot()
     expect(wrapper.isEmptyRender()).toBeFalsy()
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('Renders Editor', () => {
