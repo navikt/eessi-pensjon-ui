@@ -177,23 +177,29 @@ const TableSorter: React.FC<TableSorterProps> = ({
               case 'date':
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    <Normaltekst>{_.isFunction(value.toLocaleDateString) ? value.toLocaleDateString() : value.toString()}</Normaltekst>
+                    {_.isFunction(column.renderCell)
+                      ? column.renderCell(item, value, context)
+                      : <Normaltekst>{_.isFunction(value.toLocaleDateString) ? value.toLocaleDateString() : value.toString()}</Normaltekst>}
                   </td>
                 )
               case 'object':
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : <Normaltekst>JSON.stringify(value)</Normaltekst>}
+                    {_.isFunction(column.renderCell)
+                      ? column.renderCell(item, value, context)
+                      : <Normaltekst>JSON.stringify(value)</Normaltekst>}
                   </td>
                 )
               default:
                 return (
                   <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
-                    {_.isFunction(column.renderCell) ? column.renderCell(item, value, context) : (
-                      <Normaltekst>
-                        <span data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</span>
-                      </Normaltekst>
-                    )}
+                    {_.isFunction(column.renderCell)
+                      ? column.renderCell(item, value, context)
+                      : (
+                        <Normaltekst>
+                          <span data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</span>
+                        </Normaltekst>
+                      )}
                   </td>
                 )
             }

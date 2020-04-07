@@ -35,7 +35,7 @@ describe('widgets/EkspandertBartWidget', () => {
 
   it('Renders', () => {
     expect(wrapper.isEmptyRender()).toBeFalsy()
-    //expect(wrapper).toMatchSnapshot()
+    // expect(wrapper).toMatchSnapshot()
   })
 
   it('It tries to save state when collapse changes', () => {

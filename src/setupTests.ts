@@ -14,5 +14,5 @@ window.scrollTo = jest.fn()
 window.location.reload = jest.fn()
 
 jest.mock('crypto', () => ({
-  randomBytes: (num: number) => new Array(num).fill(0),
-}));
+  randomBytes: (num: number) => new Array(num).fill(0)
+}))

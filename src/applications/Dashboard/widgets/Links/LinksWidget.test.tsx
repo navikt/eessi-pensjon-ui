@@ -35,7 +35,7 @@ describe('widgets/Links/LinksWidget', () => {
 
   it('Renders', () => {
     expect(wrapper.isEmptyRender()).toBeFalsy()
-    //expect(wrapper).toMatchSnapshot()
+    // expect(wrapper).toMatchSnapshot()
   })
 
   it('Has proper HTML structure', () => {
