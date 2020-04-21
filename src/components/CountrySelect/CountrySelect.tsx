@@ -1,16 +1,16 @@
-import * as CountryFilter from 'components/CountrySelect/CountryFilter'
-import { AllowedLocaleString, Countries, Country } from 'declarations/components'
-import { Feilmelding } from 'Nav'
-import React, { useState } from 'react'
-import Select, { ValueType } from 'react-select'
-import PT from 'prop-types'
-import _ from 'lodash'
 import classNames from 'classnames'
-import { guid } from 'nav-frontend-js-utils'
-import CountryData from '../CountryData/CountryData'
-import CountryOption from './CountryOption'
+import * as CountryFilter from 'components/CountrySelect/CountryFilter'
 import CountryValue from 'components/CountrySelect/CountryValue'
+import { AllowedLocaleString, Countries, Country } from 'declarations/components'
+import _ from 'lodash'
+import { Feilmelding } from 'Nav'
+import { guid } from 'nav-frontend-js-utils'
+import PT from 'prop-types'
+import React from 'react'
+import Select, { ValueType } from 'react-select'
+import CountryData from '../CountryData/CountryData'
 import CountryErrorStyle from './CountryErrorStyle'
+import CountryOption from './CountryOption'
 import './CountrySelect.css'
 
 export interface CountrySelectProps<T> {
@@ -35,8 +35,6 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
   ariaLabel, className, error, excludeList, flags = true, id, includeList, label, locale = 'nb',
   menuPortalTarget, onOptionSelected, placeholder, sort = 'scandinaviaFirst', type, value = null
 }) => {
-  const [_value, setValue] = useState<ValueType<Country> | null>(value)
-
   const include = (selectedCountries: Array<string>, allCountries: Countries): Countries => {
     return _.filter(allCountries, country => {
       return selectedCountries.indexOf(country.value) >= 0
@@ -53,7 +51,6 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
     if (_.isFunction(onOptionSelected)) {
       onOptionSelected(e)
     }
-    setValue(e)
   }
 
   const optionList: Countries = CountryData.getCountryInstance(locale).getData()
@@ -81,7 +78,7 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
     })
   }
 
-  let defValue: Country = (_value as Country)
+  let defValue: Country | null = value ? (value as Country) : null
   if (defValue && !defValue.label) {
     defValue = _.find(options, { value: defValue.value })!
   }
@@ -95,7 +92,7 @@ const CountrySelect: React.FC<CountrySelectProps<Country>> = ({
       <label className='skjemaelement__label' htmlFor={inputId}>{label}</label>
       <Select
         placeholder={placeholder}
-        value={defValue || null}
+        value={defValue}
         options={_options}
         id={id + '-select'}
         components={{
