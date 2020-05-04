@@ -44,6 +44,7 @@ import { createStore } from 'redux'
 import './index.css'
 import './index_highContrast.css'
 import './minibootstrap.css'
+import 'rc-tooltip/assets/bootstrap_white.css'
 import reducer from './reducer'
 
 const store = createStore(reducer)

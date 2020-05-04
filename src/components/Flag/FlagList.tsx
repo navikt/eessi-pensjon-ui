@@ -1,4 +1,5 @@
 import { AllowedLocaleString, FlagItems } from 'declarations/components'
+import Tooltip from 'rc-tooltip'
 import React from 'react'
 import PT from 'prop-types'
 import _ from 'lodash'
@@ -46,16 +47,22 @@ const FlagList: React.FC<FlagListProps> = ({
         )
       })}
       {_(overflowLimit).isNumber() && items.length > overflowLimit ? (
-        <Normaltekst
-          data-tip={items
-            .concat()
-            .slice((items.length - overflowLimit) * -1)
-            .map(item => item.label)
-            .join(', ')}
-          className='pt-2'
+        <Tooltip
+          placement='top' trigger={['hover']} overlay={
+            <span>{items
+              .concat()
+              .slice((items.length - overflowLimit) * -1)
+              .map(item => item.label)
+              .join(', ')}
+            </span>
+          }
         >
-          +{items.length - overflowLimit}
-        </Normaltekst>
+          <Normaltekst
+            className='pt-2'
+          >
+            +{items.length - overflowLimit}
+          </Normaltekst>
+        </Tooltip>
       ) : null}
     </div>
   )

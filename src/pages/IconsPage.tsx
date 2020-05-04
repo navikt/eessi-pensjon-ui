@@ -10,7 +10,7 @@ import dark from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark'
 import { useSelector } from 'react-redux'
 import Mustache from 'mustache'
 import { Input, Normaltekst, Panel, Select, Systemtittel, Undertittel } from '../Nav'
-import ReactTooltip from 'react-tooltip'
+import Tooltip from 'rc-tooltip'
 SyntaxHighlighter.registerLanguage('jsx', jsx)
 
 const IconsPage: React.FC<PageProps> = (): JSX.Element => {
@@ -19,7 +19,6 @@ const IconsPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
-      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='mt-4 mb-4'>Icons</Systemtittel>
         <Normaltekst className='mt-4 mb-4'>Icon component that combines icons from <a href='https://fontawesome.com'>FontAwesome</a> and external SVG icons from NAV Ikoner DB</Normaltekst>
@@ -36,7 +35,9 @@ const IconsPage: React.FC<PageProps> = (): JSX.Element => {
         </div>
         <div className='d-flex flex-wrap mb-4' style={{ justifyContent: 'space-evenly' }}>
           {availableIcons.map(kind => (
-            <Icons className='p-2' key={kind} kind={kind} size={size} data-tip={kind} color={color} />
+            <Tooltip placement='top' key={kind} trigger={['hover']} overlay={<span>kind</span>}>
+              <Icons className='p-2' kind={kind} size={size} color={color} />
+            </Tooltip>
           ))}
         </div>
 
@@ -46,7 +47,6 @@ const IconsPage: React.FC<PageProps> = (): JSX.Element => {
           '     className=\'p-2\'\n' +
           '     kind={kind}\n' +
           '     size={ {{size}} }\n' +
-          '     data-tip={kind}\n' +
           '     color={ {{color}} }\n' +
           '   />\n' +
           '))', { color: color, size: size })}

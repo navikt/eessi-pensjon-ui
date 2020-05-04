@@ -3,7 +3,7 @@ import WaitingPanel from 'components/WaitingPanel/WaitingPanel'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import ReactTooltip from 'react-tooltip'
+import Tooltip from 'rc-tooltip'
 import { Checkbox, Input, Lenke, Normaltekst } from 'Nav'
 import Icons from '../Icons/Icons'
 import Pagination from '../Pagination/Pagination'
@@ -197,7 +197,11 @@ const TableSorter: React.FC<TableSorterProps> = ({
                       ? column.renderCell(item, value, context)
                       : (
                         <Normaltekst>
-                          <span data-tip={labels[column.id] ? labels[column.id][value] : ''}>{value}</span>
+                          { labels[column.id] ? (
+                            <Tooltip placement='top' trigger={['hover']} overlay={<span>{labels[column.id] ? labels[column.id][value] : ''}</span>}>
+                              <span>{value}</span>
+                            </Tooltip>
+                            ) : <span>{value}</span>}
                         </Normaltekst>
                       )}
                   </td>
@@ -220,7 +224,6 @@ const TableSorter: React.FC<TableSorterProps> = ({
 
   return (
     <div className={classNames('c-tableSorter', 'tabell', { 'tabell__td--sortert': sortable }, className)}>
-      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <div className='c-tableSorter__content'>
         {loading ? (
           <div className='c-tableSorter__loading'>

@@ -48,6 +48,7 @@ const MultipleSelectPage: React.FC<PageProps> = (): JSX.Element => {
           </li>
           <li><strong>U: </strong>Undertittel, Undertekst, UndertekstBold</li>
           <li><strong>V: </strong>Veileder, Veilederpanel</li>
+          <li><strong>X: </strong>XKnapp</li>
         </ul>
 
         <Undertittel className='pt-4 pb-4'>Component import</Undertittel>

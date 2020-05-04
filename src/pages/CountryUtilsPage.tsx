@@ -3,7 +3,6 @@ import Flag from 'components/Flag/Flag'
 import { AllowedLocaleString } from 'declarations/components'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
-import ReactTooltip from 'react-tooltip'
 import { State } from 'reducer'
 import Container from './Container'
 import CountrySelect from 'components/CountrySelect/CountrySelect'
@@ -23,7 +22,6 @@ const CountryUtilsPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
-      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Country utils</Systemtittel>
         <Normaltekst>Assorted utils for country lists, which includes:</Normaltekst>

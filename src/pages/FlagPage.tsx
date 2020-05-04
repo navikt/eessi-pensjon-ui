@@ -5,7 +5,6 @@ import { State } from 'reducer'
 import Container from './Container'
 import Flag from 'components/Flag/Flag'
 import FlagList from 'components/Flag/FlagList'
-import ReactTooltip from 'react-tooltip'
 import CountryData from 'components/CountryData/CountryData'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
@@ -26,7 +25,6 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
-      <ReactTooltip place='top' type='dark' effect='solid' multiline />
       <Panel className='p-4'>
         <Systemtittel className='pt-4 pb-4'>Flag</Systemtittel>
         <Normaltekst>Flag component renders any world flag in SVG format.</Normaltekst>
@@ -59,7 +57,6 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
 
         <Undertittel className='mt-4 mb-4'>Flag list</Undertittel>
         <Normaltekst className='mt-4 mb-4'>The <code>FlagList</code> component can render a list of flags, as follows.</Normaltekst>
-        <Normaltekst className='mt-4 mb-4'><strong>Note</strong>: you need to add into your project the <code>ReactTooltip</code> component from the <code>react-tooltip</code> npm package in order to see the label tooltips.</Normaltekst>
         <FlagList
           className='mb-4'
           items={[

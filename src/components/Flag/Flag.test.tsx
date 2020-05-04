@@ -23,14 +23,12 @@ describe('components/Flag', () => {
   it('Has proper HTML structure for non-existent flag', () => {
     wrapper = mount(<Flag {...mockInitialProps} country='aa' />)
     // @ts-ignore
-    expect(wrapper.find('.c-flag').props()['data-tip']).toEqual('mockLabel')
     expect(wrapper.exists('svg')).toBeFalsy()
   })
 
   it('Has proper HTML structure for existent flag', () => {
     wrapper = mount(<Flag {...mockInitialProps} />)
     // @ts-ignore
-    expect(wrapper.find('.c-flag').props()['data-tip']).toEqual('mockLabel')
     expect(wrapper.render().html()).toEqual('<img alt="mockLabel" src="no.svg">')
   })
 })

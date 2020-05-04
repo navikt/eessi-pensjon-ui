@@ -5,12 +5,13 @@ import Ekspanderbartpanel, { EkspanderbartpanelBase } from 'nav-frontend-ekspand
 import EtikettBase, { EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess } from 'nav-frontend-etiketter'
 import { Container, Row, Column } from 'nav-frontend-grid'
 import Hjelpetekst from 'nav-frontend-hjelpetekst'
-import { Hamburgerknapp, Lukknapp, Menyknapp, Nesteknapp, Systemerknapp, Søkeknapp, Tilbakeknapp } from 'nav-frontend-ikonknapper'
+import { Hamburgerknapp, Menyknapp, Nesteknapp, Systemerknapp, Søkeknapp, Tilbakeknapp, Xknapp } from 'nav-frontend-ikonknapper'
 import Ikon from 'nav-frontend-ikoner-assets'
 import KnappBase, { Knapp, Hovedknapp, Flatknapp, Fareknapp } from 'nav-frontend-knapper'
 import Lenke from 'nav-frontend-lenker'
 import Lenkepanel, { LenkepanelBase } from 'nav-frontend-lenkepanel'
 import Lesmerpanel from 'nav-frontend-lesmerpanel'
+import Lukknapp from 'nav-frontend-lukknapp'
 import Modal from 'nav-frontend-modal'
 import Panel from 'nav-frontend-paneler'
 import Popover from 'nav-frontend-popover'
@@ -89,7 +90,8 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (Undertekst as unknown as React.FunctionComponent).displayName = 'Undertekst';
 (UndertekstBold as unknown as React.FunctionComponent).displayName = 'UndertekstBold';
 (Veileder as unknown as React.FunctionComponent).displayName = 'Veileder';
-(Veilederpanel as unknown as React.FunctionComponent).displayName = 'Veilederpanel'
+(Veilederpanel as unknown as React.FunctionComponent).displayName = 'Veilederpanel';
+(Xknapp as unknown as React.FunctionComponent).displayName = 'XKnapp'
 
 export {
   AlertStripe, AlertStripeAdvarsel, AlertStripeFeil, AlertStripeInfo, AlertStripeSuksess,
@@ -108,5 +110,6 @@ export {
   Select, Sidetittel, SkjemaGruppe, Snakkeboble, Spinner, Stegindikator, Systemtittel, Systemerknapp, Søkeknapp,
   Tabs, Textarea, TextareaControlled, Tilbakeknapp, ToggleGruppe, ToggleKnapp,
   Undertittel, Undertekst, UndertekstBold,
-  Veileder, Veilederpanel
+  Veileder, Veilederpanel,
+  Xknapp
 }

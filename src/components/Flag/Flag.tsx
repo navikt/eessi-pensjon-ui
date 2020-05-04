@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import flagList from 'components/Flag/Flags'
 import PT from 'prop-types'
+import Tooltip from 'rc-tooltip'
 import React from 'react'
 import CountryData, { CountryList } from '../CountryData/CountryData'
 import './Flag.css'
@@ -35,15 +36,14 @@ const Flag: React.FC<FlagProps> = ({
   }
 
   return (
-    <>
+    <Tooltip placement='top' trigger={['hover']} overlay={<span>{label}</span>}>
       <div
         style={style}
         className={classnames(className, 'c-flag', 'size-' + size, 'type-' + type)}
-        data-tip={label}
       >
         {getFlag()}
       </div>
-    </>
+    </Tooltip>
   )
 }
 

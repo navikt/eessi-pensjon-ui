@@ -10,7 +10,7 @@ import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React, { useCallback, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { FileRejection, useDropzone } from 'react-dropzone'
 import { File as IFile, Files as IFiles, Labels } from 'declarations/types'
 import FileFC from '../File/File'
 import './FileUpload.css'
@@ -73,7 +73,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     return () => {}
   }, [_status, onFilesChanged])
 
-  const processFiles = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<File>) => {
+  const processFiles = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<FileRejection>) => {
     const newFiles = _.clone(_files)
     acceptedFiles.forEach((file: File) => {
       const reader: FileReader = new FileReader()
@@ -115,7 +115,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     return () => {}
   }, [_files, _labels, updateFiles])
 
-  const onDrop = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<File>) => {
+  const onDrop = useCallback((acceptedFiles: Array<File>, rejectedFiles: Array<FileRejection>) => {
     if (_.isFunction(beforeFileDrop)) {
       beforeFileDrop()
     }
@@ -133,13 +133,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
     }
   }, [_files.length, afterFileDrop, beforeFileDrop, _labels, maxFiles, processFiles])
 
-  const onDropRejected = (rejectedFiles: Array<File>): void => {
-    if (maxFileSize && rejectedFiles[0].size > maxFileSize) {
+  const onDropRejected = (rejectedFiles: Array<FileRejection>): void => {
+    if (maxFileSize && rejectedFiles[0].file.size > maxFileSize) {
       setStatus({
         message: Mustache.render(_labels.fileIsTooBigLimitIs!, {
           maxFileSize: bytes(maxFileSize),
-          size: bytes(rejectedFiles[0].size),
-          file: rejectedFiles[0].name
+          size: bytes(rejectedFiles[0].file.size),
+          file: rejectedFiles[0].file.name
         }),
         type: 'ERROR'
       })
