@@ -197,8 +197,8 @@ const TableSorter: React.FC<TableSorterProps> = ({
                       ? column.renderCell(item, value, context)
                       : (
                         <Normaltekst>
-                          {labels[column.id] ? (
-                            <Tooltip placement='top' trigger={['hover']} overlay={<span>{labels[column.id] ? labels[column.id][value] : ''}</span>}>
+                          {labels[column.id] && labels[column.id][value] ? (
+                            <Tooltip placement='top' trigger={['hover']} overlay={<span>{labels[column.id][value]}</span>}>
                               <span>{value}</span>
                             </Tooltip>
                           ) : <span>{value}</span>}
