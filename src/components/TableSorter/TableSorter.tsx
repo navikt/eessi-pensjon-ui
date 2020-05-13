@@ -124,7 +124,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
   const rows: () => Array<JSX.Element> = () => {
     const filteredItems: Items = _.filter(_items, (item) => {
       return _.every(_columns, (column) => {
-        const filterText: string = column.filterText ? column.filterText.toLowerCase() : ''
+        const filterText: string = _.isString(column.filterText) ? column.filterText.toLowerCase() : ''
         let regex
         try {
           regex = new RegExp(filterText)
@@ -138,10 +138,10 @@ const TableSorter: React.FC<TableSorterProps> = ({
               : true
           default:
             return regex
-              ? column.needle
+              ? (column.needle && _.isString(column.needle(item[column.id]))
                 ? column.needle(item[column.id]).toLowerCase().match(regex)
-                : item[column.id].toLowerCase().match(regex)
-              : true
+                : (_.isString(item[column.id]) ? item[column.id].toLowerCase().match(regex) : false)
+              ) : true
         }
       })
     })
@@ -160,7 +160,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
         <tr
           key={item.key || index}
           aria-selected={selectable && item.selected === true}
-          style={{ animationDelay: (0.07 * index) + 's' }}
+          style={{ animationDelay: (0.04 * index) + 's' }}
           className={classNames({
             slideAnimate: animatable,
             'tabell__tr--valgt': selectable && item.selected
