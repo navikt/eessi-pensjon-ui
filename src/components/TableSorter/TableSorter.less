@@ -2,6 +2,27 @@
 
 .c-tableSorter {
 
+  &.compact {
+    th a,
+    td {
+      padding: 0.35rem !important;
+    }
+    th {
+      padding: 0rem !important;
+      padding-right: 0.25rem !important;
+    }
+    th a {
+      margin: 0rem !important;
+      padding: 0.35rem !important;
+    }
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background: whitesmoke
+    }
+  }
+
   display: block !important;
 
   &__content {

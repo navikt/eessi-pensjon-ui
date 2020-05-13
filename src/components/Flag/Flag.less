@@ -50,6 +50,11 @@
 
 .c-flag {
 
+  &.animate {
+    opacity: 0.01;
+    animation: jiggle 0.5s forwards;
+  }
+
   &.type-circle {
 
     display: inline-flex;
@@ -157,8 +162,4 @@
     flex-wrap: wrap;
   }
 
-  &.animate .c-flag {
-    opacity: 0.01;
-    animation: jiggle 0.5s forwards;
-  }
 }

@@ -14,10 +14,10 @@ type AlertStatusClasses = {[status in AlertStatus]: AlertStripeType}
 type AlertType = 'client' | 'server'
 
 interface AlertError {
-  status?: string;
-  message ?: JSX.Element | string;
-  error?: string;
-  uuid ?: string;
+  status?: string | null;
+  message ?: JSX.Element | null | string;
+  error?: string | null;
+  uuid ?: string | null;
 }
 
 export interface AlertProps {

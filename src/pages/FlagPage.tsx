@@ -208,6 +208,20 @@ const FlagPage: React.FC<PageProps> = (): JSX.Element => {
               <td>Flag type. Accepted values: <code>original</code> and <code>circle</code>.</td>
               <td>original</td>
             </tr>
+            <tr>
+              <td>wrap</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Toggle for wrapping flags or keeping them in one line  (for <code>FlagList</code> component only).</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>wrapper</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Adding a wrapper div around flag icons or not (for <code>FlagList</code> component only).</td>
+              <td>true</td>
+            </tr>
           </tbody>
         </table>
       </Panel>

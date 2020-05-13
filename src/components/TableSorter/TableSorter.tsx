@@ -35,6 +35,7 @@ export interface Sort {
 export interface TableSorterProps {
   animatable?: boolean;
   className?: string;
+  compact?: boolean;
   context?: any;
   columns: Array<Column>;
   initialPage?: number;
@@ -51,7 +52,7 @@ export interface TableSorterProps {
 }
 
 const TableSorter: React.FC<TableSorterProps> = ({
-  animatable = true, className, context, columns = [],
+  animatable = true, className, compact = false, context, columns = [],
   initialPage = 1, items = [], itemsPerPage = 10,
   labels = {}, loading = false, onRowSelectChange,
   pagination = true, searchable = true, selectable = false,
@@ -124,18 +125,22 @@ const TableSorter: React.FC<TableSorterProps> = ({
     const filteredItems: Items = _.filter(_items, (item) => {
       return _.every(_columns, (column) => {
         const filterText: string = column.filterText ? column.filterText.toLowerCase() : ''
+        let regex
+        try {
+          regex = new RegExp(filterText)
+        } catch (e) {}
         switch (column.type) {
           case 'date':
-            return filterText
+            return regex
               ? item[column.id].toLocaleDateString
-                ? item[column.id].toLocaleDateString().match(filterText)
-                : item[column.id].toString().match(filterText)
+                ? item[column.id].toLocaleDateString().match(regex)
+                : item[column.id].toString().match(regex)
               : true
           default:
-            return filterText
+            return regex
               ? column.needle
-                ? column.needle(item[column.id]).toLowerCase().match(filterText)
-                : item[column.id].toLowerCase().match(filterText)
+                ? column.needle(item[column.id]).toLowerCase().match(regex)
+                : item[column.id].toLowerCase().match(regex)
               : true
         }
       })
@@ -176,7 +181,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
             switch (column.type) {
               case 'date':
                 return (
-                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && _sort.column === column.id })}>
                     {_.isFunction(column.renderCell)
                       ? column.renderCell(item, value, context)
                       : <Normaltekst>{_.isFunction(value.toLocaleDateString) ? value.toLocaleDateString() : value.toString()}</Normaltekst>}
@@ -184,7 +189,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
                 )
               case 'object':
                 return (
-                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && _sort.column === column.id })}>
                     {_.isFunction(column.renderCell)
                       ? column.renderCell(item, value, context)
                       : <Normaltekst>JSON.stringify(value)</Normaltekst>}
@@ -192,7 +197,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
                 )
               default:
                 return (
-                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && sort.column === column.id })}>
+                  <td key={index2} className={classNames({ 'tabell__td--sortert': sortable && _sort.column === column.id })}>
                     {_.isFunction(column.renderCell)
                       ? column.renderCell(item, value, context)
                       : (
@@ -222,8 +227,10 @@ const TableSorter: React.FC<TableSorterProps> = ({
     }))
   }
 
+  const tableRows = rows()
+
   return (
-    <div className={classNames('c-tableSorter', 'tabell', { 'tabell__td--sortert': sortable }, className)}>
+    <div className={classNames('c-tableSorter', 'tabell', { compact: compact }, className)}>
       <div className='c-tableSorter__content'>
         {loading ? (
           <div className='c-tableSorter__loading'>
@@ -254,26 +261,29 @@ const TableSorter: React.FC<TableSorterProps> = ({
                     />) : null}
                 </div>
               </th>
-              {_columns.map((column) => (
-                <th
-                  role='columnheader'
-                  aria-sort='none'
-                  key={column.id}
-                  className={classNames('header', { [sortClass(column)]: column.label !== '' })}
-                >
-                  {sortable && column.label ? (
-                    <Lenke
-                      href='#' onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        sortColumn(column)
-                      }}
-                    >
-                      {column.label}
-                    </Lenke>
-                  ) : column.label}
-                </th>
-              ))}
+              {_columns.map((column) => {
+                const filterText: string = column.filterText ? column.filterText.toLowerCase() : ''
+                return (
+                  <th
+                    role='columnheader'
+                    aria-sort='none'
+                    key={column.id}
+                    className={classNames('header', { [sortClass(column)]: column.label !== '' })}
+                  >
+                    {sortable && column.label ? (
+                      <Lenke
+                        href='#' onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          sortColumn(column)
+                        }}
+                      >
+                        {column.label + (filterText ? ' (' + filterText + ')' : '')}
+                      </Lenke>
+                    ) : column.label + (filterText ? ' (' + filterText + ')' : '')}
+                  </th>
+                )
+              })}
             </tr>
             {seeFilters ? (
               <tr className='c-tableSorter__filter'>
@@ -294,12 +304,12 @@ const TableSorter: React.FC<TableSorterProps> = ({
               </tr>
             ) : null}
           </thead>
-          <tbody>{rows()}</tbody>
+          <tbody>{tableRows}</tbody>
         </table>
         {pagination ? (
           <Pagination
             className='c-tableSorter__pagination'
-            numberOfItems={items.length}
+            numberOfItems={tableRows.length}
             itemsPerPage={itemsPerPage}
             initialPage={initialPage}
             onChange={(page) => setCurrentPage(page)}

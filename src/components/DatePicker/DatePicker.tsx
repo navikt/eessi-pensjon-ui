@@ -9,11 +9,11 @@ import './DatePicker.css'
 type DateElement = 'day' |'month' | 'year'
 type Labels = {[K in DateElement]?: string}
 const LabelsPropType = PT.shape({
-  day: PT.string,
-  month: PT.string,
-  year: PT.string
+  day: PT.string.isRequired,
+  month: PT.string.isRequired,
+  year: PT.string.isRequired
 })
-type DateValues = {[K in DateElement]?: string}
+type DateValues = {[K in DateElement]?: string | undefined | null}
 const DateValuesPropType = PT.shape({
   day: PT.string,
   month: PT.string,
@@ -168,7 +168,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             min='1'
             max='31'
             disabled={disabled}
-            value={(values.day !== undefined) ? values.day : ''}
+            value={!_.isNil(values.day) ? values.day : ''}
             onInput={handleMaxLengthDay}
             onChange={handleChangeDay}
             feil={(errors.day || error) ? <span /> : false}
@@ -184,7 +184,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             min='1'
             max='12'
             disabled={disabled}
-            value={values.month !== undefined ? values.month : ''}
+            value={!_.isNil(values.month) ? values.month : ''}
             onInput={handleMaxLengthMonth}
             onChange={handleChangeMonth}
             feil={errors.month || error ? <span /> : false}
@@ -199,7 +199,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             type='number'
             min='1900'
             disabled={disabled}
-            value={values.year !== undefined ? values.year : ''}
+            value={!_.isNil(values.year) ? values.year : ''}
             onInput={handleMaxLengthYear}
             onChange={handleChangeYear}
             feil={errors.year || error ? <span /> : false}

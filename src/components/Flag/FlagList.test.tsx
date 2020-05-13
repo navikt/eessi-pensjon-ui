@@ -16,7 +16,8 @@ describe('components/Flag/FlagList', () => {
       country: 'DK'
     }],
     overflowLimit: 2,
-    locale: 'nb'
+    locale: 'nb',
+    wrapper: true
   }
 
   it('Renders', () => {

@@ -18,6 +18,7 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
   const [searchable, setSearchable] = useState(true)
   const [selectable, setSelectable] = useState(true)
   const [sortable, setSortable] = useState(true)
+  const [compact, setCompact] = useState(false)
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
@@ -33,6 +34,7 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
             <Checkbox label='Toggle searchable' checked={searchable} onChange={() => setSearchable(!searchable)} />
             <Checkbox label='Toggle selectable' checked={selectable} onChange={() => setSelectable(!selectable)} />
             <Checkbox label='Toggle sortable' checked={sortable} onChange={() => setSortable(!sortable)} />
+            <Checkbox label='Toggle compact' checked={compact} onChange={() => setCompact(!compact)} />
           </div>
           <Select
             className='w-33'
@@ -84,6 +86,7 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
           searchable={searchable}
           selectable={selectable}
           sortable={sortable}
+          compact={compact}
           columns={[
             { id: 'name', label: 'Name', type: 'string', filterText: '' },
             { id: 'date', label: 'Date', type: 'date', filterText: '' },
@@ -132,6 +135,7 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
           '   searchable={ {{searchable}} }\n' +
           '   selectable={ {{selectable}} }\n' +
           '   sortable={ {{sortable}} }\n' +
+          '   compact={ {{compact}} }\n' +
           '   sort={{ column: \'name\', order: \'ascending\' }}\n' +
           '   columns={[\n' +
           '     {id: \'name\', label: \'Name\', type: \'string\', filterText: \'\' },\n' +
@@ -146,7 +150,8 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
             animatable: animatable,
             searchable: searchable,
             selectable: selectable,
-            sortable: sortable
+            sortable: sortable,
+            compact: compact
           })}
         </SyntaxHighlighter>
 
@@ -180,6 +185,13 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
               <td><code>string</code></td>
               <td>false</td>
               <td>Additional classnames</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>compact</td>
+              <td><code>boolean</code></td>
+              <td>false</td>
+              <td>Boolean for less padding on the cells (from 1rem to 0.35rem).</td>
               <td>-</td>
             </tr>
             <tr>
