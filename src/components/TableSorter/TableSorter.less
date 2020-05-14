@@ -3,20 +3,21 @@
 .c-tableSorter {
 
   &.compact {
-    th a,
-    td {
+    td, th {
       padding: 0.35rem !important;
-    }
-    th {
-      padding: 0rem !important;
-      padding-right: 0.25rem !important;
     }
     th a {
       margin: 0rem !important;
-      padding: 0.35rem !important;
+      padding: 0rem !important;
+      padding-right: 0.7rem !important;
     }
-    th a:before {
-      right: 0.2rem;
+    th a:before,
+    th a:after {
+      right: 0rem !important;
+    }
+
+    .c-tableSorter__filter .skjemaelement__input {
+      padding: 0.25rem !important;
     }
   }
 
