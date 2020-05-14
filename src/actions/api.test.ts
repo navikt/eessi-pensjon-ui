@@ -27,9 +27,10 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(2)
+        expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'FAILURE')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'FAILURE')
       })
   })
 
@@ -69,9 +70,10 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions = store.getActions()
-        expect(expectedActions.length).toBe(2)
+        expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'SERVER/INTERNAL/ERROR')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'SERVER/INTERNAL/ERROR')
       })
   })
 
@@ -91,10 +93,11 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(3)
+        expect(expectedActions.length).toBe(4)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'SERVER/INTERNAL/ERROR')
-        expect(expectedActions[2]).toHaveProperty('type', 'FAILURE')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'SERVER/INTERNAL/ERROR')
+        expect(expectedActions[3]).toHaveProperty('type', 'FAILURE')
       })
   })
 
@@ -113,9 +116,10 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(2)
+        expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
       })
   })
 
@@ -135,9 +139,10 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(2)
+        expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'FORBIDDEN')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'FORBIDDEN')
       })
   })
 
@@ -156,9 +161,10 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(2)
+        expect(expectedActions.length).toBe(3)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'FAILURE')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'FAILURE')
       })
   })
 
@@ -178,10 +184,11 @@ describe('actions/api', () => {
     }))
       .then(() => {
         const expectedActions: any[] = store.getActions()
-        expect(expectedActions.length).toBe(3)
+        expect(expectedActions.length).toBe(4)
         expect(expectedActions[0]).toHaveProperty('type', 'REQUEST')
-        expect(expectedActions[1]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
-        expect(expectedActions[2]).toHaveProperty('type', 'FAILURE')
+        expect(expectedActions[1]).toHaveProperty('type', 'API/CALL/REJECTED')
+        expect(expectedActions[2]).toHaveProperty('type', 'SERVER/UNAUTHORIZED/ERROR')
+        expect(expectedActions[3]).toHaveProperty('type', 'FAILURE')
       })
   })
 

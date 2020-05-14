@@ -25,7 +25,7 @@ export interface MultipleSelectProps<T> {
   isLoading?: boolean;
   label: string | JSX.Element;
   onSelect?: (e: ValueType<any>) => void;
-  options: Array<T>;
+  options?: Array<T>;
   placeholder?: string;
   values?: Array<T>;
 }
@@ -116,7 +116,7 @@ MultipleSelect.propTypes = {
   isLoading: PT.bool,
   label: PT.oneOfType([PT.element, PT.string]).isRequired,
   onSelect: PT.func,
-  options: PT.array.isRequired,
+  options: PT.array,
   placeholder: PT.string,
   values: PT.array.isRequired
 }

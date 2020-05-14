@@ -221,7 +221,7 @@ FileUpload.propTypes = {
   beforeFileDrop: PT.func,
   className: PT.string,
   files: FilesPropType,
-  labels: PT.object.isRequired,
+  labels: PT.object,
   maxFiles: PT.number,
   maxFileSize: PT.number,
   onFilesChanged: PT.func

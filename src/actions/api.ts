@@ -140,6 +140,12 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       })
     }).catch(error => {
       const _body: any = body || payload
+      dispatch({
+        type: types.API_CALL_REJECTED,
+        error: error,
+        originalPayload: _body,
+        context: context
+      })
       if (error.status === 401) {
         dispatch({
           type: types.SERVER_UNAUTHORIZED_ERROR,
