@@ -19,7 +19,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true
   },
   "include": [
     "src"

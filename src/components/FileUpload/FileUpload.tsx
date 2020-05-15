@@ -5,21 +5,21 @@ import classNames from 'classnames'
 import defaultLabels from 'components/FileUpload/FileUpload.labels'
 import Modal from 'components/Modal/Modal'
 import { ModalContent } from 'declarations/components'
-import { FilesPropType } from 'declarations/types.pt'
+import { File as IFile, Files as IFiles } from 'forhandsvisningsfil/lib/forhandsvisningsfil.d'
+import { FilesPropType } from 'forhandsvisningsfil/lib/forhandsvisningsfil.pt'
 import _ from 'lodash'
 import Mustache from 'mustache'
 import PT from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import { FileRejection, useDropzone } from 'react-dropzone'
-import { File as IFile, Files as IFiles, Labels } from 'declarations/types'
-import FileFC from '../File/File'
+import { Labels } from 'declarations/types'
+import File from 'forhandsvisningsfil'
 import './FileUpload.css'
 
 interface Status {
   type?: string;
   message?: string;
 }
-
 export interface FileUploadProps {
   acceptedMimetypes?: Array<string>;
   afterFileDrop?: () => void;
@@ -52,7 +52,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={closePreview}>
-          <FileFC file={file} width={400} height={600} initialPage={initialPage} onContentClick={closePreview} />
+          <File file={file} width={400} height={600} initialPage={initialPage} onContentClick={closePreview} />
         </div>
       )
     })
@@ -198,7 +198,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       <div className='c-fileUpload-files scrollable'>
         {_files.map((file, i) => (
           <div key={i} className='mr-2'>
-            <FileFC
+            <File
               file={file}
               showDeleteButton
               showDownloadButton

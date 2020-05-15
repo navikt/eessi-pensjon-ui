@@ -1,6 +1,7 @@
 import FileUpload from 'components/FileUpload/FileUpload'
 import { Step } from 'declarations/PDFEditor.d'
-import { Files, Labels } from 'declarations/types.d'
+import { Files } from 'forhandsvisningsfil/lib/forhandsvisningsfil.d'
+import { Labels } from 'declarations/types.d'
 import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import { Hovedknapp, Undertittel } from 'Nav'

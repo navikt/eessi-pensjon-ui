@@ -4,7 +4,8 @@ import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
 import { State } from 'reducer'
 import Container from './Container'
-import File from 'components/File/File'
+import File from 'forhandsvisningsfil'
+import { File as IFile } from 'forhandsvisningsfil/lib/forhandsvisningsfil.d'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import light from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
@@ -164,13 +165,13 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
               showDeleteButton
               showDownloadButton
               showPreviewButton
-              onAddFile={(file) => console.log('onAddFile: ', file)}
-              onDeleteFile={(file) => console.log('onDeleteFile: ', file)}
-              onDownloadFile={(file) => console.log('onDownloadFile: ', file)}
-              onPreviewFile={(file) => console.log('onPreviewFile: ', file)}
-              onContentClick={(file) => console.log('onContentClick: ', file)}
-              onPreviousPage={(file) => console.log('onPreviousPage: ', file)}
-              onNextPage={(file) => console.log('onNextPage: ', file)}
+              onAddFile={(file: IFile) => console.log('onAddFile: ', file)}
+              onDeleteFile={(file: IFile) => console.log('onDeleteFile: ', file)}
+              onDownloadFile={(file: IFile) => console.log('onDownloadFile: ', file)}
+              onPreviewFile={(file: IFile) => console.log('onPreviewFile: ', file)}
+              onContentClick={(file: IFile) => console.log('onContentClick: ', file)}
+              onPreviousPage={(file: IFile) => console.log('onPreviousPage: ', file)}
+              onNextPage={(file: IFile) => console.log('onNextPage: ', file)}
               scale={2}
             />
           </div>

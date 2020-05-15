@@ -1,5 +1,5 @@
 import ExpandingPanel from 'components/ExpandingPanel/ExpandingPanel'
-import File from 'components/File/File'
+import File from 'forhandsvisningsfil'
 import { Undertittel } from 'nav-frontend-typografi'
 import { PageProps } from 'pages/index'
 import React, { useState } from 'react'
