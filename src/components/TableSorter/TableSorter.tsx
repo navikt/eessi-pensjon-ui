@@ -121,14 +121,15 @@ const TableSorter: React.FC<TableSorterProps> = ({
     setItems(newItems)
   }
 
-  const rows: () => Array<JSX.Element> = () => {
+  const rawRows: () => Items = () => {
     const filteredItems: Items = _.filter(_items, (item) => {
       return _.every(_columns, (column) => {
         const filterText: string = _.isString(column.filterText) ? column.filterText.toLowerCase() : ''
         let regex
         try {
           regex = new RegExp(filterText)
-        } catch (e) {}
+        } catch (e) {
+        }
         switch (column.type) {
           case 'date':
             return regex
@@ -150,8 +151,11 @@ const TableSorter: React.FC<TableSorterProps> = ({
     if (_sort.order === 'descending') {
       sortedItems.reverse()
     }
+    return sortedItems
+  }
 
-    return sortedItems.filter((item, index) => {
+  const rows = (items: Items) => {
+    return items.filter((item, index) => {
       return pagination
         ? ((currentPage - 1) * itemsPerPage <= index && index < (currentPage * itemsPerPage))
         : true
@@ -227,7 +231,8 @@ const TableSorter: React.FC<TableSorterProps> = ({
     }))
   }
 
-  const tableRows = rows()
+  const sortedItems = rawRows()
+  const tableRows = rows(sortedItems)
 
   return (
     <div className={classNames('c-tableSorter', 'tabell', { compact: compact }, className)}>
@@ -309,7 +314,7 @@ const TableSorter: React.FC<TableSorterProps> = ({
         {pagination ? (
           <Pagination
             className='c-tableSorter__pagination'
-            numberOfItems={tableRows.length}
+            numberOfItems={sortedItems.length}
             itemsPerPage={itemsPerPage}
             initialPage={initialPage}
             onChange={(page) => setCurrentPage(page)}

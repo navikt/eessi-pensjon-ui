@@ -1,6 +1,6 @@
 // @ts-ignore
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -20,8 +20,8 @@ module.exports = {
     umdNamedDefine: true
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
+    new CopyPlugin({
+      patterns:[{
         from: 'src/index.css',
         to: 'nav.css'
       }, {
@@ -36,8 +36,8 @@ module.exports = {
       }, {
         from: 'src/declarations',
         to: 'declarations'
-      }
-    ])
+      }]
+    })
   ],
   module: {
     rules: [{
