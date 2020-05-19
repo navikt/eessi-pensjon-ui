@@ -7,8 +7,7 @@ module.exports = {
     index: './src/dist.tsx',
     nav: './src/dist-nav.tsx',
     api: './src/actions/api.ts',
-    Dashboard: './src/applications/Dashboard/Dashboard.tsx',
-    FileUpload: './src/components/FileUpload/FileUpload.tsx'
+    Dashboard: './src/applications/Dashboard/Dashboard.tsx'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -75,7 +74,7 @@ module.exports = {
     }, {
       test: /(?<!\.d)\.tsx?$/,
       use: 'ts-loader',
-      exclude: /(node_modules|bower_components|build)/
+      include: path.resolve(__dirname, 'src')
     }, {
       test: /\.d\.ts$/,
       loader: 'ignore-loader'

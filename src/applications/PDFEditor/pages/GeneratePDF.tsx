@@ -1,6 +1,6 @@
 import FileFC from 'forhandsvisningsfil'
 import { Recipes, Step, Watermark } from 'declarations/PDFEditor.d'
-import { File, Files } from 'forhandsvisningsfil/lib/forhandsvisningsfil.d'
+import { File, Files } from 'forhandsvisningsfil/lib/index.d'
 import { Labels } from 'declarations/types.d'
 import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'

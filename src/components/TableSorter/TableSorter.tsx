@@ -146,8 +146,8 @@ const TableSorter: React.FC<TableSorterProps> = ({
           default:
             return regex
               ? (column.needle && _.isString(column.needle(item[column.id]))
-                ? column.needle(item[column.id]).toLowerCase().match(regex)
-                : (_.isString(item[column.id]) ? item[column.id].toLowerCase().match(regex) : true)
+                  ? column.needle(item[column.id]).toLowerCase().match(regex)
+                  : (_.isString(item[column.id]) ? item[column.id].toLowerCase().match(regex) : true)
               ) : true
         }
       })

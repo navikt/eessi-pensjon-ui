@@ -1,7 +1,7 @@
 import { ModalContent } from 'declarations/components'
 import { PickImageStep, PickPageStep, Recipes, RecipeType, Separator, Watermark } from 'declarations/PDFEditor.d'
 import _ from 'lodash'
-import { File, Files } from 'forhandsvisningsfil/lib/forhandsvisningsfil.d'
+import { File, Files } from 'forhandsvisningsfil/lib/index.d'
 import { ActionWithPayload } from 'declarations/types.d'
 import * as types from './constants/actionTypes'
 

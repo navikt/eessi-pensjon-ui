@@ -1,6 +1,6 @@
 import * as api from 'actions/api'
 import { GeneratePayload, Recipes, Separator, Watermark } from 'declarations/PDFEditor.d'
-import { Files } from 'declarations/types.d'
+import { Files } from 'forhandsvisningsfil/lib/index.d'
 import * as types from 'applications/PDFEditor/constants/actionTypes'
 import * as urls from 'applications/PDFEditor/constants/urls'
 import * as pdfActions from './pdf'
