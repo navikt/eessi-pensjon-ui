@@ -43,6 +43,7 @@ export interface TableSorterProps {
   itemsPerPage ?: number;
   labels?: any;
   loading?: boolean;
+  onColumnSort ?: (s: Sort) => void;
   onRowSelectChange ?: (i: Items) => void;
   pagination?: boolean;
   searchable?: boolean;
@@ -54,7 +55,7 @@ export interface TableSorterProps {
 const TableSorter: React.FC<TableSorterProps> = ({
   animatable = true, className, compact = false, context, columns = [],
   initialPage = 1, items = [], itemsPerPage = 10,
-  labels = {}, loading = false, onRowSelectChange,
+  labels = {}, loading = false, onColumnSort, onRowSelectChange,
   pagination = true, searchable = true, selectable = false,
   sortable = true, sort = { column: '', order: 'none' }
 }: TableSorterProps): JSX.Element => {
@@ -86,10 +87,18 @@ const TableSorter: React.FC<TableSorterProps> = ({
     }
   }, [items, _items])
 
+  useEffect(() => {
+    setSort(sort)
+  }, [sort])
+
   const sortColumn = (column: Column): void => {
     if (!sortable) { return }
     const newSortOrder = sortOrder[_sort.order]
-    setSort({ column: column.id, order: newSortOrder })
+    const newSort = { column: column.id, order: newSortOrder }
+    setSort(newSort)
+    if (onColumnSort) {
+      onColumnSort(newSort)
+    }
   }
 
   const sortClass = (column: Column): string => {
@@ -335,6 +344,7 @@ TableSorter.propTypes = {
   itemsPerPage: PT.number,
   labels: PT.any,
   loading: PT.bool,
+  onColumnSort: PT.func,
   onRowSelectChange: PT.func,
   pagination: PT.bool,
   searchable: PT.bool,

@@ -6,7 +6,7 @@ import fetch from 'cross-fetch'
 import 'cross-fetch/polyfill'
 import { ActionWithPayload, MyThunkDispatch, ThunkResult } from 'declarations/types.d'
 import { ActionCreator } from 'redux'
-import uuid from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 export interface ApiCallTypes {
   request: string;
@@ -100,7 +100,7 @@ export const realCall: ActionCreator<ThunkResult<ActionWithPayload>> = ({
       method: method || 'GET',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'X-Request-ID': uuid.v4(),
+        'X-Request-ID': uuid(),
         ...CSRF_PROTECTION,
         ...headers
       },

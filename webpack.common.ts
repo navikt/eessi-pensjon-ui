@@ -20,8 +20,7 @@ module.exports = {
     umdNamedDefine: true
   },
   plugins: [
-    new CopyPlugin({
-      patterns:[{
+    new CopyPlugin([{
         from: 'src/index.css',
         to: 'nav.css'
       }, {
@@ -36,8 +35,7 @@ module.exports = {
       }, {
         from: 'src/declarations',
         to: 'declarations'
-      }]
-    })
+      }])
   ],
   module: {
     rules: [{

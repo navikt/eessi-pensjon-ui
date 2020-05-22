@@ -237,6 +237,13 @@ const TableSorterPage: React.FC<PageProps> = (): JSX.Element => {
               <td>false</td>
             </tr>
             <tr>
+              <td>onColumnSort</td>
+              <td><code>function</code></td>
+              <td>false</td>
+              <td>Callback function after sorting column is performed</td>
+              <td>-</td>
+            </tr>
+            <tr>
               <td>onRowSelectChange</td>
               <td><code>function</code></td>
               <td>false</td>
