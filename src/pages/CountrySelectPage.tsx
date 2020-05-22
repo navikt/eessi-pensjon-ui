@@ -1,4 +1,4 @@
-import Page from 'fremdriftslinje-doc'
+import Page from 'landvelger-doc'
 import Container from 'pages/Container'
 import { PageProps } from 'pages/index'
 import React from 'react'

@@ -1,4 +1,4 @@
-import Page from 'dashboard/lib/page'
+import Page from 'nav-dashboard-doc'
 import Container from 'pages/Container'
 import { PageProps } from 'pages/index'
 import React from 'react'

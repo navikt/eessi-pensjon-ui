@@ -1,11 +1,11 @@
-import Page from 'forhandsvisningsfil/lib/page'
+import Page from 'forhandsvisningsfil-doc'
 import Container from 'pages/Container'
 import { PageProps } from 'pages/index'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { State } from 'reducer'
 
-const FilePage: React.FC<PageProps> = (): JSX.Element => {
+const _Page: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
@@ -14,4 +14,4 @@ const FilePage: React.FC<PageProps> = (): JSX.Element => {
   )
 }
 
-export default FilePage
+export default _Page

@@ -62,6 +62,7 @@ ReactDOM.render(
         <Route exact path='/Alert' component={AlertPage} />
         <Route exact path='/Banner' component={BannerPage} />
         <Route exact path='/ColorPicker' component={ColorPickerPage} />
+        <Route exact path='/CountrySelect' component={CountrySelectPage} />
         <Route exact path='/CountryUtils' component={CountryUtilsPage} />
         <Route exact path='/DatePicker' component={DatePickerPage} />
         <Route exact path='/ExpandingPanel' component={ExpandingPanelPage} />

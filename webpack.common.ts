@@ -6,8 +6,7 @@ module.exports = {
   entry: {
     index: './src/dist.tsx',
     nav: './src/dist-nav.tsx',
-    api: './src/actions/api.ts',
-    Dashboard: './src/applications/Dashboard/Dashboard.tsx'
+    api: './src/actions/api.ts'
   },
   output: {
     path: path.join(__dirname, 'dist'),

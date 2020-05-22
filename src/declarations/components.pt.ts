@@ -15,9 +15,3 @@ export const ModalContentPropType = PT.shape({
   closeButton: PT.bool
 })
 
-export const FlagItemPropType = PT.shape({
-  label: PT.string.isRequired,
-  country: PT.string.isRequired
-})
-
-export const FlagItemsPropType = PT.arrayOf(FlagItemPropType)

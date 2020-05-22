@@ -1,6 +1,6 @@
-import FileFC from 'forhandsvisningsfil'
+import File from 'forhandsvisningsfil'
 import { Recipes, Step, Watermark } from 'declarations/PDFEditor.d'
-import { File, Files } from 'forhandsvisningsfil/lib/index.d'
+import { IFile, Files } from 'forhandsvisningsfil/lib/index.d'
 import { Labels } from 'declarations/types.d'
 import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
@@ -12,7 +12,7 @@ import * as pdfActions from '../actions/pdf'
 import { State } from '../reducer'
 
 type FileNames = {[k: string]: string};
-export type GeneratedPDFs = {[k: string]: File};
+export type GeneratedPDFs = {[k: string]: IFile};
 
 export interface GeneratePDFProps {
   labels: Labels;
@@ -93,7 +93,7 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
             return (
               <div key={key} className='fieldset animate'>
                 <div className='pdfrow'>
-                  <FileFC file={pdf} />
+                  <File file={pdf} />
                   <div className='ml-4'>
                     <Nav.Input
                       label={labels.filename} value={_fileNames[key]}

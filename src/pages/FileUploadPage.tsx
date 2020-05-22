@@ -1,11 +1,11 @@
-import Page from 'filopplasting/lib/page'
+import Page from 'filopplasting-doc'
 import Container from 'pages/Container'
 import { PageProps } from 'pages/index'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { State } from 'reducer'
 
-const FileUploadPage: React.FC<PageProps> = (): JSX.Element => {
+const _Page: React.FC<PageProps> = (): JSX.Element => {
   const highContrast = useSelector<State>(state => state.highContrast)
   return (
     <Container>
@@ -14,4 +14,4 @@ const FileUploadPage: React.FC<PageProps> = (): JSX.Element => {
   )
 }
 
-export default FileUploadPage
+export default _Page

@@ -43,6 +43,7 @@ const Container: React.FC<ContainerProps & PageProps> = ({
             <li><Link to='/Alert'>Alert</Link></li>
             <li><Link to='/Banner'>Banner</Link></li>
             <li><Link to='/ColorPicker'>Color picker</Link></li>
+            <li><Link to='/CountrySelect'>Country select</Link></li>
             <li><Link to='/CountryUtils'>Country utils</Link></li>
             <li><Link to='/DatePicker'>Date picker</Link></li>
             <li><Link to='/ExpandingPanel'>Expanding panel</Link></li>
