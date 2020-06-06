@@ -104,7 +104,7 @@
     "nav-frontend-veileder": "^2.0.16",
     "nav-frontend-veileder-style": "^2.0.13",
     "nav-frontend-veilederpanel": "^0.1.23",
-    "nav-frontend-veilederpanel-style": "0.0.26",
+    "nav-frontend-veilederpanel-style": "0.0.27",
     "prop-types": "^15.7.2",
     "rc-collapse": "^2.0.0",
     "rc-slider": "^9.2.4",
