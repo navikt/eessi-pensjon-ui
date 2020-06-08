@@ -1,6 +1,6 @@
 import File from 'forhandsvisningsfil'
 import { Recipes, Step, Watermark } from 'declarations/PDFEditor.d'
-import { IFile, Files } from 'forhandsvisningsfil/lib/index.d'
+import { IFile, Files } from 'forhandsvisningsfil'
 import { Labels } from 'declarations/types.d'
 import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
@@ -89,7 +89,7 @@ const GeneratePDF: React.FC<GeneratePDFProps> = ({
       ) : (generatedPDFs ? (
         <div>
           {Object.keys(generatedPDFs).map(key => {
-            const pdf: File = generatedPDFs[key]
+            const pdf: IFile = generatedPDFs[key]
             return (
               <div key={key} className='fieldset animate'>
                 <div className='pdfrow'>

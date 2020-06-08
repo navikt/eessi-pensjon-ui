@@ -2,9 +2,8 @@ import classNames from 'classnames'
 import { ModalContent } from 'declarations/components'
 import { PickPageStep, Recipes, RecipeSteps, RecipeType } from 'declarations/PDFEditor.d'
 import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
-import { IFile } from 'forhandsvisningsfil/lib/index.d'
+import { IFile, FilePropType } from 'forhandsvisningsfil'
 import { Labels } from 'declarations/types.d'
-import { FilePropType } from 'forhandsvisningsfil/lib/index.pt'
 import { LabelsPropType } from 'declarations/types.pt'
 import _ from 'lodash'
 import PT from 'prop-types'
@@ -17,7 +16,7 @@ export interface DnDSourceProps {
   setRecipes: (r: Recipes) => void;
   setModal: (r: ModalContent | undefined) => void;
   labels: Labels;
-  pdf: File;
+  pdf: IFile;
   recipes: Recipes;
   pageScale: number;
   dndTarget: RecipeType;
