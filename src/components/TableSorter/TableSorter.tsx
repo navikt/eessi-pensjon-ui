@@ -87,9 +87,6 @@ const TableSorter: React.FC<TableSorterProps> = ({
     }
   }, [items, _items])
 
-  useEffect(() => {
-    setSort(sort)
-  }, [sort])
 
   const sortColumn = (column: Column): void => {
     if (!sortable) { return }
