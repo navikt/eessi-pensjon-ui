@@ -22,12 +22,12 @@ module.exports = {
       patterns: [{
         from: 'src/index.css',
         to: 'nav.css'
+      },{
+        from: 'src/index.d.ts',
+        to: 'index.d.ts'
       }, {
         from: 'src/minibootstrap.css',
         to: 'minibootstrap.css'
-      }, {
-        from: 'src/dist.d.ts',
-        to: 'index.d.ts'
       }, {
         from: 'src/actions/api.ts',
         to: 'api.d.ts'

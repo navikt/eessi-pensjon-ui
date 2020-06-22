@@ -13,11 +13,11 @@ declare module 'eessi-pensjon-ui' {
   import CountrySelect from 'components/CountrySelect/CountrySelect'
   import DatePicker from 'components/DatePicker/DatePicker'
   import ExpandingPanel from 'components/ExpandingPanel/ExpandingPanel'
-  import File, { Image, Other, Pdf as PDF} from 'forhandsvisningsfil'
+  import File, { Image, Other, Pdf as PDF } from 'forhandsvisningsfil'
   import FileUpload from 'filopplasting'
   import Flag from 'components/Flag/Flag'
   import FlagList from 'components/Flag/FlagList'
-  import Icons from 'components/Icons/Icons'
+  import Icons, { availableIcons } from 'components/Icons/Icons'
   import Modal from 'components/Modal/Modal'
   import MultipleSelect from 'components/MultipleSelect/MultipleSelect'
   import Pagination from 'components/Pagination/Pagination'
@@ -49,6 +49,7 @@ declare module 'eessi-pensjon-ui' {
     Flag,
     FlagList,
     Icons,
+    availableIcons,
     Modal,
     MultipleSelect,
     Pagination,
@@ -62,3 +63,5 @@ declare module 'eessi-pensjon-ui' {
     Nav
   }
 }
+
+declare module 'eessi-pensjon-ui/dist/nav'
