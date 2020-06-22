@@ -26,9 +26,6 @@ module.exports = {
         from: 'src/minibootstrap.css',
         to: 'minibootstrap.css'
       }, {
-        from: 'src/dist.d.ts',
-        to: 'index.d.ts'
-      }, {
         from: 'src/actions/api.ts',
         to: 'api.d.ts'
       }, {

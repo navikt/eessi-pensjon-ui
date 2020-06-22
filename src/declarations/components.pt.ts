@@ -14,4 +14,3 @@ export const ModalContentPropType = PT.shape({
   modalButtons: PT.arrayOf(ModalButtonPropType.isRequired),
   closeButton: PT.bool
 })
-

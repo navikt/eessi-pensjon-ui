@@ -13,7 +13,7 @@ declare module 'eessi-pensjon-ui' {
   import CountrySelect from 'components/CountrySelect/CountrySelect'
   import DatePicker from 'components/DatePicker/DatePicker'
   import ExpandingPanel from 'components/ExpandingPanel/ExpandingPanel'
-  import File, { Image, Other, Pdf as PDF} from 'forhandsvisningsfil'
+  import File, { Image, Other, Pdf as PDF } from 'forhandsvisningsfil'
   import FileUpload from 'filopplasting'
   import Flag from 'components/Flag/Flag'
   import FlagList from 'components/Flag/FlagList'

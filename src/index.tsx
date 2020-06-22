@@ -10,7 +10,7 @@ import ExpandingPanel from 'components/ExpandingPanel/ExpandingPanel'
 import File, { Image, Pdf as PDF, Other } from 'forhandsvisningsfil'
 import FileUpload from 'filopplasting'
 import Flag, { FlagList } from 'flagg-ikoner'
-import Icons from 'components/Icons/Icons'
+import Icons,{ availableIcons } from 'components/Icons/Icons'
 import Modal from 'components/Modal/Modal'
 import MultipleSelect from 'components/MultipleSelect/MultipleSelect'
 import Pagination from 'paginering'
@@ -42,6 +42,7 @@ export default {
   Flag,
   FlagList,
   Icons,
+  availableIcons,
   Modal,
   MultipleSelect,
   Pagination,

@@ -14,4 +14,3 @@ export interface ModalContent {
 }
 
 export type AllowedLocaleString = 'en' | 'nb'
-
