@@ -16,7 +16,9 @@
     "lint:fix": "standardx src/*.ts* src/*/*.ts* src/*/*/*.ts* src/*/*/*/*.ts* src/*/*/*/*/*.ts* --fix",
     "test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 NODE_ENV=test react-scripts test",
     "test:ci": "cross-env NODE_OPTIONS=--max-old-space-size=8192 NODE_ENV=test react-scripts test --updateSnapshot --watchAll=false",
-    "test:coverage": "cross-env NODE_OPTIONS=--max-old-space-size=8192 NODE_ENV=test react-scripts test --coverage  --watchAll=false"
+    "test:coverage": "cross-env NODE_OPTIONS=--max-old-space-size=8192 NODE_ENV=test react-scripts test --coverage  --watchAll=false",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -115,7 +117,8 @@
     "react-select": "^3.1.0",
     "redux": "^4.0.5",
     "tabell": "^1.0.2",
-    "uuid": "latest"
+    "uuid": "latest",
+    "snyk": "^1.346.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.3",
@@ -274,5 +277,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "snyk": true
 }

@@ -1,0 +1,178 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.16.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - forhandsvisningsfil > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - land-verktoy > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > land-verktoy > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > land-verktoy > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > react-resize-detector > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > land-verktoy > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > @babel/traverse > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > babel-plugin-styled-components > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > react-select > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > react-select > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - forhandsvisningsfil > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - flagg-ikoner > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - nav-dashboard > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - paginering > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - fremdriftslinje > react-select > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > react-select > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - filopplasting > forhandsvisningsfil > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - landvelger > flagg-ikoner > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
+    - tabell > paginering > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-06-22T08:59:16.040Z'
