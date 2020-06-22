@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
-    index: './src/dist.tsx',
+    index: './src/index.tsx',
     nav: './src/dist-nav.tsx',
     api: './src/actions/api.ts'
   },

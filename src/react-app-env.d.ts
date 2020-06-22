@@ -1,18 +1,6 @@
 /// <reference types="react-scripts" />
-
-declare module 'flagg-ikoner'
-declare module 'flagg-ikoner-doc'
-declare module 'fremdriftslinje'
-declare module 'fremdriftslinje-doc'
-declare module 'land-verktoy'
-declare module 'land-verktoy-doc'
-declare module 'landvelger'
-declare module 'landvelger-doc'
-declare module 'nav-dashboard'
-declare module 'nav-dashboard/lib/index.pt'
-declare module 'nav-dashboard-doc'
 declare module 'nav-frontend-ikoner-assets'
-declare module 'paginering'
-declare module 'paginering-doc'
-declare module 'tabell'
-declare module 'tabell-doc'
+declare module 'country-data-list'
+declare module 'rc-collapse'
+declare module 'rc-slider'
+
