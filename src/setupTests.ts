@@ -12,11 +12,3 @@ Enzyme.configure({ adapter: new Adapter() });
 HTMLCanvasElement.prototype.getContext = jest.fn()
 window.scrollTo = jest.fn()
 window.location.reload = jest.fn()
-
-jest.mock('uuid', () => ({
-  v4: () => ('mock_uuid')
-}))
-
-jest.mock('crypto', () => ({
-  randomBytes: (num: number) => new Array(num).fill(0)
-}))
