@@ -1,4 +1,4 @@
-import * as api from 'actions/api'
+import * as api from 'js-fetch-api'
 import { GeneratePayload, Recipes, Separator, Watermark } from 'declarations/PDFEditor.d'
 import { Files } from 'forhandsvisningsfil'
 import * as types from 'applications/PDFEditor/constants/actionTypes'

@@ -1,4 +1,4 @@
-import * as api from 'actions/api'
+import { call } from 'js-fetch-api'
 import { GeneratePayload, Recipes, Separator, Watermark } from 'declarations/PDFEditor.d'
 import { Files } from 'forhandsvisningsfil'
 import * as types from 'applications/PDFEditor/constants/actionTypes'
@@ -72,7 +72,7 @@ export const setModal = (payload: any) => {
 }
 
 export const generatePDF = (payload: GeneratePayload) => {
-  return api.call({
+  return call({
     url: urls.PDF_GENERATE_URL,
     method: 'POST',
     payload: payload,

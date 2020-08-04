@@ -2,7 +2,7 @@ import { ModalContent } from 'declarations/components'
 import { PickImageStep, PickPageStep, Recipes, RecipeType, Separator, Watermark } from 'declarations/PDFEditor.d'
 import _ from 'lodash'
 import { Files } from 'forhandsvisningsfil'
-import { ActionWithPayload } from 'declarations/types.d'
+import { ActionWithPayload } from 'js-fetch-api'
 import * as types from './constants/actionTypes'
 
 export interface State {

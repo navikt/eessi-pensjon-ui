@@ -2114,7 +2114,7 @@ GRID
   line-height: 1.375rem;
   text-transform: uppercase;
   text-decoration: none;
-  background-color: transparent;
+  background-color: #FFF;
   padding: calc(.475rem - 1px) 2.5rem calc(.525rem - 1px) 2.5rem;
   min-height: 2.5rem;
   vertical-align: middle;
@@ -2557,7 +2557,11 @@ GRID
 }
 .lenke:active,
 .lenke--active {
+  outline: none;
   color: white;
+  text-decoration: none;
+  background-color: #254b6d;
+  box-shadow: 0 0 0 2px #254b6d;
 }
 .lenke svg {
   width: 1em;
@@ -4278,7 +4282,7 @@ GRID
   line-height: 1.375rem;
   text-transform: uppercase;
   text-decoration: none;
-  background-color: transparent;
+  background-color: #FFF;
   padding: calc(.475rem - 1px) 2.5rem calc(.525rem - 1px) 2.5rem;
   min-height: 2.5rem;
   vertical-align: middle;

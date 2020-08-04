@@ -5,8 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: {
     index: './src/index.tsx',
-    nav: './src/dist-nav.tsx',
-    api: './src/actions/api.ts'
+    nav: './src/dist-nav.tsx'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -28,9 +27,6 @@ module.exports = {
       }, {
         from: 'src/minibootstrap.css',
         to: 'minibootstrap.css'
-      }, {
-        from: 'src/actions/api.ts',
-        to: 'api.d.ts'
       }, {
         from: 'src/declarations',
         to: 'declarations'
