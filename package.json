@@ -43,7 +43,7 @@
     "js-fetch-api": "^1.0.1",
     "land-verktoy": "^1.0.2",
     "landvelger": "^1.0.3",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.27.0",
     "nav-dashboard": "1.0.7",
