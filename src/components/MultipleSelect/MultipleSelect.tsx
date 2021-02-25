@@ -13,7 +13,7 @@ import { SelectComponents } from 'react-select/src/components'
 import MultipleOption from './MultipleOption'
 import './MultipleSelect.css'
 
-const animatedComponents: SelectComponents<any> = makeAnimated()
+const animatedComponents: SelectComponents<any, true> = makeAnimated()
 
 export interface MultipleSelectProps<T> {
   ariaLabel ?: string;
@@ -24,7 +24,7 @@ export interface MultipleSelectProps<T> {
   id ?: string;
   isLoading?: boolean;
   label: string | JSX.Element;
-  onSelect?: (e: ValueType<any>) => void;
+  onSelect?: (e: ValueType<any, true>) => void;
   options?: Array<T>;
   placeholder?: string;
   values?: Array<T>;

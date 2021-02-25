@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { ModalContent } from 'declarations/components'
 import { PickImageStep, PickPageStep, Recipes, RecipeSteps, RecipeType, Separator } from 'declarations/PDFEditor.d'
 import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
-import { IFile, Files, FilesPropType } from 'forhandsvisningsfil'
+import { File, Files, FilesPropType } from 'forhandsvisningsfil'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React from 'react'
@@ -34,7 +34,7 @@ const DnDTarget: React.FC<DnDTargetProps> = ({
             className={classNames('a-pdf-dndTarget-droppable', 'text-center', { 'a-pdf-dndTarget-droppable-active ': snapshot.isDraggingOver })}
           >
             {recipe ? recipe.map((recipeStep, index) => {
-              let file: IFile
+              let file: File
               if (_.has(recipeStep, 'name')) {
                 file = _.find(files, { name: (recipeStep as PickImageStep | PickPageStep).name })!
               }

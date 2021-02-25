@@ -15,8 +15,18 @@ describe('components/MultipleSelect/MultipleOption', () => {
     cx: jest.fn(),
     children: undefined,
     label: '',
+    theme: {
+      borderRadius: 0,
+      colors: {},
+      spacing: {
+        baseUnit: 0,
+        controlHeight: 0,
+        menuGutter: 0
+      }
+    },
     type: 'option',
     innerRef: null,
+    isRtl: false,
     data: {
       label: 'mockLabel',
       value: 'mockValue'

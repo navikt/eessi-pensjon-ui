@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Icons from 'components/Icons/Icons'
 import { ModalContent } from 'declarations/components'
 import { PickImageStep, PickPageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
-import { IFile, FilePropType } from 'forhandsvisningsfil'
+import { File, FilePropType } from 'forhandsvisningsfil'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
@@ -13,7 +13,7 @@ export interface DnDPageProps {
   action: string;
   className ?: string;
   dndTarget: RecipeType;
-  file: IFile;
+  file: File;
   isFocused?: boolean;
   pageNumber?: number;
   pageScale: number;
@@ -31,7 +31,7 @@ const DnDPage: React.FC<DnDPageProps> = ({
   const onHandleMouseOver = (): void => setIsHovering(true)
   const onHandleMouseLeave = (): void => setIsHovering(false)
 
-  const openPreview = (file: IFile, pageNumber: number | undefined): void => {
+  const openPreview = (file: File, pageNumber: number | undefined): void => {
     setModal({
       modalContent: (
         <div style={{ cursor: 'pointer' }} onClick={() => setModal(undefined)}>

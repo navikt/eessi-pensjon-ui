@@ -20,7 +20,7 @@ import Spinner from 'nav-frontend-spinner'
 import Stegindikator from 'nav-frontend-stegindikator'
 import Tabs from 'nav-frontend-tabs'
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle'
-import { Sidetittel, Innholdstittel, Systemtittel, Undertittel, Element, Feilmelding, Normaltekst, EtikettLiten, Undertekst, UndertekstBold, Ingress } from 'nav-frontend-typografi'
+import { Sidetittel, Innholdstittel, Systemtittel, Undertittel, Element, Feilmelding, Normaltekst, Undertekst, UndertekstBold, Ingress } from 'nav-frontend-typografi'
 import Veileder from 'nav-frontend-veileder'
 import Veilederpanel from 'nav-frontend-veilederpanel'
 
@@ -44,7 +44,6 @@ import Veilederpanel from 'nav-frontend-veilederpanel'
 (EtikettFokus as unknown as React.FunctionComponent).displayName = 'EtikettFokus';
 (EtikettInfo as unknown as React.FunctionComponent).displayName = 'EtikettInfo';
 (EtikettSuksess as unknown as React.FunctionComponent).displayName = 'EtikettSuksess';
-(EtikettLiten as unknown as React.FunctionComponent).displayName = 'EtikettLiten';
 (Fareknapp as unknown as React.FunctionComponent).displayName = 'Fareknapp';
 (Feilmelding as unknown as React.FunctionComponent).displayName = 'Feilmelding';
 (Flatknapp as unknown as React.FunctionComponent).displayName = 'Flatknapp';
@@ -97,7 +96,7 @@ export {
   AlertStripe, AlertStripeAdvarsel, AlertStripeFeil, AlertStripeInfo, AlertStripeSuksess,
   BekreftCheckboksPanel,
   Checkbox, CheckboksPanel, CheckboksPanelGruppe, Chevron, Container, Column,
-  Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess, EtikettLiten,
+  Ekspanderbartpanel, EkspanderbartpanelBase, Element, EtikettBase, EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess,
   Fareknapp, Feilmelding, Flatknapp,
   Hamburgerknapp, Hjelpetekst, Hovedknapp,
   Ikon, Ingress, Innholdstittel, Input,

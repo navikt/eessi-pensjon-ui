@@ -5,7 +5,7 @@ import { PickImageStep, Recipes, RecipeType } from 'declarations/PDFEditor.d'
 import { RecipesPropType, RecipeTypePropType } from 'declarations/PDFEditor.pt'
 import { Labels } from 'declarations/types.d'
 import { LabelsPropType } from 'declarations/types.pt'
-import { IFile, Files, FilesPropType } from 'forhandsvisningsfil'
+import { File, Files, FilesPropType } from 'forhandsvisningsfil'
 import _ from 'lodash'
 import PT from 'prop-types'
 import React, { useState } from 'react'
@@ -69,7 +69,7 @@ const DnDImages: React.FC<DnDImagesProps> = ({ dndTarget, files, labels, recipes
             ref={provided.innerRef}
             className={classNames('a-pdf-dndImages-droppable', { 'a-pdf-dndImages-droppable-active': snapshot.isDraggingOver })}
           >
-            {files.map((file: IFile, index: number) => {
+            {files.map((file: File, index: number) => {
               if (_.find(recipes[dndTarget], { name: file.name })) {
                 return null
               }

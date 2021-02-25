@@ -4,7 +4,7 @@ import React from 'react'
 import { OptionProps } from 'react-select'
 import { Checkbox } from '../../Nav'
 
-export type MultipleOptionProps = OptionProps<any>
+export type MultipleOptionProps = OptionProps<any, true>
 
 const MultipleOption: React.FC<MultipleOptionProps> = ({
   data, selectProps, innerProps, isSelected, isFocused
