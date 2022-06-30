@@ -29,3 +29,5 @@ package.json___jb_old___
 src/**/*.css
 debug.log
 **/__snapshots__/*
+
+.gradle/
